@@ -1,0 +1,37 @@
+{% extends '::accesos.html.twig' %}
+
+{% block body %}
+  {% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+
+<form action="{{ path('login_check') }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="form-group" id="usuarioEmail">
+      <h3><strong>Usuario</strong></h3>
+      <input type="text" class="form-control input-lg" id="username" name="_username" value="{{ last_username }}" placeholder="ejemplo@mail.com"/>
+    </div>
+
+    <div class="form-group">
+      <h3><strong>Contraseña / Password</strong></h3>
+      <input type="password" class="form-control input-lg" type="password" id="password" name="_password" placeholder="Contraseña"/>
+    </div>
+    <!--<p class="text-right">
+      <strong>
+        <a href="{$_layoutParams.root}recuperar">
+          ¿No puedes acceder a tu cuenta?
+        </a>
+      </strong>
+    </p>-->
+    <input type="hidden" name="_target_path" value="/curso/1" />
+    <button type="submit" class="btn btn-default btn-lg">Entrar</button>
+</form>
+<p>
+  <a type="button" class="btn btn-link">Registro</a> |
+  <strong>
+    <a href="{{ path('acl_recuperar') }}">
+      ¿No puedes acceder a tu cuenta?
+    </a>
+  </strong>
+</p>
+{% endblock %}

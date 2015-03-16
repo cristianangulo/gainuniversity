@@ -1,0 +1,13 @@
+ACL\ACLBundle\Entity\Usuarios:
+    properties:
+        nombre:
+            - NotBlank: ~
+        username:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+        roles:
+            - NotBlank: ~

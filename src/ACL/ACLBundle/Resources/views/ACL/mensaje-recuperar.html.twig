@@ -1,0 +1,15 @@
+{% extends '::accesos.html.twig'%}
+
+{% block body %}
+  <p class="lead">
+    Hemos enviado a {email} toda la información necesaria para recuperar su cuenta.
+  </p>
+  <p>
+    <a type="button" class="btn btn-link">Registro</a> |
+    <strong>
+      <a href="{{ path('login') }}">
+        Login
+      </a>
+    </strong>
+  </p>
+{% endblock %}

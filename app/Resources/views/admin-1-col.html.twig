@@ -1,0 +1,42 @@
+{% extends '::admin.html.twig' %}
+
+
+{% block body %}
+	<div class="page-header">
+		<h1>
+			{{ titulo }}
+		</h1>
+	</div>
+
+	{% if btn_header is defined %}
+	<div class="page-header">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="btn-group">
+					{% for btn in btn_header %}
+					<a href="{{ btn.href }}" class="btn btn-{{ btn.class }}">{{ btn.title }}</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	{% block contenido %}
+
+
+	{% endblock %}
+
+	{% if btn_header is defined %}
+	<div class="page-header">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="btn-group">
+					{% for btn in btn_header %}
+					<a href="{{ btn.href }}" class="btn btn-{{ btn.class }}">{{ btn.title }}</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+{% endblock %}

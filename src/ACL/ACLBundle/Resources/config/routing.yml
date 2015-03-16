@@ -1,0 +1,31 @@
+acl_homepage:
+    path:     /
+    defaults: { _controller: ACLBundle:Default:index }
+
+acl_roles:
+    resource: "@ACLBundle/Resources/config/routing/roles.yml"
+    prefix:   /admin/acl/roles
+
+acl_usuarios:
+    resource: "@ACLBundle/Resources/config/routing/usuarios.yml"
+    prefix:   /admin/acl/usuarios
+
+acl_new_user:
+    path:     /acl/new_user
+    defaults: { _controller: ACLBundle:ACL:new }
+
+acl_user_perfil:
+    path:     /acl/perfil
+    defaults: { _controller: ACLBundle:ACL:perfil }
+
+acl_homepage:
+    path:     /acl/{name}
+    defaults: { _controller: ACLBundle:ACL:index }
+
+acl_recuperar:
+    path:     /recuperar
+    defaults: { _controller: ACLBundle:ACL:recuperar }
+
+acl_recuperar_cuenta:
+    path:     /recuperar/{codigo}
+    defaults: { _controller: ACLBundle:ACL:recuperarCuenta }

@@ -1,0 +1,37 @@
+{% extends '::curso.html.twig' %}
+{% block contenido %}
+
+
+<div id="timeLine">
+          <div id="bar-timeline"></div>
+
+          {% for modulos in curso.modulos|slice(0,modulosPublicar) %}
+
+          <div class="seccion">
+              <ul>
+                  <div class="head-section">
+                    <h1>{{ modulos.modulos.modulo }}</h1>
+                    <p>{{ modulos.modulos.descripcion }}</p>
+                  </div>
+                {% for items in modulos.modulos.secciones %}
+                  <li style="border-left:5px solid {{items.secciones.tipo.color }}">
+                      <div class="icon-item" style="background-color: {{items.secciones.tipo.color }}">
+                        <img src="{{ asset('iconos/')}}{{items.secciones.tipo.svgSeccion}}.png" alt="Symfony!" />
+                          <i class="fa fa-"></i>
+                      </div>
+                      <div class="date-section">
+                      </div>
+                      <h2>{{ items.secciones.seccion }}</h2>
+                      <p class="lead">
+                          {{ items.secciones.descripcion }}
+                      </p>
+                      <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulos.modulos.id, 'seccion': items.secciones.id}) }}" class="btn btn-default">Ver más</a>
+                  </li>
+                {% endfor %}
+              </ul>
+          </div>
+      {% endfor %}
+      </div>
+
+
+{% endblock %}

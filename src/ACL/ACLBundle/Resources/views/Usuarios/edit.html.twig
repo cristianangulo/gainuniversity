@@ -1,0 +1,30 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Perfil del usuario</h1>
+    </div>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('usuarios') }}">
+          Regresar
+        </a>
+        |
+        <a href="{{ path('usuarios_new') }}">
+          Crear usuario
+        </a>
+      </li>
+    </ul>
+    {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
+
+    {{ form(edit_form) }}
+
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('usuarios') }}">
+            Regresar
+        </a>
+      </li>
+      <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

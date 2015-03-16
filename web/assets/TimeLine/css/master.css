@@ -1,0 +1,148 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+html,
+body{
+  width: 100%;
+  height: 100%;
+}
+
+body{
+  background: #dedede;
+}
+
+#wrap-timeLine{
+    width: 1000px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+#timeLine{
+  width: 100%;
+  float: left;
+  position: relative;
+  //background: #aaa;
+
+}
+
+#timeLine #bar-timeline{
+    width: 1px;
+    position: absolute;
+    height:100%;
+    padding: 1px;
+    background: #dedede;
+    margin: auto;
+    left: 50%;
+    border-radius: 3px;
+}
+
+#timeLine .seccion{
+    width: 100%;
+    float:left;
+    position: relative;
+}
+
+#timeLine .head-section{
+    width: 100%;
+    float: left;
+    position: relative;
+    padding: 20px;
+    border-bottom: 2px solid #dedede;
+    border-radius: 10px;
+}
+
+#timeLine .head-section h1{
+    font-family: Verdana, Helvetica;
+    font-size: 25px;
+    color: #aaa;
+}
+
+#timeLine .head-section p{
+        font-size: 14px;
+        color: #505050;
+        margin-top: 10px;
+        font-family: Verdana, Helvetica;
+    }
+
+#timeLine .seccion ul{
+    width: 46%;
+}
+
+#timeLine .seccion ul li h2{
+    font-family: Verdana, Helvetica;
+    color: #505050;
+    font-size: 17px;
+}
+
+#timeLine .seccion ul li p{
+    font-size: 12px;
+    color: #505050;
+    margin-top: 10px;
+    font-family: Verdana, Helvetica;
+    padding: 10px;
+}
+
+#timeLine .seccion ul li button{
+    background: white;
+    font-size: 13px;
+    background: #f4f4f2  ;
+    border-radius: 5px;
+    font-family: Verdana, Helvetica;
+    color: #7d7d7a ;
+}
+
+#timeLine .seccion:nth-child(2n+1) ul{
+    float: right;
+}
+
+#timeLine .seccion ul li{
+    width: 100%;
+    float: left;
+    position: relative;
+    padding: 10px;
+    margin-top: 15px;
+    //border: 2px solid #eee;
+    border-radius: 10px;
+    background: white;
+    //border: 2px solid #dedede;
+}
+
+
+#timeLine .icon-item{
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    border: 5px solid #EDEEF0;
+    font-size: 20px;
+    color: white;
+}
+
+#timeLine .seccion:nth-child(2n) ul .icon-item{
+    right: -4.3em;
+}
+
+
+#timeLine .seccion:nth-child(2n+1) ul .icon-item{
+    left: -4.5em;
+}
+
+
+#timeLine .date-section{
+    position: absolute;
+    font-size: 12px;
+    margin-top:25px;
+    font-family: Verdana, Helvetica;
+    color: #7d7d7a ;
+}
+
+#timeLine .seccion:nth-child(2n) ul .date-section{
+    right: -13em;
+}
+
+#timeLine .seccion:nth-child(2n+1) ul .date-section{
+    left: -13em;
+}

@@ -1,0 +1,45 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Usuarios</h1>
+    </div>
+
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('usuarios_new') }}">
+          Crear usuario
+        </a>
+      </li>
+    </ul>
+
+    <table class="table table-striped records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td class="col-md-1"><a href="{{ path('usuarios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td class="col-md-2">{{ entity.username }}</td>
+                <td class="col-md-5">{{ entity.email }}</td>
+                <td class="col-md-4 text-center">
+                  <a class="btn btn-default" href="{{ path('usuarios_edit', { 'id': entity.id }) }}">{{ btn_editar }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('usuarios_new') }}">
+          Crear usuario
+        </a>
+      </li>
+    </ul>
+    {% endblock %}

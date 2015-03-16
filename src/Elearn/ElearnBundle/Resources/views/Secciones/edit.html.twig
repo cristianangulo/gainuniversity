@@ -1,0 +1,48 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Perfil del ítem</h1>
+    </div>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_secciones') }}">
+          Regresar
+        </a>
+        |
+        <a href="{{ path('admin_secciones_new') }}">
+          Crear ítem
+        </a>
+      </li>
+    </ul>
+
+
+    {% if entity.path !="" %}
+
+    <div class="alert alert-success" role="alert">
+      <strong>Archivo: </strong>{{ entity.path }} <a class="btn btn-danger" href="{{ path('secciones_delete_archivo', {id :entity.id})}}" class="alert-link">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </a>
+    </div>
+    {% endif %}
+    {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
+    {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_secciones') }}">
+          Regresar
+        </a>
+        |
+        <a href="{{ path('admin_secciones_new') }}">
+          Crear ítem
+        </a>
+      </li>
+      <li>{{ form(delete_form) }}</li>
+    </ul>
+
+
+
+
+
+</ul>
+{% endblock %}

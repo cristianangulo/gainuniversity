@@ -1,0 +1,7 @@
+<p>Hola: {{ nombre }}</p>
+<p>Recientemente, alguien solicitó cambiar la contraseña de tu cuenta de gainuniversity.com <br />Si fuiste tú, haz clic aquí para definir una nueva contraseña:</p>
+<p><a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('acl_recuperar_cuenta', { codigo: codigo }) }}">Restaurar contraseña</a></p>
+<p>Si no deseas modificar tu contraseña o no solicitaste hacerlo, ignora y elimina este mensaje.</p>
+<p>Para preservar la seguridad de tu cuenta, no reenvíes este mensaje a nadie. <br />Consulta nuestro Centro de ayuda para obtener más sugerencias de seguridad.</p>
+<p>Gracias.
+El equipo de TI de gainuniversity.com</p>

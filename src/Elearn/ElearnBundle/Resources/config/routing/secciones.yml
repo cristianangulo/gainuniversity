@@ -1,0 +1,35 @@
+admin_secciones:
+    path:     /
+    defaults: { _controller: "ElearnBundle:Secciones:index" }
+
+admin_secciones_show:
+    path:     /{id}/show
+    defaults: { _controller: "ElearnBundle:Secciones:show" }
+
+admin_secciones_new:
+    path:     /new
+    defaults: { _controller: "ElearnBundle:Secciones:new" }
+
+admin_secciones_create:
+    path:     /create
+    defaults: { _controller: "ElearnBundle:Secciones:create" }
+    requirements: { _method: post }
+
+admin_secciones_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ElearnBundle:Secciones:edit" }
+
+admin_secciones_update:
+    path:     /{id}/update
+    defaults: { _controller: "ElearnBundle:Secciones:update" }
+    requirements: { _method: post|put }
+
+admin_secciones_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ElearnBundle:Secciones:delete" }
+    requirements: { _method: post|delete }
+
+secciones_delete_archivo:
+    path:     /{id}/delete-archivo
+    defaults: { _controller: "ElearnBundle:Secciones:deleteArchivo" }
+    requirements: { _method: post|get }

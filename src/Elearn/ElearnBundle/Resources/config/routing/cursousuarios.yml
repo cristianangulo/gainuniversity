@@ -1,0 +1,35 @@
+admin_cursos_usuarios:
+    path:     /{curso}
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:index" }
+
+admin_cursos_usuarios_show:
+    path:     /{id}/show
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:show" }
+
+admin_cursos_usuarios_new:
+    path:     /new
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:new" }
+
+admin_cursos_usuarios_create:
+    path:     /create
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:create" }
+    methods:  POST
+
+admin_cursos_usuarios_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:edit" }
+
+admin_cursos_usuarios_update:
+    path:     /{id}/update
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:update" }
+    methods:  [POST, PUT]
+
+admin_cursos_usuarios_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:delete" }
+    methods:  [POST, DELETE]
+
+admin_curso_usuario_delete:
+    path:     /{curso}/{usuario}/delete
+    defaults: { _controller: "ElearnBundle:CursoUsuarios:deleteUsuarioCurso" }
+    methods:  [GET]

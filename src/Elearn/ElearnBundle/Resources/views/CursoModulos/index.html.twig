@@ -1,0 +1,42 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Módulos del curso <small></small></h1>
+    </div>
+
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_cursos_edit', {'id': 1 }) }}">
+          Regresar al curso
+        </a>
+      </li>
+    </ul>
+    {% form_theme form 'ElearnBundle:Form:admin-form.html.twig' %}
+    {{ form(form) }}
+
+    <table class="table table-striped records_list">
+        <thead>
+            <tr>
+                <th>Módulo</th>
+                <th>Posicion</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.modulos.modulo }}</td>
+                <td>{{ entity.posicion }}</td>
+                <td>
+                <ul>
+                  <li>
+                      <a href="{{ path('admin_curso_modulo_delete', { 'curso': curso_id, 'modulo': entity.id }) }}">Eliminar</a>
+                  </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

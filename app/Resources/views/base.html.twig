@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+		<head>
+			<title>{% block title '' %} | GainUniversity.com</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+			<link rel="shortcut icon" href="../favicon.ico">
+			<!--Bootstrap-->
+			<link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet" type="text/css" />
+			<link href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+
+			<!--Font Awesonme-->
+			<link href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+			<!--Assets CSS Header-->
+			<!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/AnimatedHeader/css/default.css') }} " />
+			<link rel="stylesheet" type="text/css" href="{{ asset('assets/AnimatedHeader/css/component.css') }} " /> -->
+
+			<!--TabbedNavigation-->
+			<link rel="stylesheet" href="{{ asset('assets/tabbed-navigation/css/reset.css') }} "> <!-- CSS reset -->
+			<link rel="stylesheet" href="{{ asset('assets/tabbed-navigation/css/style.css') }} "> <!-- Resource style -->
+
+			<!--VerticalTimeLine-->
+			<link rel="stylesheet" href="{{ asset('assets/TimeLine/css/master.css') }}" media="screen" title="no title" charset="utf-8" />
+			<link rel="stylesheet" href="{{ asset('assets/TimeLine/css/font-awesome.min.css') }} ">
+
+			<!--FullTabs-->
+			<link rel="stylesheet" type="text/css" href="{{ asset('assets/full-width-tabs/css/demo.css') }}" />
+			<link rel="stylesheet" type="text/css" href="{{ asset('assets/full-width-tabs/css/component.css') }}" />
+
+			<link rel="stylesheet" href="{{ asset('assets/TMFront/css/master.css') }}" media="screen" title="no title" charset="utf-8" />
+
+			<!--Assets CSS Main-->
+			<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }} " />
+
+	</head>
+		<body>
+
+			{% include 'includes/headAdmin.html.twig' %}
+
+			{% block body %}
+
+			{% endblock %}
+
+
+
+			<footer id="foot-main">
+				{{ app_name }} - Todos los derechos reservados
+			</footer>
+
+			<script type="text/javascript" charset="utf-8" src="{{ asset('js/jQuery.js') }}"></script>
+			<script type="text/javascript" charset="utf-8" src="{{ asset('js/jquery-ui.js') }}"></script>
+			<script type="text/javascript" charset="utf-8" src="{{ asset('js/jquery.loadbar.js') }}"></script>
+			<script>
+				$(document).on('ready',function(){
+					$('body').loadBar();
+				});
+			</script>
+			<script src="{{ asset('assets/full-width-tabs/js/cbpFWTabs.js') }}"></script>
+			<script>
+				new CBPFWTabs( document.getElementById( 'tabs' ) );
+			</script>
+			<!--Assets JS Bootstrap-->
+
+			<script type="text/javascript" charset="utf-8" src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+			<script src="{{ asset('assets/AnimatedHeader/js/modernizr.custom.js') }} "></script>
+
+			<!--Assets JS Header-->
+			<script src="{{ asset('assets/AnimatedHeader/js/classie.js') }} "></script>
+			<script src="{{ asset('assets/AnimatedHeader/js/cbpAnimatedHeader.js') }} "></script>
+
+			<!--Assets JS TabbedNavigation-->
+			<script src="{{ asset('assets/tabbed-navigation/js/main.js') }} "></script> <!-- Resource jQuery -->
+
+			<!--VerticalTimeLine-->
+			<script src="{{ asset('assets/vertical-timeline/js/main.js') }} "></script> <!-- Resource jQuery -->
+		</body>
+
+
+
+</html>

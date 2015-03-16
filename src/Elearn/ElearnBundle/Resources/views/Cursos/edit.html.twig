@@ -1,0 +1,52 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Perfil del curso</h1>
+    </div>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_cursos') }}">
+          Regresar
+        </a>
+        |
+        <a href="{{ path('admin_cursos_new') }}">
+          Crear curso
+        </a>
+        |
+        <a href="{{ path('admin_cursos_modulos', {'curso': entity.id}) }}">
+          Agregar módulos
+        </a>
+        |
+        <a href="{{ path('admin_cursos_usuarios', {'curso': entity.id}) }}">
+          Agregar usuarios
+        </a>
+      </li>
+    </ul>
+    {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
+    <div class="well">
+      {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
+    </div>
+
+
+    <div class="panel panel-default">
+  <div class="panel-body">
+    <div class="page-header">
+      <h3>Usuarios</h3>
+    </div>
+  </div>
+</div>
+
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_cursos') }}">
+          Regresar
+        </a>
+        |
+        <a href="{{ path('admin_cursos_new') }}">
+          Crear curso
+        </a>
+      </li>
+      <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

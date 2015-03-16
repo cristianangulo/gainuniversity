@@ -1,0 +1,100 @@
+body{
+	//background: #dedede;
+}
+
+#main-panel{
+	width: 1100px;
+	min-height: 800px!important;
+	margin: 0 auto;
+	margin-top: 70px;
+}
+	#wrap-main-panel{
+		width: 100%;
+		float: left;
+		position: relative;
+	}
+
+
+.nav-modulo{
+	margin-top: 20px;
+}
+
+#foot-main{
+	width: 100%;
+	float: left;
+	position: relative;
+	background: #f1f1f1;
+	padding: 20px;
+	border-top: 1px solid #aaa;
+	text-align: center;
+	color: #505050;
+}
+
+#contenido-modulo{
+	width: 100%;
+	float: left;
+	position: relative;
+}
+
+	#contenido-modulo h2{
+		color: #505050;
+	}
+
+	#w-contenido-modulo{
+		margin: 0 auto;
+	}
+
+	#w-contenido-modulo p{
+		color: #505050;
+	}
+
+		.w-media-modulo{
+			width: 100%;
+			float: left;
+			position: relative;
+		}
+
+		.w-datos-media{
+			width: 100%;
+			float: left;
+			position: relative;
+			padding: 20px;
+			border: 1px solid #dedede;
+			border-radius: 3px;
+		}
+
+		#w-avatar-modulo{
+			width: 100px;
+			position: absolute;
+			right: 0;
+			padding: 5px;
+			top: 5px;
+		}
+
+			#w-avatar-modulo img{
+				width: 100%;
+				border-radius: 40%;
+			}
+
+
+.titulo-seccion{
+	width: 400px;
+	margin: auto;
+	background: #dedede;
+	padding: 10px;
+	margin-top: -30px;
+}
+
+.navbar img{
+	width: 20px;
+}
+
+@media only screen and (max-width: 1100px) {
+	#main-panel{
+		width: 100%;
+	}
+
+	.panel{
+		border: 0;
+	}
+}

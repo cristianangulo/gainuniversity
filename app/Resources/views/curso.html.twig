@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div id="main-panel">
+  <div id="wrap-main-panel">
+    <div class="panel panel-default" id="">
+      <div class="panel-body">
+          {% block contenido %}
+          {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

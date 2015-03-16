@@ -1,0 +1,20 @@
+Elearn\ElearnBundle\Entity\Cursos:
+    properties:
+        curso:
+            - NotBlank: ~
+        descripcion:
+            - NotBlank: ~
+
+Elearn\ElearnBundle\Entity\Modulos:
+    properties:
+        modulo:
+            - NotBlank: ~
+        descripcion:
+            - NotBlank: ~
+
+Elearn\ElearnBundle\Entity\Secciones:
+    properties:
+        seccion:
+            - NotBlank: ~
+        descripcion:
+            - NotBlank: ~

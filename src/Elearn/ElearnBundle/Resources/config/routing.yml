@@ -1,0 +1,53 @@
+elearn_admin_cursos_usuarios:
+    resource: "@ElearnBundle/Resources/config/routing/cursousuarios.yml"
+    prefix:   /admin/cursos/usuarios
+
+elearn_comentarios_items:
+    resource: "@ElearnBundle/Resources/config/routing/comentariositems.yml"
+    prefix:   /comentarios/items
+
+elearn_admin_modulos_secciones:
+    resource: "@ElearnBundle/Resources/config/routing/modulosecciones.yml"
+    prefix:   /admin/modulos/secciones
+
+elearn_admin_cursos_modulos:
+    resource: "@ElearnBundle/Resources/config/routing/cursomodulos.yml"
+    prefix:   /admin/cursos/modulos
+
+login:
+    pattern:   /login
+    defaults:  { _controller: ACLBundle:ACL:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    path:   /logout
+
+elearn_admin_secciones:
+    resource: "@ElearnBundle/Resources/config/routing/secciones.yml"
+    prefix:   /admin/secciones
+
+elearn_admin_modulos:
+    resource: "@ElearnBundle/Resources/config/routing/modulos.yml"
+    prefix:   /admin/modulos
+
+elearn_admin_cursos:
+    resource: "@ElearnBundle/Resources/config/routing/cursos.yml"
+    prefix:   /admin/cursos
+
+front_perfil:
+    path:     /perfil/
+    defaults: { _controller: ElearnBundle:Front:perfil }
+
+elearn_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ElearnBundle:Default:index }
+
+front_curso:
+    path:     /curso/{id}
+    defaults: { _controller: ElearnBundle:Front:index }
+
+front_modulo:
+    path:     /curso/{curso}/{modulo}/{seccion}
+    defaults: { _controller: ElearnBundle:Front:modulo }

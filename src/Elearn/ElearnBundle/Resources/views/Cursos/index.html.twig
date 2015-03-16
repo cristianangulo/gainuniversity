@@ -1,0 +1,48 @@
+{% extends '::admin.html.twig' %}
+
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Cursos <small></small></h1>
+    </div>
+
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_cursos_new') }}">
+          Crear curso
+        </a>
+      </li>
+    </ul>
+    <table class="table table-striped records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Curso</th>
+                <th>Descripcion</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td class="col-md-1"><a href="{{ path('admin_cursos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td class="col-md-2">{{ entity.curso }}</td>
+                <td class="col-md-5">{{ entity.descripcion }}</td>
+                <td class="col-md-4 text-center">
+                  <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('front_curso', { 'id': entity.id }) }}">{{ btn_ver }}</a>
+                    <a class="btn btn-default" href="{{ path('admin_cursos_edit', { 'id': entity.id }) }}">{{ btn_editar }}</a>
+                  </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_cursos_new') }}">
+          Crear curso
+        </a>
+      </li>
+    </ul>
+    {% endblock %}

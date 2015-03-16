@@ -1,0 +1,26 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+
+    <div class="page-header">
+      <h1>Crear módulo</h1>
+    </div>
+
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_modulos') }}">
+          Regresar
+        </a>
+      </li>
+    </ul>
+    {% form_theme form 'ElearnBundle:Form:admin-form.html.twig' %}
+    {{ form(form, {'attr':{'novalidate':'novalidate'}}) }}
+
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_modulos') }}">
+            Regresar
+        </a>
+    </li>
+</ul>
+{% endblock %}
