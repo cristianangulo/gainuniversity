@@ -57,7 +57,7 @@ class FrontController extends Controller
        * Se la fecha mayor se usa para iniciar la publicación de los módulos
        */
 
-      $dePublicacion = ($fpc < $fru) ? $fru : $fpc;
+      $dePublicacion = ($fpc < $fru->getFechaRegistro()) ? $fru->getFechaRegistro() : $fpc;
 
       /*
        * Se averigua por la fecha actual
@@ -91,6 +91,7 @@ class FrontController extends Controller
 
       $modulosPublicar = ($intervalo / $formaPublicacion + 1);
       $modulosPublicar = ($modulosPublicar < $modulosCurso) ? $modulosPublicar: $modulosCurso;
+
 
       return $this->render('ElearnBundle:Front:curso.html.twig', array(
         "curso" => $curso,
