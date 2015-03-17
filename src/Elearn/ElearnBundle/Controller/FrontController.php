@@ -38,7 +38,7 @@ class FrontController extends Controller
 
     if ($this->get('security.context')->isGranted('ROLE_USER')) {
       // @fecha publicación curso
-      $fpc = date_format($curso->getFechaPublicacion(), 'Y-m-d');
+      $fpc = $curso->getFechaPublicacion();
 
       // @Usuario
       $usuario = $this->getUser()->getId();
@@ -52,7 +52,6 @@ class FrontController extends Controller
       )->setParameter('usuario',$usuario);
 
       $fru = $fru->getSingleResult();
-      $fru = date_format($fru->getFechaRegistro(), "Y-m-d");
 
       /*
        * Se la fecha mayor se usa para iniciar la publicación de los módulos
@@ -63,13 +62,10 @@ class FrontController extends Controller
       /*
        * Se averigua por la fecha actual
        */
-      $hoy = date_format(new \DateTime('now'), 'Y-m-d');
+      //$hoy = date_format(new \DateTime('now'), 'Y-m-d');
 
-
-      $dePublicacion = new \DateTime($dePublicacion);
-      $hoy = new \DateTime($hoy);
-      $intervalo = $dePublicacion->diff($hoy);
-      $intervalo = $intervalo->format('%d');
+      $hoy = new \DateTime('now');
+      $intervalo = $dePublicacion->diff($hoy)->format('%a');
 
       $temporalidadCurso = $curso->getTemporalidad();
 
