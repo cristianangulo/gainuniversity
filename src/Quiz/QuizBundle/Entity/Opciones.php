@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * QuizOpciones
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\QuizOpcionesRepository")
+ * @ORM\Table(name="Opciones")
+ * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\OpcionesRepository")
  */
-class QuizOpciones
+class Opciones
 {
     /**
      * @var integer
@@ -46,7 +46,7 @@ class QuizOpciones
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +69,7 @@ class QuizOpciones
     /**
      * Get opcion
      *
-     * @return string 
+     * @return string
      */
     public function getOpcion()
     {
@@ -92,7 +92,7 @@ class QuizOpciones
     /**
      * Get valor
      *
-     * @return integer 
+     * @return integer
      */
     public function getValor()
     {
@@ -115,7 +115,7 @@ class QuizOpciones
     /**
      * Get quizId
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuizId()
     {
