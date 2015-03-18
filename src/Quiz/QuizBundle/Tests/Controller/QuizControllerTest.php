@@ -4,7 +4,7 @@ namespace Quiz\QuizBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class PreguntasControllerTest extends WebTestCase
+class QuizControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class PreguntasControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/admin/quiz/preguntas/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin/quiz/preguntas/");
+        $crawler = $client->request('GET', '/admin/quiz/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin/quiz/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'quiz_quizbundle_preguntas[field_name]'  => 'Test',
+            'quiz_quizbundle_quiz[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class PreguntasControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'quiz_quizbundle_preguntas[field_name]'  => 'Foo',
+            'quiz_quizbundle_quiz[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

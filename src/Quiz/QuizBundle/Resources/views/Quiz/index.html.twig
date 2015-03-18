@@ -1,0 +1,45 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Quiz's <small></small></h1>
+    </div>
+
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_quiz_new') }}">
+          Crear quiz
+        </a>
+      </li>
+    </ul>
+
+    <table class="table table-striped records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quiz</th>
+                <th>Descripcion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_quiz_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.quiz }}</td>
+                <td>{{ entity.descripcion }}</td>
+                <td>
+                <a class="btn btn-default" href="{{ path('admin_quiz_edit', { 'id': entity.id }) }}">{{ btn_editar }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_quiz_new') }}">
+          Crear quiz
+        </a>
+      </li>
+    </ul>
+    {% endblock %}

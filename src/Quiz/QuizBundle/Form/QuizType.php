@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PreguntasType extends AbstractType
+class QuizType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,7 +15,7 @@ class PreguntasType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pregunta')
+            ->add('quiz')
             ->add('descripcion')
         ;
     }
@@ -26,7 +26,7 @@ class PreguntasType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Quiz\QuizBundle\Entity\Preguntas'
+            'data_class' => 'Quiz\QuizBundle\Entity\Quiz'
         ));
     }
 
@@ -35,6 +35,6 @@ class PreguntasType extends AbstractType
      */
     public function getName()
     {
-        return 'quiz_quizbundle_preguntas';
+        return 'quiz_quizbundle_quiz';
     }
 }
