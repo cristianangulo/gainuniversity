@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class OpcionesType extends AbstractType
+class QuizOpcionesType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,10 +15,10 @@ class OpcionesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('opcion')
-            ->add('valor', 'checkbox', array(
-              'required'  => false,
-            ))
+            ->add('opciones', 'collection', array(
+              'type' => new OpcionesType(),
+              'allow_delete' => true
+              ))
         ;
     }
 
@@ -28,7 +28,7 @@ class OpcionesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Quiz\QuizBundle\Entity\Opciones',
+            'data_class' => 'Quiz\QuizBundle\Entity\Quiz',
             'cascade_validation' => true,
         ));
     }
@@ -38,6 +38,6 @@ class OpcionesType extends AbstractType
      */
     public function getName()
     {
-        return 'quiz_quizbundle_opciones';
+        return 'quiz_opciones';
     }
 }

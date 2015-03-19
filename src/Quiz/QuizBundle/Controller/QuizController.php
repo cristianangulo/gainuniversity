@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Quiz\QuizBundle\Entity\Quiz;
 use Quiz\QuizBundle\Form\QuizType;
+use Quiz\QuizBundle\Form\QuizOpcionesType;
 
 use Quiz\QuizBundle\Entity\Opciones;
 use Quiz\QuizBundle\Form\OpcionesType;
@@ -142,11 +143,21 @@ class QuizController extends Controller
           return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
         }
 
+        $quizOpcionesForm = $this->createForm(new QuizOpcionesType(), $entity);
+        $quizOpcionesForm->handleRequest($request);
+
+        if($quizOpcionesForm->isSubmitted()){
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
+        }
+
         return $this->render('QuizBundle:Quiz:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'opciones_form' => $opcionesForm->createView()
+            'opciones_form' => $opcionesForm->createView(),
+            'quiz_opciones_form' => $quizOpcionesForm->createView()
         ));
     }
 
@@ -157,7 +168,7 @@ class QuizController extends Controller
         'method' => 'POST'
       ));
 
-      $form->add('submit', 'submit', array('label' => 'Update'));
+      $form->add('submit', 'submit', array('label' => 'Agregar'));
 
       return $form;
     }
@@ -176,7 +187,7 @@ class QuizController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Guardar'));
 
         return $form;
     }

@@ -35,11 +35,6 @@ class Quiz
      */
     private $descripcion;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Opciones", mappedBy="quiz")
-     */
-
-    protected $opciones;
 
     /**
      * Get id
@@ -96,13 +91,6 @@ class Quiz
     {
         return $this->descripcion;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->opciones = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add opciones
@@ -128,12 +116,32 @@ class Quiz
     }
 
     /**
+     * @ORM\OneToMany(targetEntity="Opciones", mappedBy="quiz")
+     */
+
+    protected $opciones;
+
+    public function __construct()
+    {
+      $this->opciones = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get opciones
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpciones()
     {
         return $this->opciones;
+    }
+
+    /**
+     * Set opciones
+     *
+     */
+    public function setOpciones(Opciones $opciones = null)
+    {
+        $this->opciones =  $opciones;
     }
 }

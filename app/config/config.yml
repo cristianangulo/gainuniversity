@@ -33,6 +33,8 @@ twig:
       btn_editar: %btn_editar%
       btn_eliminar: %btn_eliminar%
       app_name: 'Gabriel Guerrero'
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
 
 parameters:
   btn_ver: Ver
@@ -85,3 +87,8 @@ services:
     acl_success_handler:
         class: ACL\ACLBundle\Service\LoginSuccessHandler
         arguments: [@router, @security.context]
+
+    twig.extension.debug:
+        class:        Twig_Extension_Debug
+        tags:
+             - { name: 'twig.extension' }

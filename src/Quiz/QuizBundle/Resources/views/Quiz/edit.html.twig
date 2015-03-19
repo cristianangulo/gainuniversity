@@ -19,7 +19,7 @@
     <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-body">
-        {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
+        {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
         {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
       </div>
     </div>
@@ -38,7 +38,37 @@
     <div class="col-md-8">
       <div class="panel panel-default">
         <div class="panel-body">
-          Basic panel example
+
+          <form action="" method="POST">
+            {% form_theme quiz_opciones_form 'bootstrap_3_layout.html.twig' %}
+
+            {% macro prototype(opcion) %}
+             <tr>
+               <td>{{form_widget(opcion.opcion)}}</td>
+               <td>{{form_widget(opcion.valor)}} </td>
+               <td>
+                <a href="" class="btn btn-default">
+                  <span class="glyphicon glyphicon-remove">
+                  </span>
+                </a>
+               </td>
+             </tr>
+             {% endmacro %}
+
+             <table class="table table-condensed">
+                 <caption></caption>
+                 <thead><tr>Productos</tr></thead>
+                 <tbody>
+                     {% for opcion in quiz_opciones_form.opciones %}
+                        {{_self.prototype(opcion)}}
+                     {% endfor %}
+                 </tbody>
+             </table>
+
+            <input type="submit" value="Guardar" class="btn btn-default"/>
+          </form>
+
+
         </div>
       </div>
     </div>

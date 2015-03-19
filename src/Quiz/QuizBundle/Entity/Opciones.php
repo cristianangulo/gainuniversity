@@ -31,7 +31,7 @@ class Opciones
     /**
      * @var integer
      *
-     * @ORM\Column(name="valor", type="integer")
+     * @ORM\Column(name="valor", type="boolean")
      */
     private $valor;
 
@@ -116,7 +116,7 @@ class Opciones
     /**
      * Get quiz
      *
-     * @return \Quiz\QuizBundle\Entity\Quiz 
+     * @return \Quiz\QuizBundle\Entity\Quiz
      */
     public function getQuiz()
     {
