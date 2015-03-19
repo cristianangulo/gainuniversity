@@ -410,4 +410,27 @@ class Secciones
     {
         return $this->path;
     }
+
+    /**
+     * Set quiz
+     *
+     * @param \Quiz\QuizBundle\Entity\Quiz $quiz
+     * @return Secciones
+     */
+    public function setQuiz(\Quiz\QuizBundle\Entity\Quiz $quiz = null)
+    {
+        $this->quiz = $quiz;
+
+        return $this;
+    }
+
+    /**
+     * Get quiz
+     *
+     * @return \Quiz\QuizBundle\Entity\Quiz
+     */
+    public function getQuiz()
+    {
+        return $this->quiz;
+    }
 }

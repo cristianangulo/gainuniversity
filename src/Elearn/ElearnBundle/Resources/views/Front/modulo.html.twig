@@ -15,6 +15,15 @@
 
     <div class="w-media-modulo">
 
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form action method="POST">
+            {{ form_widget(opciones_form) }}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+
       {% if seccion.tipo.tipoSeccion == 'PDF' %}
         {% include 'ElearnBundle:Front:secciones/pdf.html.twig' %}
       {% endif %}

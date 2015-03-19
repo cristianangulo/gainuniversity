@@ -14,6 +14,11 @@ use Elearn\ElearnBundle\Form\PasswordUsuarioType;
 use ACL\ACLBundle\Entity\CursoUsuarios;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use Quiz\QuizBundle\Entity\UsuarioQuizOpciones;
+use Quiz\QuizBundle\Form\UsuarioQuizOpcionesType;
+
+use Doctrine\ORM\EntityRepository;
+
 class FrontController extends Controller
 {
 
@@ -112,6 +117,8 @@ class FrontController extends Controller
   public function moduloAction($curso, $modulo, $seccion, Request $request)
   {
 
+    $em = $this->getDoctrine()->getManager();
+
     $curso = $this->getDoctrine()
     ->getRepository("ElearnBundle:Cursos")
     ->find($curso);
@@ -135,11 +142,41 @@ class FrontController extends Controller
       $opciones[$opcion->getId()] = $opcion->getOpcion();
     }
 
-    echo "<pre>";print_r($opciones);
+  $usuarioQuizOpcion = new UsuarioQuizOpciones();
 
-    exit();
+  $quiz = $seccion->getQuiz()->getId();
 
-  $em = $this->getDoctrine()->getManager();
+  $opcionesForm = $this->createFormBuilder($usuarioQuizOpcion)
+    ->add('opcion', 'entity', array(
+      'class' => 'QuizBundle:Opciones',
+      'query_builder' => function(EntityRepository $er) use($quiz){
+          return $er->createQueryBuilder('qo')
+            ->where('qo.quiz = :quiz')
+            ->setParameter('quiz', $quiz);
+        },
+      'property' => 'opcion',
+      'expanded' => true
+    ))
+    ->getForm()
+  ;
+
+  $opcionesForm->handleRequest($request);
+
+  if($opcionesForm->isValid()){
+    $usuarioQuizOpcion->setCurso($curso);
+    $usuarioQuizOpcion->setModulo($modulo);
+    $usuarioQuizOpcion->setItem($seccion);
+
+    $quiz = $em->getRepository("QuizBundle:Quiz")->find($quiz);
+
+    $usuarioQuizOpcion->setQuiz($quiz);
+    $formData = $opcionesForm->getData();
+
+    $usuarioQuizOpcion->setCalificacion($formData->getOpcion()->getValor());
+
+    $em->persist($usuarioQuizOpcion);
+    $em->flush();
+  }
   // $comentarios = $em->getRepository("ElearnBundle:ComentariosItems")->findAll();
 
   $comentarios = $em->getRepository('ElearnBundle:ComentariosItems');
@@ -190,7 +227,8 @@ class FrontController extends Controller
       "seccion" => $seccion,
       "seccion_id" => $seccion->getId(),
       "comentarioForm" => $comentarioForm->createView(),
-      "comentarios" => $comentarios
+      "comentarios" => $comentarios,
+      'opciones_form' => $opcionesForm->createView()
     ));
   }
 
