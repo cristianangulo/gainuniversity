@@ -118,6 +118,7 @@ class FrontController extends Controller
     $modulo = $this->getDoctrine()
     ->getRepository("ElearnBundle:Modulos")
     ->find($modulo);
+
     $seccion = $this->getDoctrine()
     ->getRepository("ElearnBundle:Secciones")
     ->find($seccion);
@@ -125,8 +126,18 @@ class FrontController extends Controller
     if(!$seccion){
       throw $this->createNotFoundException(
       'Este item no existe'
-    );
-  }
+      );
+    }
+
+
+    $opciones = array();
+    foreach($seccion->getQuiz()->getOpciones() as $key => $opcion){
+      $opciones[$opcion->getId()] = $opcion->getOpcion();
+    }
+
+    echo "<pre>";print_r($opciones);
+
+    exit();
 
   $em = $this->getDoctrine()->getManager();
   // $comentarios = $em->getRepository("ElearnBundle:ComentariosItems")->findAll();

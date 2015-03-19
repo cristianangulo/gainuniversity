@@ -62,6 +62,12 @@ class Secciones
     protected $tipo;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Quiz\QuizBundle\Entity\Quiz", inversedBy="secciones")
+     * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
+     */
+    protected $quiz;
+
+    /**
      * Get id
      *
      * @return integer
@@ -403,5 +409,28 @@ class Secciones
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set quiz
+     *
+     * @param \Quiz\QuizBundle\Entity\Quiz $quiz
+     * @return Secciones
+     */
+    public function setQuiz(\Quiz\QuizBundle\Entity\Quiz $quiz = null)
+    {
+        $this->quiz = $quiz;
+
+        return $this;
+    }
+
+    /**
+     * Get quiz
+     *
+     * @return \Quiz\QuizBundle\Entity\Quiz
+     */
+    public function getQuiz()
+    {
+        return $this->quiz;
     }
 }

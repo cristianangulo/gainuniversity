@@ -62,6 +62,12 @@ class Secciones
     protected $tipo;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Quiz\QuizBundle\Entity\Quiz", inversedBy="secciones")
+     * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
+     */
+    protected $quiz;
+
+    /**
      * Get id
      *
      * @return integer

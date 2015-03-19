@@ -35,6 +35,11 @@ class Quiz
      */
     private $descripcion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Elearn\ElearnBundle\Entity\Secciones", mappedBy="quiz")
+     */
+
+    protected $secciones;
 
     /**
      * Get id
@@ -119,11 +124,12 @@ class Quiz
      * @ORM\OneToMany(targetEntity="Opciones", mappedBy="quiz")
      */
 
-    protected $opciones;
+    private $opciones;
 
     public function __construct()
     {
       $this->opciones = new \Doctrine\Common\Collections\ArrayCollection();
+      $this->secciones = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -143,5 +149,38 @@ class Quiz
     public function setOpciones(Opciones $opciones = null)
     {
         $this->opciones =  $opciones;
+    }
+
+    /**
+     * Add secciones
+     *
+     * @param \Elearn\ElearnBundle\Entity\Secciones $secciones
+     * @return Quiz
+     */
+    public function addSeccione(\Elearn\ElearnBundle\Entity\Secciones $secciones)
+    {
+        $this->secciones[] = $secciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove secciones
+     *
+     * @param \Elearn\ElearnBundle\Entity\Secciones $secciones
+     */
+    public function removeSeccione(\Elearn\ElearnBundle\Entity\Secciones $secciones)
+    {
+        $this->secciones->removeElement($secciones);
+    }
+
+    /**
+     * Get secciones
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSecciones()
+    {
+        return $this->secciones;
     }
 }

@@ -48,8 +48,15 @@ class AddMultimediaFieldSubscriber implements EventSubscriberInterface
                 'label' => 'El archivo debe pesar hasta 10M'
               ));
             }
+          }
 
-
+          if($data->getTipo()->getId()==5){
+            $form->add('quiz', 'entity', array(
+              'class' => 'QuizBundle:Quiz',
+              'property' => 'quiz',
+              'empty_value' => 'Seleccione',
+              'label' => 'Multimedia'
+              ));
           }
 
         }
