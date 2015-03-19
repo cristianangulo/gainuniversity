@@ -16,18 +16,32 @@
       </li>
     </ul>
 
-    {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
-    {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
+    <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
+        {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
+      </div>
+    </div>
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_quiz') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('admin_quiz_new') }}">
-          Crear módulo
-        </a>
-      </li>
-    </ul>
+
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {% form_theme opciones_form 'ElearnBundle:Form:admin-form.html.twig' %}
+          {{ form(opciones_form, {'attr':{'novalidate':'novalidate'}}) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          Basic panel example
+        </div>
+      </div>
+    </div>
+
+
 {% endblock %}

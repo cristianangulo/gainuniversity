@@ -36,11 +36,11 @@ class Opciones
     private $valor;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="quiz_id", type="integer")
-     */
-    private $quizId;
+     * @ORM\ManyToOne(targetEntity="Quiz", inversedBy="opciones")
+     * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
+     **/
+
+    private $quiz;
 
 
     /**
@@ -99,26 +99,27 @@ class Opciones
         return $this->valor;
     }
 
+
     /**
-     * Set quizId
+     * Set quiz
      *
-     * @param integer $quizId
-     * @return QuizOpciones
+     * @param \Quiz\QuizBundle\Entity\Quiz $quiz
+     * @return Opciones
      */
-    public function setQuizId($quizId)
+    public function setQuiz(\Quiz\QuizBundle\Entity\Quiz $quiz = null)
     {
-        $this->quizId = $quizId;
+        $this->quiz = $quiz;
 
         return $this;
     }
 
     /**
-     * Get quizId
+     * Get quiz
      *
-     * @return integer
+     * @return \Quiz\QuizBundle\Entity\Quiz 
      */
-    public function getQuizId()
+    public function getQuiz()
     {
-        return $this->quizId;
+        return $this->quiz;
     }
 }

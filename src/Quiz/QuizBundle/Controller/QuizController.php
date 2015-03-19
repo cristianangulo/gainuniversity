@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Quiz\QuizBundle\Entity\Quiz;
 use Quiz\QuizBundle\Form\QuizType;
 
+use Quiz\QuizBundle\Entity\Opciones;
+use Quiz\QuizBundle\Form\OpcionesType;
+
 /**
  * Quiz controller.
  *
@@ -113,7 +116,7 @@ class QuizController extends Controller
      * Displays a form to edit an existing Quiz entity.
      *
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -126,11 +129,37 @@ class QuizController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
+        $opciones = new Opciones();
+        $opcionesForm = $this->crearQuizOpcionesForm($opciones);
+
+        $opcionesForm->handleRequest($request);
+
+        if($opcionesForm->isSubmitted() && $opcionesForm->isValid()){
+          $opciones->setQuiz($entity);
+          $em->persist($opciones);
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
+        }
+
         return $this->render('QuizBundle:Quiz:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'opciones_form' => $opcionesForm->createView()
         ));
+    }
+
+    public function crearQuizOpcionesForm(Opciones $entity)
+    {
+      $form = $this->createForm(new OpcionesType, $entity, array(
+        'action' => '',
+        'method' => 'POST'
+      ));
+
+      $form->add('submit', 'submit', array('label' => 'Update'));
+
+      return $form;
     }
 
     /**
@@ -181,6 +210,7 @@ class QuizController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Quiz entity.
      *

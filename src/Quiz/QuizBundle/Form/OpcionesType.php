@@ -16,11 +16,12 @@ class OpcionesType extends AbstractType
     {
         $builder
             ->add('opcion')
-            ->add('valor')
-            ->add('quizId')
+            ->add('valor', 'checkbox', array(
+              'required'  => false,
+            ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
