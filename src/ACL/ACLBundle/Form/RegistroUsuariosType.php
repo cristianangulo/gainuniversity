@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UsuariosType extends AbstractType
+
+class RegistroUsuariosType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,8 +17,11 @@ class UsuariosType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('username')
+            ->add('username', 'hidden', array(
+              'data' => 1
+            ))
             ->add('salt','hidden')
+            ->add('email')
             ->add('password','repeated', array(
               'type' => 'password',
               'invalid_message' => 'The password fields must match.',
@@ -26,18 +30,9 @@ class UsuariosType extends AbstractType
               'first_options'  => array('label' => 'Password'),
               'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('email')
-            ->add('isActive', 'checkbox', array(
-              'required' => false,
-              'label' => 'Usuario activo'
-            ))
-            ->add('roles', 'entity', array(
-              'class' => 'ACLBundle:Roles',
-              'property' => 'role',
-              'expanded' => true,
-              'multiple' => true
-            ))
+
         ;
+
     }
 
     /**
@@ -55,6 +50,6 @@ class UsuariosType extends AbstractType
      */
     public function getName()
     {
-        return 'acl_aclbundle_usuarios';
+        return 'acl_registro_usuarios';
     }
 }

@@ -22,6 +22,10 @@ acl_homepage:
     path:     /acl/{name}
     defaults: { _controller: ACLBundle:ACL:index }
 
+acl_activar_cuenta:
+    path:     /activar-cuenta/{salt}
+    defaults: { _controller: ACLBundle:ACL:activarCuenta }
+
 acl_recuperar:
     path:     /recuperar
     defaults: { _controller: ACLBundle:ACL:recuperar }
@@ -29,3 +33,15 @@ acl_recuperar:
 acl_recuperar_cuenta:
     path:     /recuperar/{codigo}
     defaults: { _controller: ACLBundle:ACL:recuperarCuenta }
+
+acl_no_activo:
+    path:     /no-activo
+    defaults: { _controller: ACLBundle:ACL:noActivo }
+
+acl_registro:
+    path:     /registro
+    defaults: { _controller: ACLBundle:ACL:registro }
+
+acl_registro_curso:
+    path:     /registro/{orden}/{cuenta}
+    defaults: { _controller: ACLBundle:ACL:registro }

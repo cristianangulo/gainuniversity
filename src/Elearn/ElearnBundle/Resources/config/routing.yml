@@ -14,6 +14,10 @@ elearn_admin_cursos_modulos:
     resource: "@ElearnBundle/Resources/config/routing/cursomodulos.yml"
     prefix:   /admin/cursos/modulos
 
+front_perfil:
+    path:     /perfil/
+    defaults: { _controller: ElearnBundle:Front:perfil }
+
 login:
     pattern:   /login
     defaults:  { _controller: ACLBundle:ACL:login }
@@ -35,10 +39,6 @@ elearn_admin_modulos:
 elearn_admin_cursos:
     resource: "@ElearnBundle/Resources/config/routing/cursos.yml"
     prefix:   /admin/cursos
-
-front_perfil:
-    path:     /perfil/
-    defaults: { _controller: ElearnBundle:Front:perfil }
 
 elearn_homepage:
     path:     /hello/{name}

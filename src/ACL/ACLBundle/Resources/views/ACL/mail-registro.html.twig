@@ -1,0 +1,7 @@
+<p>Hola: {{ entity.nombre }}</p>
+<p>Recientemente, alguien solicitó activar una cuenta en gainuniversity.com con esta cuenta de correo<br />Si fuiste tú, haz clic aquí para activarla:</p>
+<p><a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('acl_activar_cuenta', { salt: entity.salt }) }}">Activar cuenta</a></p>
+<p>Si no deseas activar esta cuenta o no solicitaste hacerlo, ignora y elimina este mensaje.</p>
+<p>Para preservar la seguridad de tu cuenta, no reenvíes este mensaje a nadie. <br />Consulta nuestro Centro de ayuda para obtener más sugerencias de seguridad.</p>
+<p>Gracias.
+El equipo de TI de gainuniversity.com</p>

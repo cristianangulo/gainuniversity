@@ -29,6 +29,15 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         }
         elseif ($this->security->isGranted('ROLE_USER')) {
             $response = new RedirectResponse($this->router->generate('front_perfil'));
+        }elseif($this->security->isGranted('ROLE_SUPER_ADMIN')){
+            $response = new RedirectResponse($this->router->generate('admin_cursos'));
+        }
+
+        if(!$this->security->isGranted('ROLE_SUPER_ADMIN')){
+          if($user->getIsActive() == null){
+            //exit("Inactivo");
+            $response = new RedirectResponse($this->router->generate('acl_no_activo'));
+          }
         }
 
         return $response;

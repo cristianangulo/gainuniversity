@@ -9,6 +9,10 @@ security:
             pattern:    ^/recuperar
             anonymous: ~
 
+        registro:
+            pattern:    ^/registro
+            anonymous: ~
+
         secured_area:
             pattern:    ^/
             form_login:
@@ -27,6 +31,10 @@ security:
         # la propia URL /admin
         # - { path: ^/admin$, roles: ROLE_ADMIN }
 
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     providers:
       chain_provider:
         chain:
@@ -38,7 +46,7 @@ security:
               users:
                   ryan:  { password: 7110eda4d09e062aa5e4a390b0a572ac0d2c0220, roles: 'ROLE_USER' }
                   # foo
-                  super_test: { password: f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7, roles: 'ROLE_ADMIN' }
+                  super_test: { password: f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7, roles: 'ROLE_SUPER_ADMIN' }
 
       user_provider:
             id: user_provider
