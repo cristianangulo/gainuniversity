@@ -30,7 +30,7 @@ class Usuarios implements UserInterface
   private $nombre;
 
   /**
-  * @ORM\Column(type="string", length=25, unique=true)
+  * @ORM\Column(type="string", length=255, unique=true)
   */
   private $username;
 
@@ -45,7 +45,7 @@ class Usuarios implements UserInterface
   private $password;
 
   /**
-  * @ORM\Column(type="string", length=60, unique=true)
+  * @ORM\Column(type="string", length=255, unique=true)
   */
   private $email;
 

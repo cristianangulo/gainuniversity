@@ -17,7 +17,7 @@ class QuizOpcionesType extends AbstractType
         $builder
             ->add('opciones', 'collection', array(
               'type' => new OpcionesType(),
-              'allow_delete' => true
+              'allow_delete'   => true,
               ))
         ;
     }

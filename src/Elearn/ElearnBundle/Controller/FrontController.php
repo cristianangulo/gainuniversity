@@ -237,7 +237,7 @@ class FrontController extends Controller
     $em = $this->getDoctrine()->getManager();
     $usuario = $this->get('security.context')->getToken()->getUser();
 
-    $usuario = $em->getRepository("ACLBundle:Usuarios")->findOneByUsername($usuario->getUsername());
+    $usuario = $em->getRepository("ACLBundle:Usuarios")->find($usuario->getId());
 
     $formPerfil = $this->createForm(new PerfilUsuarioType(), $usuario);
     $formPassword = $this->createForm(new PasswordUsuarioType(), $usuario);
