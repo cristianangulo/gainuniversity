@@ -44,6 +44,10 @@ class UserProvider extends Controller implements UserProviderInterface
       $rolesUsuario[$key] = $role->getRoles()->getRole();
     }
 
+    if($user->getIsActive()==0){
+      $rolesUsuario = array("ROLE_NO_ACTIVADO");
+    }
+
     return new Service\UserEntityService($id, $username, $password, $salt, $rolesUsuario, $isActive);
 }
 
