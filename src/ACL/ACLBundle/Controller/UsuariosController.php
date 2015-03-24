@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ACL\ACLBundle\Entity\Usuarios;
 use ACL\ACLBundle\Form\UsuariosType;
 
+use Elearn\ElearnBundle\Form\PerfilUsuarioType;
+use Elearn\ElearnBundle\Form\PasswordUsuarioType;
+
 /**
  * Usuarios controller.
  *
@@ -117,7 +120,7 @@ class UsuariosController extends Controller
      * Displays a form to edit an existing Usuarios entity.
      *
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -130,10 +133,27 @@ class UsuariosController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
+        $formPassword = $this->createForm(new PasswordUsuarioType(), $entity);
+
+        $formPassword->handleRequest($request);
+
+        if($formPassword->isValid()){
+
+          $factory = $this->get('security.encoder_factory');
+          $encoder = $factory->getEncoder($entity);
+          $formData = $formPassword->getData();
+          $entity->setPassword($encoder->encodePassword($formData->getPassword(), $entity->getSalt()));
+          $em->persist($entity);
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $entity->getId())));
+        }
+
         return $this->render('ACLBundle:Usuarios:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'usuario_password_form' => $formPassword->createView()
         ));
     }
 
@@ -172,11 +192,6 @@ class UsuariosController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
-        $factory = $this->get('security.encoder_factory');
-        $encoder = $factory->getEncoder($entity);
-        $formData = $editForm->getData();
-        $entity->setPassword($encoder->encodePassword($formData->getPassword(), $entity->getSalt()));
 
         if ($editForm->isValid()) {
             $em->flush();

@@ -66,7 +66,8 @@ class Usuarios implements UserInterface
   // private $roles;
 
   /**
-   * @ORM\OneToMany(targetEntity="UsuariosRoles", mappedBy="usuarios")
+   * @ORM\ManyToOne(targetEntity="Roles", inversedBy="usuarios")
+   * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
    */
 
   protected $roles;
@@ -86,7 +87,6 @@ class Usuarios implements UserInterface
   {
     $this->isActive = true;
     $this->salt = md5(uniqid(null, true));
-    $this->roles = new ArrayCollection();
     $this->curso = new ArrayCollection();
     //$this->usuariosRoles = new ArrayCollection();
   }
@@ -113,15 +113,6 @@ class Usuarios implements UserInterface
   public function getPassword()
   {
     return $this->password;
-  }
-
-  /**
-  * @inheritDoc
-  */
-  public function getRoles()
-  {
-    //return $this->roles->toArray();
-    return $this->roles;
   }
 
   /**
@@ -251,28 +242,6 @@ class Usuarios implements UserInterface
         return $this->isActive;
     }
 
-    /**
-     * Add roles
-     *
-     * @param \ACL\ACLBundle\Entity\Roles $roles
-     * @return Usuarios
-     */
-    public function addRole(\ACL\ACLBundle\Entity\Roles $roles)
-    {
-        $this->roles[] = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Remove roles
-     *
-     * @param \ACL\ACLBundle\Entity\Roles $roles
-     */
-    public function removeRole(\ACL\ACLBundle\Entity\Roles $roles)
-    {
-        $this->roles->removeElement($roles);
-    }
 
     /**
      * Set nombre
@@ -354,39 +323,6 @@ class Usuarios implements UserInterface
     }
 
     /**
-     * Add usuariosRoles
-     *
-     * @param \ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles
-     * @return Usuarios
-     */
-    public function addUsuariosRole(\ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles)
-    {
-        $this->usuariosRoles[] = $usuariosRoles;
-
-        return $this;
-    }
-
-    /**
-     * Remove usuariosRoles
-     *
-     * @param \ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles
-     */
-    public function removeUsuariosRole(\ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles)
-    {
-        $this->usuariosRoles->removeElement($usuariosRoles);
-    }
-
-    /**
-     * Get usuariosRoles
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsuariosRoles()
-    {
-        return $this->usuariosRoles;
-    }
-
-    /**
      * Set activado
      *
      * @param boolean $activado
@@ -407,5 +343,24 @@ class Usuarios implements UserInterface
     public function getActivado()
     {
         return $this->activado;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+
+    /**
+     * Set roles
+     *
+     * @param \ACL\ACLBundle\Entity\Roles $roles
+     * @return Usuarios
+     */
+    public function setRoles(\ACL\ACLBundle\Entity\Roles $roles = null)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }

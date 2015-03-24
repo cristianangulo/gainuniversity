@@ -15,16 +15,29 @@
         </a>
       </li>
     </ul>
-    {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {{ form(edit_form) }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {{ form(usuario_password_form) }}
+        </div>
+      </div>
+    </div>
 
-    {{ form(edit_form) }}
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {{ form(delete_form) }}
+        </div>
+      </div>
+    </div>
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('usuarios') }}">
-            Regresar
-        </a>
-      </li>
-      <li>{{ form(delete_form) }}</li>
-    </ul>
+
+
 {% endblock %}

@@ -34,6 +34,18 @@ class Roles implements RoleInterface
   /**
   * @see RoleInterface
   */
+
+  /**
+   * @ORM\OneToMany(targetEntity="Usuarios", mappedBy="roles")
+   */
+
+  protected $usuarios;
+
+  public function __construct()
+  {
+    $this->usuarios = new ArrayCollection();
+  }
+
   public function getRole()
   {
     return $this->role;

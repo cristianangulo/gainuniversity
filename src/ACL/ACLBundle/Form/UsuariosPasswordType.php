@@ -15,18 +15,13 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('username')
-            ->add('salt','hidden')
-            ->add('email')
-            ->add('isActive', 'checkbox', array(
-              'required' => false,
-              'label' => 'Usuario activo'
-            ))
-            ->add('roles', 'entity', array(
-              'class' => 'ACLBundle:Roles',
-              'property' => 'role',
-              'expanded' => true,
+            ->add('password','repeated', array(
+              'type' => 'password',
+              'invalid_message' => 'The password fields must match.',
+              'options' => array('attr' => array('class' => 'password-field')),
+              'required' => true,
+              'first_options'  => array('label' => 'Password'),
+              'second_options' => array('label' => 'Repeat Password'),
             ))
         ;
     }
