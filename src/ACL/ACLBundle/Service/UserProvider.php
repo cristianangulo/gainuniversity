@@ -39,7 +39,12 @@ class UserProvider extends Controller implements UserProviderInterface
     $roles = $user->getRoles();
     $isActive = $user->getIsActive();
 
-    return new Service\UserEntityService($id, $username, $password, $salt, $roles, $isActive);
+    $rolesUsuario = array();
+    foreach($roles as $key => $role){
+      $rolesUsuario[$key] = $role->getRoles()->getRole();
+    }
+
+    return new Service\UserEntityService($id, $username, $password, $salt, $rolesUsuario, $isActive);
 }
 
 public function refreshUser(UserInterface $user)

@@ -30,7 +30,7 @@ class Usuarios implements UserInterface
   private $nombre;
 
   /**
-  * @ORM\Column(type="string", length=255, unique=false)
+  * @ORM\Column(type="string", length=255, unique=true)
   */
   private $username;
 
@@ -55,10 +55,21 @@ class Usuarios implements UserInterface
   private $isActive;
 
   /**
-  * @ORM\ManyToMany(targetEntity="Roles", inversedBy="usuarios")
-  *
+  * @ORM\Column(name="activado", type="boolean")
   */
-  private $roles;
+  private $activado;
+
+  // /**
+  // * @ORM\ManyToMany(targetEntity="Roles", inversedBy="usuarios")
+  // *
+  // */
+  // private $roles;
+
+  /**
+   * @ORM\OneToMany(targetEntity="UsuariosRoles", mappedBy="usuarios")
+   */
+
+  protected $roles;
 
   /**
   * @ORM\Column(name="codigo", type="text", nullable=true)
@@ -77,8 +88,7 @@ class Usuarios implements UserInterface
     $this->salt = md5(uniqid(null, true));
     $this->roles = new ArrayCollection();
     $this->curso = new ArrayCollection();
-
-    $this->username = $this->email;
+    //$this->usuariosRoles = new ArrayCollection();
   }
 
   /**
@@ -110,7 +120,8 @@ class Usuarios implements UserInterface
   */
   public function getRoles()
   {
-    return $this->roles->toArray();
+    //return $this->roles->toArray();
+    return $this->roles;
   }
 
   /**
@@ -340,5 +351,38 @@ class Usuarios implements UserInterface
     public function getCodigo()
     {
         return $this->codigo;
+    }
+
+    /**
+     * Add usuariosRoles
+     *
+     * @param \ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles
+     * @return Usuarios
+     */
+    public function addUsuariosRole(\ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles)
+    {
+        $this->usuariosRoles[] = $usuariosRoles;
+
+        return $this;
+    }
+
+    /**
+     * Remove usuariosRoles
+     *
+     * @param \ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles
+     */
+    public function removeUsuariosRole(\ACL\ACLBundle\Entity\UsuariosRoles $usuariosRoles)
+    {
+        $this->usuariosRoles->removeElement($usuariosRoles);
+    }
+
+    /**
+     * Get usuariosRoles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsuariosRoles()
+    {
+        return $this->usuariosRoles;
     }
 }

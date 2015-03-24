@@ -11,6 +11,8 @@ use ACL\ACLBundle\Entity\User;
 use ACL\ACLBundle\Entity\Usuarios;
 use ACL\ACLBundle\Form\RegistroUsuariosType;
 
+use ACL\ACLBundle\Entity\UsuariosRoles;
+
 class ACLController extends Controller
 {
   public function indexAction($name)
@@ -200,7 +202,15 @@ class ACLController extends Controller
       $entity->getRoles($role);
       $entity->setUsername($formData->getEmail());
       $entity->setIsActive(0);
+      $entity->setActivado(0);
       $em->persist($entity);
+      $em->flush();
+
+      $usuariosRoles = new UsuariosRoles();
+
+      $usuariosRoles->setUsuarios($entity);
+      $usuariosRoles->setRoles($role);
+      $em->persist($usuariosRoles);
       $em->flush();
 
       $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
@@ -234,9 +244,17 @@ class ACLController extends Controller
         throw $this->createNotFoundException('Unable to find Usuarios entity.');
     }
 
-    $entity->setIsActive(1);
-    $em->flush();
+    if($entity->getActivado()==0){
+      $entity->setIsActive(1);
+      $entity->setActivado(1);
+      $em->flush();
+    }
 
     return $this->redirect($this->generateUrl('login'));
+  }
+
+  public function activarAction()
+  {
+    return new Response("Activar cuenta");
   }
 }
