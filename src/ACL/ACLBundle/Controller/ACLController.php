@@ -257,36 +257,64 @@ class ACLController extends Controller
     return $this->redirect($this->generateUrl('login'));
   }
 
-  public function registroCursoAction()
+  public function registroCursoAction($id, $curso)
   {
+
+
+    $em = $this->getDoctrine()->getManager();
+
+    //Averiguamos el curso con el Salt enviado desde el correo del cliente
+    $curso = $em->getRepository('ElearnBundle:Cursos')->find($curso);
+
+    if (!$curso) {
+        throw $this->createNotFoundException('Este curso no existe.');
+    }
+
+    // Conexión con el Servicio
     $cliente = new \nusoap_client($this->container->getParameter('wsdl'));
 
+    // Pasamos los datos al Servicio
     $orden = array(
-      'orderId' => 1,
-      'sku' => 'PMB-008'
+      'orderId' => $id,
+      'sku' => $curso->getId()
     );
 
     $conexion = $cliente->call("OrderStatSrv.getStat", $orden);
 
-    echo "<pre>";print_r($conexion);
-    exit();
-
-    $conexion["status"] = 0;
-
+    // Si el valor de status es igual a 0 se puede registrar el usuario-curso
     if($conexion["status"] == 0){
       $user = $this->getUser();
 
-      $cursoUsuario = new CursoUsuarios();
+      // Se genera una consulta preguntando si la relación que se pretente hacer ya existe
+      $cursoUsuario = $em->getRepository('ElearnBundle:CursoUsuarios');
 
-      $em = $this->getDoctrine()->getManager();
-      $curso = $em->getRepository('ElearnBundle:Cursos')->find(1);
-      $usuario = $em->getRepository('ACLBundle:Usuarios')->find($user->getId());
+      $consulta = $cursoUsuario->createQueryBuilder('c')
+        ->where('c.curso = :curso')
+        ->andWhere('c.usuario = :usuario')
+        ->setParameter('curso', $curso->getId())
+        ->setParameter('usuario', $user->getId())
+        ->getQuery()
+        ->getResult();
 
-      $cursoUsuario->setCurso($curso);
-      $cursoUsuario->setUsuario($usuario);
+      // Si la consulta no existe se genera el registro 
+      if(!$consulta){
+        $cursoUsuario = new CursoUsuarios();
 
-      $em->persist($cursoUsuario);
-      $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        //$curso = $em->getRepository('ElearnBundle:Cursos')->find(2);
+        $usuario = $em->getRepository('ACLBundle:Usuarios')->find($user->getId());
+
+        $cursoUsuario->setCurso($curso);
+        $cursoUsuario->setUsuario($usuario);
+
+        $em->persist($cursoUsuario);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('front_perfil'));
+      }
+
+      return $this->redirect($this->generateUrl('front_perfil'));
+
     }
 
     return $this->redirect($this->generateUrl('front_perfil'));
