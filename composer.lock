@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "84ef0211ab359d6e23dff8c07a6826c9",
+    "hash": "2f42f5cacccb441302c9ebef5978ab40",
     "packages": [
         {
             "name": "andres-montanez/magallanes",
@@ -764,6 +764,43 @@
                 "orm"
             ],
             "time": "2014-12-16 13:45:01"
+        },
+        {
+            "name": "fergusean/nusoap",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fergusean/nusoap.git",
+                "reference": "463c772ae805aed7f396d89e6dce1dc0ce4c038b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fergusean/nusoap/zipball/463c772ae805aed7f396d89e6dce1dc0ce4c038b",
+                "reference": "463c772ae805aed7f396d89e6dce1dc0ce4c038b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Dietrich Ayala",
+                    "homepage": "http://sourceforge.net/u/dietricha/profile/"
+                },
+                {
+                    "name": "Scott Nichol",
+                    "homepage": "http://sourceforge.net/u/snichol/profile/"
+                }
+            ],
+            "description": "NuSOAP re-packaged for Packagist/Composer",
+            "time": "2014-05-19 03:44:33"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1724,7 +1761,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "fergusean/nusoap": 20
+    },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"

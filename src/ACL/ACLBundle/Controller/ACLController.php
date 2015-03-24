@@ -6,12 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 use ACL\ACLBundle\Entity\User;
 
 use ACL\ACLBundle\Entity\Usuarios;
 use ACL\ACLBundle\Form\RegistroUsuariosType;
 
 use ACL\ACLBundle\Entity\UsuariosRoles;
+
+use Elearn\ElearnBundle\Entity\CursoUsuarios;
 
 class ACLController extends Controller
 {
@@ -253,8 +257,39 @@ class ACLController extends Controller
     return $this->redirect($this->generateUrl('login'));
   }
 
-  public function activarAction()
+  public function registroCursoAction()
   {
-    return new Response("Activar cuenta");
+    $cliente = new \nusoap_client($this->container->getParameter('wsdl'));
+
+    $orden = array(
+      'orderId' => 1,
+      'sku' => 'PMB-008'
+    );
+
+    $conexion = $cliente->call("OrderStatSrv.getStat", $orden);
+
+    echo "<pre>";print_r($conexion);
+    exit();
+
+    $conexion["status"] = 0;
+
+    if($conexion["status"] == 0){
+      $user = $this->getUser();
+
+      $cursoUsuario = new CursoUsuarios();
+
+      $em = $this->getDoctrine()->getManager();
+      $curso = $em->getRepository('ElearnBundle:Cursos')->find(1);
+      $usuario = $em->getRepository('ACLBundle:Usuarios')->find($user->getId());
+
+      $cursoUsuario->setCurso($curso);
+      $cursoUsuario->setUsuario($usuario);
+
+      $em->persist($cursoUsuario);
+      $em->flush();
+    }
+
+    return $this->redirect($this->generateUrl('front_perfil'));
+
   }
 }
