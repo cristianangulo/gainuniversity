@@ -25,6 +25,9 @@ class CursosType extends AbstractType
               'widget' => 'choice',
             ))
             ->add('curso')
+            ->add('sku', 'text', array(
+              'label' => 'Ponga aquí el SKU del curso de tusaludfisicaymental.com'
+            ))
             ->add('descripcion')
 
         ;

@@ -52,6 +52,13 @@ class Cursos
     private $temporalidad;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="sku", type="string", length=100)
+     */
+    private $sku;
+
+    /**
     * @ORM\OneToMany(targetEntity="CursoModulos", mappedBy="cursos")
     */
     private $modulos;
@@ -195,5 +202,28 @@ class Cursos
     public function getFechaPublicacion()
     {
         return $this->fechaPublicacion;
+    }
+
+    /**
+     * Set sku
+     *
+     * @param string $sku
+     * @return Cursos
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Get sku
+     *
+     * @return string 
+     */
+    public function getSku()
+    {
+        return $this->sku;
     }
 }

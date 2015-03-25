@@ -52,6 +52,13 @@ class Cursos
     private $temporalidad;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="sku", type="string", length=100)
+     */
+    private $sku;
+
+    /**
     * @ORM\OneToMany(targetEntity="CursoModulos", mappedBy="cursos")
     */
     private $modulos;

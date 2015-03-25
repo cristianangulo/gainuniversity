@@ -41,12 +41,21 @@ class FrontController extends Controller
       );
     }
 
+
+
     if ($this->get('security.context')->isGranted('ROLE_USER')) {
       // @fecha publicación curso
       $fpc = $curso->getFechaPublicacion();
 
       // @Usuario
-      $usuario = $this->getUser()->getId();
+
+
+      if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')){
+        $usuario = 2;
+      }else{
+        $usuario = $this->getUser()->getId();
+      }
+
 
       // @fecha registro del usuario
       $fru = $em->createQuery(
@@ -136,47 +145,59 @@ class FrontController extends Controller
       );
     }
 
+    if($seccion->getTipo()->getId()==5){
 
-    $opciones = array();
-    foreach($seccion->getQuiz()->getOpciones() as $key => $opcion){
-      $opciones[$opcion->getId()] = $opcion->getOpcion();
+      $opciones = array();
+      foreach($seccion->getQuiz()->getOpciones() as $key => $opcion){
+        $opciones[$opcion->getId()] = $opcion->getOpcion();
+      }
+
+      $usuarioQuizOpcion = new UsuarioQuizOpciones();
+
+      $quiz = $seccion->getQuiz()->getId();
+
+      $opcionesForm = $this->createFormBuilder($usuarioQuizOpcion)
+        ->add('opcion', 'entity', array(
+          'class' => 'QuizBundle:Opciones',
+          'query_builder' => function(EntityRepository $er) use($quiz){
+              return $er->createQueryBuilder('qo')
+                ->where('qo.quiz = :quiz')
+                ->setParameter('quiz', $quiz);
+            },
+          'property' => 'opcion',
+          'expanded' => true
+        ))
+        ->getForm()
+      ;
+
+      $opcionesForm->handleRequest($request);
+
+      if($opcionesForm->isValid()){
+        $usuarioQuizOpcion->setCurso($curso);
+        $usuarioQuizOpcion->setModulo($modulo);
+        $usuarioQuizOpcion->setItem($seccion);
+
+        $quiz = $em->getRepository("QuizBundle:Quiz")->find($quiz);
+
+        $usuarioQuizOpcion->setQuiz($quiz);
+        $formData = $opcionesForm->getData();
+
+        $usuarioQuizOpcion->setCalificacion($formData->getOpcion()->getValor());
+
+        $em->persist($usuarioQuizOpcion);
+        $em->flush();
+      }
+
+      return $this->render('ElearnBundle:Front:modulo.html.twig', array(
+        "curso" => $curso,
+        "modulo" => $modulo,
+        "seccion" => $seccion,
+        "seccion_id" => $seccion->getId(),
+        'opciones_form' => $opcionesForm->createView()
+      ));
     }
 
-  $usuarioQuizOpcion = new UsuarioQuizOpciones();
 
-  $quiz = $seccion->getQuiz()->getId();
-
-  $opcionesForm = $this->createFormBuilder($usuarioQuizOpcion)
-    ->add('opcion', 'entity', array(
-      'class' => 'QuizBundle:Opciones',
-      'query_builder' => function(EntityRepository $er) use($quiz){
-          return $er->createQueryBuilder('qo')
-            ->where('qo.quiz = :quiz')
-            ->setParameter('quiz', $quiz);
-        },
-      'property' => 'opcion',
-      'expanded' => true
-    ))
-    ->getForm()
-  ;
-
-  $opcionesForm->handleRequest($request);
-
-  if($opcionesForm->isValid()){
-    $usuarioQuizOpcion->setCurso($curso);
-    $usuarioQuizOpcion->setModulo($modulo);
-    $usuarioQuizOpcion->setItem($seccion);
-
-    $quiz = $em->getRepository("QuizBundle:Quiz")->find($quiz);
-
-    $usuarioQuizOpcion->setQuiz($quiz);
-    $formData = $opcionesForm->getData();
-
-    $usuarioQuizOpcion->setCalificacion($formData->getOpcion()->getValor());
-
-    $em->persist($usuarioQuizOpcion);
-    $em->flush();
-  }
   // $comentarios = $em->getRepository("ElearnBundle:ComentariosItems")->findAll();
 
   $comentarios = $em->getRepository('ElearnBundle:ComentariosItems');
@@ -228,7 +249,6 @@ class FrontController extends Controller
       "seccion_id" => $seccion->getId(),
       "comentarioForm" => $comentarioForm->createView(),
       "comentarios" => $comentarios,
-      'opciones_form' => $opcionesForm->createView()
     ));
   }
 
