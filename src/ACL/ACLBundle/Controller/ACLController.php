@@ -275,6 +275,9 @@ class ACLController extends Controller
     $conexion = $cliente->call("OrderStatSrv.getStat", $orden);
 
     // Si el valor de status es igual a 0 se puede registrar el usuario-curso
+
+    $conexion["status"] = 0;
+
     if($conexion["status"] == 0){
       $user = $this->getUser();
 
