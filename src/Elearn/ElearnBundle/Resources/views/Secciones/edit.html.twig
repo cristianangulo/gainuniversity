@@ -17,7 +17,7 @@
     </ul>
 
 
-    {% if entity.path !="" %}
+    {% if entity.tipo.id ==3 %}
 
     <div class="alert alert-success" role="alert">
       <strong>Archivo: </strong>{{ entity.path }} <a class="btn btn-danger" href="{{ path('secciones_delete_archivo', {id :entity.id})}}" class="alert-link">
