@@ -203,18 +203,11 @@ class ACLController extends Controller
       $formData = $registroForm->getData();
       $entity->setPassword($encoder->encodePassword($formData->getPassword(), $entity->getSalt()));
 
-      $entity->getRoles($role);
+      $entity->setRoles($role);
       $entity->setUsername($formData->getEmail());
       $entity->setIsActive(0);
       $entity->setActivado(0);
       $em->persist($entity);
-      $em->flush();
-
-      $usuariosRoles = new UsuariosRoles();
-
-      $usuariosRoles->setUsuarios($entity);
-      $usuariosRoles->setRoles($role);
-      $em->persist($usuariosRoles);
       $em->flush();
 
       $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
@@ -257,14 +250,14 @@ class ACLController extends Controller
     return $this->redirect($this->generateUrl('login'));
   }
 
-  public function registroCursoAction($id, $curso)
+  public function registroCursoAction($id, $sku)
   {
 
 
     $em = $this->getDoctrine()->getManager();
 
     //Averiguamos el curso con el Salt enviado desde el correo del cliente
-    $curso = $em->getRepository('ElearnBundle:Cursos')->find($curso);
+    $curso = $em->getRepository('ElearnBundle:Cursos')->findOneBySku($sku);
 
     if (!$curso) {
         throw $this->createNotFoundException('Este curso no existe.');
@@ -276,7 +269,7 @@ class ACLController extends Controller
     // Pasamos los datos al Servicio
     $orden = array(
       'orderId' => $id,
-      'sku' => $curso->getId()
+      'sku' => $curso->getSku()
     );
 
     $conexion = $cliente->call("OrderStatSrv.getStat", $orden);
@@ -296,7 +289,7 @@ class ACLController extends Controller
         ->getQuery()
         ->getResult();
 
-      // Si la consulta no existe se genera el registro 
+      // Si la consulta no existe se genera el registro
       if(!$consulta){
         $cursoUsuario = new CursoUsuarios();
 

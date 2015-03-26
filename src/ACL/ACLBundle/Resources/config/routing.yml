@@ -39,7 +39,7 @@ acl_registro:
     defaults: { _controller: ACLBundle:ACL:registro }
 
 acl_registro_curso:
-    path:     /perfil/registro-curso/{id}/{curso}
+    path:     /perfil/registro-curso/{id}/{sku}
     defaults: { _controller: ACLBundle:ACL:registroCurso }
 
 acl_activar_cuenta:

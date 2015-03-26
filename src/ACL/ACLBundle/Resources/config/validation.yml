@@ -9,5 +9,5 @@ ACL\ACLBundle\Entity\Usuarios:
         email:
             - NotBlank: ~
             - Email: ~
-        roles:
-            - NotBlank: ~
+        # roles:
+        #     - NotBlank: ~
