@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use ACL\ACLBundle\Entity\Usuarios;
 use ACL\ACLBundle\Form\UsuariosType;
+use ACL\ACLBundle\Form\UsuariosPerfilType;
 
 use Elearn\ElearnBundle\Form\PerfilUsuarioType;
 use Elearn\ElearnBundle\Form\PasswordUsuarioType;
@@ -48,6 +49,7 @@ class UsuariosController extends Controller
             $encoder = $factory->getEncoder($entity);
             $formData = $form->getData();
             $entity->setPassword($encoder->encodePassword($formData->getPassword(), $entity->getSalt()));
+            $entity->setActivado(1);
             $em->persist($entity);
             $em->flush();
 
@@ -166,7 +168,7 @@ class UsuariosController extends Controller
     */
     private function createEditForm(Usuarios $entity)
     {
-        $form = $this->createForm(new UsuariosType(), $entity, array(
+        $form = $this->createForm(new UsuariosPerfilType(), $entity, array(
             'action' => $this->generateUrl('usuarios_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));

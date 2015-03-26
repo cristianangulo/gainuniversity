@@ -16,7 +16,6 @@
     <table class="table table-striped records_list">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th></th>
@@ -25,7 +24,6 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td class="col-md-1"><a href="{{ path('usuarios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td class="col-md-2">{{ entity.username }}</td>
                 <td class="col-md-5">{{ entity.email }}</td>
                 <td class="col-md-4 text-center">

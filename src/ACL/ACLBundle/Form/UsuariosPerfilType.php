@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UsuariosType extends AbstractType
+class UsuariosPerfilType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -19,14 +19,6 @@ class UsuariosType extends AbstractType
             ->add('username')
             ->add('salt','hidden')
             ->add('email')
-            ->add('password','repeated', array(
-              'type' => 'password',
-              'invalid_message' => 'The password fields must match.',
-              'options' => array('attr' => array('class' => 'password-field')),
-              'required' => true,
-              'first_options'  => array('label' => 'Password'),
-              'second_options' => array('label' => 'Repeat Password'),
-            ))
             ->add('isActive', 'checkbox', array(
               'required' => false,
               'label' => 'Usuario activo'

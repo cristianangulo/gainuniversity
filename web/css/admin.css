@@ -94,3 +94,7 @@ body{
 .navbar img{
   width: 20px;
 }
+
+.active-admin{
+	background: red;
+}
