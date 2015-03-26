@@ -18,12 +18,13 @@
 
 
     {% if entity.tipo.id ==3 %}
-
-    <div class="alert alert-success" role="alert">
-      <strong>Archivo: </strong>{{ entity.path }} <a class="btn btn-danger" href="{{ path('secciones_delete_archivo', {id :entity.id})}}" class="alert-link">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-      </a>
-    </div>
+      {% if (entity.path !="") or (entity.path!=NULL) %}
+      <div class="alert alert-success" role="alert">
+        <strong>Archivo: </strong>{{ entity.path }} <a class="btn btn-danger" href="{{ path('secciones_delete_archivo', {id :entity.id})}}" class="alert-link">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </a>
+      </div>
+      {% endif %}
     {% endif %}
     {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
     {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
