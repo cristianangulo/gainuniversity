@@ -36,11 +36,18 @@ class Opciones
     private $valor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Quiz", inversedBy="opciones")
-     * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
+     * @var integer
+     *
+     * @ORM\Column(name="posicion", type="integer")
+     */
+    private $posicion;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Preguntas", inversedBy="opciones")
+     * @ORM\JoinColumn(name="pregunta_id", referencedColumnName="id")
      **/
 
-    private $quiz;
+    private $preguntas;
 
 
     /**
@@ -99,27 +106,49 @@ class Opciones
         return $this->valor;
     }
 
-
     /**
-     * Set quiz
+     * Set preguntas
      *
-     * @param \Quiz\QuizBundle\Entity\Quiz $quiz
+     * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
      * @return Opciones
      */
-    public function setQuiz(\Quiz\QuizBundle\Entity\Quiz $quiz = null)
+    public function setPreguntas(\Quiz\QuizBundle\Entity\Preguntas $preguntas = null)
     {
-        $this->quiz = $quiz;
+        $this->preguntas = $preguntas;
 
         return $this;
     }
 
     /**
-     * Get quiz
+     * Get preguntas
      *
-     * @return \Quiz\QuizBundle\Entity\Quiz
+     * @return \Quiz\QuizBundle\Entity\Preguntas
      */
-    public function getQuiz()
+    public function getPreguntas()
     {
-        return $this->quiz;
+        return $this->preguntas;
+    }
+
+    /**
+     * Set posicion
+     *
+     * @param integer $posicion
+     * @return Opciones
+     */
+    public function setPosicion($posicion)
+    {
+        $this->posicion = $posicion;
+
+        return $this;
+    }
+
+    /**
+     * Get posicion
+     *
+     * @return integer 
+     */
+    public function getPosicion()
+    {
+        return $this->posicion;
     }
 }

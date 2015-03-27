@@ -7,10 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Quiz\QuizBundle\Entity\Quiz;
 use Quiz\QuizBundle\Form\QuizType;
-use Quiz\QuizBundle\Form\QuizOpcionesType;
+
+use Quiz\QuizBundle\Form\QuizPreguntasType;
+
+use Quiz\QuizBundle\Entity\Preguntas;
+use Quiz\QuizBundle\Form\PreguntasType;
+
 
 use Quiz\QuizBundle\Entity\Opciones;
 use Quiz\QuizBundle\Form\OpcionesType;
+
+use Quiz\QuizBundle\Form\PreguntaOpcionesType;
 
 /**
  * Quiz controller.
@@ -130,23 +137,28 @@ class QuizController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        $opciones = new Opciones();
-        $opcionesForm = $this->crearQuizOpcionesForm($opciones);
+        $preguntas = new Preguntas();
 
-        $opcionesForm->handleRequest($request);
+        $preguntasForm = $this->createForm(new PreguntasType(), $preguntas);
+        $preguntasForm->add('submit','submit');
+        $preguntasForm->handleRequest($request);
 
-        if($opcionesForm->isSubmitted() && $opcionesForm->isValid()){
-          $opciones->setQuiz($entity);
-          $em->persist($opciones);
+        if($preguntasForm->isSubmitted() && $preguntasForm->isValid()){
+
+          $posicion = count($entity->getPreguntas()) + 1;
+
+          $preguntas->setQuiz($entity);
+          $preguntas->setPosicion($posicion);
+          $em->persist($preguntas);
           $em->flush();
 
           return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
         }
 
-        $quizOpcionesForm = $this->createForm(new QuizOpcionesType(), $entity);
-        $quizOpcionesForm->handleRequest($request);
+        $quizPreguntasForm = $this->createForm(new QuizPreguntasType(), $entity);
+        $quizPreguntasForm->handleRequest($request);
 
-        if($quizOpcionesForm->isSubmitted()){
+        if($quizPreguntasForm->isSubmitted()){
           $em->flush();
 
           return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
@@ -156,8 +168,10 @@ class QuizController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'opciones_form' => $opcionesForm->createView(),
-            'quiz_opciones_form' => $quizOpcionesForm->createView()
+            //'opciones_form' => $opcionesForm->createView(),
+            //'quiz_opciones_form' => $quizOpcionesForm->createView(),
+            'preguntas_form' => $preguntasForm->createView(),
+            'quiz_preguntas_form' => $quizPreguntasForm->createView()
         ));
     }
 
@@ -261,5 +275,46 @@ class QuizController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    public function preguntaAction($id, Request $request)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $entity = $em->getRepository('QuizBundle:Preguntas')->find($id);
+
+      if (!$entity) {
+          throw $this->createNotFoundException('Esta entidad no existe.');
+      }
+
+      $opciones = new Opciones();
+      $opcionesForm = $this->crearQuizOpcionesForm($opciones);
+
+      $opcionesForm->handleRequest($request);
+
+      if($opcionesForm->isSubmitted() && $opcionesForm->isValid()){
+
+        $posicion = count($entity->getOpciones()) + 1;
+        $opciones->setPreguntas($entity);
+        $opciones->setPosicion($posicion);
+        $em->persist($opciones);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_quiz_pregunta', array('id' => $entity->getId())));
+      }
+
+      $preguntaOpcionesForm = $this->createForm(new PreguntaOpcionesType(), $entity);
+      $preguntaOpcionesForm->handleRequest($request);
+
+      if($preguntaOpcionesForm->isSubmitted()){
+        $em->flush();
+        return $this->redirect($this->generateUrl('admin_quiz_pregunta', array('id' => $entity->getId())));
+      }
+
+      return $this->render('QuizBundle:Quiz:pregunta.html.twig', array(
+        'entity' => $entity,
+        'opciones_form' => $opcionesForm->createView(),
+        'pregunta_opciones_form' => $preguntaOpcionesForm->createView()
+      ));
     }
 }

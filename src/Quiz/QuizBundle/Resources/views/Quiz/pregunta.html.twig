@@ -1,0 +1,70 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <div class="page-header">
+      <h1>Pregunta: {{ entity.pregunta }}</h1>
+    </div>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_quiz_edit', { id: entity.quiz.id }) }}">
+          Regresar
+        </a>
+      </li>
+    </ul>
+
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                {{ form(opciones_form) }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                <form action="" method="POST">
+
+                  {% macro prototype(opcion) %}
+                   <tr>
+                     <td>{{ form_widget(opcion.opcion) }}</td>
+                     <td>{{ form_widget(opcion.valor) }}</td>
+                     <td>{{ form_widget(opcion.posicion) }}</td>
+                     <td>
+                      <a href="" class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove">
+                        </span>
+                      </a>
+                     </td>
+                   </tr>
+                   {% endmacro %}
+
+                   <table class="table table-condensed">
+                       <caption></caption>
+                       <thead><tr>Preguntas</tr></thead>
+                       <tbody>
+                           {% for opcion in pregunta_opciones_form.opciones %}
+                              {{ _self.prototype(opcion) }}
+                           {% endfor %}
+                       </tbody>
+                   </table>
+
+                  <input type="submit" value="Guardar" class="btn btn-default"/>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

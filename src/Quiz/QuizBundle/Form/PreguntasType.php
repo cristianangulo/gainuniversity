@@ -5,9 +5,9 @@ namespace Quiz\QuizBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Quiz\QuizBundle\Form\EventListener\OpcionesPosicionSubscriber;
+use Quiz\QuizBundle\Form\EventListener\PreguntasPosicionSubscriber;
 
-class OpcionesType extends AbstractType
+class PreguntasType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,13 +16,11 @@ class OpcionesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('opcion')
-            ->add('valor', 'checkbox', array(
-              'required'  => false,
-            ))
+            ->add('pregunta')
+            //->add('quiz')
         ;
 
-        $builder->addEventSubscriber(new OpcionesPosicionSubscriber());
+        $builder->addEventSubscriber(new PreguntasPosicionSubscriber());
     }
 
     /**
@@ -31,8 +29,7 @@ class OpcionesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Quiz\QuizBundle\Entity\Opciones',
-            'cascade_validation' => true,
+            'data_class' => 'Quiz\QuizBundle\Entity\Preguntas'
         ));
     }
 
@@ -41,6 +38,6 @@ class OpcionesType extends AbstractType
      */
     public function getName()
     {
-        return 'quiz_quizbundle_opciones';
+        return 'quiz_quizbundle_preguntas';
     }
 }

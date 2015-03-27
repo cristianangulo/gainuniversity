@@ -28,3 +28,7 @@ admin_quiz_delete:
     path:     /{id}/delete
     defaults: { _controller: "QuizBundle:Quiz:delete" }
     methods:  [POST, DELETE]
+
+admin_quiz_pregunta:
+    path:     /pregunta/{id}
+    defaults: { _controller: "QuizBundle:Quiz:pregunta" }

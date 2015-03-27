@@ -39,8 +39,6 @@ class Quiz
      * @ORM\OneToMany(targetEntity="Elearn\ElearnBundle\Entity\Secciones", mappedBy="quiz")
      */
 
-    protected $secciones;
-
     /**
      * Get id
      *
@@ -97,58 +95,17 @@ class Quiz
         return $this->descripcion;
     }
 
-    /**
-     * Add opciones
-     *
-     * @param \Quiz\QuizBundle\Entity\Opciones $opciones
-     * @return Quiz
-     */
-    public function addOpcione(\Quiz\QuizBundle\Entity\Opciones $opciones)
-    {
-        $this->opciones[] = $opciones;
-
-        return $this;
-    }
 
     /**
-     * Remove opciones
-     *
-     * @param \Quiz\QuizBundle\Entity\Opciones $opciones
-     */
-    public function removeOpcione(\Quiz\QuizBundle\Entity\Opciones $opciones)
-    {
-        $this->opciones->removeElement($opciones);
-    }
-
-    /**
-     * @ORM\OneToMany(targetEntity="Opciones", mappedBy="quiz")
+     * @ORM\OneToMany(targetEntity="Preguntas", mappedBy="quiz")
      */
 
-    private $opciones;
+    private $preguntas;
 
     public function __construct()
     {
-      $this->opciones = new \Doctrine\Common\Collections\ArrayCollection();
       $this->secciones = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get opciones
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOpciones()
-    {
-        return $this->opciones;
-    }
-
-    /**
-     * Set opciones
-     *
-     */
-    public function setOpciones(Opciones $opciones = null)
-    {
-        $this->opciones =  $opciones;
+      $this->preguntas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -182,5 +139,43 @@ class Quiz
     public function getSecciones()
     {
         return $this->secciones;
+    }
+
+    /**
+     * Add preguntas
+     *
+     * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
+     * @return Quiz
+     */
+    public function addPregunta(\Quiz\QuizBundle\Entity\Preguntas $preguntas)
+    {
+        $this->preguntas[] = $preguntas;
+
+        return $this;
+    }
+
+    /**
+     * Remove preguntas
+     *
+     * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
+     */
+    public function removePregunta(\Quiz\QuizBundle\Entity\Preguntas $preguntas)
+    {
+        $this->preguntas->removeElement($preguntas);
+    }
+
+    /**
+     * Get preguntas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPreguntas()
+    {
+        return $this->preguntas;
+    }
+
+    public function __toString()
+    {
+       return $this->id;
     }
 }

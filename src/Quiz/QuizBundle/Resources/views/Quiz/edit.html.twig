@@ -19,7 +19,6 @@
     <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-body">
-        {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
         {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
       </div>
     </div>
@@ -29,8 +28,8 @@
     <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-body">
-          {% form_theme opciones_form 'ElearnBundle:Form:admin-form.html.twig' %}
-          {{ form(opciones_form, {'attr':{'novalidate':'novalidate'}}) }}
+          {{ form(preguntas_form) }}
+          {# form(opciones_form, {'attr':{'novalidate':'novalidate'}}) #}
         </div>
       </div>
     </div>
@@ -39,14 +38,17 @@
       <div class="panel panel-default">
         <div class="panel-body">
 
-          <form action="" method="POST">
-            {% form_theme quiz_opciones_form 'bootstrap_3_layout.html.twig' %}
 
-            {% macro prototype(opcion) %}
+          <form action="" method="POST">
+
+            {% macro prototype(pregunta) %}
              <tr>
-               <td>{{form_widget(opcion.opcion)}}</td>
-               <td>{{form_widget(opcion.valor)}} </td>
+               <td>{{ form_widget(pregunta.pregunta) }}</td>
+               <td>{{ form_widget(pregunta.posicion) }}</td>
                <td>
+                <a href="{{ path('admin_quiz_pregunta', { id: pregunta.vars.value.id }) }}" class="btn btn-success opciones">
+                  <span class="glyphicon glyphicon-plus"></span> Opciones
+                </a>
                 <a href="" class="btn btn-default">
                   <span class="glyphicon glyphicon-remove">
                   </span>
@@ -57,10 +59,10 @@
 
              <table class="table table-condensed">
                  <caption></caption>
-                 <thead><tr>Productos</tr></thead>
+                 <thead><tr>Preguntas</tr></thead>
                  <tbody>
-                     {% for opcion in quiz_opciones_form.opciones %}
-                        {{_self.prototype(opcion)}}
+                     {% for pregunta in quiz_preguntas_form.preguntas %}
+                        {{ _self.prototype(pregunta) }}
                      {% endfor %}
                  </tbody>
              </table>
