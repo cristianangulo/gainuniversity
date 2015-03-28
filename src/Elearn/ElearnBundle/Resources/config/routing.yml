@@ -49,5 +49,5 @@ front_curso:
     defaults: { _controller: ElearnBundle:Front:index }
 
 front_modulo:
-    path:     /curso/{curso}/{modulo}/{seccion}
-    defaults: { _controller: ElearnBundle:Front:modulo }
+    path:     /curso/{curso}/{modulo}/{seccion}/{pregunta}
+    defaults: { _controller: ElearnBundle:Front:modulo, pregunta:null }

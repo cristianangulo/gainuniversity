@@ -128,4 +128,27 @@ class Opciones
     {
         return $this->preguntas;
     }
+
+    /**
+     * Set posicion
+     *
+     * @param integer $posicion
+     * @return Opciones
+     */
+    public function setPosicion($posicion)
+    {
+        $this->posicion = $posicion;
+
+        return $this;
+    }
+
+    /**
+     * Get posicion
+     *
+     * @return integer 
+     */
+    public function getPosicion()
+    {
+        return $this->posicion;
+    }
 }

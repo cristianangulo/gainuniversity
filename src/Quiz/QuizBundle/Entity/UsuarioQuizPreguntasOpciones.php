@@ -6,49 +6,72 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * UsuarioQuizOpciones
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\UsuarioQuizOpcionesRepository")
  */
-class UsuarioQuizOpciones
+class UsuarioQuizPreguntasOpciones
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var \Elearn\ElearnBundle\Entity\Cursos
+     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Cursos", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      */
+
     private $cursos;
 
     /**
-     * @var \Elearn\ElearnBundle\Entity\Modulos
+     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Modulos", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
      */
+
     private $modulos;
 
     /**
-     * @var \Elearn\ElearnBundle\Entity\Secciones
+     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Secciones", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     private $items;
 
     /**
-     * @var \Quiz\QuizBundle\Entity\Quiz
+     * @ORM\ManyToOne(targetEntity="Quiz", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
      */
     private $quizes;
 
     /**
-     * @var \Quiz\QuizBundle\Entity\Preguntas
+     * @ORM\ManyToOne(targetEntity="Preguntas", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="pregunta_id", referencedColumnName="id")
      */
+
     private $preguntas;
 
     /**
-     * @var \Quiz\QuizBundle\Entity\Opciones
+     * @ORM\ManyToOne(targetEntity="Opciones", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="opcion_id", referencedColumnName="id")
      */
+
     private $opciones;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="calificacion", type="boolean")
+     */
+    private $calificacion;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +82,7 @@ class UsuarioQuizOpciones
      * Set cursos
      *
      * @param \Elearn\ElearnBundle\Entity\Cursos $cursos
-     * @return UsuarioQuizOpciones
+     * @return UsuarioQuizPreguntasOpciones
      */
     public function setCursos(\Elearn\ElearnBundle\Entity\Cursos $cursos = null)
     {
@@ -71,7 +94,7 @@ class UsuarioQuizOpciones
     /**
      * Get cursos
      *
-     * @return \Elearn\ElearnBundle\Entity\Cursos 
+     * @return \Elearn\ElearnBundle\Entity\Cursos
      */
     public function getCursos()
     {
@@ -82,7 +105,7 @@ class UsuarioQuizOpciones
      * Set modulos
      *
      * @param \Elearn\ElearnBundle\Entity\Modulos $modulos
-     * @return UsuarioQuizOpciones
+     * @return UsuarioQuizPreguntasOpciones
      */
     public function setModulos(\Elearn\ElearnBundle\Entity\Modulos $modulos = null)
     {
@@ -94,7 +117,7 @@ class UsuarioQuizOpciones
     /**
      * Get modulos
      *
-     * @return \Elearn\ElearnBundle\Entity\Modulos 
+     * @return \Elearn\ElearnBundle\Entity\Modulos
      */
     public function getModulos()
     {
@@ -105,7 +128,7 @@ class UsuarioQuizOpciones
      * Set items
      *
      * @param \Elearn\ElearnBundle\Entity\Secciones $items
-     * @return UsuarioQuizOpciones
+     * @return UsuarioQuizPreguntasOpciones
      */
     public function setItems(\Elearn\ElearnBundle\Entity\Secciones $items = null)
     {
@@ -117,7 +140,7 @@ class UsuarioQuizOpciones
     /**
      * Get items
      *
-     * @return \Elearn\ElearnBundle\Entity\Secciones 
+     * @return \Elearn\ElearnBundle\Entity\Secciones
      */
     public function getItems()
     {
@@ -128,7 +151,7 @@ class UsuarioQuizOpciones
      * Set quizes
      *
      * @param \Quiz\QuizBundle\Entity\Quiz $quizes
-     * @return UsuarioQuizOpciones
+     * @return UsuarioQuizPreguntasOpciones
      */
     public function setQuizes(\Quiz\QuizBundle\Entity\Quiz $quizes = null)
     {
@@ -140,7 +163,7 @@ class UsuarioQuizOpciones
     /**
      * Get quizes
      *
-     * @return \Quiz\QuizBundle\Entity\Quiz 
+     * @return \Quiz\QuizBundle\Entity\Quiz
      */
     public function getQuizes()
     {
@@ -151,7 +174,7 @@ class UsuarioQuizOpciones
      * Set preguntas
      *
      * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
-     * @return UsuarioQuizOpciones
+     * @return UsuarioQuizPreguntasOpciones
      */
     public function setPreguntas(\Quiz\QuizBundle\Entity\Preguntas $preguntas = null)
     {
@@ -163,7 +186,7 @@ class UsuarioQuizOpciones
     /**
      * Get preguntas
      *
-     * @return \Quiz\QuizBundle\Entity\Preguntas 
+     * @return \Quiz\QuizBundle\Entity\Preguntas
      */
     public function getPreguntas()
     {
@@ -174,7 +197,7 @@ class UsuarioQuizOpciones
      * Set opciones
      *
      * @param \Quiz\QuizBundle\Entity\Opciones $opciones
-     * @return UsuarioQuizOpciones
+     * @return UsuarioQuizPreguntasOpciones
      */
     public function setOpciones(\Quiz\QuizBundle\Entity\Opciones $opciones = null)
     {
@@ -186,10 +209,33 @@ class UsuarioQuizOpciones
     /**
      * Get opciones
      *
-     * @return \Quiz\QuizBundle\Entity\Opciones 
+     * @return \Quiz\QuizBundle\Entity\Opciones
      */
     public function getOpciones()
     {
         return $this->opciones;
+    }
+
+    /**
+     * Set calificacion
+     *
+     * @param boolean $calificacion
+     * @return UsuarioQuizPreguntasOpciones
+     */
+    public function setCalificacion($calificacion)
+    {
+        $this->calificacion = $calificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get calificacion
+     *
+     * @return boolean 
+     */
+    public function getCalificacion()
+    {
+        return $this->calificacion;
     }
 }
