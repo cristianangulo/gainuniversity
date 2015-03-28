@@ -36,10 +36,8 @@ class UserProvider extends Controller implements UserProviderInterface
     $id = $user->getId();
     $password = $user->getPassword();
     $salt = $user->getSalt();
-    $roles = $user->getRoles()->getRole();
+    $roles = array($user->getRoles()->getRole());
     $isActive = $user->getIsActive();
-
-    $roles = array('ROLE_USER');
 
     if($user->getIsActive()==0){
       $roles = array("ROLE_NO_ACTIVADO");
