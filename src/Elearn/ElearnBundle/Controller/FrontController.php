@@ -149,14 +149,6 @@ class FrontController extends Controller
 
     if($seccion->getTipo()->getId()==5){
 
-      // $opciones = array();
-      // foreach($seccion->getQuiz()->getOpciones() as $key => $opcion){
-      //   $opciones[$opcion->getId()] = $opcion->getOpcion();
-      // }
-
-      // echo count($seccion->getQuiz()->getPreguntas());
-      // exit();
-
       $usuarioQuizPreguntasOpciones = new UsuarioQuizPreguntasOpciones();
 
       $quiz = $seccion->getQuiz()->getId();
@@ -175,12 +167,38 @@ class FrontController extends Controller
       if(null == $pregunta){
         $preguntaActual = current($preguntas);
         $siguientePregunta = next($preguntas);
+
+        $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
+        $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
+          ->where('p.cursos     = :curso')
+          ->andWhere('p.modulos = :modulo')
+          ->andWhere('p.items   =  :item')
+          ->andWhere('p.quizes  = :quiz')
+          ->setParameter('curso', $curso->getId())
+          ->setParameter('modulo', $modulo->getId())
+          ->setParameter('item', $seccion->getId())
+          ->setParameter('quiz', $quiz)
+          ->getQuery()
+          ->getResult();
+
+        // foreach($preguntasResueltas as $p){
+        //   if($p->getPreguntas()->getId() == $preguntaActual){
+        //
+        //     foreach($preguntas as $next){
+        //       echo $next."<br />";
+        //     }
+        //     exit();
+        //
+        //   }
+        // }
+
       }else{
 
         /**
          * Si el valor de la url pregunta no es nulo
          * el valor de la pregunta actual será el valor pasado por url
          */
+
         $preguntaActual = $preguntas[$pregunta];
 
         $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
@@ -203,6 +221,11 @@ class FrontController extends Controller
           }
 
           $siguientePregunta = next($preguntas);
+
+          // if(end($preguntas == $preguntaActual)){
+          //   echo "Es la final";
+          //   exit();
+          // }
       }
 
       $opcionesForm = $this->createFormBuilder($usuarioQuizPreguntasOpciones)
