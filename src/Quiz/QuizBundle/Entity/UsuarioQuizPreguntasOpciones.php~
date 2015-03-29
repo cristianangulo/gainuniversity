@@ -215,4 +215,27 @@ class UsuarioQuizPreguntasOpciones
     {
         return $this->opciones;
     }
+
+    /**
+     * Set calificacion
+     *
+     * @param boolean $calificacion
+     * @return UsuarioQuizPreguntasOpciones
+     */
+    public function setCalificacion($calificacion)
+    {
+        $this->calificacion = $calificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get calificacion
+     *
+     * @return boolean 
+     */
+    public function getCalificacion()
+    {
+        return $this->calificacion;
+    }
 }

@@ -149,14 +149,6 @@ class FrontController extends Controller
 
     if($seccion->getTipo()->getId()==5){
 
-      // $opciones = array();
-      // foreach($seccion->getQuiz()->getOpciones() as $key => $opcion){
-      //   $opciones[$opcion->getId()] = $opcion->getOpcion();
-      // }
-
-      // echo count($seccion->getQuiz()->getPreguntas());
-      // exit();
-
       $usuarioQuizPreguntasOpciones = new UsuarioQuizPreguntasOpciones();
 
       $quiz = $seccion->getQuiz()->getId();
@@ -171,35 +163,90 @@ class FrontController extends Controller
         $preguntas[$p->getId()] = $p->getId();
       }
 
+      $preguntasResueltas = $this->getPreguntasResultas($curso, $modulo, $seccion);
+
+      if(count($preguntas) === count($preguntasResueltas)){
+        exit("Examen completo");
+      }
+
       $preguntaActual = 0;
       if(null == $pregunta){
         $preguntaActual = current($preguntas);
         $siguientePregunta = next($preguntas);
+
+        // $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
+        //
+        // $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
+        //   ->where('p.cursos     = :curso')
+        //   ->andWhere('p.modulos = :modulo')
+        //   ->andWhere('p.items   =  :item')
+        //   ->andWhere('p.quizes  = :quiz')
+        //   ->setParameter('curso', $curso->getId())
+        //   ->setParameter('modulo', $modulo->getId())
+        //   ->setParameter('item', $seccion->getId())
+        //   ->setParameter('quiz', $quiz)
+        //   ->getQuery()
+        //   ->getResult();
+
+        foreach($preguntasResueltas as $p){
+          if($p->getPreguntas()->getId() === $preguntaActual){
+
+            unset($preguntas[$preguntaActual]);
+
+            foreach($preguntas as $x){
+
+              if($x != $p->getPreguntas()->getId()){
+                return $this->redirect($this->generateUrl('front_modulo', array(
+                  'curso' => $curso->getId(),
+                  'modulo'=> $modulo->getId(),
+                  'seccion' => $seccion->getId(),
+                  'pregunta' => $x
+                )));
+              }
+            }
+
+          }
+        }
       }else{
 
         /**
          * Si el valor de la url pregunta no es nulo
          * el valor de la pregunta actual será el valor pasado por url
          */
+
         $preguntaActual = $preguntas[$pregunta];
 
-        $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
-
-        $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
-          ->where('p.cursos     = :curso')
-          ->andWhere('p.modulos = :modulo')
-          ->andWhere('p.items   =  :item')
-          ->andWhere('p.quizes  = :quiz')
-          ->setParameter('curso', $curso->getId())
-          ->setParameter('modulo', $modulo->getId())
-          ->setParameter('item', $seccion->getId())
-          ->setParameter('quiz', $quiz)
-          ->getQuery()
-          ->getResult();
+        // $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
+        //
+        // $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
+        //   ->where('p.cursos     = :curso')
+        //   ->andWhere('p.modulos = :modulo')
+        //   ->andWhere('p.items   =  :item')
+        //   ->andWhere('p.quizes  = :quiz')
+        //   ->setParameter('curso', $curso->getId())
+        //   ->setParameter('modulo', $modulo->getId())
+        //   ->setParameter('item', $seccion->getId())
+        //   ->setParameter('quiz', $quiz)
+        //   ->getQuery()
+        //   ->getResult();
 
           foreach($preguntasResueltas as $p){
-              echo $p->getPreguntas()->getId();
-              unset($preguntas[$p->getPreguntas()->getId()]);
+
+            unset($preguntas[$p->getPreguntas()->getId()]);
+
+            if($p->getPreguntas()->getId() === $preguntaActual){
+
+              foreach($preguntas as $x){
+                if($x != $p->getPreguntas()->getId()){
+                  return $this->redirect($this->generateUrl('front_modulo', array(
+                    'curso' => $curso->getId(),
+                    'modulo'=> $modulo->getId(),
+                    'seccion' => $seccion->getId(),
+                    'pregunta' => $x
+                  )));
+                }
+              }
+            }
           }
 
           $siguientePregunta = next($preguntas);
@@ -346,5 +393,26 @@ class FrontController extends Controller
       'formPassword' => $formPassword->createView(),
       'usuario' => $usuario
     ));
+  }
+
+  public function getPreguntasResultas($curso, $modulo, $item)
+  {
+    $em = $this->getDoctrine()->getManager();
+
+    $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
+
+    $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
+      ->where('p.cursos     = :curso')
+      ->andWhere('p.modulos = :modulo')
+      ->andWhere('p.items   =  :item')
+      ->andWhere('p.quizes  = :quiz')
+      ->setParameter('curso', $curso->getId())
+      ->setParameter('modulo', $modulo->getId())
+      ->setParameter('item', $item->getId())
+      ->setParameter('quiz', $item->getQuiz()->getId())
+      ->getQuery()
+      ->getResult();
+
+      return $preguntasResueltas;
   }
 }
