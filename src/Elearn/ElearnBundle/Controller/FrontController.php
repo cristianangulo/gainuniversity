@@ -14,6 +14,8 @@ use Elearn\ElearnBundle\Form\PasswordUsuarioType;
 use ACL\ACLBundle\Entity\CursoUsuarios;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use Quiz\QuizBundle\Entity\QuizUsuario;
+
 use Quiz\QuizBundle\Entity\UsuarioQuizPreguntasOpciones;
 use Quiz\QuizBundle\Form\UsuarioQuizPreguntasOpcionesType;
 
@@ -148,6 +150,46 @@ class FrontController extends Controller
     }
 
     if($seccion->getTipo()->getId()==5){
+
+      $quizUsuario = $this->getQuizUsuario($curso, $modulo, $seccion, $this->getUser());
+
+      if(null == $quizUsuario ){
+
+      $qUsuario = new QuizUsuario();
+
+      $quizUsuarioForm = $this->createFormBuilder($qUsuario)
+        ->getForm();
+
+      $quizUsuarioForm->handleRequest($request);
+
+      if($quizUsuarioForm->isValid()){
+        $qUsuario->setCursos($curso);
+        $qUsuario->setModulos($modulo);
+        $qUsuario->setItems($seccion);
+
+        $quiz = $em->getRepository("QuizBundle:Quiz")->find($seccion->getQuiz()->getId());
+
+        $qUsuario->setQuizes($quiz);
+
+        $usuario = $em->getRepository("ACLBundle:Usuarios")->find($this->getUser()->getId());
+
+        $qUsuario->setUsuarios($usuario);
+        $qUsuario->setCalificacion("");
+        $em->persist($qUsuario);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('front_modulo', array('curso' => $curso->getId(), 'modulo' => $modulo->getId(), 'seccion' => $seccion->getId())));
+      }
+
+        return $this->render('ElearnBundle:Front:quiz.html.twig', array(
+          "curso" => $curso,
+          "modulo" => $modulo,
+          "seccion" => $seccion,
+          "seccion_id" => $seccion->getId(),
+          'quiz_usuario_form' => $quizUsuarioForm->createView()
+        ));
+      }
+
 
       $usuarioQuizPreguntasOpciones = new UsuarioQuizPreguntasOpciones();
 
@@ -414,5 +456,33 @@ class FrontController extends Controller
       ->getResult();
 
       return $preguntasResueltas;
+  }
+
+  public function getQuizUsuario($curso, $modulo, $item, $usuario)
+  {
+
+    $em = $this->getDoctrine()->getManager();
+
+    $quizUsuario = $em->getRepository("QuizBundle:QuizUsuario");
+
+    $quizUsuario = $quizUsuario->createQueryBuilder('p')
+      ->where('p.cursos     = :curso')
+      ->andWhere('p.modulos = :modulo')
+      ->andWhere('p.items   =  :item')
+      ->andWhere('p.usuarios  = :usuario')
+      ->setParameter('curso', $curso->getId())
+      ->setParameter('modulo', $modulo->getId())
+      ->setParameter('item', $item->getId())
+      ->setParameter('usuario', $usuario->getId())
+      ->getQuery()
+      ->getResult();
+
+    $qUsuario = array();
+      foreach($quizUsuario as $q){
+        $qUsuario["quizUsuario"] = $q->getId();
+        $qUsuario["quizItem"] = $q->getQuizes()->getId();
+      }
+
+      return $qUsuario;
   }
 }

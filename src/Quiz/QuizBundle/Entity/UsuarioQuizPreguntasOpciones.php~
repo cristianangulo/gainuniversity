@@ -22,29 +22,10 @@ class UsuarioQuizPreguntasOpciones
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Cursos", inversedBy="calificacion")
-     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
-     */
-
-    private $cursos;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Modulos", inversedBy="calificacion")
-     * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
-     */
-
-    private $modulos;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Secciones", inversedBy="calificacion")
-     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
-     */
-    private $items;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Quiz", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="QuizUsuario", inversedBy="calificacion")
      * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
      */
+
     private $quizes;
 
     /**
@@ -232,7 +213,7 @@ class UsuarioQuizPreguntasOpciones
     /**
      * Get calificacion
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCalificacion()
     {

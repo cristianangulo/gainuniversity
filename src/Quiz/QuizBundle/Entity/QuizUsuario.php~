@@ -1,0 +1,188 @@
+<?php
+
+namespace Quiz\QuizBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * QuizUsuario
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\QuizUsuarioRepository")
+ */
+class QuizUsuario
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Cursos", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
+     */
+
+    private $cursos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Modulos", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
+     */
+
+    private $modulos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Secciones", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+     */
+    private $items;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Quiz", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
+     */
+    private $quizes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ACL\ACLBundle\Entity\Usuarios", inversedBy="calificacion")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    private $usuarios;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="calificacion", type="string", length=255)
+     */
+    private $calificacion;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set calificacion
+     *
+     * @param string $calificacion
+     * @return QuizUsuario
+     */
+    public function setCalificacion($calificacion)
+    {
+        $this->calificacion = $calificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get calificacion
+     *
+     * @return string
+     */
+    public function getCalificacion()
+    {
+        return $this->calificacion;
+    }
+
+    /**
+     * Set cursos
+     *
+     * @param \Elearn\ElearnBundle\Entity\Cursos $cursos
+     * @return QuizUsuario
+     */
+    public function setCursos(\Elearn\ElearnBundle\Entity\Cursos $cursos = null)
+    {
+        $this->cursos = $cursos;
+
+        return $this;
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Elearn\ElearnBundle\Entity\Cursos
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
+    }
+
+    /**
+     * Set modulos
+     *
+     * @param \Elearn\ElearnBundle\Entity\Modulos $modulos
+     * @return QuizUsuario
+     */
+    public function setModulos(\Elearn\ElearnBundle\Entity\Modulos $modulos = null)
+    {
+        $this->modulos = $modulos;
+
+        return $this;
+    }
+
+    /**
+     * Get modulos
+     *
+     * @return \Elearn\ElearnBundle\Entity\Modulos
+     */
+    public function getModulos()
+    {
+        return $this->modulos;
+    }
+
+    /**
+     * Set items
+     *
+     * @param \Elearn\ElearnBundle\Entity\Secciones $items
+     * @return QuizUsuario
+     */
+    public function setItems(\Elearn\ElearnBundle\Entity\Secciones $items = null)
+    {
+        $this->items = $items;
+
+        return $this;
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Elearn\ElearnBundle\Entity\Secciones
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Set quizes
+     *
+     * @param \Quiz\QuizBundle\Entity\Quiz $quizes
+     * @return QuizUsuario
+     */
+    public function setQuizes(\Quiz\QuizBundle\Entity\Quiz $quizes = null)
+    {
+        $this->quizes = $quizes;
+
+        return $this;
+    }
+
+    /**
+     * Get quizes
+     *
+     * @return \Quiz\QuizBundle\Entity\Quiz
+     */
+    public function getQuizes()
+    {
+        return $this->quizes;
+    }
+}
