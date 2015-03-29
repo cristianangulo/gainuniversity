@@ -169,6 +169,7 @@ class FrontController extends Controller
         $siguientePregunta = next($preguntas);
 
         $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
+
         $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
           ->where('p.cursos     = :curso')
           ->andWhere('p.modulos = :modulo')
@@ -181,17 +182,25 @@ class FrontController extends Controller
           ->getQuery()
           ->getResult();
 
-        // foreach($preguntasResueltas as $p){
-        //   if($p->getPreguntas()->getId() == $preguntaActual){
-        //
-        //     foreach($preguntas as $next){
-        //       echo $next."<br />";
-        //     }
-        //     exit();
-        //
-        //   }
-        // }
+        foreach($preguntasResueltas as $p){
+          if($p->getPreguntas()->getId() === $preguntaActual){
 
+            unset($preguntas[$preguntaActual]);
+
+            foreach($preguntas as $x){
+
+              if($x != $p->getPreguntas()->getId()){
+                return $this->redirect($this->generateUrl('front_modulo', array(
+                  'curso' => $curso->getId(),
+                  'modulo'=> $modulo->getId(),
+                  'seccion' => $seccion->getId(),
+                  'pregunta' => $x
+                )));
+              }
+            }
+
+          }
+        }
       }else{
 
         /**
@@ -216,9 +225,29 @@ class FrontController extends Controller
           ->getResult();
 
           foreach($preguntasResueltas as $p){
-              echo $p->getPreguntas()->getId();
-              unset($preguntas[$p->getPreguntas()->getId()]);
+
+            unset($preguntas[$p->getPreguntas()->getId()]);
+
+
+            if($p->getPreguntas()->getId() === $preguntaActual){
+
+
+              foreach($preguntas as $x){
+
+                if($x != $p->getPreguntas()->getId()){
+                  return $this->redirect($this->generateUrl('front_modulo', array(
+                    'curso' => $curso->getId(),
+                    'modulo'=> $modulo->getId(),
+                    'seccion' => $seccion->getId(),
+                    'pregunta' => $x
+                  )));
+                }
+              }
+
+            }
+
           }
+
 
           $siguientePregunta = next($preguntas);
 
