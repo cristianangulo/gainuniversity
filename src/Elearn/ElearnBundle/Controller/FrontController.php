@@ -27,11 +27,6 @@ use Doctrine\ORM\EntityRepository;
 class FrontController extends Controller
 {
 
-  public function modulosPublicar()
-  {
-
-  }
-
   public function indexAction($id)
   {
     $em = $this->getDoctrine()->getManager();
@@ -206,7 +201,13 @@ class FrontController extends Controller
       $quiz = $quizUsuario["quizItem"];
 
       if(count($preguntas) === count($preguntasResueltas)){
-        exit("Examen completo");
+        return $this->render('ElearnBundle:Front:respuestas.html.twig', array(
+          "curso" => $curso,
+          "modulo" => $modulo,
+          "seccion" => $seccion,
+          "seccion_id" => $seccion->getId(),
+          "quiz" => $preguntasResueltas
+        ));
       }
 
       $preguntaActual = 0;
@@ -444,7 +445,6 @@ class FrontController extends Controller
         $qUsuario["quizUsuario"] = $q->getId();
         $qUsuario["quizItem"] = $q->getQuizes()->getId();
       }
-
       return $qUsuario;
   }
 }
