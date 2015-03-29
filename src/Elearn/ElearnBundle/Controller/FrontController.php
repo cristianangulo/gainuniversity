@@ -15,6 +15,7 @@ use ACL\ACLBundle\Entity\CursoUsuarios;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Quiz\QuizBundle\Entity\QuizUsuario;
+use Quiz\QuizBundle\Entity\QuizUsuarioDetalle;
 
 use Quiz\QuizBundle\Entity\UsuarioQuizPreguntasOpciones;
 use Quiz\QuizBundle\Form\UsuarioQuizPreguntasOpcionesType;
@@ -191,10 +192,6 @@ class FrontController extends Controller
       }
 
 
-      $usuarioQuizPreguntasOpciones = new UsuarioQuizPreguntasOpciones();
-
-      $quiz = $seccion->getQuiz()->getId();
-
       /**
        * De la entidad sección se necesita saber cuántas preguntas hay y generar un Array
        */
@@ -205,7 +202,8 @@ class FrontController extends Controller
         $preguntas[$p->getId()] = $p->getId();
       }
 
-      $preguntasResueltas = $this->getPreguntasResultas($curso, $modulo, $seccion);
+      $preguntasResueltas = $this->getPreguntasResultas($quizUsuario["quizUsuario"]);
+      $quiz = $quizUsuario["quizItem"];
 
       if(count($preguntas) === count($preguntasResueltas)){
         exit("Examen completo");
@@ -215,20 +213,6 @@ class FrontController extends Controller
       if(null == $pregunta){
         $preguntaActual = current($preguntas);
         $siguientePregunta = next($preguntas);
-
-        // $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
-        //
-        // $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
-        //   ->where('p.cursos     = :curso')
-        //   ->andWhere('p.modulos = :modulo')
-        //   ->andWhere('p.items   =  :item')
-        //   ->andWhere('p.quizes  = :quiz')
-        //   ->setParameter('curso', $curso->getId())
-        //   ->setParameter('modulo', $modulo->getId())
-        //   ->setParameter('item', $seccion->getId())
-        //   ->setParameter('quiz', $quiz)
-        //   ->getQuery()
-        //   ->getResult();
 
         foreach($preguntasResueltas as $p){
           if($p->getPreguntas()->getId() === $preguntaActual){
@@ -250,27 +234,12 @@ class FrontController extends Controller
           }
         }
       }else{
-
         /**
          * Si el valor de la url pregunta no es nulo
          * el valor de la pregunta actual será el valor pasado por url
          */
 
         $preguntaActual = $preguntas[$pregunta];
-
-        // $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
-        //
-        // $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
-        //   ->where('p.cursos     = :curso')
-        //   ->andWhere('p.modulos = :modulo')
-        //   ->andWhere('p.items   =  :item')
-        //   ->andWhere('p.quizes  = :quiz')
-        //   ->setParameter('curso', $curso->getId())
-        //   ->setParameter('modulo', $modulo->getId())
-        //   ->setParameter('item', $seccion->getId())
-        //   ->setParameter('quiz', $quiz)
-        //   ->getQuery()
-        //   ->getResult();
 
           foreach($preguntasResueltas as $p){
 
@@ -294,7 +263,9 @@ class FrontController extends Controller
           $siguientePregunta = next($preguntas);
       }
 
-      $opcionesForm = $this->createFormBuilder($usuarioQuizPreguntasOpciones)
+      $quizUsuarioDetalle = new QuizUsuarioDetalle();
+
+      $opcionesForm = $this->createFormBuilder($quizUsuarioDetalle)
         ->add('opciones', 'entity', array(
           'class' => 'QuizBundle:Opciones',
           'query_builder' => function(EntityRepository $er) use($preguntaActual, $quiz){
@@ -314,21 +285,18 @@ class FrontController extends Controller
       $opcionesForm->handleRequest($request);
 
       if($opcionesForm->isValid()){
-        $usuarioQuizPreguntasOpciones->setCursos($curso);
-        $usuarioQuizPreguntasOpciones->setModulos($modulo);
-        $usuarioQuizPreguntasOpciones->setItems($seccion);
 
-        $quiz = $em->getRepository("QuizBundle:Quiz")->find($quiz);
+        $quiz = $em->getRepository("QuizBundle:QuizUsuario")->find($quizUsuario["quizUsuario"]);
 
-        $usuarioQuizPreguntasOpciones->setQuizes($quiz);
+        $quizUsuarioDetalle->setQuizes($quiz);
         $formData = $opcionesForm->getData();
 
         $pregunta = $em->getRepository("QuizBundle:Preguntas")->find($preguntaActual);
 
-        $usuarioQuizPreguntasOpciones->setPreguntas($pregunta);
-        $usuarioQuizPreguntasOpciones->setCalificacion($formData->getOpciones()->getValor());
+        $quizUsuarioDetalle->setPreguntas($pregunta);
+        $quizUsuarioDetalle->setCalificacion($formData->getOpciones()->getValor());
 
-        $em->persist($usuarioQuizPreguntasOpciones);
+        $em->persist($quizUsuarioDetalle);
         $em->flush();
 
         return $this->redirect($this->generateUrl('front_modulo', array(
@@ -437,21 +405,15 @@ class FrontController extends Controller
     ));
   }
 
-  public function getPreguntasResultas($curso, $modulo, $item)
+  public function getPreguntasResultas($id)
   {
     $em = $this->getDoctrine()->getManager();
 
-    $preguntasResueltas = $em->getRepository("QuizBundle:UsuarioQuizPreguntasOpciones");
+    $preguntasResueltas = $em->getRepository("QuizBundle:QuizUsuarioDetalle");
 
     $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
-      ->where('p.cursos     = :curso')
-      ->andWhere('p.modulos = :modulo')
-      ->andWhere('p.items   =  :item')
       ->andWhere('p.quizes  = :quiz')
-      ->setParameter('curso', $curso->getId())
-      ->setParameter('modulo', $modulo->getId())
-      ->setParameter('item', $item->getId())
-      ->setParameter('quiz', $item->getQuiz()->getId())
+      ->setParameter('quiz', $id)
       ->getQuery()
       ->getResult();
 

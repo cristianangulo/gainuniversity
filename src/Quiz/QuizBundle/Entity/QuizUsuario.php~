@@ -185,4 +185,27 @@ class QuizUsuario
     {
         return $this->quizes;
     }
+
+    /**
+     * Set usuarios
+     *
+     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
+     * @return QuizUsuario
+     */
+    public function setUsuarios(\ACL\ACLBundle\Entity\Usuarios $usuarios = null)
+    {
+        $this->usuarios = $usuarios;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \ACL\ACLBundle\Entity\Usuarios 
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
 }
