@@ -308,11 +308,14 @@ class FrontController extends Controller
         )));
       }
 
-      return $this->render('ElearnBundle:Front:modulo.html.twig', array(
+      $pregunta = $em->getRepository("QuizBundle:Preguntas")->find($preguntaActual);
+
+      return $this->render('ElearnBundle:Front:quiz-respuestas.html.twig', array(
         "curso" => $curso,
         "modulo" => $modulo,
         "seccion" => $seccion,
         "seccion_id" => $seccion->getId(),
+        'pregunta' => $pregunta,
         'opciones_form' => $opcionesForm->createView()
       ));
     }

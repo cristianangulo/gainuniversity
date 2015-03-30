@@ -12,30 +12,6 @@
   </ol>
   <div id="w-contenido-modulo">
 
-
-    <div class="w-media-modulo">
-
-
-        <div class="panel panel-default">
-          <div class="panel-body">
-          {% for q in quiz %}
-
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-success">Pregunta: {{ q.preguntas.pregunta }}</li>
-              {% for p in q.opciones.preguntas.opciones %}
-                <li class="list-group-item">{{ p.opcion }}</li>
-              {% endfor %}
-              <li class="list-group-item {% if q.calificacion == 1%} list-group-item-info {% else %} list-group-item-danger {% endif %}">Tu respuesta:{{ q.opciones.opcion }}</li>
-            </ul>
-
-          {% endfor %}
-          </div>
-        </div>
-
-
-
-
-    </div>
     <div class="w-datos-media">
       <div id="w-avatar-modulo">
         <img src="https://scontent-mia.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10846358_10154996416550085_9136934945260243027_n.jpg?oh=f46c8b109267c9f5c579d62264f77a99&oe=555957CD" />
@@ -45,8 +21,40 @@
       <!--<p>Joshua Rosenthal, MScEd, welcomes you to Integrative Nutrition.</p>-->
       <hr />
       <p class="lead">
-          {{ seccion.descripcion }}
+          {{ seccion.quiz.descripcion }}
       </p>
+    </div>
+    <div class="w-media-modulo">
+
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+  
+          {% for q in quiz %}
+
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-success">Pregunta: {{ q.preguntas.pregunta }}</li>
+              {% for p in q.opciones.preguntas.opciones %}
+                <li class="list-group-item {% if p.valor == 1%} list-group-item-info {% else %} list-group-item-warning {% endif%}">{{ p.opcion }}</li>
+              {% endfor %}
+              <li class="list-group-item {% if q.calificacion == 1%} active {% else %} list-group-item-danger {% endif %}">
+                Tu respuesta:{{ q.opciones.opcion }}
+                {% if q.calificacion == 1%}
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                {% else %}
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                {% endif %}
+
+              </li>
+            </ul>
+
+          {% endfor %}
+          </div>
+        </div>
+
+
+
+
     </div>
   </div>
 </div>

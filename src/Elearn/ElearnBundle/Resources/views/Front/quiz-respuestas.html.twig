@@ -21,23 +21,21 @@
       <!--<p>Joshua Rosenthal, MScEd, welcomes you to Integrative Nutrition.</p>-->
       <hr />
       <p class="lead">
-          {{ seccion.quiz.descripcion }}
+          {{ pregunta.pregunta }}
       </p>
     </div>
     <div class="w-media-modulo">
 
-        
+
+
         <div class="panel panel-default">
           <div class="panel-body">
           <form action method="POST">
-            {{ form_widget(quiz_usuario_form) }}
-            <button type="submit" class="btn btn-primary">Iniciar quiz</button>
+            {{ form_widget(opciones_form)}}
+            <button type="submit" class="btn btn-primary">Enviar</button>
           </form>
           </div>
         </div>
-
-
-
 
     </div>
 
