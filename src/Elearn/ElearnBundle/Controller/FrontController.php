@@ -145,6 +145,15 @@ class FrontController extends Controller
       );
     }
 
+    if($seccion->getTipo()->getId()==6){
+      return $this->render('ElearnBundle:Front:audio-descarga.html.twig', array(
+        "curso" => $curso,
+        "modulo" => $modulo,
+        "seccion" => $seccion,
+        "seccion_id" => $seccion->getId(),
+      ));
+    }
+
     if($seccion->getTipo()->getId()==5){
 
       $quizUsuario = $this->getQuizUsuario($curso, $modulo, $seccion, $this->getUser());

@@ -37,7 +37,7 @@ class AddMultimediaFieldSubscriber implements EventSubscriberInterface
             'disabled' => true
           ));
 
-          if($data->getTipo()->getId()==1 || $data->getTipo()->getId()==4){
+          if($data->getTipo()->getId()==1 || $data->getTipo()->getId()==4 || $data->getTipo()->getId()==6){
             $form->add('multimedia', 'text', array('label' => 'Multimedia'));
           }
 
