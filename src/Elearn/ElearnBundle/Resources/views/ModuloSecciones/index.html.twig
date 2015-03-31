@@ -12,30 +12,34 @@
         </a>
       </li>
     </ul>
-    {% form_theme form 'ElearnBundle:Form:admin-form.html.twig' %}
 
     {{ form(form) }}
-    <table class="table table-striped records_list">
-        <thead>
-            <tr>
-                <th>Ítem</th>
-                <th>Posicion</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td>{{ entity.secciones.seccion }}</td>
-                <td>{{ entity.posicion }}</td>
-                <td>
-                <ul>
-                  <li>
-                      <a href="{{ path('admin_modulo_item_delete', {'modulo': modulo_id, 'item': entity.id })}}">Eliminar</a>
-                  </li>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+    {{ form(modulo_secciones_form) }}
+
+    <form action="" method="POST">
+
+      {% macro prototype(secciones) %}
+       <tr>
+         <td>{{ form_widget(secciones.secciones) }}</td>
+         <td>{{ form_widget(secciones.posicion) }}</td>
+         <td>
+
+         </td>
+       </tr>
+       {% endmacro %}
+
+       <table class="table table-condensed">
+           <caption></caption>
+           <thead><tr>Preguntas</tr></thead>
+           <tbody>
+               {% for secciones in modulo_secciones_form.secciones %}
+                  {{ _self.prototype(secciones) }}
+               {% endfor %}
+           </tbody>
+       </table>
+
+      <input type="submit" value="Guardar" class="btn btn-default"/>
+    </form>
+
     {% endblock %}
