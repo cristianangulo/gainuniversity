@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Elearn\ElearnBundle\Entity\Modulos;
 use Elearn\ElearnBundle\Form\ModulosType;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Elearn\ElearnBundle\Entity\ModuloSecciones;
 /**
  * Modulos controller.
  *
@@ -113,21 +116,59 @@ class ModulosController extends Controller
      * Displays a form to edit an existing Modulos entity.
      *
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ElearnBundle:Modulos')->find($id);
+        $modulo = $em->getRepository('ElearnBundle:Modulos')->find($id);
 
-        if (!$entity) {
+        if (!$modulo) {
             throw $this->createNotFoundException('Unable to find Modulos entity.');
         }
 
-        $form = $this->createEditForm($entity);
+        $originalItems = new ArrayCollection();
+
+        foreach($modulo->getSecciones() as $item){
+          $originalItems->add($item);
+        }
+
+        $form = $this->createEditForm($modulo);
+        $form->handleRequest($request);
         $deleteForm = $this->createDeleteForm($id);
 
+        if ($form->isValid()) {
+          foreach($originalItems as $o){
+          if(false === $modulo->getSecciones()->contains($o)){
+            //$o->getOrden()->removeElement($ordenCompra);
+            //$o->setOrden(null);
+            $em->remove($o);
+            //$em->persist($o);
+          }
+        }
+
+        foreach($form->getData()->getSecciones() as $item){
+          if(!$item->getId()){
+            $moduloSecciones = new ModuloSecciones();
+
+            $modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo);
+            $secciones = count($originalItems) + 1;
+            $moduloSecciones->setPosicion($secciones);
+            $moduloSecciones->setModulos($modulo);
+            $seccion = $em->getRepository('ElearnBundle:Secciones')->find($item->getSecciones()->getId());
+            $moduloSecciones->setSecciones($seccion);
+
+            $em->persist($moduloSecciones);
+          }
+        }
+
+
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $id)));
+        }
+
         return $this->render('ElearnBundle:Modulos:edit.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $modulo,
             'form'   => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -143,7 +184,7 @@ class ModulosController extends Controller
     private function createEditForm(Modulos $entity)
     {
         $form = $this->createForm(new ModulosType(), $entity, array(
-            'action' => $this->generateUrl('admin_modulos_update', array('id' => $entity->getId())),
+            'action' => "",
             'method' => 'PUT',
         ));
         return $form;

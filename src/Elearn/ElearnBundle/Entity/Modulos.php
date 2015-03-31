@@ -37,7 +37,7 @@ class Modulos
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="ModuloSecciones", mappedBy="modulos")
+     * @ORM\OneToMany(targetEntity="ModuloSecciones", mappedBy="modulos", cascade={"persist"})
      **/
 
     private $secciones;
