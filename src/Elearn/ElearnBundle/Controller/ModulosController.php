@@ -123,12 +123,12 @@ class ModulosController extends Controller
             throw $this->createNotFoundException('Unable to find Modulos entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $form = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ElearnBundle:Modulos:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -146,9 +146,6 @@ class ModulosController extends Controller
             'action' => $this->generateUrl('admin_modulos_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Guardar', 'attr' => array('class' => 'btn btn-success')));
-
         return $form;
     }
     /**

@@ -20,9 +20,51 @@
       </li>
     </ul>
 
+    {{ form_start(form) }}
 
-    {% form_theme edit_form 'ElearnBundle:Form:admin-form.html.twig' %}
-    {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
+      {% macro prototype(item) %}
+             <tr>
+               <td>{{ form_widget(item.secciones) }}</td>
+               <td>{{ form_widget(item.posicion) }}</td>
+               <td>
+                <button class="btn btn-danger delete">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+               </td>
+             </tr>
+         {% endmacro %}
+          {{ form_row(form.modulo) }}
+          {{ form_row(form.descripcion) }}
+         <table class="table table-condensed">
+             <caption></caption>
+             <thead>
+              <tr>
+                <th>
+                  Ítem
+                </th>
+                <th>
+                  Posición
+                </th>
+                <th>
+                </th>
+              </tr>
+             </thead>
+             <tbody class="ordenes">
+                 {% for item in form.secciones %}
+                    {{_self.prototype(item)}}
+                 {% endfor %}
+             </tbody>
+         </table>
+         <div class="btn-group">
+         <button type="submit" class="btn btn-success add">Guardar</button>
+          <button type="button" class="btn btn-default add">
+            <span class="glyphicon glyphicon-plus"></span> Add
+          </button>
+         </div>
+
+
+    {{ form_end(form) }}
+
     <ul class="record_actions">
       <li>
         <a href="{{ path('admin_modulos') }}">

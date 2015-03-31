@@ -33,7 +33,7 @@ class Secciones
     /**
     * @var string
     *
-    * @ORM\Column(name="multimedia", type="string", length=50, nullable=true)
+    * @ORM\Column(name="multimedia", type="string", length=255, nullable=true)
     */
     private $multimedia;
 

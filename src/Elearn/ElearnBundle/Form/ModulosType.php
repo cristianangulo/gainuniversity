@@ -5,6 +5,7 @@ namespace Elearn\ElearnBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Elearn\ElearnBundle\Form\EventListener\ModuloItemsSubscriber;
 
 class ModulosType extends AbstractType
 {
@@ -18,6 +19,8 @@ class ModulosType extends AbstractType
             ->add('modulo')
             ->add('descripcion')
         ;
+
+        $builder->addEventSubscriber(new ModuloItemsSubscriber());
     }
 
     /**

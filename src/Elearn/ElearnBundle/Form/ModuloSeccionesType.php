@@ -5,6 +5,7 @@ namespace Elearn\ElearnBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Elearn\ElearnBundle\Form\EventListener\ModuloSeccionesPosicionSubscriber;
 
 class ModuloSeccionesType extends AbstractType
 {
@@ -20,7 +21,10 @@ class ModuloSeccionesType extends AbstractType
               'property' => 'seccion',
               'empty_value' => 'Seleccione'
             ))
+            ->add('posicion');
         ;
+
+        $builder->addEventSubscriber(new ModuloSeccionesPosicionSubscriber());
     }
 
     /**

@@ -24,7 +24,7 @@ class ModuloSecciones
     /**
      * @var string
      *
-     * @ORM\Column(name="posicion", type="string", length=255)
+     * @ORM\Column(name="posicion", type="integer")
      */
     private $posicion;
 
@@ -92,7 +92,7 @@ class ModuloSecciones
     /**
      * Get modulos
      *
-     * @return \Elearn\ElearnBundle\Entity\Modulos 
+     * @return \Elearn\ElearnBundle\Entity\Modulos
      */
     public function getModulos()
     {
@@ -115,7 +115,7 @@ class ModuloSecciones
     /**
      * Get secciones
      *
-     * @return \Elearn\ElearnBundle\Entity\Secciones 
+     * @return \Elearn\ElearnBundle\Entity\Secciones
      */
     public function getSecciones()
     {
