@@ -153,8 +153,7 @@ class CursosController extends Controller
             $cursoModulos = new CursoModulos();
 
             //$modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo);
-            $modulos = count($originalModulos) + 1;
-            $cursoModulos->setPosicion($modulos);
+            $cursoModulos->setPosicion(count($originalModulos) + 1);
             $cursoModulos->setCursos($curso);
             $modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo->getModulos()->getId());
             $cursoModulos->setModulos($modulo);

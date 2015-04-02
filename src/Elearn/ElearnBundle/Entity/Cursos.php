@@ -60,6 +60,7 @@ class Cursos
 
     /**
     * @ORM\OneToMany(targetEntity="CursoModulos", mappedBy="cursos", cascade={"persist"})
+    * @ORM\OrderBy({"posicion" = "ASC"})
     */
     private $modulos;
 
@@ -118,7 +119,7 @@ class Cursos
     /**
      * Get curso
      *
-     * @return string 
+     * @return string
      */
     public function getCurso()
     {
@@ -141,7 +142,7 @@ class Cursos
     /**
      * Get fechaPublicacion
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaPublicacion()
     {
@@ -164,7 +165,7 @@ class Cursos
     /**
      * Get temporalidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getTemporalidad()
     {
@@ -187,7 +188,7 @@ class Cursos
     /**
      * Get sku
      *
-     * @return string 
+     * @return string
      */
     public function getSku()
     {
@@ -220,7 +221,7 @@ class Cursos
     /**
      * Get modulos
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getModulos()
     {
