@@ -59,7 +59,7 @@ class Cursos
     private $sku;
 
     /**
-    * @ORM\OneToMany(targetEntity="CursoModulos", mappedBy="cursos")
+    * @ORM\OneToMany(targetEntity="CursoModulos", mappedBy="cursos", cascade={"persist"})
     */
     private $modulos;
 
@@ -116,69 +116,13 @@ class Cursos
     }
 
     /**
-     * Add modulos
-     *
-     * @param \Elearn\ElearnBundle\Entity\Modulos $modulos
-     * @return Cursos
-     */
-    public function addModulo(\Elearn\ElearnBundle\Entity\Modulos $modulos)
-    {
-        $this->modulos[] = $modulos;
-
-        return $this;
-    }
-
-    /**
-     * Remove modulos
-     *
-     * @param \Elearn\ElearnBundle\Entity\Modulos $modulos
-     */
-    public function removeModulo(\Elearn\ElearnBundle\Entity\Modulos $modulos)
-    {
-        $this->modulos->removeElement($modulos);
-    }
-
-    /**
-     * Get modulos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getModulos()
-    {
-        return $this->modulos;
-    }
-
-    /**
      * Get curso
      *
-     * @return string
+     * @return string 
      */
     public function getCurso()
     {
         return $this->curso;
-    }
-
-    /**
-     * Set temporalidad
-     *
-     * @param integer $temporalidad
-     * @return Cursos
-     */
-    public function setTemporalidad($temporalidad)
-    {
-        $this->temporalidad = $temporalidad;
-
-        return $this;
-    }
-
-    /**
-     * Get temporalidad
-     *
-     * @return integer
-     */
-    public function getTemporalidad()
-    {
-        return $this->temporalidad;
     }
 
     /**
@@ -197,11 +141,34 @@ class Cursos
     /**
      * Get fechaPublicacion
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaPublicacion()
     {
         return $this->fechaPublicacion;
+    }
+
+    /**
+     * Set temporalidad
+     *
+     * @param integer $temporalidad
+     * @return Cursos
+     */
+    public function setTemporalidad($temporalidad)
+    {
+        $this->temporalidad = $temporalidad;
+
+        return $this;
+    }
+
+    /**
+     * Get temporalidad
+     *
+     * @return integer 
+     */
+    public function getTemporalidad()
+    {
+        return $this->temporalidad;
     }
 
     /**
@@ -225,5 +192,38 @@ class Cursos
     public function getSku()
     {
         return $this->sku;
+    }
+
+    /**
+     * Add modulos
+     *
+     * @param \Elearn\ElearnBundle\Entity\CursoModulos $modulos
+     * @return Cursos
+     */
+    public function addModulo(\Elearn\ElearnBundle\Entity\CursoModulos $modulos)
+    {
+        $this->modulos[] = $modulos;
+
+        return $this;
+    }
+
+    /**
+     * Remove modulos
+     *
+     * @param \Elearn\ElearnBundle\Entity\CursoModulos $modulos
+     */
+    public function removeModulo(\Elearn\ElearnBundle\Entity\CursoModulos $modulos)
+    {
+        $this->modulos->removeElement($modulos);
+    }
+
+    /**
+     * Get modulos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModulos()
+    {
+        return $this->modulos;
     }
 }

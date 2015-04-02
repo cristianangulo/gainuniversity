@@ -139,7 +139,6 @@ class CursosController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         if ($form->isValid()) {
-          exit("entra");
           foreach($originalModulos as $o){
             if(false === $curso->getModulos()->contains($o)){
               //$o->getOrden()->removeElement($ordenCompra);
@@ -157,7 +156,7 @@ class CursosController extends Controller
             $modulos = count($originalModulos) + 1;
             $cursoModulos->setPosicion($modulos);
             $cursoModulos->setCursos($curso);
-            $modulo = $em->getRepository('ElearnBundle:Modulos')->find($item->getModulo()->getId());
+            $modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo->getModulos()->getId());
             $cursoModulos->setModulos($modulo);
 
             $em->persist($cursoModulos);
