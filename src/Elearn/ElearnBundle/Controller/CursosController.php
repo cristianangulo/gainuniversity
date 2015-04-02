@@ -8,6 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Elearn\ElearnBundle\Entity\Cursos;
 use Elearn\ElearnBundle\Form\CursosType;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Elearn\ElearnBundle\Entity\CursoModulos;
+
+
 /**
  * Cursos controller.
  *
@@ -113,22 +118,60 @@ class CursosController extends Controller
      * Displays a form to edit an existing Cursos entity.
      *
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ElearnBundle:Cursos')->find($id);
+        $curso = $em->getRepository('ElearnBundle:Cursos')->find($id);
 
-        if (!$entity) {
+        if (!$curso) {
             throw $this->createNotFoundException('Unable to find Cursos entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $originalModulos = new ArrayCollection();
+
+        foreach($curso->getModulos() as $modulo){
+          $originalModulos->add($modulo);
+        }
+
+        $form = $this->createEditForm($curso);
+        $form->handleRequest($request);
         $deleteForm = $this->createDeleteForm($id);
 
+        if ($form->isValid()) {
+          exit("entra");
+          foreach($originalModulos as $o){
+            if(false === $curso->getModulos()->contains($o)){
+              //$o->getOrden()->removeElement($ordenCompra);
+              //$o->setOrden(null);
+              $em->remove($o);
+              //$em->persist($o);
+            }
+          }
+
+        foreach($form->getData()->getModulos() as $modulo){
+          if(!$modulo->getId()){
+            $cursoModulos = new CursoModulos();
+
+            //$modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo);
+            $modulos = count($originalModulos) + 1;
+            $cursoModulos->setPosicion($modulos);
+            $cursoModulos->setCursos($curso);
+            $modulo = $em->getRepository('ElearnBundle:Modulos')->find($item->getModulo()->getId());
+            $cursoModulos->setModulos($modulo);
+
+            $em->persist($cursoModulos);
+          }
+        }
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $id)));
+      }
+
         return $this->render('ElearnBundle:Cursos:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity'      => $curso,
+            'form'   => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -143,11 +186,9 @@ class CursosController extends Controller
     private function createEditForm(Cursos $entity)
     {
         $form = $this->createForm(new CursosType(), $entity, array(
-            'action' => $this->generateUrl('admin_cursos_update', array('id' => $entity->getId())),
+            'action' => "",
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Guardar', 'attr' => array('class' => 'btn btn-success')));
 
         return $form;
     }

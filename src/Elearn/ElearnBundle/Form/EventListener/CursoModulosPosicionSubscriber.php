@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ModuloSeccionesPosicionSubscriber implements EventSubscriberInterface
+class CursoModulosPosicionSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
@@ -26,7 +26,7 @@ class ModuloSeccionesPosicionSubscriber implements EventSubscriberInterface
 
           $choices = array();
 
-          for($i = 0; $i <count($data->getModulos()->getSecciones()); $i++){
+          for($i = 0; $i <count($data->getCursos()->getModulos()); $i++){
             $choices[$i + 1] = $i + 1;
           }
 

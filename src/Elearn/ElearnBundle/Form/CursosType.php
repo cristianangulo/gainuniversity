@@ -5,6 +5,7 @@ namespace Elearn\ElearnBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Elearn\ElearnBundle\Form\EventListener\CursoModulosSubscriber;
 
 class CursosType extends AbstractType
 {
@@ -29,8 +30,10 @@ class CursosType extends AbstractType
               'label' => 'Ponga aquí el SKU del curso de tusaludfisicaymental.com'
             ))
             ->add('descripcion')
-
+            //->add('modulos')
         ;
+
+        $builder->addEventSubscriber(new CursoModulosSubscriber());
     }
 
     /**

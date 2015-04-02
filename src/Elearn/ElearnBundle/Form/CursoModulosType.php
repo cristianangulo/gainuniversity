@@ -5,6 +5,8 @@ namespace Elearn\ElearnBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Elearn\ElearnBundle\Form\EventListener\CursoModulosPosicionSubscriber;
+
 
 class CursoModulosType extends AbstractType
 {
@@ -13,16 +15,20 @@ class CursoModulosType extends AbstractType
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    { 
         $builder
-            ->add('cursos', 'hidden')
+            //->add('cursos', 'hidden')
             ->add('modulos', 'entity', array(
               'class' => 'ElearnBundle:Modulos',
               'property' => 'modulo',
               'empty_value' => "Seleccione",
               'label' => 'Agregue módulos a este curso'
             ))
+            ->add('posicion')
         ;
+
+        $builder->addEventSubscriber(new CursoModulosPosicionSubscriber());
+
     }
 
     /**

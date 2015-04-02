@@ -24,17 +24,58 @@
       </li>
     </ul>
     <div class="well">
-      {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
-    </div>
+      {{ form_start(form) }}
+
+        {% macro prototype(modulo) %}
+               <tr>
+                 <td>{{ form_widget(modulo.modulos) }}</td>
+                 <td>{{ form_widget(modulo.posicion) }}</td>
+                 <td class="text-center">
+                  <button class="btn btn-danger delete">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                 </td>
+               </tr>
+           {% endmacro %}
+            {{ form_row(form.curso) }}
+            {{ form_row(form.temporalidad) }}
+            {{ form_row(form.fechaPublicacion) }}
+            {{ form_row(form.sku) }}
+            {{ form_row(form.descripcion) }}
+            <div class="page-header">
+              <h1>Módulos</h1>
+            </div>
+           <table class="table table-condensed">
+               <caption></caption>
+               <thead>
+                <tr>
+                  <th>
+                    Ítem
+                  </th>
+                  <th>
+                    Posición
+                  </th>
+                  <th>
+                  </th>
+                </tr>
+               </thead>
+               <tbody class="ordenes" data-prototype="{{ _self.prototype(form.modulos.vars.prototype)|e }}">
+                   {% for modulo in form.modulos %}
+                      {{_self.prototype(modulo)}}
+                   {% endfor %}
+               </tbody>
+           </table>
+           <div class="btn-group">
+           <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-default add">
+              <span class="glyphicon glyphicon-plus"></span> Add
+            </button>
+           </div>
 
 
-    <div class="panel panel-default">
-  <div class="panel-body">
-    <div class="page-header">
-      <h3>Usuarios</h3>
+      {{ form_end(form) }}
     </div>
-  </div>
-</div>
+
 
     <ul class="record_actions">
       <li>
