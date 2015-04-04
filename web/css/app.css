@@ -2,12 +2,12 @@ body{
 	//background: #dedede;
 }
 
-#main-panel{
+/*#main-panel{
 	width: 1100px;
 	min-height: 800px!important;
 	margin: 0 auto;
-	margin-top: 70px;
-}
+	//margin-top: 70px;
+}*/
 	#wrap-main-panel{
 		width: 100%;
 		float: left;

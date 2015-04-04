@@ -1,37 +1,413 @@
-{% extends '::curso.html.twig' %}
-{% block contenido %}
+{% extends '::elearn.html.twig' %}
 
+{% block body %}
 
-<div id="timeLine">
-          <div id="bar-timeline"></div>
-
-          {% for modulos in curso.modulos|slice(0,modulosPublicar) %}
-
-          <div class="seccion">
-              <ul>
-                  <div class="head-section">
-                    <h1>{{ modulos.modulos.modulo }}</h1>
-                    <p>{{ modulos.modulos.descripcion }}</p>
-                  </div>
-                {% for items in modulos.modulos.secciones %}
-                  <li style="border-left:5px solid {{items.secciones.tipo.color }}">
-                      <div class="icon-item" style="background-color: {{items.secciones.tipo.color }}">
-                        <img src="{{ asset('iconos/')}}{{items.secciones.tipo.svgSeccion}}.png" alt="Symfony!" />
-                          <i class="fa fa-"></i>
-                      </div>
-                      <div class="date-section">
-                      </div>
-                      <h2>{{ items.secciones.seccion }}</h2>
-                      <p class="lead">
-                          {{ items.secciones.descripcion }}
-                      </p>
-                      <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulos.modulos.id, 'seccion': items.secciones.id}) }}" class="btn btn-default">Ver más</a>
-                  </li>
-                {% endfor %}
-              </ul>
+<ul class="timeline-scrubber inner-element">
+  {% for modulos in curso.modulos|slice(0,modulosPublicar) %}
+  <li class="selected">
+    <a href="#m{{ modulos.modulos.id }}" data-separator="#m{{ modulos.modulos.id }}">
+      {{ modulos.modulos.modulo }}</a>
+  </li>
+  {% endfor %}
+</ul>
+<div id="timeline" class="demo1">
+  <div class="timeline">
+    <div class="spine"></div>
+    {% for modulos in curso.modulos|slice(0,modulosPublicar) %}
+    <div class="date_separator" id="m{{ modulos.modulos.id }}" data-appear-top-offset="-400">
+      <span>{{ modulos.modulos.modulo }}</span>
+    </div>
+    <ul class="columns">
+      {% for items in modulos.modulos.secciones %}
+      <li>
+        <div class="timeline_element partition-white">
+          <div class="timeline_date">
+            <div>
+              <!--<div class="inline-block">
+                <span class="day text-bold">02</span>
+              </div>-->
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">{{ items.secciones.seccion }}</span>
+                <!--<span class="block month text-large text-light">november 2014</span>-->
+              </div>
+            </div>
           </div>
+          <!--<div class="timeline_title">
+            <i class="fa fa-check fa-2x pull-left fa-border"></i>
+            <h4 class="light-text no-margin padding-5">Appointment</h4>
+          </div>-->
+          <div class="timeline_content">
+            {{ items.secciones.descripcion }}
+          </div>
+          <div class="readmore">
+            <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulos.modulos.id, 'seccion': items.secciones.id}) }}" class="btn btn-default" class="btn btn-green">
+              Ver más <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
       {% endfor %}
-      </div>
+    </ul>
+  {% endfor %}
+    <!--
+    <div class="date_separator" id="october" data-appear-top-offset="-400">
+      <span>OCTOBER 2014</span>
+    </div>
+    <ul class="columns">
+      <li>
+        <div class="timeline_element partition-white">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_title">
+            <i class="fa fa-map-marker fa-2x pull-left fa-border"></i>
+            <h4 class="light-text no-margin padding-5">Appointment</h4>
+          </div>
+          <div class="timeline_content">
+            <div class="row">
+              <div class="col-md-3 col-xs-4"><img src="assets/images/photodune-4043508-3d-modern-office-room-l.jpg" alt="offce" class="img-responsive"/>
+              </div>
+              <div class="col-md-9 col-xs-8">
+                <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+              </div>
+            </div>
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-purple">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_title">
+            <i class="fa fa-map-marker fa-2x pull-left fa-border"></i>
+            <h4 class="light-text no-margin padding-5">Appointment</h4>
+          </div>
+          <div class="timeline_content">
+            <div class="row">
+              <div class="col-md-3 col-xs-4"><img src="assets/images/photodune-4043508-3d-modern-office-room-l.jpg" alt="offce" class="img-responsive"/>
+              </div>
+              <div class="col-md-9 col-xs-8">
+                <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+              </div>
+            </div>
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-transparent-white">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-green">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_content">
+            <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-white">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_content">
+            <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="date_separator" id="september" data-appear-top-offset="-400">
+      <span>September 2014</span>
+    </div>
+    <ul class="columns">
+      <li>
+        <div class="timeline_element partition-white">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_title">
+            <i class="fa fa-map-marker fa-2x pull-left fa-border"></i>
+            <h4 class="light-text no-margin padding-5">Appointment</h4>
+          </div>
+          <div class="timeline_content">
+            <div class="row">
+              <div class="col-md-3 col-xs-4"><img src="assets/images/photodune-4043508-3d-modern-office-room-l.jpg" alt="offce" class="img-responsive"/>
+              </div>
+              <div class="col-md-9 col-xs-8">
+                <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+              </div>
+            </div>
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-orange">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_title">
+            <i class="fa fa-map-marker fa-2x pull-left fa-border"></i>
+            <h4 class="light-text no-margin padding-5">Appointment</h4>
+          </div>
+          <div class="timeline_content">
+            <div class="row">
+              <div class="col-md-3 col-xs-4"><img src="assets/images/photodune-4043508-3d-modern-office-room-l.jpg" alt="offce" class="img-responsive"/>
+              </div>
+              <div class="col-md-9 col-xs-8">
+                <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+              </div>
+            </div>
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-transparent-white">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-blue">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_content">
+            <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-white">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_content">
+            <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="date_separator" id="august" data-appear-top-offset="-400">
+      <span>August 2014</span>
+    </div>
+    <ul class="columns">
+      <li>
+        <div class="timeline_element partition-white">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_title">
+            <i class="fa fa-map-marker fa-2x pull-left fa-border"></i>
+            <h4 class="light-text no-margin padding-5">Appointment</h4>
+          </div>
+          <div class="timeline_content">
+            <div class="row">
+              <div class="col-md-3 col-xs-4"><img src="assets/images/photodune-4043508-3d-modern-office-room-l.jpg" alt="offce" class="img-responsive"/>
+              </div>
+              <div class="col-md-9 col-xs-8">
+                <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+              </div>
+            </div>
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-orange">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_title">
+            <i class="fa fa-map-marker fa-2x pull-left fa-border"></i>
+            <h4 class="light-text no-margin padding-5">Appointment</h4>
+          </div>
+          <div class="timeline_content">
+            <div class="row">
+              <div class="col-md-3 col-xs-4"><img src="assets/images/photodune-4043508-3d-modern-office-room-l.jpg" alt="offce" class="img-responsive"/>
+              </div>
+              <div class="col-md-9 col-xs-8">
+                <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+              </div>
+            </div>
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-transparent-white">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-azure">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_content">
+            <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="timeline_element partition-white">
+          <div class="timeline_date">
+            <div>
+              <div class="inline-block">
+                <span class="day text-bold">05</span>
+              </div>
+              <div class="inline-block">
+                <span class="block week-day text-extra-large">Wensdey</span>
+                <span class="block month text-large text-light">november 2014</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_content">
+            <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </div>
+          <div class="readmore">
+            <a href="#" class="btn btn-light-blue">
+              Read More <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>-->
+  </div>
+</div>
+
+
+
+
+
 
 
 {% endblock %}
