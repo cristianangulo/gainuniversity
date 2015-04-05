@@ -973,9 +973,10 @@ ul.main-navigation-menu li ul.sub-menu li ul.sub-menu li ul.sub-menu li a {
 /* ---------------------------------------------------------------------- */
 /* line 4, ../sass/partials/layout-elements/_main-container.scss */
 .main-container {
-  margin-top: 36px !important;
+  //margin-top: 36px !important;
   //margin-left: 260px;
   position: relative;
+  top: 40px;
 }
 /* line 8, ../sass/partials/layout-elements/_main-container.scss */
 .sidebar-close .main-container {

@@ -3,60 +3,44 @@
 
 {% block contenido %}
 
-  <div id="tabs" class="tabs">
-    <nav>
-      <ul>
-        <li><a href="#section-4" class="icon-lab"><span>Perfil</span></a></li>
-        <li><a href="#section-1" class="icon-shop"><span>Cursos</span></a></li>
-      </ul>
-    </nav>
-    <div class="content">
-      <section id="section-1">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            {% form_theme formPerfil 'ElearnBundle:Form:admin-form.html.twig' %}
-            {{ form(formPerfil, {'attr':{'novalidate':'novalidate'}}) }}
-          </div>
-        </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h1>Datos de perfil</h1></div>
+      <div class="panel-body">
+        {{ form(formPerfil, {'attr':{'novalidate':'novalidate'}}) }}
       </div>
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            {% form_theme formPassword 'ElearnBundle:Form:admin-form.html.twig' %}
-            {{ form(formPassword, {'attr':{'novalidate':'novalidate'}}) }}
-          </div>
-        </div>
+      <div class="panel-heading"><h1>Contraseña</h1></div>
+      <div class="panel-body">
+        {{ form(formPassword, {'attr':{'novalidate':'novalidate'}}) }}
       </div>
-
-
-      </section>
-      <section id="section-3">
-
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h1>Tus cursos</h1></div>
+      <div class="panel-body">
         <table class="table">
-      <caption>Tus cursos</caption>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for cursos in usuario.curso %}
-          <tr>
-            <th scope="row">1</th>
-            <td>{{ cursos.cursos.curso }}</td>
-            <td class="text-center">
-              <a href="{{ path('front_curso', {'id' : cursos.cursos.id }) }}" class="btn btn-default">Ver curso</a>
-            </td>
-          </tr>
+          <caption>Tus cursos</caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cursos in usuario.curso %}
+              <tr>
+                <th scope="row">1</th>
+                <td>{{ cursos.cursos.curso }}</td>
+                <td class="text-center">
+                  <a href="{{ path('front_curso', {'id' : cursos.cursos.id }) }}" class="btn btn-default">Ver curso</a>
+                </td>
+              </tr>
 
-        {% endfor %}
-      </tbody>
-    </table>
-
-
-      </section>
-    </div><!-- /content -->
-  </div><!-- /tabs -->
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 {% endblock %}

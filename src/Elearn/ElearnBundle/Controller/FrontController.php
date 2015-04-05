@@ -107,14 +107,14 @@ class FrontController extends Controller
       $modulosPublicar = ($modulosPublicar < $modulosCurso) ? $modulosPublicar: $modulosCurso;
 
 
-      return $this->render('ElearnBundle:Front:curso.html.twig', array(
+      return $this->render('elearn/curso.html.twig', array(
         "curso" => $curso,
         "modulosPublicar" => $modulosPublicar
       ));
 
     }else{
 
-      return $this->render('ElearnBundle:Front:curso.html.twig', array(
+      return $this->render('elearn/curso.html.twig', array(
         "curso" => $curso,
         "modulosPublicar" => null
       ));
