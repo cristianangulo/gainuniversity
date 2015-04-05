@@ -276,7 +276,7 @@ class ACLController extends Controller
 
     // Si el valor de status es igual a 0 se puede registrar el usuario-curso
 
-    $conexion["status"] = 0;
+    //$conexion["status"] = 0;
 
     if($conexion["status"] == 0){
       $user = $this->getUser();
