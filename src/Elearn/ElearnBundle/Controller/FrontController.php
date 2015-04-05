@@ -57,15 +57,6 @@ class FrontController extends Controller
         $usuario = $this->getUser()->getId();
       }
 
-
-      // @fecha registro del usuario
-      // $fru = $em->createQuery(
-      //   "SELECT c, u
-      //   FROM ElearnBundle:CursoUsuarios c
-      //   JOIN c.curso u
-      //   WHERE c.usuario = :usuario"
-      // )->setParameter('usuario',$usuario);
-
       $fru = $em->getRepository('ElearnBundle:CursoUsuarios');
 
       $fru = $fru->createQueryBuilder('cu')
