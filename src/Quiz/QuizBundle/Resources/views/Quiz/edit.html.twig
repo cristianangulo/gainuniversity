@@ -29,7 +29,6 @@
       <div class="panel panel-default">
         <div class="panel-body">
           {{ form(preguntas_form) }}
-          {# form(opciones_form, {'attr':{'novalidate':'novalidate'}}) #}
         </div>
       </div>
     </div>
@@ -38,9 +37,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
 
-
-          <form action="" method="POST">
-
+          {{ form_start(quiz_preguntas_form)}}
             {% macro prototype(pregunta) %}
              <tr>
                <td>{{ form_widget(pregunta.pregunta) }}</td>
@@ -49,10 +46,9 @@
                 <a href="{{ path('admin_quiz_pregunta', { id: pregunta.vars.value.id }) }}" class="btn btn-success opciones">
                   <span class="glyphicon glyphicon-plus"></span> Opciones
                 </a>
-                <a href="" class="btn btn-default">
-                  <span class="glyphicon glyphicon-remove">
-                  </span>
-                </a>
+                <button class="btn btn-default delete">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
                </td>
              </tr>
              {% endmacro %}
@@ -60,16 +56,13 @@
              <table class="table table-condensed">
                  <caption></caption>
                  <thead><tr>Preguntas</tr></thead>
-                 <tbody>
+                 <tbody class="collections">
                      {% for pregunta in quiz_preguntas_form.preguntas %}
                         {{ _self.prototype(pregunta) }}
                      {% endfor %}
                  </tbody>
              </table>
-
-            <input type="submit" value="Guardar" class="btn btn-default"/>
-          </form>
-
+          {{ form_end(quiz_preguntas_form)}}
 
         </div>
       </div>

@@ -43,7 +43,7 @@ class Preguntas
      protected $quiz;
 
      /**
-      * @ORM\OneToMany(targetEntity="Opciones", mappedBy="preguntas")
+      * @ORM\OneToMany(targetEntity="Opciones", mappedBy="preguntas", cascade={"remove", "persist"})
       */
 
      private $opciones;
@@ -163,5 +163,10 @@ class Preguntas
     public function getOpciones()
     {
         return $this->opciones;
+    }
+
+    public function removeAllOpciones()
+    {
+      $this->opciones->clear();
     }
 }

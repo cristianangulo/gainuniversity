@@ -15,10 +15,10 @@ $(document).ready(function(){
   });
 
   var ordenesColeccion;
-
+  
   $('.add').on('click', function(){
 
-    ordenesColeccion = $('tbody.ordenes');
+    ordenesColeccion = $('tbody.collections');
 
     ordenesColeccion.data('index', ordenesColeccion.find(':input').length);
 
@@ -34,7 +34,7 @@ $(document).ready(function(){
 
     ordenesColeccion.data('index', index + 1);
 
-    $('tbody.ordenes').append(nuevaOrden);
+    $('tbody.collections').append(nuevaOrden);
     var nuevaOrdenTR = $('<tr></tr>').append(nuevaOrden);
   }
 });

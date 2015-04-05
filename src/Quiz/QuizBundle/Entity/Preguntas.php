@@ -44,6 +44,7 @@ class Preguntas
 
      /**
       * @ORM\OneToMany(targetEntity="Opciones", mappedBy="preguntas")
+      * @ORM\OrderBy({"posicion" = "ASC"})
       */
 
      private $opciones;
@@ -163,5 +164,10 @@ class Preguntas
     public function getOpciones()
     {
         return $this->opciones;
+    }
+
+    public function removeAllOpciones()
+    {
+      $this->opciones->clear();
     }
 }

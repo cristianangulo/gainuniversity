@@ -28,7 +28,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
 
-                <form action="" method="POST">
+                {{ form_start(pregunta_opciones_form) }}
 
                   {% macro prototype(opcion) %}
                    <tr>
@@ -36,10 +36,10 @@
                      <td>{{ form_widget(opcion.valor) }}</td>
                      <td>{{ form_widget(opcion.posicion) }}</td>
                      <td>
-                      <a href="" class="btn btn-default">
+                      <button class="btn btn-default delete">
                         <span class="glyphicon glyphicon-remove">
                         </span>
-                      </a>
+                      </button>
                      </td>
                    </tr>
                    {% endmacro %}
@@ -47,7 +47,7 @@
                    <table class="table table-condensed">
                        <caption></caption>
                        <thead><tr>Preguntas</tr></thead>
-                       <tbody>
+                       <tbody class="collections">
                            {% for opcion in pregunta_opciones_form.opciones %}
                               {{ _self.prototype(opcion) }}
                            {% endfor %}
@@ -55,7 +55,7 @@
                    </table>
 
                   <input type="submit" value="Guardar" class="btn btn-default"/>
-                </form>
+                {{ form_end(pregunta_opciones_form)}}
 
               </div>
             </div>

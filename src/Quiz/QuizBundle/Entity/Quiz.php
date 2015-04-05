@@ -97,7 +97,8 @@ class Quiz
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Preguntas", mappedBy="quiz")
+     * @ORM\OneToMany(targetEntity="Preguntas", mappedBy="quiz", cascade={"persist"})
+     * @ORM\OrderBy({"posicion" = "ASC"})
      */
 
     private $preguntas;

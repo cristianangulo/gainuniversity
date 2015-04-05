@@ -17,7 +17,6 @@ class PreguntasType extends AbstractType
     {
         $builder
             ->add('pregunta')
-            //->add('quiz')
         ;
 
         $builder->addEventSubscriber(new PreguntasPosicionSubscriber());

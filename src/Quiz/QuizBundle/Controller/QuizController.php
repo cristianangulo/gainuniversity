@@ -19,6 +19,9 @@ use Quiz\QuizBundle\Form\OpcionesType;
 
 use Quiz\QuizBundle\Form\PreguntaOpcionesType;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
+
 /**
  * Quiz controller.
  *
@@ -143,7 +146,7 @@ class QuizController extends Controller
         $preguntasForm->add('submit','submit');
         $preguntasForm->handleRequest($request);
 
-        if($preguntasForm->isSubmitted() && $preguntasForm->isValid()){
+        if($preguntasForm->isValid()){
 
           $posicion = count($entity->getPreguntas()) + 1;
 
@@ -155,10 +158,23 @@ class QuizController extends Controller
           return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
         }
 
-        $quizPreguntasForm = $this->createForm(new QuizPreguntasType(), $entity);
+        $preguntasOriginal = new ArrayCollection;
+
+        foreach($entity->getPreguntas() as $p){
+          $preguntasOriginal->add($p);
+        }
+
+        $quizPreguntasForm = $this->quizPreguntasForm($entity);
+
         $quizPreguntasForm->handleRequest($request);
 
-        if($quizPreguntasForm->isSubmitted()){
+        if($quizPreguntasForm->isValid()){
+
+          foreach($preguntasOriginal as $p){
+            if(false === $entity->getPreguntas()->contains($p)){
+              $em->remove($p);
+            }
+          }
           $em->flush();
 
           return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
@@ -236,6 +252,16 @@ class QuizController extends Controller
         ));
     }
 
+    public function quizPreguntasForm(Quiz $entity)
+    {
+      $form = $this->createForm(new QuizPreguntasType(), $entity, array(
+        'action' => '',
+        'method' => 'POST'
+      ));
+      $form->add('submit', 'submit', array('label' => 'Guardar'));
+      return $form;
+    }
+
     /**
      * Deletes a Quiz entity.
      *
@@ -303,10 +329,25 @@ class QuizController extends Controller
         return $this->redirect($this->generateUrl('admin_quiz_pregunta', array('id' => $entity->getId())));
       }
 
+      $opcionesOriginales = new ArrayCollection();
+
+      foreach($entity->getOpciones() as $o){
+        $opcionesOriginales->add($o);
+      }
+
+
+
       $preguntaOpcionesForm = $this->createForm(new PreguntaOpcionesType(), $entity);
       $preguntaOpcionesForm->handleRequest($request);
 
-      if($preguntaOpcionesForm->isSubmitted()){
+      if($preguntaOpcionesForm->isValid()){
+
+        foreach($opcionesOriginales as $o){
+          if(false === $entity->getOpciones()->contains($o)){
+            $em->remove($o);
+          }
+        }
+
         $em->flush();
         return $this->redirect($this->generateUrl('admin_quiz_pregunta', array('id' => $entity->getId())));
       }

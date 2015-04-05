@@ -145,7 +145,7 @@ class Opciones
     /**
      * Get posicion
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosicion()
     {
