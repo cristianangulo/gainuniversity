@@ -190,7 +190,7 @@ h1, h2, h3, h4 {
 .topbar {
   margin: 0 !important;
   padding: 0 !important;
-  min-height: 36px !important;
+  //min-height: 36px !important;
   border: none !important;
 }
 /* line 9, ../sass/partials/layout-elements/_header.scss */
@@ -211,7 +211,7 @@ h1, h2, h3, h4 {
 .topbar .container .navbar-header {
   margin: 12px auto 0;
   float: none;
-  width: 140px;
+  //width: 140px;
 }
 /* line 23, ../sass/partials/layout-elements/_header.scss */
 .topbar .container .navbar-header .sb-toggle-left {
@@ -1318,7 +1318,7 @@ footer {
 footer .footer-inner {
   padding: 0 20px;
   line-height: 50px;
-  margin-left: 260px;
+  //margin-left: 260px;
 }
 /* line 14, ../sass/partials/layout-elements/_footer.scss */
 .sidebar-close footer .footer-inner {

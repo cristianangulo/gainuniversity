@@ -71,6 +71,15 @@
 						</a> -->
 						<!-- end: LOGO -->
 					</div>
+					<div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="#"><img src="{{ asset('elearnIcon.png') }}" alt="Rapido">{{ app_name }}</a>
+			    </div>
 					<div class="topbar-tools">
 						<!-- start: TOP NAVIGATION MENU -->
 						<ul class="nav navbar-right">
@@ -509,14 +518,14 @@
 						<div class="row">
 							<div class="col-md-12">
 								<ol class="breadcrumb">
-									<li>
+									<!-- <li>
 										<a href="#">
 											Dashboard
 										</a>
 									</li>
 									<li class="active">
 										Timeline
-									</li>
+									</li> -->
 								</ol>
 							</div>
 						</div>
@@ -526,9 +535,9 @@
 							<div class="col-md-12">
 								<!-- start: TIMELINE PANEL -->
 								<div class="panel panel-white">
-									<div class="panel-heading">
+									<!-- <div class="panel-heading">
 										<h4 class="panel-title">Timeline</h4>
-									</div>
+									</div> -->
 									<div class="panel-body">
 										{% block body %}
 
@@ -551,7 +560,7 @@
 			<footer class="inner">
 				<div class="footer-inner">
 					<div class="pull-left">
-						2014 © Rapido by cliptheme.
+						2015 © {{ app_name }}
 					</div>
 					<div class="pull-right">
 						<span class="go-top"><i class="fa fa-chevron-up"></i></span>

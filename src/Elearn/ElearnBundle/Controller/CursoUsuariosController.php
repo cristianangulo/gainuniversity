@@ -22,7 +22,14 @@ class CursoUsuariosController extends Controller
     public function indexAction($curso, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('ElearnBundle:CursoUsuarios')->findAll($curso);
+        $entities = $em->getRepository('ElearnBundle:CursoUsuarios');
+
+        $entities = $entities->createQueryBuilder('cu')
+          ->where('cu.curso = :curso')
+          ->setParameter('curso', $curso)
+          ->getQuery()
+          ->getResult()
+        ;
 
         $entity = new CursoUsuarios();
         $form = $this->createCreateForm($entity);

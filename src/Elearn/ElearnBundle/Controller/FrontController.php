@@ -43,6 +43,7 @@ class FrontController extends Controller
 
 
 
+
     if ($this->get('security.context')->isGranted('ROLE_USER')) {
       // @fecha publicación curso
       $fpc = $curso->getFechaPublicacion();
@@ -58,12 +59,22 @@ class FrontController extends Controller
 
 
       // @fecha registro del usuario
-      $fru = $em->createQuery(
-        "SELECT c, u
-        FROM ElearnBundle:CursoUsuarios c
-        JOIN c.curso u
-        WHERE c.usuario = :usuario"
-      )->setParameter('usuario',$usuario);
+      // $fru = $em->createQuery(
+      //   "SELECT c, u
+      //   FROM ElearnBundle:CursoUsuarios c
+      //   JOIN c.curso u
+      //   WHERE c.usuario = :usuario"
+      // )->setParameter('usuario',$usuario);
+
+      $fru = $em->getRepository('ElearnBundle:CursoUsuarios');
+
+      $fru = $fru->createQueryBuilder('cu')
+        ->where('cu.curso = :curso')
+        ->andWhere('cu.usuario = :usuario')
+        ->setParameter('curso', $id)
+        ->setParameter('usuario', $this->getUser()->getId())
+        ->getQuery()
+      ;
 
       $fru = $fru->getSingleResult();
 
