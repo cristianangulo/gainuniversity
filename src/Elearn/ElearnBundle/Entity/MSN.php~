@@ -3,6 +3,7 @@
 namespace Elearn\ElearnBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MSN
@@ -53,12 +54,13 @@ class MSN
      * @ORM\OneToMany(targetEntity="MensajesRespuestas", mappedBy="respuestas")
      */
 
-    private $respuestasMensajes;
+    private $mensajesRespuestas;
 
     public function __construct()
     {
       $this->creado = new \Datetime('now');
       $this->estado = 0;
+      $this->mensajesRespuestas = new ArrayCollection();
     }
 
     /**

@@ -5,9 +5,18 @@
   <div id="wrap-main-panel">
     <div class="panel panel-default" id="">
       <div class="panel-body">
+        <div class="col-md-4">
+          <ul class="list-group">
+            <a href="{{ path('front_perfil') }}" class="list-group-item">Perfil</a>
+            <a href="{{ path('perfil_tus_cursos')}}" class="list-group-item">Tus cursos</a>
+            <a href="{{ path('front_msn') }}" class="list-group-item">Notificaciones / MSN</a>
+          </ul>
+        </div>
+        <div class="col-md-8">
         {% block contenido %}
 
         {% endblock %}
+        </div>
       </div>
     </div>
   </div>

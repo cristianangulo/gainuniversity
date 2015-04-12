@@ -1,0 +1,34 @@
+{% extends '::perfil.html.twig' %}
+
+
+{% block contenido %}
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h1>Tus cursos</h1></div>
+    <div class="panel-body">
+      <table class="table">
+        <caption>Tus cursos</caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cursos in usuario.curso %}
+            <tr>
+              <th scope="row">1</th>
+              <td>{{ cursos.cursos.curso }}</td>
+              <td class="text-center">
+                <a href="{{ path('front_curso', {'id' : cursos.cursos.id }) }}" class="btn btn-default">Ver curso</a>
+              </td>
+            </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

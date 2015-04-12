@@ -29,7 +29,7 @@ class MensajesRespuestas
     private $mensajes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="respuestasMensajes")
+     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="mensajesRespuestas")
      * @ORM\JoinColumn(name="respuesta_id", referencedColumnName="id")
      */
 

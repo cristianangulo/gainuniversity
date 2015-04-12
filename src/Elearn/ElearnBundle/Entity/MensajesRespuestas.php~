@@ -22,14 +22,14 @@ class MensajesRespuestas
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="mensajes")
+     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="mensajesMensajes")
      * @ORM\JoinColumn(name="mensaje_id", referencedColumnName="id")
      */
 
     private $mensajes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="respuestasMensajes")
+     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="mensajesRespuestas")
      * @ORM\JoinColumn(name="respuesta_id", referencedColumnName="id")
      */
 
@@ -45,7 +45,7 @@ class MensajesRespuestas
     public function __construct()
     {
       $this->creado = new \Datetime('now');
-      $this->respuestas = new ArrayCollection();
+      //$this->respuestas = new ArrayCollection();
     }
 
     /**

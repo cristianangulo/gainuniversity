@@ -1,6 +1,41 @@
-La mensajería
+{% extends '::perfil.html.twig' %}
 
+
+{% block contenido %}
+<ul>
+{% for mensaje in mensajes %}
+  <li class="list-group-item">
+  <p>
+    <p>
+      <span class="label label-default">{{ mensaje.mensajes.creado|date('d/m/Y') }}</span>
+    </p>
+    {{ mensaje.mensajes.mensaje }}
+  </p>
+  <div class="alert alert-info" role="alert">
+    <p><span class="label label-info">{{ mensaje.respuestas.creado|date('d/m/Y') }}</span> | {{ mensaje.respuestas.usuarios.nombre }}</p>
+    <p class="lead">{{ mensaje.respuestas.mensaje }}</p>
+  </div>
+
+  </li>
+{% endfor %}
+
+{% for mensaje in msn_no_contestados %}
+<li class="list-group-item list-group-item-success">
+  <p>
+    <p>
+      <span class="label label-default">{{ mensaje.creado|date('d/m/Y') }}</span>
+    </p>
+    {{ mensaje.mensaje }}
+  </p>
+</li>
+{% endfor %}
+
+<li class="list-group-item">
 <form action="" method="POST">
   {{ form_widget(msn_form) }}
-  <input type="submit" value="Guardar"/>
+  <input type="submit" value="Guardar" class="btn btn-default"/>
 </form>
+</li>
+</ul>
+
+{% endblock %}

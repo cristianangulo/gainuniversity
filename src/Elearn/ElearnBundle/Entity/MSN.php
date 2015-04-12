@@ -50,11 +50,17 @@ class MSN
      */
     private $estado;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MensajesRespuestas", mappedBy="respuestas")
+     */
+
+    private $mensajesRespuestas;
+
     public function __construct()
     {
       $this->creado = new \Datetime('now');
       $this->estado = 0;
-      $this->respuestasMensajes = new ArrayCollection();
+      $this->mensajesRespuestas = new ArrayCollection();
     }
 
     /**
@@ -160,35 +166,35 @@ class MSN
     }
 
     /**
-     * Add respuestasMensajes
+     * Add mensajesRespuestas
      *
-     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes
+     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas
      * @return MSN
      */
-    public function addRespuestasMensaje(\Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes)
+    public function addMensajesRespuesta(\Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas)
     {
-        $this->respuestasMensajes[] = $respuestasMensajes;
+        $this->mensajesRespuestas[] = $mensajesRespuestas;
 
         return $this;
     }
 
     /**
-     * Remove respuestasMensajes
+     * Remove mensajesRespuestas
      *
-     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes
+     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas
      */
-    public function removeRespuestasMensaje(\Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes)
+    public function removeMensajesRespuesta(\Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas)
     {
-        $this->respuestasMensajes->removeElement($respuestasMensajes);
+        $this->mensajesRespuestas->removeElement($mensajesRespuestas);
     }
 
     /**
-     * Get respuestasMensajes
+     * Get mensajesRespuestas
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getRespuestasMensajes()
+    public function getMensajesRespuestas()
     {
-        return $this->respuestasMensajes;
+        return $this->mensajesRespuestas;
     }
 }

@@ -27,4 +27,21 @@ class MensajesRespuestasRepository extends EntityRepository
          return null;
       }
   }
+
+  public function MensajesUsuario($id)
+  {
+    $query = $this->getEntityManager()
+      ->createQuery(
+        'SELECT m FROM ElearnBundle:MensajesRespuestas m
+        JOIN m.mensajes r
+        WHERE r.usuarios = :usuario'
+      )
+      ->setParameter('usuario', $id);
+
+      try{
+        return $query->getResult();
+      } catch (\Doctrine\ORM\NoResultException $e) {
+         return null;
+      }
+  }
 }

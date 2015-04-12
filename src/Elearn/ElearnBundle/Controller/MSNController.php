@@ -34,26 +34,31 @@ class MSNController extends Controller
   public function msnAction(Request $request)
   {
 
+    $em = $this->getDoctrine()->getEntityManager();
+
     $msn = new MSN();
+
+    $usuario = $this->getUser()->getId();
+
+    $mensajesUsuario = $em->getRepository('ElearnBundle:MensajesRespuestas')->MensajesUsuario($usuario);
+    $msnNoContestados = $em->getRepository('ElearnBundle:MSN')->MSNNoContestadosUsuario($usuario);
+
     $msnForm = $this->createForm(new MSNType(), $msn);
 
     $msnForm->handleRequest($request);
 
     if($msnForm->isValid()){
-
-      $em = $this->getDoctrine()->getEntityManager();
-
-      $usuario = $em->getRepository('ACLBundle:Usuarios')->find($this->getUser()->getId());
+      $usuario = $em->getRepository('ACLBundle:Usuarios')->find($usuario);
       $msn->setUsuarios($usuario);
       $em->persist($msn);
-
       $em->flush();
-
-      exit("Válido");
+      return $this->redirect($this->generateUrl('front_msn'));
     }
 
     return $this->render("ElearnBundle:MSN:msn.html.twig", array(
-      'msn_form' => $msnForm->createView()
+      'msn_form' => $msnForm->createView(),
+      'mensajes' => $mensajesUsuario,
+      'msn_no_contestados' => $msnNoContestados
     ));
   }
 
