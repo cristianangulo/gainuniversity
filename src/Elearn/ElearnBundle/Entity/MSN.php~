@@ -29,9 +29,9 @@ class MSN
     private $usuarios;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="mensaje", type="text", length=255)
+     * @ORM\Column(name="mensaje", type="text")
      */
     private $mensaje;
 
@@ -49,9 +49,16 @@ class MSN
      */
     private $estado;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MensajesRespuestas", mappedBy="respuestas")
+     */
+
+    private $respuestasMensajes;
+
     public function __construct()
     {
       $this->creado = new \Datetime('now');
+      $this->estado = 0;
     }
 
     /**
@@ -134,32 +141,22 @@ class MSN
     }
 
     /**
-     * Add usuarios
+     * Set usuarios
      *
      * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
      * @return MSN
      */
-    public function addUsuario(\ACL\ACLBundle\Entity\Usuarios $usuarios)
+    public function setUsuarios(\ACL\ACLBundle\Entity\Usuarios $usuarios = null)
     {
-        $this->usuarios[] = $usuarios;
+        $this->usuarios = $usuarios;
 
         return $this;
     }
 
     /**
-     * Remove usuarios
-     *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
-     */
-    public function removeUsuario(\ACL\ACLBundle\Entity\Usuarios $usuarios)
-    {
-        $this->usuarios->removeElement($usuarios);
-    }
-
-    /**
      * Get usuarios
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \ACL\ACLBundle\Entity\Usuarios
      */
     public function getUsuarios()
     {

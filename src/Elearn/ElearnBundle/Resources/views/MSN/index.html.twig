@@ -1,0 +1,37 @@
+{% extends '::admin.html.twig' %}
+
+
+{% block body -%}
+<div class="page-header">
+  <h1>Mensajería <small></small></h1>
+</div>
+
+<div class="alert alert-success" role="alert">Nuevos mensajes</div>
+
+<ul class="list-group">
+{% for mensaje in  msn_no_contestados %}
+  <a href="{{ path('admin_msn_responder', { id : mensaje.id })  }}" class="list-group-item">
+  <h4 class="list-group-item-heading">
+      {{ mensaje.mensaje|length > 50 ? mensaje.mensaje|slice(0, 100) ~ '...' : mensaje.mensaje  }}
+  </h4>
+  <p class="list-group-item-text">
+    {{ mensaje.usuarios.nombre }} | {{ mensaje.creado|date("d/m/Y") }}
+  </p>
+  </a>
+{% endfor %}
+</ul>
+<div class="alert alert-info" role="alert">Contestados</div>
+<ul class="list-group">
+{% for mensaje in  msn_contestados %}
+  <a href="{{ path('admin_msn_responder', { id : mensaje.mensajes.id })  }}" class="list-group-item">
+  <h4 class="list-group-item-heading">
+      {{ mensaje.mensajes.mensaje|length > 50 ? mensaje.mensajes.mensaje|slice(0, 100) ~ '...' : mensaje.mensajes.mensaje  }}
+  </h4>
+  <p class="list-group-item-text">
+    {{ mensaje.mensajes.usuarios.nombre }} | {{ mensaje.mensajes.creado|date("d/m/Y") }}
+  </p>
+  </a>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+      <h1>Perfil del módulo</h1>
+    </div>
+    <ul class="record_actions">
+      <li>
+        <a href="{{ path('admin_modulos') }}">
+          Regresar
+        </a>
+        |
+        <a href="{{ path('admin_modulos_new') }}">
+          Crear módulo
+        </a>
+      </li>
+    </ul>
+    <p class="lead">
+      <span class="label label-primary">{{ mensaje.usuarios.nombre }}</span> | {{ respuesta.creado|date('d/m/Y') }}
+
+      <hr />
+      {{ mensaje.mensaje }}
+    </p>
+    <hr />
+    <p>
+     <p>
+      <span class="label label-default">{{ respuesta.usuarios.nombre }}</span> | {{ respuesta.creado|date('d/m/Y') }}
+     </p>
+      {{ respuesta.mensaje }}
+    </p>
+
+{% endblock %}

@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class MSNRepository extends EntityRepository
 {
+  public function MSNNoContestados()
+  {
+    return $this->getEntityManager()
+      ->createQuery(
+        'SELECT m FROM ElearnBundle:MSN m where m.estado = 0 '
+      )
+      ->getResult();
+  }
+
+  public function MSNContestados()
+  {
+    return $this->getEntityManager()
+      ->createQuery(
+        'SELECT m FROM ElearnBundle:MSN m where m.estado = 1 '
+      )
+      ->getResult();
+  }
 }

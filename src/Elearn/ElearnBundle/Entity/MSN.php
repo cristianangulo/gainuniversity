@@ -3,6 +3,7 @@
 namespace Elearn\ElearnBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MSN
@@ -29,9 +30,9 @@ class MSN
     private $usuarios;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="mensaje", type="text", length=255)
+     * @ORM\Column(name="mensaje", type="text")
      */
     private $mensaje;
 
@@ -53,6 +54,7 @@ class MSN
     {
       $this->creado = new \Datetime('now');
       $this->estado = 0;
+      $this->respuestasMensajes = new ArrayCollection();
     }
 
     /**
@@ -117,11 +119,9 @@ class MSN
      * @param integer $estado
      * @return MSN
      */
-    public function setEstado($estado = null)
+    public function setEstado($estado)
     {
-        if($estado != null){
-          $this->estado = $estado;
-        }
+        $this->estado = $estado;
 
         return $this;
     }
@@ -137,39 +137,6 @@ class MSN
     }
 
     /**
-     * Add usuarios
-     *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
-     * @return MSN
-     */
-    public function addUsuario(\ACL\ACLBundle\Entity\Usuarios $usuarios)
-    {
-        $this->usuarios[] = $usuarios;
-
-        return $this;
-    }
-
-    /**
-     * Remove usuarios
-     *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
-     */
-    public function removeUsuario(\ACL\ACLBundle\Entity\Usuarios $usuarios)
-    {
-        $this->usuarios->removeElement($usuarios);
-    }
-
-    /**
-     * Get usuarios
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsuarios()
-    {
-        return $this->usuarios;
-    }
-
-    /**
      * Set usuarios
      *
      * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
@@ -180,5 +147,48 @@ class MSN
         $this->usuarios = $usuarios;
 
         return $this;
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \ACL\ACLBundle\Entity\Usuarios
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    /**
+     * Add respuestasMensajes
+     *
+     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes
+     * @return MSN
+     */
+    public function addRespuestasMensaje(\Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes)
+    {
+        $this->respuestasMensajes[] = $respuestasMensajes;
+
+        return $this;
+    }
+
+    /**
+     * Remove respuestasMensajes
+     *
+     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes
+     */
+    public function removeRespuestasMensaje(\Elearn\ElearnBundle\Entity\MensajesRespuestas $respuestasMensajes)
+    {
+        $this->respuestasMensajes->removeElement($respuestasMensajes);
+    }
+
+    /**
+     * Get respuestasMensajes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRespuestasMensajes()
+    {
+        return $this->respuestasMensajes;
     }
 }
