@@ -60,6 +60,7 @@ class Cursos
 
     /**
     * @ORM\OneToMany(targetEntity="CursoModulos", mappedBy="cursos", cascade={"persist"})
+    * @ORM\OrderBy({"posicion" = "ASC"})
     */
     private $modulos;
 
@@ -113,5 +114,117 @@ class Cursos
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Get curso
+     *
+     * @return string
+     */
+    public function getCurso()
+    {
+        return $this->curso;
+    }
+
+    /**
+     * Set fechaPublicacion
+     *
+     * @param \DateTime $fechaPublicacion
+     * @return Cursos
+     */
+    public function setFechaPublicacion($fechaPublicacion)
+    {
+        $this->fechaPublicacion = $fechaPublicacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaPublicacion
+     *
+     * @return \DateTime
+     */
+    public function getFechaPublicacion()
+    {
+        return $this->fechaPublicacion;
+    }
+
+    /**
+     * Set temporalidad
+     *
+     * @param integer $temporalidad
+     * @return Cursos
+     */
+    public function setTemporalidad($temporalidad)
+    {
+        $this->temporalidad = $temporalidad;
+
+        return $this;
+    }
+
+    /**
+     * Get temporalidad
+     *
+     * @return integer
+     */
+    public function getTemporalidad()
+    {
+        return $this->temporalidad;
+    }
+
+    /**
+     * Set sku
+     *
+     * @param string $sku
+     * @return Cursos
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Get sku
+     *
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * Add modulos
+     *
+     * @param \Elearn\ElearnBundle\Entity\CursoModulos $modulos
+     * @return Cursos
+     */
+    public function addModulo(\Elearn\ElearnBundle\Entity\CursoModulos $modulos)
+    {
+        $this->modulos[] = $modulos;
+
+        return $this;
+    }
+
+    /**
+     * Remove modulos
+     *
+     * @param \Elearn\ElearnBundle\Entity\CursoModulos $modulos
+     */
+    public function removeModulo(\Elearn\ElearnBundle\Entity\CursoModulos $modulos)
+    {
+        $this->modulos->removeElement($modulos);
+    }
+
+    /**
+     * Get modulos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getModulos()
+    {
+        return $this->modulos;
     }
 }

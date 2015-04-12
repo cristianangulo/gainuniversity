@@ -51,3 +51,7 @@ front_curso:
 front_modulo:
     path:     /curso/{curso}/{modulo}/{seccion}/{pregunta}
     defaults: { _controller: ElearnBundle:Front:modulo, pregunta:null }
+
+front_msn:
+    path:     /perfil/msn
+    defaults: { _controller: ElearnBundle:MSN:msn}

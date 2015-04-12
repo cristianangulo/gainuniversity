@@ -38,6 +38,7 @@ class Modulos
 
     /**
      * @ORM\OneToMany(targetEntity="ModuloSecciones", mappedBy="modulos", cascade={"persist"})
+     * @ORM\OrderBy({"posicion" = "ASC"})
      **/
 
     private $secciones;
