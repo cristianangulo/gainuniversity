@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Elearn\ElearnBundle\ElearnBundle(),
             new ACL\ACLBundle\ACLBundle(),
             new Quiz\QuizBundle\QuizBundle(),
+            new AppBundle\AppBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
