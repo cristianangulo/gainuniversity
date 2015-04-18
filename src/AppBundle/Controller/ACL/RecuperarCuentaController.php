@@ -52,10 +52,10 @@ class RecuperarCuentaController extends Controller
       $usuario->setCodigo($random);
       $em->flush();
 
-      return $this->render('ACLBundle:ACL:mensaje-recuperar.html.twig');
+      return $this->render('ACL/mensaje-recuperar.html.twig');
     }
 
-    return $this->render('ACLBundle:ACL:recuperar.html.twig', array(
+    return $this->render('ACL/recuperar.html.twig', array(
       'form' => $recuperarForm->createView()
     ));
   }
@@ -95,7 +95,7 @@ class RecuperarCuentaController extends Controller
       return $this->redirect($this->generateUrl('login'));
     }
 
-    return $this->render('ACLBundle:ACL:recuperar-pass.html.twig', array(
+    return $this->render('ACL/recuperar-pass.html.twig', array(
       'form' => $recuperarForm->createView()
     ));
   }

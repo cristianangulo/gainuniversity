@@ -22,13 +22,7 @@ acl_homepage:
     path:     /acl/{name}
     defaults: { _controller: ACLBundle:ACL:index }
 
-acl_recuperar:
-    path:     /recuperar
-    defaults: { _controller: ACLBundle:ACL:recuperar }
 
-acl_recuperar_cuenta:
-    path:     /recuperar/{codigo}
-    defaults: { _controller: ACLBundle:ACL:recuperarCuenta }
 
 acl_no_activo:
     path:     /no-activo

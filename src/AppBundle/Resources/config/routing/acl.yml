@@ -7,3 +7,13 @@ login_check:
 
 logout:
     path:   /logout
+
+### Recuperar
+
+acl_recuperar:
+    path:     /recuperar
+    defaults: { _controller: AppBundle:ACL/RecuperarCuenta:recuperar }
+
+acl_recuperar_cuenta:
+    path:     /recuperar/{codigo}
+    defaults: { _controller: AppBundle:ACL/RecuperarCuenta:recuperarCuenta }
