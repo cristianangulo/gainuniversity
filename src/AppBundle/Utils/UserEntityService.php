@@ -1,6 +1,6 @@
 <?php
 
-namespace ACL\ACLBundle\Service;
+namespace AppBundle\Utils;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;

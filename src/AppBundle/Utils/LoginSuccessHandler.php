@@ -1,6 +1,6 @@
 <?php
 
-namespace ACL\ACLBundle\Service;
+namespace AppBundle\Utils;
 
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

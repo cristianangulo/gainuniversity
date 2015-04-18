@@ -1,0 +1,3 @@
+acl:
+    resource: "@AppBundle/Resources/config/routing/acl.yml"
+    prefix:   /
