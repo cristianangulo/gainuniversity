@@ -1,6 +1,6 @@
 <?php
 
-namespace Quiz\QuizBundle\Form;
+namespace AppBundle\Form\Admin\Quiz;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,7 +31,7 @@ class PreguntaOpcionesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Quiz\QuizBundle\Entity\Preguntas',
+            'data_class' => 'AppBundle\Entity\Admin\Quiz\Preguntas',
             'cascade_validation' => true,
         ));
     }

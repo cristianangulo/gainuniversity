@@ -5,19 +5,19 @@ namespace AppBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use AppBundle\Entity\Quiz\Quiz;
-use AppBundle\Form\Quiz\QuizType;
+use AppBundle\Entity\Admin\Quiz\Quiz;
+use AppBundle\Form\Admin\Quiz\QuizType;
 
-use Quiz\QuizBundle\Form\QuizPreguntasType;
+use AppBundle\Form\Admin\Quiz\QuizPreguntasType;
 
-use Quiz\QuizBundle\Entity\Preguntas;
-use Quiz\QuizBundle\Form\PreguntasType;
+use AppBundle\Entity\Admin\Quiz\Preguntas;
+use AppBundle\Form\Admin\Quiz\PreguntasType;
 
 
-use Quiz\QuizBundle\Entity\Opciones;
-use Quiz\QuizBundle\Form\OpcionesType;
+use AppBundle\Entity\Admin\Quiz\Opciones;
+use AppBundle\Form\Admin\Quiz\OpcionesType;
 
-use Quiz\QuizBundle\Form\PreguntaOpcionesType;
+use AppBundle\Form\Admin\Quiz\PreguntaOpcionesType;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -57,7 +57,7 @@ class QuizController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_quiz_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
         }
 
         return $this->render('QuizBundle:Quiz:new.html.twig', array(
@@ -130,7 +130,7 @@ class QuizController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('QuizBundle:Quiz')->find($id);
+        $entity = $em->getRepository('AppBundle:Admin\Quiz\Quiz')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Quiz entity.');
@@ -228,7 +228,7 @@ class QuizController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('QuizBundle:Quiz')->find($id);
+        $entity = $em->getRepository('AppBundle:Admin\Quiz\Quiz')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Quiz entity.');
@@ -306,7 +306,7 @@ class QuizController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
 
-      $entity = $em->getRepository('QuizBundle:Preguntas')->find($id);
+      $entity = $em->getRepository('AppBundle:Admin\Quiz\Preguntas')->find($id);
 
       if (!$entity) {
           throw $this->createNotFoundException('Esta entidad no existe.');

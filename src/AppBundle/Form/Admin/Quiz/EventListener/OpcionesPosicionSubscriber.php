@@ -1,6 +1,6 @@
 <?php
 
-namespace Quiz\QuizBundle\Form\EventListener;
+namespace AppBundle\Form\Admin\Quiz\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
