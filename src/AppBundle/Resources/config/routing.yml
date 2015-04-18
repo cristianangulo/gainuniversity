@@ -13,3 +13,7 @@ acl_usuarios:
 admin:
     resource: "@AppBundle/Resources/config/routing/admin.yml"
     prefix:   /
+
+quiz_admin_quiz:
+    resource: "@AppBundle/Resources/config/routing/admin/quiz.yml"
+    prefix:   /admin/quiz

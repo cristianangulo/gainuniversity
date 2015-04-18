@@ -1,0 +1,34 @@
+admin_quiz:
+    path:     /
+    defaults: { _controller: "AppBundle:Admin/Quiz:index" }
+
+admin_quiz_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Admin/Quiz:show" }
+
+admin_quiz_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Admin/Quiz:new" }
+
+admin_quiz_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Admin/Quiz:create" }
+    methods:  POST
+
+admin_quiz_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Admin/Quiz:edit" }
+
+admin_quiz_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Admin/Quiz:update" }
+    methods:  [POST, PUT]
+
+admin_quiz_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Admin/Quiz:delete" }
+    methods:  [POST, DELETE]
+
+admin_quiz_pregunta:
+    path:     /pregunta/{id}
+    defaults: { _controller: "AppBundle:Admin/Quiz:pregunta" }

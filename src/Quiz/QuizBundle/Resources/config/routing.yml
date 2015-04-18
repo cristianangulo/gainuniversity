@@ -1,7 +1,3 @@
-quiz_admin_quiz:
-    resource: "@QuizBundle/Resources/config/routing/quiz.yml"
-    prefix:   /admin/quiz
-
 quiz_homepage:
     path:     /hello/{name}
     defaults: { _controller: QuizBundle:Default:index }
