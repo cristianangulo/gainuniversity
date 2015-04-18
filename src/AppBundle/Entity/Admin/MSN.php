@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Admin;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * MSN
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\MSNRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\MSNRepository")
  */
 class MSN
 {
@@ -23,7 +23,7 @@ class MSN
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ACL\ACLBundle\Entity\Usuarios", inversedBy="msn");
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Usuarios", inversedBy="msn");
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
 
@@ -51,7 +51,7 @@ class MSN
     private $estado;
 
     /**
-     * @ORM\OneToMany(targetEntity="MensajesRespuestas", mappedBy="respuestas")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\MensajesRespuestas", mappedBy="respuestas")
      */
 
     private $mensajesRespuestas;
@@ -145,10 +145,10 @@ class MSN
     /**
      * Set usuarios
      *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
      * @return MSN
      */
-    public function setUsuarios(\ACL\ACLBundle\Entity\Usuarios $usuarios = null)
+    public function setUsuarios(\AppBundle\Entity\ACL\Usuarios $usuarios = null)
     {
         $this->usuarios = $usuarios;
 
@@ -158,10 +158,43 @@ class MSN
     /**
      * Get usuarios
      *
-     * @return \ACL\ACLBundle\Entity\Usuarios
+     * @return \AppBundle\Entity\ACL\Usuarios
      */
     public function getUsuarios()
     {
         return $this->usuarios;
+    }
+
+    /**
+     * Add mensajesRespuestas
+     *
+     * @param \AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas
+     * @return MSN
+     */
+    public function addMensajesRespuesta(\AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas)
+    {
+        $this->mensajesRespuestas[] = $mensajesRespuestas;
+
+        return $this;
+    }
+
+    /**
+     * Remove mensajesRespuestas
+     *
+     * @param \AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas
+     */
+    public function removeMensajesRespuesta(\AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas)
+    {
+        $this->mensajesRespuestas->removeElement($mensajesRespuestas);
+    }
+
+    /**
+     * Get mensajesRespuestas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMensajesRespuestas()
+    {
+        return $this->mensajesRespuestas;
     }
 }

@@ -354,10 +354,10 @@ class Usuarios implements UserInterface
     /**
      * Set roles
      *
-     * @param \ACL\ACLBundle\Entity\Roles $roles
+     * @param \AppBundle\Entity\ACL\Roles $roles
      * @return Usuarios
      */
-    public function setRoles(\ACL\ACLBundle\Entity\Roles $roles = null)
+    public function setRoles(\AppBundle\Entity\ACL\Roles $roles = null)
     {
         $this->roles = $roles;
 

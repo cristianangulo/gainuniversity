@@ -1,13 +1,13 @@
 <?php
 
-namespace Elearn\ElearnBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Elearn\ElearnBundle\Entity\MSN;
-use Elearn\ElearnBundle\Form\MSNType;
+use AppBundle\Entity\Admin\MSN;
+use AppBundle\Form\Admin\MSNType;
 
 use Elearn\ElearnBundle\Entity\MensajesRespuestas;
 
@@ -22,8 +22,9 @@ class MSNController extends Controller
   {
     $em = $this->getDoctrine()->getEntityManager();
 
-    $msnNoContestados = $em->getRepository('ElearnBundle:MSN')->MSNNoContestados();
-    $msnContestados = $em->getRepository('ElearnBundle:MensajesRespuestas')->findAll();
+    $msnNoContestados = $em->getRepository('AppBundle:Admin\MSN')->MSNNoContestados();
+
+    $msnContestados = $em->getRepository('AppBundle:Admin\MensajesRespuestas')->findAll();
 
     return $this->render("ElearnBundle:MSN:index.html.twig", array(
       'msn_no_contestados' => $msnNoContestados,
@@ -66,8 +67,8 @@ class MSNController extends Controller
   {
 
     $em = $this->getDoctrine()->getEntityManager();
-    $mensaje = $em->getRepository("ElearnBundle:MSN")->find($id);
-    $respuesta = $em->getRepository("ElearnBundle:MensajesRespuestas")->findMensajeRespuesta($id);
+    $mensaje = $em->getRepository("AppBundle:Admin\MSN")->find($id);
+    $respuesta = $em->getRepository("AppBundle:Admin\MensajesRespuestas")->findMensajeRespuesta($id);
 
     if($mensaje->getEstado() == 1){
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Admin;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -16,18 +16,16 @@ class MensajesRespuestasRepository extends EntityRepository
   {
     $query = $this->getEntityManager()
       ->createQuery(
-        'SELECT m FROM ElearnBundle:MensajesRespuestas m
+        'SELECT m FROM AppBundle:Admin\MensajesRespuestas m
         WHERE m.mensajes = :mensaje'
       )
       ->setParameter('mensaje', $id);
-
       try{
         return $query->getSingleResult();
       } catch (\Doctrine\ORM\NoResultException $e) {
          return null;
       }
   }
-
   public function MensajesUsuario($id)
   {
     $query = $this->getEntityManager()
@@ -37,7 +35,6 @@ class MensajesRespuestasRepository extends EntityRepository
         WHERE r.usuarios = :usuario'
       )
       ->setParameter('usuario', $id);
-
       try{
         return $query->getResult();
       } catch (\Doctrine\ORM\NoResultException $e) {

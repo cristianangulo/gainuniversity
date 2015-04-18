@@ -9,3 +9,7 @@ acl_roles:
 acl_usuarios:
     resource: "@AppBundle/Resources/config/routing/usuarios.yml"
     prefix:   /admin/acl/usuarios
+
+admin:
+    resource: "@AppBundle/Resources/config/routing/admin.yml"
+    prefix:   /

@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Admin;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * MensajesRespuestas
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\MensajesRespuestasRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\MensajesRespuestasRepository")
  */
 class MensajesRespuestas
 {

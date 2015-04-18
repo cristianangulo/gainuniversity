@@ -1,0 +1,7 @@
+admin_msn:
+    path:     /admin/msn
+    defaults: { _controller: AppBundle:Admin/MSN:msnAdmin}
+
+admin_msn_responder:
+    path:     /admin/msn/{id}/responder
+    defaults: { _controller: AppBundle:Admin/MSN:msnResponder}

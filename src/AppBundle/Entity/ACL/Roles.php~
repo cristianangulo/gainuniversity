@@ -50,4 +50,83 @@ class Roles implements RoleInterface
   {
     return $this->role;
   }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return Roles
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Set role_key
+     *
+     * @param string $roleKey
+     * @return Roles
+     */
+    public function setRoleKey($roleKey)
+    {
+        $this->role_key = $roleKey;
+
+        return $this;
+    }
+
+    /**
+     * Get role_key
+     *
+     * @return string 
+     */
+    public function getRoleKey()
+    {
+        return $this->role_key;
+    }
+
+    /**
+     * Add usuarios
+     *
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
+     * @return Roles
+     */
+    public function addUsuario(\AppBundle\Entity\ACL\Usuarios $usuarios)
+    {
+        $this->usuarios[] = $usuarios;
+
+        return $this;
+    }
+
+    /**
+     * Remove usuarios
+     *
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
+     */
+    public function removeUsuario(\AppBundle\Entity\ACL\Usuarios $usuarios)
+    {
+        $this->usuarios->removeElement($usuarios);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
 }

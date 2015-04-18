@@ -46,14 +46,6 @@ front_msn:
     path:     /perfil/msn
     defaults: { _controller: ElearnBundle:MSN:msn}
 
-admin_msn:
-    path:     /admin/msn
-    defaults: { _controller: ElearnBundle:MSN:msnAdmin}
-
-admin_msn_responder:
-    path:     /admin/msn/{id}/responder
-    defaults: { _controller: ElearnBundle:MSN:msnResponder}
-
 perfil_tus_cursos:
     path:     /perfil/tus-cursos
     defaults: { _controller: ElearnBundle:Front:tusCursos }
