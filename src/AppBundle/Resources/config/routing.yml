@@ -25,3 +25,7 @@ elearn_admin_secciones:
 elearn_admin_modulos:
     resource: "@AppBundle/Resources/config/routing/admin/modulos.yml"
     prefix:   /admin/modulos
+
+elearn_admin_cursos:
+    resource: "@AppBundle/Resources/config/routing/admin/cursos.yml"
+    prefix:   /admin/cursos

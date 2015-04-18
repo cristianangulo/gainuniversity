@@ -1,12 +1,12 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form\EventListener;
+namespace AppBundle\Form\Admin\Cursos\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-use Elearn\ElearnBundle\Form\CursoModulosType;
+use AppBundle\Form\Admin\Cursos\CursoModulosType;
 
 class CursoModulosSubscriber implements EventSubscriberInterface
 {

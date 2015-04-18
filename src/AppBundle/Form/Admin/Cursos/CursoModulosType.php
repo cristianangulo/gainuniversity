@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form;
+namespace AppBundle\Form\Admin\Cursos;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,11 +15,11 @@ class CursoModulosType extends AbstractType
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    { 
+    {
         $builder
             //->add('cursos', 'hidden')
             ->add('modulos', 'entity', array(
-              'class' => 'ElearnBundle:Modulos',
+              'class' => 'AppBundle:Admin\Modulos\Modulos',
               'property' => 'modulo',
               'empty_value' => "Seleccione",
               'label' => 'Agregue módulos a este curso'
@@ -37,7 +37,7 @@ class CursoModulosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elearn\ElearnBundle\Entity\CursoModulos'
+            'data_class' => 'AppBundle\Entity\Admin\Cursos\CursoModulos'
         ));
     }
 

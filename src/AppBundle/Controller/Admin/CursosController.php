@@ -1,12 +1,12 @@
 <?php
 
-namespace Elearn\ElearnBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Elearn\ElearnBundle\Entity\Cursos;
-use Elearn\ElearnBundle\Form\CursosType;
+use AppBundle\Entity\Admin\Cursos\Cursos;
+use AppBundle\Form\Admin\Cursos\CursosType;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -28,7 +28,7 @@ class CursosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ElearnBundle:Cursos')->findAll();
+        $entities = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->findAll();
 
         return $this->render('ElearnBundle:Cursos:index.html.twig', array(
             'entities' => $entities,
@@ -122,7 +122,7 @@ class CursosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $curso = $em->getRepository('ElearnBundle:Cursos')->find($id);
+        $curso = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->find($id);
 
         if (!$curso) {
             throw $this->createNotFoundException('Unable to find Cursos entity.');
@@ -135,6 +135,7 @@ class CursosController extends Controller
         }
 
         $form = $this->createEditForm($curso);
+
         $form->handleRequest($request);
         $deleteForm = $this->createDeleteForm($id);
 

@@ -1,0 +1,30 @@
+admin_cursos:
+    path:     /
+    defaults: { _controller: "AppBundle:Admin/Cursos:index" }
+
+admin_cursos_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Admin/Cursos:show" }
+
+admin_cursos_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Admin/Cursos:new" }
+
+admin_cursos_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Admin/Cursos:create" }
+    requirements: { _method: post }
+
+admin_cursos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Admin/Cursos:edit" }
+
+admin_cursos_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Admin/Cursos:update" }
+    requirements: { _method: post|put }
+
+admin_cursos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Admin/Cursos:delete" }
+    requirements: { _method: post|delete }

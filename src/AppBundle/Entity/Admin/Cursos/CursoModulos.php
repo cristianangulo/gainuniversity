@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Admin\Cursos;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CursoModulos
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\CursoModulosRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\Cursos\CursoModulosRepository")
  */
 class CursoModulos
 {
@@ -28,7 +28,7 @@ class CursoModulos
     private $cursos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Modulos", inversedBy="moduloscurso")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="moduloscurso")
      * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
      **/
     private $modulos;

@@ -1,79 +1,61 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Admin\Modulos;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use ACL\ACLBundle\Entity\Usuarios;
+
 /**
  * Cursos
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\CursosRepository")
  */
 class Cursos
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="curso", type="string", length=50)
      */
     private $curso;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="descripcion", type="text")
      */
     private $descripcion;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="fecha_publicacion", type="datetime")
+     * @var \DateTime
      */
     private $fechaPublicacion;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="temporalidad", type="integer")
      */
-
     private $temporalidad;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="sku", type="string", length=100)
      */
     private $sku;
 
     /**
-    * @ORM\OneToMany(targetEntity="CursoModulos", mappedBy="cursos", cascade={"persist"})
-    * @ORM\OrderBy({"posicion" = "ASC"})
-    */
+     * @var \Doctrine\Common\Collections\Collection
+     */
     private $modulos;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-      $this->modulos = new ArrayCollection();
-      $this->fechaPublicacion = new \DateTime('now');
+        $this->modulos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -94,6 +76,16 @@ class Cursos
     }
 
     /**
+     * Get curso
+     *
+     * @return string 
+     */
+    public function getCurso()
+    {
+        return $this->curso;
+    }
+
+    /**
      * Set descripcion
      *
      * @param string $descripcion
@@ -109,21 +101,11 @@ class Cursos
     /**
      * Get descripcion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcion()
     {
         return $this->descripcion;
-    }
-
-    /**
-     * Get curso
-     *
-     * @return string
-     */
-    public function getCurso()
-    {
-        return $this->curso;
     }
 
     /**
@@ -142,7 +124,7 @@ class Cursos
     /**
      * Get fechaPublicacion
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaPublicacion()
     {
@@ -165,7 +147,7 @@ class Cursos
     /**
      * Get temporalidad
      *
-     * @return integer
+     * @return integer 
      */
     public function getTemporalidad()
     {
@@ -188,7 +170,7 @@ class Cursos
     /**
      * Get sku
      *
-     * @return string
+     * @return string 
      */
     public function getSku()
     {
@@ -198,10 +180,10 @@ class Cursos
     /**
      * Add modulos
      *
-     * @param \Elearn\ElearnBundle\Entity\CursoModulos $modulos
+     * @param \AppBundle\Entity\Admin\Modulos\CursoModulos $modulos
      * @return Cursos
      */
-    public function addModulo(\Elearn\ElearnBundle\Entity\CursoModulos $modulos)
+    public function addModulo(\AppBundle\Entity\Admin\Modulos\CursoModulos $modulos)
     {
         $this->modulos[] = $modulos;
 
@@ -211,9 +193,9 @@ class Cursos
     /**
      * Remove modulos
      *
-     * @param \Elearn\ElearnBundle\Entity\CursoModulos $modulos
+     * @param \AppBundle\Entity\Admin\Modulos\CursoModulos $modulos
      */
-    public function removeModulo(\Elearn\ElearnBundle\Entity\CursoModulos $modulos)
+    public function removeModulo(\AppBundle\Entity\Admin\Modulos\CursoModulos $modulos)
     {
         $this->modulos->removeElement($modulos);
     }
@@ -221,7 +203,7 @@ class Cursos
     /**
      * Get modulos
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getModulos()
     {
