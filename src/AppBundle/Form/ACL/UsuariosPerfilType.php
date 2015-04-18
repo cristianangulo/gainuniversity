@@ -1,6 +1,6 @@
 <?php
 
-namespace ACL\ACLBundle\Form;
+namespace AppBundle\Form\ACL;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +24,7 @@ class UsuariosPerfilType extends AbstractType
               'label' => 'Usuario activo'
             ))
             ->add('roles', 'entity', array(
-              'class' => 'ACLBundle:Roles',
+              'class' => 'AppBundle:ACL\Roles',
               'property' => 'role',
               'expanded' => true,
             ))
@@ -37,7 +37,7 @@ class UsuariosPerfilType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ACL\ACLBundle\Entity\Usuarios'
+            'data_class' => 'AppBundle\Entity\ACL\Usuarios'
         ));
     }
 

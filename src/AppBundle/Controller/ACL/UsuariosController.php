@@ -6,8 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\ACL\Usuarios;
-use ACL\ACLBundle\Form\UsuariosType;
-use ACL\ACLBundle\Form\UsuariosPerfilType;
+use AppBundle\Form\ACL\UsuariosType;
+use AppBundle\Form\ACL\UsuariosPerfilType;
 
 use Elearn\ElearnBundle\Form\PerfilUsuarioType;
 use Elearn\ElearnBundle\Form\PasswordUsuarioType;
@@ -28,7 +28,7 @@ class UsuariosController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:ACL\Usuarios')->findAll();
-        
+
         return $this->render('ACL/Usuarios/index.html.twig', array(
             'entities' => $entities,
         ));
@@ -126,13 +126,14 @@ class UsuariosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ACLBundle:Usuarios')->find($id);
+        $entity = $em->getRepository('AppBundle:ACL\Usuarios')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuarios entity.');
         }
 
         $editForm = $this->createEditForm($entity);
+
         $deleteForm = $this->createDeleteForm($id);
 
         $formPassword = $this->createForm(new PasswordUsuarioType(), $entity);

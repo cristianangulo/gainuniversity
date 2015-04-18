@@ -8,8 +8,8 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use ACL\ACLBundle\Entity\Usuarios;
-use ACL\ACLBundle\Form\RegistroUsuariosType;
+use AppBundle\Entity\ACL\Usuarios;
+use AppBundle\Form\ACL\RegistroUsuariosType;
 
 class RegistroCuentaController extends Controller
 {
