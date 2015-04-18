@@ -1,6 +1,6 @@
 <?php
 
-namespace ACL\ACLBundle\Controller;
+namespace AppBundle\Controller\ACL;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +25,7 @@ class RolesController extends Controller
 
         $entities = $em->getRepository('ACLBundle:Roles')->findAll();
 
-        return $this->render('ACLBundle:Roles:index.html.twig', array(
+        return $this->render('ACL/Roles/index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -47,7 +47,7 @@ class RolesController extends Controller
             return $this->redirect($this->generateUrl('roles_edit', array('id' => $entity->getId())));
         }
 
-        return $this->render('ACLBundle:Roles:new.html.twig', array(
+        return $this->render('ACL/Roles/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -80,7 +80,7 @@ class RolesController extends Controller
         $entity = new Roles();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('ACLBundle:Roles:new.html.twig', array(
+        return $this->render('ACL/Roles/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -102,7 +102,7 @@ class RolesController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ACLBundle:Roles:show.html.twig', array(
+        return $this->render('ACL/Roles/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -125,7 +125,7 @@ class RolesController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ACLBundle:Roles:edit.html.twig', array(
+        return $this->render('ACL/Roles/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -173,7 +173,7 @@ class RolesController extends Controller
             return $this->redirect($this->generateUrl('roles_edit', array('id' => $id)));
         }
 
-        return $this->render('ACLBundle:Roles:edit.html.twig', array(
+        return $this->render('ACL/Roles/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

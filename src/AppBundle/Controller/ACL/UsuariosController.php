@@ -1,6 +1,6 @@
 <?php
 
-namespace ACL\ACLBundle\Controller;
+namespace AppBundle\Controller\ACL;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,7 +29,7 @@ class UsuariosController extends Controller
 
         $entities = $em->getRepository('ACLBundle:Usuarios')->findAll();
 
-        return $this->render('ACLBundle:Usuarios:index.html.twig', array(
+        return $this->render('ACL/Usuarios/index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -56,7 +56,7 @@ class UsuariosController extends Controller
             return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $entity->getId())));
         }
 
-        return $this->render('ACLBundle:Usuarios:new.html.twig', array(
+        return $this->render('ACL/Usuarios/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -90,7 +90,7 @@ class UsuariosController extends Controller
         $entity = new Usuarios();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('ACLBundle:Usuarios:new.html.twig', array(
+        return $this->render('ACL/Usuarios/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -112,7 +112,7 @@ class UsuariosController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ACLBundle:Usuarios:show.html.twig', array(
+        return $this->render('ACL/Usuarios/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -151,7 +151,7 @@ class UsuariosController extends Controller
           return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $entity->getId())));
         }
 
-        return $this->render('ACLBundle:Usuarios:edit.html.twig', array(
+        return $this->render('ACL/Usuarios/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -201,7 +201,7 @@ class UsuariosController extends Controller
             return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $id)));
         }
 
-        return $this->render('ACLBundle:Usuarios:edit.html.twig', array(
+        return $this->render('ACL/Usuarios/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

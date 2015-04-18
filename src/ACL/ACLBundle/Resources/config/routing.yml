@@ -2,14 +2,6 @@ acl_homepage:
     path:     /
     defaults: { _controller: ACLBundle:Default:index }
 
-acl_roles:
-    resource: "@ACLBundle/Resources/config/routing/roles.yml"
-    prefix:   /admin/acl/roles
-
-acl_usuarios:
-    resource: "@ACLBundle/Resources/config/routing/usuarios.yml"
-    prefix:   /admin/acl/usuarios
-
 acl_new_user:
     path:     /acl/new_user
     defaults: { _controller: ACLBundle:ACL:new }
