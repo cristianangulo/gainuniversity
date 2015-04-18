@@ -38,7 +38,7 @@ class QuizController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Admin\Quiz\Quiz')->findAll();
-        return $this->render('QuizBundle:Quiz:index.html.twig', array(
+        return $this->render('Admin/Quiz/index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -60,7 +60,7 @@ class QuizController extends Controller
             return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
         }
 
-        return $this->render('QuizBundle:Quiz:new.html.twig', array(
+        return $this->render('Admin/Quiz/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -94,7 +94,7 @@ class QuizController extends Controller
         $entity = new Quiz();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('QuizBundle:Quiz:new.html.twig', array(
+        return $this->render('Admin/Quiz/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -116,7 +116,7 @@ class QuizController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('QuizBundle:Quiz:show.html.twig', array(
+        return $this->render('Admin/Quiz/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -179,7 +179,7 @@ class QuizController extends Controller
           return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $entity->getId())));
         }
 
-        return $this->render('QuizBundle:Quiz:edit.html.twig', array(
+        return $this->render('Admin/Quiz/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -244,7 +244,7 @@ class QuizController extends Controller
             return $this->redirect($this->generateUrl('admin_quiz_edit', array('id' => $id)));
         }
 
-        return $this->render('QuizBundle:Quiz:edit.html.twig', array(
+        return $this->render('Admin/Quiz/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -351,7 +351,7 @@ class QuizController extends Controller
         return $this->redirect($this->generateUrl('admin_quiz_pregunta', array('id' => $entity->getId())));
       }
 
-      return $this->render('QuizBundle:Quiz:pregunta.html.twig', array(
+      return $this->render('Admin/Quiz/pregunta.html.twig', array(
         'entity' => $entity,
         'opciones_form' => $opcionesForm->createView(),
         'pregunta_opciones_form' => $preguntaOpcionesForm->createView()
