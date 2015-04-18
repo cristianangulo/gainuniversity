@@ -21,21 +21,3 @@ acl_user_perfil:
 acl_homepage:
     path:     /acl/{name}
     defaults: { _controller: ACLBundle:ACL:index }
-
-
-
-acl_no_activo:
-    path:     /no-activo
-    defaults: { _controller: ACLBundle:ACL:noActivo }
-
-acl_registro:
-    path:     /registro
-    defaults: { _controller: ACLBundle:ACL:registro }
-
-acl_registro_curso:
-    path:     /perfil/registro-curso/{id}/{sku}
-    defaults: { _controller: ACLBundle:ACL:registroCurso }
-
-acl_activar_cuenta:
-  path:     /activar-cuenta/{salt}
-  defaults: { _controller: ACLBundle:ACL:activarCuenta }

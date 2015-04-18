@@ -17,3 +17,24 @@ acl_recuperar:
 acl_recuperar_cuenta:
     path:     /recuperar/{codigo}
     defaults: { _controller: AppBundle:ACL/RecuperarCuenta:recuperarCuenta }
+
+### Registro cuenta
+
+acl_registro:
+    path:     /registro
+    defaults: { _controller: AppBundle:ACL/RegistroCuenta:registro }
+
+
+acl_activar_cuenta:
+  path:     /activar-cuenta/{salt}
+  defaults: { _controller: AppBundle:ACL/RegistroCuenta:activarCuenta }
+
+acl_no_activo:
+    path:     /no-activa
+    defaults: { _controller: AppBundle:ACL/CuentaNoActiva:noActiva }
+
+## Registro curso
+
+acl_registro_curso:
+    path:     /perfil/registro-curso/{id}/{sku}
+    defaults: { _controller: AppBundle:ACL/RegistroCurso:registroCurso }
