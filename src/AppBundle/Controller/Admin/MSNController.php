@@ -26,7 +26,7 @@ class MSNController extends Controller
 
     $msnContestados = $em->getRepository('AppBundle:Admin\MensajesRespuestas')->findAll();
 
-    return $this->render("ElearnBundle:MSN:index.html.twig", array(
+    return $this->render("Admin/MSN/index.html.twig", array(
       'msn_no_contestados' => $msnNoContestados,
       'msn_contestados' => $msnContestados
     ));
@@ -56,7 +56,7 @@ class MSNController extends Controller
       return $this->redirect($this->generateUrl('front_msn'));
     }
 
-    return $this->render("ElearnBundle:MSN:msn.html.twig", array(
+    return $this->render("Admin/MSN/msn.html.twig", array(
       'msn_form' => $msnForm->createView(),
       'mensajes' => $mensajesUsuario,
       'msn_no_contestados' => $msnNoContestados
@@ -72,7 +72,7 @@ class MSNController extends Controller
 
     if($mensaje->getEstado() == 1){
 
-      return $this->render("ElearnBundle:MSN:msn-respondido.html.twig", array(
+      return $this->render("Admin/MSN/msn-respondido.html.twig", array(
         'mensaje' => $mensaje,
         'respuesta' => $respuesta->getRespuestas()
       ));
@@ -102,7 +102,7 @@ class MSNController extends Controller
       return $this->redirect($this->generateUrl('admin_msn_responder', array('id' => $mensaje->getId())));
     }
 
-    return $this->render("ElearnBundle:MSN:msn-responder.html.twig", array(
+    return $this->render("Admin/MSN/msn-responder.html.twig", array(
       'mensaje' => $mensaje,
       'msn_form' => $msnForm->createView()
     ));
