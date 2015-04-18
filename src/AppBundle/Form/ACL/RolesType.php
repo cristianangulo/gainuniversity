@@ -1,6 +1,6 @@
 <?php
 
-namespace ACL\ACLBundle\Form;
+namespace AppBundle\Form\ACL;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +26,7 @@ class RolesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ACL\ACLBundle\Entity\Roles'
+            'data_class' => 'AppBundle\Entity\ACL\Roles'
         ));
     }
 

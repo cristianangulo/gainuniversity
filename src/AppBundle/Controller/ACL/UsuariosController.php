@@ -5,7 +5,7 @@ namespace AppBundle\Controller\ACL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use ACL\ACLBundle\Entity\Usuarios;
+use AppBundle\Entity\ACL\Usuarios;
 use ACL\ACLBundle\Form\UsuariosType;
 use ACL\ACLBundle\Form\UsuariosPerfilType;
 
@@ -27,8 +27,8 @@ class UsuariosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ACLBundle:Usuarios')->findAll();
-
+        $entities = $em->getRepository('AppBundle:ACL\Usuarios')->findAll();
+        
         return $this->render('ACL/Usuarios/index.html.twig', array(
             'entities' => $entities,
         ));

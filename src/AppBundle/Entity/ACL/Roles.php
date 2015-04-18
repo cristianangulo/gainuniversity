@@ -1,6 +1,6 @@
 <?php
 
-namespace ACL\ACLBundle\Entity;
+namespace AppBundle\Entity\ACL;
 
 use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -36,7 +36,7 @@ class Roles implements RoleInterface
   */
 
   /**
-   * @ORM\OneToMany(targetEntity="Usuarios", mappedBy="roles")
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\ACL\Usuarios", mappedBy="roles")
    */
 
   protected $usuarios;
@@ -54,7 +54,7 @@ class Roles implements RoleInterface
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -62,72 +62,16 @@ class Roles implements RoleInterface
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Grupos
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * Set role
      *
      * @param string $role
-     * @return Grupos
+     * @return Roles
      */
     public function setRole($role)
     {
         $this->role = $role;
 
         return $this;
-    }
-
-    /**
-     * Add usuarios
-     *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
-     * @return Grupos
-     */
-    public function addUsuario(\ACL\ACLBundle\Entity\Usuarios $usuarios)
-    {
-        $this->usuarios[] = $usuarios;
-
-        return $this;
-    }
-
-    /**
-     * Remove usuarios
-     *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
-     */
-    public function removeUsuario(\ACL\ACLBundle\Entity\Usuarios $usuarios)
-    {
-        $this->usuarios->removeElement($usuarios);
-    }
-
-    /**
-     * Get usuarios
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsuarios()
-    {
-        return $this->usuarios;
     }
 
     /**
@@ -146,10 +90,43 @@ class Roles implements RoleInterface
     /**
      * Get role_key
      *
-     * @return string
+     * @return string 
      */
     public function getRoleKey()
     {
         return $this->role_key;
+    }
+
+    /**
+     * Add usuarios
+     *
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
+     * @return Roles
+     */
+    public function addUsuario(\AppBundle\Entity\ACL\Usuarios $usuarios)
+    {
+        $this->usuarios[] = $usuarios;
+
+        return $this;
+    }
+
+    /**
+     * Remove usuarios
+     *
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
+     */
+    public function removeUsuario(\AppBundle\Entity\ACL\Usuarios $usuarios)
+    {
+        $this->usuarios->removeElement($usuarios);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
     }
 }

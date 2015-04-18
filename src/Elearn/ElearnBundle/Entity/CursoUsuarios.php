@@ -28,7 +28,7 @@ class CursoUsuarios
     private $curso;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ACL\ACLBundle\Entity\Usuarios", inversedBy="usuarioscurso")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Usuarios", inversedBy="usuarioscurso")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      **/
     private $usuario;
@@ -127,7 +127,7 @@ class CursoUsuarios
     /**
      * Get curso
      *
-     * @return \Elearn\ElearnBundle\Entity\Cursos 
+     * @return \Elearn\ElearnBundle\Entity\Cursos
      */
     public function getCurso()
     {

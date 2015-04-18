@@ -5,8 +5,8 @@ namespace AppBundle\Controller\ACL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use ACL\ACLBundle\Entity\Roles;
-use ACL\ACLBundle\Form\RolesType;
+use AppBundle\Entity\ACL\Roles;
+use AppBundle\Form\ACL\RolesType;
 
 /**
  * Roles controller.
@@ -23,7 +23,7 @@ class RolesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ACLBundle:Roles')->findAll();
+        $entities = $em->getRepository('AppBundle:ACL\Roles')->findAll();
 
         return $this->render('ACL/Roles/index.html.twig', array(
             'entities' => $entities,
@@ -116,7 +116,7 @@ class RolesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ACLBundle:Roles')->find($id);
+        $entity = $em->getRepository('AppBundle:ACL\Roles')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Roles entity.');
@@ -157,7 +157,7 @@ class RolesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ACLBundle:Roles')->find($id);
+        $entity = $em->getRepository('AppBundle:ACL\Roles')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Roles entity.');
@@ -190,7 +190,7 @@ class RolesController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ACLBundle:Roles')->find($id);
+            $entity = $em->getRepository('AppBundle:ACL\Roles')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Roles entity.');

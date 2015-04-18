@@ -1,0 +1,53 @@
+<?php
+
+namespace AppBundle\Entity\ACL;
+
+use Symfony\Component\Security\Core\Role\RoleInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+* @ORM\Table(name="Roles")
+* @ORM\Entity()
+*/
+class Roles implements RoleInterface
+{
+  /**
+  * @ORM\Column(name="id", type="integer")
+  * @ORM\Id()
+  * @ORM\GeneratedValue(strategy="AUTO")
+  */
+  private $id;
+
+  /**
+  * @ORM\Column(name="role", type="string", length=30)
+  */
+  private $role;
+
+  /**
+  * @ORM\Column(name="role_key", type="string", length=20, unique=true)
+  */
+  private $role_key;
+
+  // ... getters and setters for each property
+
+  /**
+  * @see RoleInterface
+  */
+
+  /**
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\ACL\Usuarios", mappedBy="roles")
+   */
+
+  protected $usuarios;
+
+  public function __construct()
+  {
+    $this->usuarios = new ArrayCollection();
+  }
+
+  public function getRole()
+  {
+    return $this->role;
+  }
+}
