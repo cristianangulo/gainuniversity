@@ -1,12 +1,12 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form\EventListener;
+namespace AppBundle\Form\Admin\Modulos\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-use Elearn\ElearnBundle\Form\ModuloSeccionesType;
+use AppBundle\Form\Admin\Modulos\ModuloItemsType;
 
 class ModuloItemsSubscriber implements EventSubscriberInterface
 {
@@ -34,7 +34,7 @@ class ModuloItemsSubscriber implements EventSubscriberInterface
         // comprueba si el objeto producto es "nuevo"
         if ($data->getId()) {
             $form->add('secciones', 'collection', array(
-              'type' => new ModuloSeccionesType(),
+              'type' => new ModuloItemsType(),
               'by_reference' => false,
               'allow_add' => true,
               'allow_delete' => true

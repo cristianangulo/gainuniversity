@@ -1,13 +1,13 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form;
+namespace AppBundle\Form\Admin\Modulos;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Elearn\ElearnBundle\Form\EventListener\ModuloItemsSubscriber;
+use Elearn\ElearnBundle\Form\EventListener\ModuloSeccionesPosicionSubscriber;
 
-class ModulosType extends AbstractType
+class ModuloItemsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,11 +16,15 @@ class ModulosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('modulo')
-            ->add('descripcion')
+            ->add('secciones', 'entity', array(
+              'class' => 'AppBundle:Admin\Items\Items',
+              'property' => 'seccion',
+              'empty_value' => 'Seleccione'
+            ))
+            ->add('posicion');
         ;
 
-        $builder->addEventSubscriber(new ModuloItemsSubscriber());
+        $builder->addEventSubscriber(new ModuloSeccionesPosicionSubscriber());
     }
 
     /**
@@ -29,7 +33,7 @@ class ModulosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elearn\ElearnBundle\Entity\Modulos'
+            'data_class' => 'AppBundle\Entity\Admin\Modulos\ModuloItems'
         ));
     }
 
@@ -38,6 +42,6 @@ class ModulosType extends AbstractType
      */
     public function getName()
     {
-        return 'elearn_elearnbundle_modulos';
+        return 'elearn_elearnbundle_modulosecciones';
     }
 }

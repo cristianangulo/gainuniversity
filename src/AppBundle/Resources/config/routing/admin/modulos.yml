@@ -1,0 +1,30 @@
+admin_modulos:
+    path:     /
+    defaults: { _controller: "AppBundle:Admin/Modulos:index" }
+
+admin_modulos_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Admin/Modulos:show" }
+
+admin_modulos_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Admin/Modulos:new" }
+
+admin_modulos_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Admin/Modulos:create" }
+    requirements: { _method: post }
+
+admin_modulos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Admin/Modulos:edit" }
+
+admin_modulos_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Admin/Modulos:update" }
+    requirements: { _method: post|put }
+
+admin_modulos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Admin/Modulos:delete" }
+    requirements: { _method: post|delete }

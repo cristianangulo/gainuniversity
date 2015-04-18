@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Entity\Admin\Items;
+namespace AppBundle\Entity\Admin\Modulos;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ModuloSecciones
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\ModuloItemsRepository")
+ * @ORM\Table(name="ModuloSecciones")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\Modulos\ModuloItemsRepository")
  */
 class ModuloItems
 {

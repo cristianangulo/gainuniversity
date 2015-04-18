@@ -37,7 +37,7 @@ class Modulos
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Items\ModuloItems", mappedBy="modulos", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="modulos", cascade={"persist"})
      * @ORM\OrderBy({"posicion" = "ASC"})
      **/
 

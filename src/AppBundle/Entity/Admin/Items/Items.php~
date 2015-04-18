@@ -50,7 +50,7 @@ class Items
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Items\ModuloItems", mappedBy="items")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="items")
      **/
 
     private $modulos;
@@ -75,160 +75,88 @@ class Items
     }
 
     /**
-     * Get id
+     * Sets file.
      *
-     * @return integer
+     * @param UploadedFile $file
      */
-    public function getId()
+    public function setFile(UploadedFile $file = null)
     {
-        return $this->id;
+        $this->file = $file;
     }
-
     /**
-     * Set seccion
+     * Get file.
      *
-     * @param string $seccion
-     * @return Items
+     * @return UploadedFile
      */
-    public function setSeccion($seccion)
+    public function getFile()
     {
-        $this->seccion = $seccion;
-
+        return $this->file;
+    }
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/documents';
+    }
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getFile()) {
+            return;
+        }
+        // use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+        // move takes the target directory and then the
+        // target filename to move to
+        $this->getFile()->move(
+            $this->getUploadRootDir(),
+            $this->getFile()->getClientOriginalName()
+        );
+        // set the path property to the filename where you've saved the file
+        $this->path = $this->getFile()->getClientOriginalName();
+        // clean up the file property as you won't need it anymore
+        $this->file = null;
+    }
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Secciones
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
         return $this;
     }
-
     /**
-     * Get seccion
+     * Get path
      *
      * @return string
      */
-    public function getSeccion()
+    public function getPath()
     {
-        return $this->seccion;
-    }
-
-    /**
-     * Set multimedia
-     *
-     * @param string $multimedia
-     * @return Items
-     */
-    public function setMultimedia($multimedia)
-    {
-        $this->multimedia = $multimedia;
-
-        return $this;
-    }
-
-    /**
-     * Get multimedia
-     *
-     * @return string
-     */
-    public function getMultimedia()
-    {
-        return $this->multimedia;
-    }
-
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     * @return Items
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * Add modulos
-     *
-     * @param \AppBundle\Entity\Admin\Items\ModuloItems $modulos
-     * @return Items
-     */
-    public function addModulo(\AppBundle\Entity\Admin\Items\ModuloItems $modulos)
-    {
-        $this->modulos[] = $modulos;
-
-        return $this;
-    }
-
-    /**
-     * Remove modulos
-     *
-     * @param \AppBundle\Entity\Admin\Items\ModuloItems $modulos
-     */
-    public function removeModulo(\AppBundle\Entity\Admin\Items\ModuloItems $modulos)
-    {
-        $this->modulos->removeElement($modulos);
-    }
-
-    /**
-     * Get modulos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getModulos()
-    {
-        return $this->modulos;
-    }
-
-    /**
-     * Set tipo
-     *
-     * @param \AppBundle\Entity\Admin\Items\TipoItem $tipo
-     * @return Items
-     */
-    public function setTipo(\AppBundle\Entity\Admin\Items\TipoItem $tipo = null)
-    {
-        $this->tipo = $tipo;
-
-        return $this;
-    }
-
-    /**
-     * Get tipo
-     *
-     * @return \AppBundle\Entity\Admin\Items\TipoItem
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    /**
-     * Set quiz
-     *
-     * @param \AppBundle\Entity\Admin\Quiz\Quiz $quiz
-     * @return Items
-     */
-    public function setQuiz(\AppBundle\Entity\Admin\Quiz\Quiz $quiz = null)
-    {
-        $this->quiz = $quiz;
-
-        return $this;
-    }
-
-    /**
-     * Get quiz
-     *
-     * @return \AppBundle\Entity\Admin\Quiz\Quiz
-     */
-    public function getQuiz()
-    {
-        return $this->quiz;
+        return $this->path;
     }
 }

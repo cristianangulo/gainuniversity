@@ -1,16 +1,16 @@
 <?php
 
-namespace Elearn\ElearnBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Elearn\ElearnBundle\Entity\Modulos;
-use Elearn\ElearnBundle\Form\ModulosType;
+use AppBundle\Entity\Admin\Modulos\Modulos;
+use AppBundle\Form\Admin\Modulos\ModulosType;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elearn\ElearnBundle\Entity\ModuloSecciones;
+use AppBundle\Entity\Admin\Modulos\ModuloItems;
 /**
  * Modulos controller.
  *
@@ -26,7 +26,7 @@ class ModulosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ElearnBundle:Modulos')->findAll();
+        $entities = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->findAll();
 
         return $this->render('ElearnBundle:Modulos:index.html.twig', array(
             'entities' => $entities,
@@ -120,7 +120,7 @@ class ModulosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $modulo = $em->getRepository('ElearnBundle:Modulos')->find($id);
+        $modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($id);
 
         if (!$modulo) {
             throw $this->createNotFoundException('Unable to find Modulos entity.');
@@ -133,6 +133,7 @@ class ModulosController extends Controller
         }
 
         $form = $this->createEditForm($modulo);
+
         $form->handleRequest($request);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -148,13 +149,13 @@ class ModulosController extends Controller
 
         foreach($form->getData()->getSecciones() as $item){
           if(!$item->getId()){
-            $moduloSecciones = new ModuloSecciones();
+            $moduloSecciones = new ModuloItems();
 
-            $modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo);
+            $modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($modulo);
             $secciones = count($originalItems) + 1;
             $moduloSecciones->setPosicion($secciones);
             $moduloSecciones->setModulos($modulo);
-            $seccion = $em->getRepository('ElearnBundle:Secciones')->find($item->getSecciones()->getId());
+            $seccion = $em->getRepository('AppBundle:Admin\Items\Items')->find($item->getSecciones()->getId());
             $moduloSecciones->setSecciones($seccion);
 
             $em->persist($moduloSecciones);

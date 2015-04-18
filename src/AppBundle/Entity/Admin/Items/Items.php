@@ -50,7 +50,7 @@ class Items
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Items\ModuloItems", mappedBy="items")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="items")
      **/
 
     private $modulos;
@@ -72,164 +72,6 @@ class Items
     public function __construct()
     {
         $this->modulos = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set seccion
-     *
-     * @param string $seccion
-     * @return Items
-     */
-    public function setSeccion($seccion)
-    {
-        $this->seccion = $seccion;
-
-        return $this;
-    }
-
-    /**
-     * Get seccion
-     *
-     * @return string
-     */
-    public function getSeccion()
-    {
-        return $this->seccion;
-    }
-
-    /**
-     * Set multimedia
-     *
-     * @param string $multimedia
-     * @return Items
-     */
-    public function setMultimedia($multimedia)
-    {
-        $this->multimedia = $multimedia;
-
-        return $this;
-    }
-
-    /**
-     * Get multimedia
-     *
-     * @return string
-     */
-    public function getMultimedia()
-    {
-        return $this->multimedia;
-    }
-
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     * @return Items
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * Add modulos
-     *
-     * @param \AppBundle\Entity\Admin\Items\ModuloItems $modulos
-     * @return Items
-     */
-    public function addModulo(\AppBundle\Entity\Admin\Items\ModuloItems $modulos)
-    {
-        $this->modulos[] = $modulos;
-
-        return $this;
-    }
-
-    /**
-     * Remove modulos
-     *
-     * @param \AppBundle\Entity\Admin\Items\ModuloItems $modulos
-     */
-    public function removeModulo(\AppBundle\Entity\Admin\Items\ModuloItems $modulos)
-    {
-        $this->modulos->removeElement($modulos);
-    }
-
-    /**
-     * Get modulos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getModulos()
-    {
-        return $this->modulos;
-    }
-
-    /**
-     * Set tipo
-     *
-     * @param \AppBundle\Entity\Admin\Items\TipoItem $tipo
-     * @return Items
-     */
-    public function setTipo(\AppBundle\Entity\Admin\Items\TipoItem $tipo = null)
-    {
-        $this->tipo = $tipo;
-
-        return $this;
-    }
-
-    /**
-     * Get tipo
-     *
-     * @return \AppBundle\Entity\Admin\Items\TipoItem
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    /**
-     * Set quiz
-     *
-     * @param \AppBundle\Entity\Admin\Quiz\Quiz $quiz
-     * @return Items
-     */
-    public function setQuiz(\AppBundle\Entity\Admin\Quiz\Quiz $quiz = null)
-    {
-        $this->quiz = $quiz;
-
-        return $this;
-    }
-
-    /**
-     * Get quiz
-     *
-     * @return \AppBundle\Entity\Admin\Quiz\Quiz
-     */
-    public function getQuiz()
-    {
-        return $this->quiz;
     }
 
     /**
@@ -316,5 +158,163 @@ class Items
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set seccion
+     *
+     * @param string $seccion
+     * @return Items
+     */
+    public function setSeccion($seccion)
+    {
+        $this->seccion = $seccion;
+
+        return $this;
+    }
+
+    /**
+     * Get seccion
+     *
+     * @return string 
+     */
+    public function getSeccion()
+    {
+        return $this->seccion;
+    }
+
+    /**
+     * Set multimedia
+     *
+     * @param string $multimedia
+     * @return Items
+     */
+    public function setMultimedia($multimedia)
+    {
+        $this->multimedia = $multimedia;
+
+        return $this;
+    }
+
+    /**
+     * Get multimedia
+     *
+     * @return string 
+     */
+    public function getMultimedia()
+    {
+        return $this->multimedia;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Items
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Add modulos
+     *
+     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $modulos
+     * @return Items
+     */
+    public function addModulo(\AppBundle\Entity\Admin\Modulos\ModuloItems $modulos)
+    {
+        $this->modulos[] = $modulos;
+
+        return $this;
+    }
+
+    /**
+     * Remove modulos
+     *
+     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $modulos
+     */
+    public function removeModulo(\AppBundle\Entity\Admin\Modulos\ModuloItems $modulos)
+    {
+        $this->modulos->removeElement($modulos);
+    }
+
+    /**
+     * Get modulos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModulos()
+    {
+        return $this->modulos;
+    }
+
+    /**
+     * Set tipo
+     *
+     * @param \AppBundle\Entity\Admin\Items\TipoItem $tipo
+     * @return Items
+     */
+    public function setTipo(\AppBundle\Entity\Admin\Items\TipoItem $tipo = null)
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     *
+     * @return \AppBundle\Entity\Admin\Items\TipoItem 
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * Set quiz
+     *
+     * @param \AppBundle\Entity\Admin\Quiz\Quiz $quiz
+     * @return Items
+     */
+    public function setQuiz(\AppBundle\Entity\Admin\Quiz\Quiz $quiz = null)
+    {
+        $this->quiz = $quiz;
+
+        return $this;
+    }
+
+    /**
+     * Get quiz
+     *
+     * @return \AppBundle\Entity\Admin\Quiz\Quiz 
+     */
+    public function getQuiz()
+    {
+        return $this->quiz;
     }
 }

@@ -37,7 +37,7 @@ class Modulos
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Items\ModuloItems", mappedBy="modulos", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="modulos", cascade={"persist"})
      * @ORM\OrderBy({"posicion" = "ASC"})
      **/
 
@@ -107,10 +107,10 @@ class Modulos
     /**
      * Add secciones
      *
-     * @param \AppBundle\Entity\Admin\Items\ModuloItems $secciones
+     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $secciones
      * @return Modulos
      */
-    public function addSeccione(\AppBundle\Entity\Admin\Items\ModuloItems $secciones)
+    public function addSeccione(\AppBundle\Entity\Admin\Modulos\ModuloItems $secciones)
     {
         $this->secciones[] = $secciones;
 
@@ -120,9 +120,9 @@ class Modulos
     /**
      * Remove secciones
      *
-     * @param \AppBundle\Entity\Admin\Items\ModuloItems $secciones
+     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $secciones
      */
-    public function removeSeccione(\AppBundle\Entity\Admin\Items\ModuloItems $secciones)
+    public function removeSeccione(\AppBundle\Entity\Admin\Modulos\ModuloItems $secciones)
     {
         $this->secciones->removeElement($secciones);
     }
