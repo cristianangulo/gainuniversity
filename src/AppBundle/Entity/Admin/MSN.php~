@@ -51,7 +51,7 @@ class MSN
     private $estado;
 
     /**
-     * @ORM\OneToMany(targetEntity="MensajesRespuestas", mappedBy="respuestas")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\MensajesRespuestas", mappedBy="respuestas")
      */
 
     private $mensajesRespuestas;
@@ -168,10 +168,10 @@ class MSN
     /**
      * Add mensajesRespuestas
      *
-     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas
+     * @param \AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas
      * @return MSN
      */
-    public function addMensajesRespuesta(\Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas)
+    public function addMensajesRespuesta(\AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas)
     {
         $this->mensajesRespuestas[] = $mensajesRespuestas;
 
@@ -181,9 +181,9 @@ class MSN
     /**
      * Remove mensajesRespuestas
      *
-     * @param \Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas
+     * @param \AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas
      */
-    public function removeMensajesRespuesta(\Elearn\ElearnBundle\Entity\MensajesRespuestas $mensajesRespuestas)
+    public function removeMensajesRespuesta(\AppBundle\Entity\Admin\MensajesRespuestas $mensajesRespuestas)
     {
         $this->mensajesRespuestas->removeElement($mensajesRespuestas);
     }

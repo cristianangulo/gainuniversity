@@ -1,6 +1,6 @@
 <?php
 
-namespace Quiz\QuizBundle\Entity;
+namespace AppBundle\Entity\Admin\Quiz;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Quiz
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\QuizRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\Quiz\QuizRepository")
  */
 class Quiz
 {
@@ -97,7 +97,7 @@ class Quiz
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Preguntas", mappedBy="quiz", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Quiz\Preguntas", mappedBy="quiz", cascade={"persist"})
      * @ORM\OrderBy({"posicion" = "ASC"})
      */
 
@@ -109,46 +109,14 @@ class Quiz
       $this->preguntas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Add secciones
-     *
-     * @param \Elearn\ElearnBundle\Entity\Secciones $secciones
-     * @return Quiz
-     */
-    public function addSeccione(\Elearn\ElearnBundle\Entity\Secciones $secciones)
-    {
-        $this->secciones[] = $secciones;
-
-        return $this;
-    }
-
-    /**
-     * Remove secciones
-     *
-     * @param \Elearn\ElearnBundle\Entity\Secciones $secciones
-     */
-    public function removeSeccione(\Elearn\ElearnBundle\Entity\Secciones $secciones)
-    {
-        $this->secciones->removeElement($secciones);
-    }
-
-    /**
-     * Get secciones
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSecciones()
-    {
-        return $this->secciones;
-    }
 
     /**
      * Add preguntas
      *
-     * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
+     * @param \AppBundle\Entity\Admin\Quiz\Preguntas $preguntas
      * @return Quiz
      */
-    public function addPregunta(\Quiz\QuizBundle\Entity\Preguntas $preguntas)
+    public function addPregunta(\AppBundle\Entity\Admin\Quiz\Preguntas $preguntas)
     {
         $this->preguntas[] = $preguntas;
 
@@ -158,9 +126,9 @@ class Quiz
     /**
      * Remove preguntas
      *
-     * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
+     * @param \AppBundle\Entity\Admin\Quiz\Preguntas $preguntas
      */
-    public function removePregunta(\Quiz\QuizBundle\Entity\Preguntas $preguntas)
+    public function removePregunta(\AppBundle\Entity\Admin\Quiz\Preguntas $preguntas)
     {
         $this->preguntas->removeElement($preguntas);
     }
@@ -173,10 +141,5 @@ class Quiz
     public function getPreguntas()
     {
         return $this->preguntas;
-    }
-
-    public function __toString()
-    {
-       return $this->id;
     }
 }

@@ -5,8 +5,8 @@ namespace AppBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Quiz\QuizBundle\Entity\Quiz;
-use Quiz\QuizBundle\Form\QuizType;
+use AppBundle\Entity\Quiz\Quiz;
+use AppBundle\Form\Quiz\QuizType;
 
 use Quiz\QuizBundle\Form\QuizPreguntasType;
 
@@ -37,8 +37,7 @@ class QuizController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('QuizBundle:Quiz')->findAll();
-
+        $entities = $em->getRepository('AppBundle:Admin\Quiz\Quiz')->findAll();
         return $this->render('QuizBundle:Quiz:index.html.twig', array(
             'entities' => $entities,
         ));

@@ -1,6 +1,6 @@
 <?php
 
-namespace Quiz\QuizBundle\Entity;
+namespace AppBundle\Entity\Admin\Quiz;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * QuizOpciones
  *
  * @ORM\Table(name="Opciones")
- * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\OpcionesRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\Quiz\OpcionesRepository")
  */
 class Opciones
 {
@@ -43,17 +43,16 @@ class Opciones
     private $posicion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Preguntas", inversedBy="opciones")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Quiz\Preguntas", inversedBy="opciones")
      * @ORM\JoinColumn(name="pregunta_id", referencedColumnName="id")
      **/
 
     private $preguntas;
 
-
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -64,7 +63,7 @@ class Opciones
      * Set opcion
      *
      * @param string $opcion
-     * @return QuizOpciones
+     * @return Opciones
      */
     public function setOpcion($opcion)
     {
@@ -76,7 +75,7 @@ class Opciones
     /**
      * Get opcion
      *
-     * @return string
+     * @return string 
      */
     public function getOpcion()
     {
@@ -86,8 +85,8 @@ class Opciones
     /**
      * Set valor
      *
-     * @param integer $valor
-     * @return QuizOpciones
+     * @param boolean $valor
+     * @return Opciones
      */
     public function setValor($valor)
     {
@@ -99,34 +98,11 @@ class Opciones
     /**
      * Get valor
      *
-     * @return integer
+     * @return boolean 
      */
     public function getValor()
     {
         return $this->valor;
-    }
-
-    /**
-     * Set preguntas
-     *
-     * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
-     * @return Opciones
-     */
-    public function setPreguntas(\Quiz\QuizBundle\Entity\Preguntas $preguntas = null)
-    {
-        $this->preguntas = $preguntas;
-
-        return $this;
-    }
-
-    /**
-     * Get preguntas
-     *
-     * @return \Quiz\QuizBundle\Entity\Preguntas
-     */
-    public function getPreguntas()
-    {
-        return $this->preguntas;
     }
 
     /**
@@ -145,10 +121,33 @@ class Opciones
     /**
      * Get posicion
      *
-     * @return integer
+     * @return integer 
      */
     public function getPosicion()
     {
         return $this->posicion;
+    }
+
+    /**
+     * Set preguntas
+     *
+     * @param \AppBundle\Entity\Admin\Quiz\Preguntas $preguntas
+     * @return Opciones
+     */
+    public function setPreguntas(\AppBundle\Entity\Admin\Quiz\Preguntas $preguntas = null)
+    {
+        $this->preguntas = $preguntas;
+
+        return $this;
+    }
+
+    /**
+     * Get preguntas
+     *
+     * @return \AppBundle\Entity\Admin\Quiz\Preguntas 
+     */
+    public function getPreguntas()
+    {
+        return $this->preguntas;
     }
 }
