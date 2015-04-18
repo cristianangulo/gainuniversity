@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Admin\Items;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * ModuloSecciones
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\ModuloSeccionesRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\ModuloItemsRepository")
  */
-class ModuloSecciones
+class ModuloItems
 {
     /**
      * @var integer
@@ -29,14 +29,14 @@ class ModuloSecciones
     private $posicion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Modulos", inversedBy="modulosecciones")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="modulosecciones")
      * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
      **/
 
     private $modulos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Secciones", inversedBy="seccionesmodulo")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Items\Items", inversedBy="seccionesmodulo")
      * @ORM\JoinColumn(name="seccion_id", referencedColumnName="id")
      **/
 
@@ -79,10 +79,10 @@ class ModuloSecciones
     /**
      * Set modulos
      *
-     * @param \Elearn\ElearnBundle\Entity\Modulos $modulos
+     * @param \AppBundle\Entity\Admin\Modulos\Modulos $modulos
      * @return ModuloSecciones
      */
-    public function setModulos(\Elearn\ElearnBundle\Entity\Modulos $modulos = null)
+    public function setModulos(\AppBundle\Entity\Admin\Modulos\Modulos $modulos = null)
     {
         $this->modulos = $modulos;
 
@@ -92,7 +92,7 @@ class ModuloSecciones
     /**
      * Get modulos
      *
-     * @return \Elearn\ElearnBundle\Entity\Modulos
+     * @return \AppBundle\Entity\Admin\Modulos\Modulos
      */
     public function getModulos()
     {
@@ -102,10 +102,10 @@ class ModuloSecciones
     /**
      * Set secciones
      *
-     * @param \Elearn\ElearnBundle\Entity\Secciones $secciones
+     * @param \AppBundle\Entity\Admin\Items\Items $secciones
      * @return ModuloSecciones
      */
-    public function setSecciones(\Elearn\ElearnBundle\Entity\Secciones $secciones = null)
+    public function setSecciones(\AppBundle\Entity\Admin\Items\Items $secciones = null)
     {
         $this->secciones = $secciones;
 
@@ -115,7 +115,7 @@ class ModuloSecciones
     /**
      * Get secciones
      *
-     * @return \Elearn\ElearnBundle\Entity\Secciones
+     * @return \AppBundle\Entity\Admin\Items\Items
      */
     public function getSecciones()
     {

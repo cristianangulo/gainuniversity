@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Admin\Modulos;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -37,7 +37,7 @@ class Modulos
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="ModuloSecciones", mappedBy="modulos", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Items\ModuloItems", mappedBy="modulos", cascade={"persist"})
      * @ORM\OrderBy({"posicion" = "ASC"})
      **/
 
@@ -107,10 +107,10 @@ class Modulos
     /**
      * Add secciones
      *
-     * @param \Elearn\ElearnBundle\Entity\ModuloSecciones $secciones
+     * @param \AppBundle\Entity\Admin\Items\ModuloItems $secciones
      * @return Modulos
      */
-    public function addSeccione(\Elearn\ElearnBundle\Entity\ModuloSecciones $secciones)
+    public function addSeccione(\AppBundle\Entity\Admin\Items\ModuloItems $secciones)
     {
         $this->secciones[] = $secciones;
 
@@ -120,9 +120,9 @@ class Modulos
     /**
      * Remove secciones
      *
-     * @param \Elearn\ElearnBundle\Entity\ModuloSecciones $secciones
+     * @param \AppBundle\Entity\Admin\Items\ModuloItems $secciones
      */
-    public function removeSeccione(\Elearn\ElearnBundle\Entity\ModuloSecciones $secciones)
+    public function removeSeccione(\AppBundle\Entity\Admin\Items\ModuloItems $secciones)
     {
         $this->secciones->removeElement($secciones);
     }

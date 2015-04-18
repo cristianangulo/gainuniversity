@@ -17,3 +17,7 @@ admin:
 quiz_admin_quiz:
     resource: "@AppBundle/Resources/config/routing/admin/quiz.yml"
     prefix:   /admin/quiz
+
+elearn_admin_secciones:
+    resource: "@AppBundle/Resources/config/routing/admin/items.yml"
+    prefix:   /admin/secciones

@@ -48,4 +48,106 @@ class Opciones
      **/
 
     private $preguntas;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set opcion
+     *
+     * @param string $opcion
+     * @return Opciones
+     */
+    public function setOpcion($opcion)
+    {
+        $this->opcion = $opcion;
+
+        return $this;
+    }
+
+    /**
+     * Get opcion
+     *
+     * @return string 
+     */
+    public function getOpcion()
+    {
+        return $this->opcion;
+    }
+
+    /**
+     * Set valor
+     *
+     * @param boolean $valor
+     * @return Opciones
+     */
+    public function setValor($valor)
+    {
+        $this->valor = $valor;
+
+        return $this;
+    }
+
+    /**
+     * Get valor
+     *
+     * @return boolean 
+     */
+    public function getValor()
+    {
+        return $this->valor;
+    }
+
+    /**
+     * Set posicion
+     *
+     * @param integer $posicion
+     * @return Opciones
+     */
+    public function setPosicion($posicion)
+    {
+        $this->posicion = $posicion;
+
+        return $this;
+    }
+
+    /**
+     * Get posicion
+     *
+     * @return integer 
+     */
+    public function getPosicion()
+    {
+        return $this->posicion;
+    }
+
+    /**
+     * Set preguntas
+     *
+     * @param \AppBundle\Entity\Admin\Quiz\Preguntas $preguntas
+     * @return Opciones
+     */
+    public function setPreguntas(\AppBundle\Entity\Admin\Quiz\Preguntas $preguntas = null)
+    {
+        $this->preguntas = $preguntas;
+
+        return $this;
+    }
+
+    /**
+     * Get preguntas
+     *
+     * @return \AppBundle\Entity\Admin\Quiz\Preguntas 
+     */
+    public function getPreguntas()
+    {
+        return $this->preguntas;
+    }
 }

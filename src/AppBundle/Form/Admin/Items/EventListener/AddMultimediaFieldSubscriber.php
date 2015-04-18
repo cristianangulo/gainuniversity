@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form\EventListener;
+namespace AppBundle\Form\Admin\Items\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -32,7 +32,7 @@ class AddMultimediaFieldSubscriber implements EventSubscriberInterface
         // comprueba si el objeto producto es "nuevo"
         if ($data->getId()) {
           $form->add('tipo', 'entity', array(
-            'class' => 'ElearnBundle:TipoSeccion',
+            'class' => 'AppBundle:Admin\Items\TipoItem',
             'property' => 'tipo_seccion',
             'disabled' => true
           ));

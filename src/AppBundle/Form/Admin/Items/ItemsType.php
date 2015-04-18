@@ -1,13 +1,13 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form;
+namespace AppBundle\Form\Admin\Items;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Elearn\ElearnBundle\Form\EventListener\AddMultimediaFieldSubscriber;
+use AppBundle\Form\Admin\Items\EventListener\AddMultimediaFieldSubscriber;
 
-class SeccionesType extends AbstractType
+class ItemsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,8 +17,8 @@ class SeccionesType extends AbstractType
     {
         $builder
             ->add('tipo', 'entity', array(
-              'class' => 'ElearnBundle:TipoSeccion',
-              'property' => 'tipo_seccion',
+              'class' => 'AppBundle:Admin\Items\TipoItem',
+              'property' => 'tipoSeccion',
             ))
             ->add('seccion','text',array(
               'label' => 'Ítem'
@@ -34,7 +34,7 @@ class SeccionesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elearn\ElearnBundle\Entity\Secciones'
+            'data_class' => 'AppBundle\Entity\Admin\Items\Items'
         ));
     }
 

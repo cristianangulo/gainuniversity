@@ -18,9 +18,6 @@ front_perfil:
     path:     /perfil/
     defaults: { _controller: ElearnBundle:Front:perfil }
 
-elearn_admin_secciones:
-    resource: "@ElearnBundle/Resources/config/routing/secciones.yml"
-    prefix:   /admin/secciones
 
 elearn_admin_modulos:
     resource: "@ElearnBundle/Resources/config/routing/modulos.yml"

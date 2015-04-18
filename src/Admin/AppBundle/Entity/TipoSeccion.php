@@ -1,44 +1,31 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TipoSeccion
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\TipoSeccionRepository")
  */
 class TipoSeccion
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="tipo_seccion", type="string", length=100)
      */
     private $tipoSeccion;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="svg_seccion", type="string", length=20)
      */
     private $svgSeccion;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="color", type="string", length=100)
      */
     private $color;
 
@@ -46,7 +33,7 @@ class TipoSeccion
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -69,7 +56,7 @@ class TipoSeccion
     /**
      * Get tipoSeccion
      *
-     * @return string
+     * @return string 
      */
     public function getTipoSeccion()
     {
@@ -92,7 +79,7 @@ class TipoSeccion
     /**
      * Get svgSeccion
      *
-     * @return string
+     * @return string 
      */
     public function getSvgSeccion()
     {
@@ -115,7 +102,7 @@ class TipoSeccion
     /**
      * Get color
      *
-     * @return string
+     * @return string 
      */
     public function getColor()
     {

@@ -1,19 +1,19 @@
 <?php
 
-namespace Elearn\ElearnBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Elearn\ElearnBundle\Entity\Secciones;
-use Elearn\ElearnBundle\Form\SeccionesType;
+use AppBundle\Entity\Admin\Items\Items;
+use AppBundle\Form\Admin\Items\ItemsType;
 
 /**
  * Secciones controller.
  *
  */
-class SeccionesController extends Controller
+class ItemsController extends Controller
 {
 
     /**
@@ -24,7 +24,7 @@ class SeccionesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ElearnBundle:Secciones')->findAll();
+        $entities = $em->getRepository('AppBundle:Admin\Items\Items')->findAll();
 
         return $this->render('ElearnBundle:Secciones:index.html.twig', array(
             'entities' => $entities,
@@ -36,11 +36,12 @@ class SeccionesController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Secciones();
+        $entity = new Items();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -61,9 +62,9 @@ class SeccionesController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Secciones $entity)
+    private function createCreateForm(Items $entity)
     {
-        $form = $this->createForm(new SeccionesType(), $entity, array(
+        $form = $this->createForm(new ItemsType(), $entity, array(
             'action' => $this->generateUrl('admin_secciones_create'),
             'method' => 'POST',
         ));
@@ -79,7 +80,7 @@ class SeccionesController extends Controller
      */
     public function newAction()
     {
-        $entity = new Secciones();
+        $entity = new Items();
         $form   = $this->createCreateForm($entity);
 
         return $this->render('ElearnBundle:Secciones:new.html.twig', array(
@@ -118,13 +119,14 @@ class SeccionesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ElearnBundle:Secciones')->find($id);
+        $entity = $em->getRepository('AppBundle:Admin\Items\Items')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Secciones entity.');
         }
 
         $editForm = $this->createEditForm($entity);
+
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ElearnBundle:Secciones:edit.html.twig', array(
@@ -141,9 +143,9 @@ class SeccionesController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Secciones $entity)
+    private function createEditForm(Items $entity)
     {
-        $form = $this->createForm(new SeccionesType(), $entity, array(
+        $form = $this->createForm(new ItemsType(), $entity, array(
             'action' => $this->generateUrl('admin_secciones_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -160,7 +162,7 @@ class SeccionesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ElearnBundle:Secciones')->find($id);
+        $entity = $em->getRepository('AppBundle:Admin\Items\Items')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Secciones entity.');
@@ -209,7 +211,7 @@ class SeccionesController extends Controller
     public function deleteArchivoAction(Request $request, $id)
     {
       $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('ElearnBundle:Secciones')->find($id);
+      $entity = $em->getRepository('AppBundle:Admin\Items\Items')->find($id);
 
       if (!$entity) {
           throw $this->createNotFoundException('Unable to find Secciones entity.');
