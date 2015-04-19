@@ -30,6 +30,10 @@ elearn_admin_cursos:
     resource: "@AppBundle/Resources/config/routing/admin/cursos.yml"
     prefix:   /admin/cursos
 
+elearn_admin_cursos_usuarios:
+    resource: "@AppBundle/Resources/config/routing/admin/cursousuarios.yml"
+    prefix:   /admin/cursos/usuarios
+
 front:
     resource: "@AppBundle/Resources/config/routing/front/front.yml"
     prefix:   /

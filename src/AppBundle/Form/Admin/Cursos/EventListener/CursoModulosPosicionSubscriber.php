@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form\EventListener;
+namespace AppBundle\Form\Admin\Cursos\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

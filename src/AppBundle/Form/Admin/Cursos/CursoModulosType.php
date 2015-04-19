@@ -5,7 +5,7 @@ namespace AppBundle\Form\Admin\Cursos;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Elearn\ElearnBundle\Form\EventListener\CursoModulosPosicionSubscriber;
+use AppBundle\Form\Admin\Cursos\EventListener\CursoModulosPosicionSubscriber;
 
 
 class CursoModulosType extends AbstractType

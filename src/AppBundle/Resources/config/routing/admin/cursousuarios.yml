@@ -1,6 +1,6 @@
 admin_cursos_usuarios:
     path:     /{curso}
-    defaults: { _controller: "ElearnBundle:CursoUsuarios:index" }
+    defaults: { _controller: "AppBundle:Admin\CursoUsuarios:index" }
 
 admin_cursos_usuarios_show:
     path:     /{id}/show

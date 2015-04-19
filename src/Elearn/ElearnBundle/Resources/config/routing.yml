@@ -1,7 +1,3 @@
-elearn_admin_cursos_usuarios:
-    resource: "@ElearnBundle/Resources/config/routing/cursousuarios.yml"
-    prefix:   /admin/cursos/usuarios
-
 elearn_comentarios_items:
     resource: "@ElearnBundle/Resources/config/routing/comentariositems.yml"
     prefix:   /comentarios/items
