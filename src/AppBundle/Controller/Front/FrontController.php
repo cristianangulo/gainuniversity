@@ -3,8 +3,8 @@
 namespace AppBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Elearn\ElearnBundle\Entity\ComentariosItems;
-use Elearn\ElearnBundle\Form\ComentariosItemsType;
+use AppBundle\Entity\Front\ComentariosItems;
+use AppBundle\Form\Front\ComentariosItemsType;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\ACL\Usuarios;
@@ -333,7 +333,7 @@ class FrontController extends Controller
 
   // $comentarios = $em->getRepository("ElearnBundle:ComentariosItems")->findAll();
 
-  $comentarios = $em->getRepository('ElearnBundle:ComentariosItems');
+  $comentarios = $em->getRepository('AppBundle:Front\ComentariosItems');
 
   $comentarios = $comentarios->createQueryBuilder('i')
     ->where('i.items = :item')

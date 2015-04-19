@@ -3,13 +3,11 @@
 namespace AppBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Elearn\ElearnBundle\Entity\ComentariosItems;
-use Elearn\ElearnBundle\Form\ComentariosItemsType;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\ACL\Usuarios;
 use AppBundle\Form\Front\PerfilUsuarioType;
-use Elearn\ElearnBundle\Form\PasswordUsuarioType;
+use AppBundle\Form\Front\PasswordUsuarioType;
 
 use ACL\ACLBundle\Entity\CursoUsuarios;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

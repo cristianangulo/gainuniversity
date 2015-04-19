@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Entity;
+namespace AppBundle\Entity\Front;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ComentariosItems
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\ComentariosItemsRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Front\ComentariosItemsRepository")
  */
 class ComentariosItems
 {
@@ -55,7 +55,7 @@ class ComentariosItems
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,7 +78,7 @@ class ComentariosItems
     /**
      * Get comentario
      *
-     * @return string 
+     * @return string
      */
     public function getComentario()
     {
@@ -101,7 +101,7 @@ class ComentariosItems
     /**
      * Get usuarios
      *
-     * @return \AppBundle\Entity\ACL\Usuarios 
+     * @return \AppBundle\Entity\ACL\Usuarios
      */
     public function getUsuarios()
     {
@@ -124,7 +124,7 @@ class ComentariosItems
     /**
      * Get cursos
      *
-     * @return \AppBundle\Entity\Admin\Cursos\Cursos 
+     * @return \AppBundle\Entity\Admin\Cursos\Cursos
      */
     public function getCursos()
     {
@@ -147,7 +147,7 @@ class ComentariosItems
     /**
      * Get modulos
      *
-     * @return \AppBundle\Entity\Admin\Modulos\Modulos 
+     * @return \AppBundle\Entity\Admin\Modulos\Modulos
      */
     public function getModulos()
     {
@@ -170,7 +170,7 @@ class ComentariosItems
     /**
      * Get items
      *
-     * @return \AppBundle\Entity\Admin\Items\Items 
+     * @return \AppBundle\Entity\Admin\Items\Items
      */
     public function getItems()
     {
