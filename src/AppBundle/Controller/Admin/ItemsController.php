@@ -83,7 +83,7 @@ class ItemsController extends Controller
         $entity = new Items();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('ElearnBundle:Secciones:new.html.twig', array(
+        return $this->render('Admin/Items/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));

@@ -9,8 +9,8 @@ use AppBundle\Entity\ACL\Usuarios;
 use AppBundle\Form\ACL\UsuariosType;
 use AppBundle\Form\ACL\UsuariosPerfilType;
 
-use Elearn\ElearnBundle\Form\PerfilUsuarioType;
-use Elearn\ElearnBundle\Form\PasswordUsuarioType;
+use AppBundle\Form\Front\PerfilUsuarioType;
+use AppBundle\Form\Front\PasswordUsuarioType;
 
 /**
  * Usuarios controller.

@@ -1,4 +1,0 @@
-services:
-#    quiz.example:
-#        class: Quiz\QuizBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]

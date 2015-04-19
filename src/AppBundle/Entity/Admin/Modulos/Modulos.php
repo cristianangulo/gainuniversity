@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Modulos
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Elearn\ElearnBundle\Entity\ModulosRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\Modulos\ModulosRepository")
  */
 class Modulos
 {

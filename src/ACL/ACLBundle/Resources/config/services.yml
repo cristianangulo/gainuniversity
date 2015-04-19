@@ -1,5 +1,0 @@
-services:
-    user_provider:
-        class: ACL\ACLBundle\Service\UserProvider
-        calls:
-            - [setContainer, ["@service_container"]]

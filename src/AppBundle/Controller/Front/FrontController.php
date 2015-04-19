@@ -159,21 +159,21 @@ class FrontController extends Controller
 
       $quizUsuario = $this->getQuizUsuario($curso, $modulo, $seccion, $this->getUser());
 
-      if(null == $quizUsuario ){
-      exit();
-      $qUsuario = new QuizUsuario();
+      if(null == $quizUsuario){
+        exit();
+        $qUsuario = new QuizUsuario();
 
-      $quizUsuarioForm = $this->createFormBuilder($qUsuario)
-        ->getForm();
+        $quizUsuarioForm = $this->createFormBuilder($qUsuario)->getForm();
 
-      $quizUsuarioForm->handleRequest($request);
+        $quizUsuarioForm->handleRequest($request);
 
       if($quizUsuarioForm->isValid()){
+
         $qUsuario->setCursos($curso);
         $qUsuario->setModulos($modulo);
         $qUsuario->setItems($seccion);
 
-        $quiz = $em->getRepository("AppBundle:Admin\Quiz")->find($seccion->getQuiz()->getId());
+        $quiz = $em->getRepository("AppBundle:Admin\Quiz\Quiz")->find($seccion->getQuiz()->getId());
 
         $qUsuario->setQuizes($quiz);
 
@@ -297,12 +297,12 @@ class FrontController extends Controller
 
       if($opcionesForm->isValid()){
 
-        $quiz = $em->getRepository("QuizBundle:QuizUsuario")->find($quizUsuario["quizUsuario"]);
+        $quiz = $em->getRepository("AppBundle:Admin\Quiz\QuizUsuario")->find($quizUsuario["quizUsuario"]);
 
         $quizUsuarioDetalle->setQuizes($quiz);
         $formData = $opcionesForm->getData();
 
-        $pregunta = $em->getRepository("QuizBundle:Preguntas")->find($preguntaActual);
+        $pregunta = $em->getRepository("AppBundle:Admin\Quiz\Preguntas")->find($preguntaActual);
 
         $quizUsuarioDetalle->setPreguntas($pregunta);
         $quizUsuarioDetalle->setCalificacion($formData->getOpciones()->getValor());
@@ -318,7 +318,7 @@ class FrontController extends Controller
         )));
       }
 
-      $pregunta = $em->getRepository("QuizBundle:Preguntas")->find($preguntaActual);
+      $pregunta = $em->getRepository("AppBundle:Admin\Quiz\Preguntas")->find($preguntaActual);
 
       return $this->render('Front/quiz-respuestas.html.twig', array(
         "curso" => $curso,
@@ -402,7 +402,6 @@ class FrontController extends Controller
 
   public function getQuizUsuario($curso, $modulo, $item, $usuario)
   {
-
     $em = $this->getDoctrine()->getManager();
 
     $quizUsuario = $em->getRepository("AppBundle:Admin\Quiz\QuizUsuario");
@@ -426,16 +425,4 @@ class FrontController extends Controller
       }
       return $qUsuario;
   }
-
-  // public function tusCursosAction()
-  // {
-  //   $em = $this->getDoctrine()->getManager();
-  //   $usuario = $this->get('security.context')->getToken()->getUser();
-  //
-  //   $usuario = $em->getRepository("ACLBundle:Usuarios")->find($usuario->getId());
-  //
-  //   return $this->render('ElearnBundle:Front:tus-cursos.html.twig', array(
-  //     'usuario' => $usuario
-  //   ));
-  // }
 }

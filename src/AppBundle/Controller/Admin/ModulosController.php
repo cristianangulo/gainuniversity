@@ -84,7 +84,7 @@ class ModulosController extends Controller
         $entity = new Modulos();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('ElearnBundle:Modulos:new.html.twig', array(
+        return $this->render('Admin/Modulos/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));

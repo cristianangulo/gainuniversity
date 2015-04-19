@@ -86,7 +86,7 @@ class CursosController extends Controller
         $entity = new Cursos();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('ElearnBundle:Cursos:new.html.twig', array(
+        return $this->render('Admin/Cursos/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
