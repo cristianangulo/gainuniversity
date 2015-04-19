@@ -14,12 +14,6 @@ elearn_admin_cursos_modulos:
     resource: "@ElearnBundle/Resources/config/routing/cursomodulos.yml"
     prefix:   /admin/cursos/modulos
 
-front_perfil:
-    path:     /perfil/
-    defaults: { _controller: ElearnBundle:Front:perfil }
-
-
-
 elearn_homepage:
     path:     /hello/{name}
     defaults: { _controller: ElearnBundle:Default:index }
