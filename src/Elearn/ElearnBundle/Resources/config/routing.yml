@@ -17,9 +17,3 @@ elearn_admin_cursos_modulos:
 elearn_homepage:
     path:     /hello/{name}
     defaults: { _controller: ElearnBundle:Default:index }
-
-
-
-front_msn:
-    path:     /perfil/msn
-    defaults: { _controller: ElearnBundle:MSN:msn}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form;
+namespace AppBundle\Form\Admin\MSN;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +27,7 @@ class MSNType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elearn\ElearnBundle\Entity\MSN'
+            'data_class' => 'AppBundle\Entity\Admin\MSN'
         ));
     }
 

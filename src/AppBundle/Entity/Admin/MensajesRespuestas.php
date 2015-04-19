@@ -22,14 +22,14 @@ class MensajesRespuestas
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="mensajes")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\MSN", inversedBy="mensajes")
      * @ORM\JoinColumn(name="mensaje_id", referencedColumnName="id")
      */
 
     private $mensajes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MSN", inversedBy="mensajesRespuestas")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\MSN", inversedBy="mensajesRespuestas")
      * @ORM\JoinColumn(name="respuesta_id", referencedColumnName="id")
      */
 
@@ -51,7 +51,7 @@ class MensajesRespuestas
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -74,7 +74,7 @@ class MensajesRespuestas
     /**
      * Get creado
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getCreado()
     {
@@ -84,10 +84,10 @@ class MensajesRespuestas
     /**
      * Set mensajes
      *
-     * @param \Elearn\ElearnBundle\Entity\MSN $mensajes
+     * @param \AppBundle\Entity\Admin\MSN $mensajes
      * @return MensajesRespuestas
      */
-    public function setMensajes(\Elearn\ElearnBundle\Entity\MSN $mensajes = null)
+    public function setMensajes(\AppBundle\Entity\Admin\MSN $mensajes = null)
     {
         $this->mensajes = $mensajes;
 
@@ -97,7 +97,7 @@ class MensajesRespuestas
     /**
      * Get mensajes
      *
-     * @return \Elearn\ElearnBundle\Entity\MSN
+     * @return \AppBundle\Entity\Admin\MSN 
      */
     public function getMensajes()
     {
@@ -107,10 +107,10 @@ class MensajesRespuestas
     /**
      * Set respuestas
      *
-     * @param \Elearn\ElearnBundle\Entity\MSN $respuestas
+     * @param \AppBundle\Entity\Admin\MSN $respuestas
      * @return MensajesRespuestas
      */
-    public function setRespuestas(\Elearn\ElearnBundle\Entity\MSN $respuestas = null)
+    public function setRespuestas(\AppBundle\Entity\Admin\MSN $respuestas = null)
     {
         $this->respuestas = $respuestas;
 
@@ -120,7 +120,7 @@ class MensajesRespuestas
     /**
      * Get respuestas
      *
-     * @return \Elearn\ElearnBundle\Entity\MSN
+     * @return \AppBundle\Entity\Admin\MSN 
      */
     public function getRespuestas()
     {

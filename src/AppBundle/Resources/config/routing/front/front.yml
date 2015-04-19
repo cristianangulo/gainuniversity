@@ -13,3 +13,7 @@ front_perfil:
 perfil_tus_cursos:
     path:     /perfil/tus-cursos
     defaults: { _controller: AppBundle:Front/CursosUsuario:cursos }
+
+front_msn:
+    path:     /perfil/msn
+    defaults: { _controller: AppBundle:Admin/MSN:msn}

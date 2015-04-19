@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Admin\MSN;
-use AppBundle\Form\Admin\MSNType;
+use AppBundle\Form\Admin\MSN\MSNType;
 
-use Elearn\ElearnBundle\Entity\MensajesRespuestas;
+use AppBundle\Entity\Admin\MensajesRespuestas;
 
 /**
  * MSN controller.
@@ -41,15 +41,16 @@ class MSNController extends Controller
 
     $usuario = $this->getUser()->getId();
 
-    $mensajesUsuario = $em->getRepository('ElearnBundle:MensajesRespuestas')->MensajesUsuario($usuario);
-    $msnNoContestados = $em->getRepository('ElearnBundle:MSN')->MSNNoContestadosUsuario($usuario);
+    $mensajesUsuario = $em->getRepository('AppBundle:Admin\MensajesRespuestas')->MensajesUsuario($usuario);
+
+    $msnNoContestados = $em->getRepository('AppBundle:Admin\MSN')->MSNNoContestadosUsuario($usuario);
 
     $msnForm = $this->createForm(new MSNType(), $msn);
 
     $msnForm->handleRequest($request);
 
     if($msnForm->isValid()){
-      $usuario = $em->getRepository('ACLBundle:Usuarios')->find($usuario);
+      $usuario = $em->getRepository('AppBundle:ACL\Usuarios')->find($usuario);
       $msn->setUsuarios($usuario);
       $em->persist($msn);
       $em->flush();

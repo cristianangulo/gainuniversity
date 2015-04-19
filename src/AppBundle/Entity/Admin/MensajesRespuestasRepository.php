@@ -30,7 +30,7 @@ class MensajesRespuestasRepository extends EntityRepository
   {
     $query = $this->getEntityManager()
       ->createQuery(
-        'SELECT m FROM ElearnBundle:MensajesRespuestas m
+        'SELECT m FROM AppBundle:Admin\MensajesRespuestas m
         JOIN m.mensajes r
         WHERE r.usuarios = :usuario'
       )

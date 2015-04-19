@@ -24,7 +24,7 @@ class MSNRepository extends EntityRepository
   {
     return $this->getEntityManager()
       ->createQuery(
-        'SELECT m FROM AppBundle:Admin/MSN m where m.estado = 0 AND m.usuarios = :usuario'
+        'SELECT m FROM AppBundle:Admin\MSN m where m.estado = 0 AND m.usuarios = :usuario'
       )
       ->setParameter('usuario', $id)
       ->getResult();
