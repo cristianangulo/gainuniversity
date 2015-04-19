@@ -30,7 +30,7 @@ class CursosController extends Controller
 
         $entities = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->findAll();
 
-        return $this->render('ElearnBundle:Cursos:index.html.twig', array(
+        return $this->render('Admin/Cursos/index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -169,7 +169,7 @@ class CursosController extends Controller
       }
 
 
-        return $this->render('ElearnBundle:Cursos:edit.html.twig', array(
+        return $this->render('Admin/Cursos/edit.html.twig', array(
             'entity'      => $curso,
             'form'   => $form->createView(),
             'delete_form' => $deleteForm->createView(),

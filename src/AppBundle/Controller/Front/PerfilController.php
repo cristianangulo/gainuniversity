@@ -48,7 +48,7 @@ class PerfilController extends Controller
       return $this->redirect($this->generateUrl('front_perfil'));
     }
 
-    return $this->render('ElearnBundle:Front:perfil.html.twig', array(
+    return $this->render('Front/perfil.html.twig', array(
       'formPerfil' => $formPerfil->createView(),
       'formPassword' => $formPassword->createView(),
       'usuario' => $usuario

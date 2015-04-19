@@ -31,15 +31,15 @@
 
 
       {% if seccion.tipo.tipoSeccion == 'PDF' %}
-        {% include 'ElearnBundle:Front:secciones/pdf.html.twig' %}
+        {% include 'Front/secciones/pdf.html.twig' %}
       {% endif %}
 
       {% if (seccion.tipo.tipoSeccion == 'Audio') or (seccion.tipo.tipoSeccion == 'Video') %}
-        {% include 'ElearnBundle:Front:secciones/audio-video.html.twig' %}
+        {% include 'Front/secciones/audio-video.html.twig' %}
       {% endif %}
 
       {% if seccion.tipo.tipoSeccion == 'Foro' %}
-        {% include 'ElearnBundle:Front:secciones/foro.html.twig' %}
+        {% include 'Front/secciones/foro.html.twig' %}
       {% endif %}
 
     </div>

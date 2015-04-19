@@ -147,7 +147,7 @@ class FrontController extends Controller
     }
 
     if($seccion->getTipo()->getId()==6){
-      return $this->render('ElearnBundle:Front:audio-descarga.html.twig', array(
+      return $this->render('Front/audio-descarga.html.twig', array(
         "curso" => $curso,
         "modulo" => $modulo,
         "seccion" => $seccion,
@@ -187,7 +187,7 @@ class FrontController extends Controller
         return $this->redirect($this->generateUrl('front_modulo', array('curso' => $curso->getId(), 'modulo' => $modulo->getId(), 'seccion' => $seccion->getId())));
       }
 
-        return $this->render('ElearnBundle:Front:quiz.html.twig', array(
+        return $this->render('Front/quiz.html.twig', array(
           "curso" => $curso,
           "modulo" => $modulo,
           "seccion" => $seccion,
@@ -211,7 +211,7 @@ class FrontController extends Controller
       $quiz = $quizUsuario["quizItem"];
 
       if(count($preguntas) === count($preguntasResueltas)){
-        return $this->render('ElearnBundle:Front:respuestas.html.twig', array(
+        return $this->render('Front/respuestas.html.twig', array(
           "curso" => $curso,
           "modulo" => $modulo,
           "seccion" => $seccion,
@@ -320,7 +320,7 @@ class FrontController extends Controller
 
       $pregunta = $em->getRepository("QuizBundle:Preguntas")->find($preguntaActual);
 
-      return $this->render('ElearnBundle:Front:quiz-respuestas.html.twig', array(
+      return $this->render('Front/quiz-respuestas.html.twig', array(
         "curso" => $curso,
         "modulo" => $modulo,
         "seccion" => $seccion,
@@ -375,47 +375,13 @@ class FrontController extends Controller
     return $this->redirect($this->generateUrl('front_modulo', array('curso' => $curso->getId(), 'modulo' => $modulo->getId(), 'seccion' => $seccion->getId())));
   }
 
-    return $this->render('ElearnBundle:Front:modulo.html.twig', array(
+    return $this->render('Front/modulo.html.twig', array(
       "curso" => $curso,
       "modulo" => $modulo,
       "seccion" => $seccion,
       "seccion_id" => $seccion->getId(),
       "comentarioForm" => $comentarioForm->createView(),
       "comentarios" => $comentarios,
-    ));
-  }
-
-  public function perfilAction(Request $request)
-  {
-    $em = $this->getDoctrine()->getManager();
-    $usuario = $this->get('security.context')->getToken()->getUser();
-
-    $usuario = $em->getRepository("ACLBundle:Usuarios")->find($usuario->getId());
-
-    $formPerfil = $this->createForm(new PerfilUsuarioType(), $usuario);
-    $formPassword = $this->createForm(new PasswordUsuarioType(), $usuario);
-
-    $formPerfil->handleRequest($request);
-    $formPassword->handleRequest($request);
-
-    if($formPerfil->isValid()){
-      $em->flush();
-      return $this->redirect($this->generateUrl('front_perfil'));
-    }
-
-    if($formPassword->isValid()){
-      $factory = $this->get('security.encoder_factory');
-      $encoder = $factory->getEncoder($usuario);
-      $formData = $formPassword->getData();
-      $usuario->setPassword($encoder->encodePassword($formData->getPassword(), $usuario->getSalt()));
-      $em->flush();
-      return $this->redirect($this->generateUrl('front_perfil'));
-    }
-
-    return $this->render('ElearnBundle:Front:perfil.html.twig', array(
-      'formPerfil' => $formPerfil->createView(),
-      'formPassword' => $formPassword->createView(),
-      'usuario' => $usuario
     ));
   }
 

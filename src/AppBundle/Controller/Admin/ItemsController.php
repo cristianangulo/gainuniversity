@@ -26,7 +26,7 @@ class ItemsController extends Controller
 
         $entities = $em->getRepository('AppBundle:Admin\Items\Items')->findAll();
 
-        return $this->render('ElearnBundle:Secciones:index.html.twig', array(
+        return $this->render('Admin/Items/index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -129,7 +129,7 @@ class ItemsController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ElearnBundle:Secciones:edit.html.twig', array(
+        return $this->render('Admin/Items/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

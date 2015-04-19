@@ -28,7 +28,7 @@ class ModulosController extends Controller
 
         $entities = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->findAll();
 
-        return $this->render('ElearnBundle:Modulos:index.html.twig', array(
+        return $this->render('Admin/Modulos/index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -168,7 +168,7 @@ class ModulosController extends Controller
           return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $id)));
         }
 
-        return $this->render('ElearnBundle:Modulos:edit.html.twig', array(
+        return $this->render('Admin/Modulos/edit.html.twig', array(
             'entity'      => $modulo,
             'form'   => $form->createView(),
             'delete_form' => $deleteForm->createView(),

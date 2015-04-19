@@ -18,8 +18,8 @@ class CursosUsuarioController extends Controller
     $usuario = $this->get('security.context')->getToken()->getUser();
 
     $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->find($usuario->getId());
-    
-    return $this->render('ElearnBundle:Front:tus-cursos.html.twig', array(
+
+    return $this->render('Front/tus-cursos.html.twig', array(
       'usuario' => $usuario
     ));
   }

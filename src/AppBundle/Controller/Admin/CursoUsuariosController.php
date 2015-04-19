@@ -45,7 +45,7 @@ class CursoUsuariosController extends Controller
             return $this->redirect($this->generateUrl('admin_cursos_usuarios', array('curso' => $curso->getId())));
         }
 
-        return $this->render('ElearnBundle:CursoUsuarios:index.html.twig', array(
+        return $this->render('Admin/CursoUsuarios/index.html.twig', array(
             'entities' => $entities,
             'entity' => $entity,
             'form'   => $form->createView(),
