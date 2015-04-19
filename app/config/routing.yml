@@ -2,14 +2,14 @@ app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
 
-quiz:
-    resource: "@QuizBundle/Resources/config/routing.yml"
-    prefix:   /
-
-elearn:
-    resource: "@ElearnBundle/Resources/config/routing.yml"
-    prefix:   /
-
-acl:
-    resource: "@ACLBundle/Resources/config/routing.yml"
-    prefix:   /
+# quiz:
+#     resource: "@QuizBundle/Resources/config/routing.yml"
+#     prefix:   /
+#
+# elearn:
+#     resource: "@ElearnBundle/Resources/config/routing.yml"
+#     prefix:   /
+#
+# acl:
+#     resource: "@ACLBundle/Resources/config/routing.yml"
+#     prefix:   /

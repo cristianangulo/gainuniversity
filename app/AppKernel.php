@@ -22,9 +22,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Elearn\ElearnBundle\ElearnBundle(),
-            new ACL\ACLBundle\ACLBundle(),
-            new Quiz\QuizBundle\QuizBundle(),
+            //new Elearn\ElearnBundle\ElearnBundle(),
+            //new ACL\ACLBundle\ACLBundle(),
+            //new Quiz\QuizBundle\QuizBundle(),
             new AppBundle\AppBundle(),
         );
 
