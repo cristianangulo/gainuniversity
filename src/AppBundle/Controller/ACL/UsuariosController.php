@@ -186,7 +186,7 @@ class UsuariosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ACLBundle:Usuarios')->find($id);
+        $entity = $em->getRepository('AppBundle:ACL\Usuarios')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuarios entity.');

@@ -14,7 +14,7 @@ class UserProvider extends Controller implements UserProviderInterface
   public function loadUserByUsername($username)
   {
 
-    $repositorio = $this->getDoctrine()->getRepository("ACLBundle:Usuarios");
+    $repositorio = $this->getDoctrine()->getRepository("AppBundle:ACL\Usuarios");
 
     $query = $repositorio
     ->createQueryBuilder('u')

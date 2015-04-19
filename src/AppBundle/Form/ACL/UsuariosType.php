@@ -32,7 +32,7 @@ class UsuariosType extends AbstractType
               'label' => 'Usuario activo'
             ))
             ->add('roles', 'entity', array(
-              'class' => 'ACLBundle:Roles',
+              'class' => 'AppBundle:ACL\Roles',
               'property' => 'role',
               'expanded' => true,
             ))

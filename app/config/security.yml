@@ -66,7 +66,7 @@ security:
             iterations: 1
             encode_as_base64: false
 
-        ACL\ACLBundle\Entity\Usuarios:
+        AppBundle\Entity\ACL\Usuarios:
             algorithm:        sha512
             encode_as_base64: false
             iterations:       3
