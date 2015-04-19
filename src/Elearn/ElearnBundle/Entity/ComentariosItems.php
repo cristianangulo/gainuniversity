@@ -22,25 +22,25 @@ class ComentariosItems
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ACL\ACLBundle\Entity\Usuarios", inversedBy="usuariocomentarios")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Usuarios", inversedBy="usuariocomentarios")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      **/
     private $usuarios;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cursos", inversedBy="cursocomentarios")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Cursos\Cursos", inversedBy="cursocomentarios")
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      **/
     private $cursos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Modulos", inversedBy="modulocomentarios")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="modulocomentarios")
      * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
      **/
     private $modulos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Secciones", inversedBy="itemscomentarios")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Items\Items", inversedBy="itemscomentarios")
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      **/
     private $items;
@@ -52,107 +52,14 @@ class ComentariosItems
      */
     private $comentario;
 
-
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set usuarioId
-     *
-     * @param integer $usuarioId
-     * @return ComentariosItems
-     */
-    public function setUsuarioId($usuarioId)
-    {
-        $this->usuarioId = $usuarioId;
-
-        return $this;
-    }
-
-    /**
-     * Get usuarioId
-     *
-     * @return integer
-     */
-    public function getUsuarioId()
-    {
-        return $this->usuarioId;
-    }
-
-    /**
-     * Set cursoId
-     *
-     * @param integer $cursoId
-     * @return ComentariosItems
-     */
-    public function setCursoId($cursoId)
-    {
-        $this->cursoId = $cursoId;
-
-        return $this;
-    }
-
-    /**
-     * Get cursoId
-     *
-     * @return integer
-     */
-    public function getCursoId()
-    {
-        return $this->cursoId;
-    }
-
-    /**
-     * Set moduloId
-     *
-     * @param integer $moduloId
-     * @return ComentariosItems
-     */
-    public function setModuloId($moduloId)
-    {
-        $this->moduloId = $moduloId;
-
-        return $this;
-    }
-
-    /**
-     * Get moduloId
-     *
-     * @return integer
-     */
-    public function getModuloId()
-    {
-        return $this->moduloId;
-    }
-
-    /**
-     * Set itemId
-     *
-     * @param integer $itemId
-     * @return ComentariosItems
-     */
-    public function setItemId($itemId)
-    {
-        $this->itemId = $itemId;
-
-        return $this;
-    }
-
-    /**
-     * Get itemId
-     *
-     * @return integer
-     */
-    public function getItemId()
-    {
-        return $this->itemId;
     }
 
     /**
@@ -171,7 +78,7 @@ class ComentariosItems
     /**
      * Get comentario
      *
-     * @return string
+     * @return string 
      */
     public function getComentario()
     {
@@ -181,10 +88,10 @@ class ComentariosItems
     /**
      * Set usuarios
      *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
      * @return ComentariosItems
      */
-    public function setUsuarios(\ACL\ACLBundle\Entity\Usuarios $usuarios = null)
+    public function setUsuarios(\AppBundle\Entity\ACL\Usuarios $usuarios = null)
     {
         $this->usuarios = $usuarios;
 
@@ -194,7 +101,7 @@ class ComentariosItems
     /**
      * Get usuarios
      *
-     * @return \Elearn\ElearnBundle\Entity\Usuarios
+     * @return \AppBundle\Entity\ACL\Usuarios 
      */
     public function getUsuarios()
     {
@@ -204,10 +111,10 @@ class ComentariosItems
     /**
      * Set cursos
      *
-     * @param \Elearn\ElearnBundle\Entity\Cursos $cursos
+     * @param \AppBundle\Entity\Admin\Cursos\Cursos $cursos
      * @return ComentariosItems
      */
-    public function setCursos(\Elearn\ElearnBundle\Entity\Cursos $cursos = null)
+    public function setCursos(\AppBundle\Entity\Admin\Cursos\Cursos $cursos = null)
     {
         $this->cursos = $cursos;
 
@@ -217,7 +124,7 @@ class ComentariosItems
     /**
      * Get cursos
      *
-     * @return \Elearn\ElearnBundle\Entity\Cursos
+     * @return \AppBundle\Entity\Admin\Cursos\Cursos 
      */
     public function getCursos()
     {
@@ -227,10 +134,10 @@ class ComentariosItems
     /**
      * Set modulos
      *
-     * @param \Elearn\ElearnBundle\Entity\Modulos $modulos
+     * @param \AppBundle\Entity\Admin\Modulos\Modulos $modulos
      * @return ComentariosItems
      */
-    public function setModulos(\Elearn\ElearnBundle\Entity\Modulos $modulos = null)
+    public function setModulos(\AppBundle\Entity\Admin\Modulos\Modulos $modulos = null)
     {
         $this->modulos = $modulos;
 
@@ -240,7 +147,7 @@ class ComentariosItems
     /**
      * Get modulos
      *
-     * @return \Elearn\ElearnBundle\Entity\Modulos
+     * @return \AppBundle\Entity\Admin\Modulos\Modulos 
      */
     public function getModulos()
     {
@@ -250,10 +157,10 @@ class ComentariosItems
     /**
      * Set items
      *
-     * @param \Elearn\ElearnBundle\Entity\Secciones $items
+     * @param \AppBundle\Entity\Admin\Items\Items $items
      * @return ComentariosItems
      */
-    public function setItems(\Elearn\ElearnBundle\Entity\Secciones $items = null)
+    public function setItems(\AppBundle\Entity\Admin\Items\Items $items = null)
     {
         $this->items = $items;
 
@@ -263,7 +170,7 @@ class ComentariosItems
     /**
      * Get items
      *
-     * @return \Elearn\ElearnBundle\Entity\Items
+     * @return \AppBundle\Entity\Admin\Items\Items 
      */
     public function getItems()
     {

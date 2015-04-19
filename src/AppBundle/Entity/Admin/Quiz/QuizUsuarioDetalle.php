@@ -1,6 +1,6 @@
 <?php
 
-namespace Quiz\QuizBundle\Entity;
+namespace AppBundle\Entity\Admin\Quiz;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UsuarioQuizOpciones
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\QuizUsuarioDetalleRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\Quiz\QuizUsuarioDetalleRepository")
  */
 class QuizUsuarioDetalle
 {
@@ -22,21 +22,21 @@ class QuizUsuarioDetalle
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="QuizUsuario", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Quiz\QuizUsuario", inversedBy="calificacion")
      * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
      */
 
     private $quizes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Preguntas", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Quiz\Preguntas", inversedBy="calificacion")
      * @ORM\JoinColumn(name="pregunta_id", referencedColumnName="id")
      */
 
     private $preguntas;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Opciones", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Quiz\Opciones", inversedBy="calificacion")
      * @ORM\JoinColumn(name="opcion_id", referencedColumnName="id")
      */
 
@@ -85,10 +85,10 @@ class QuizUsuarioDetalle
     /**
      * Set quizes
      *
-     * @param \Quiz\QuizBundle\Entity\QuizUsuario $quizes
+     * @param \AppBundle\Entity\Admin\Quiz\QuizUsuario $quizes
      * @return QuizUsuarioDetalle
      */
-    public function setQuizes(\Quiz\QuizBundle\Entity\QuizUsuario $quizes = null)
+    public function setQuizes(\AppBundle\Entity\Admin\Quiz\QuizUsuario $quizes = null)
     {
         $this->quizes = $quizes;
 
@@ -98,7 +98,7 @@ class QuizUsuarioDetalle
     /**
      * Get quizes
      *
-     * @return \Quiz\QuizBundle\Entity\QuizUsuario 
+     * @return \AppBundle\Entity\Admin\Quiz\QuizUsuario 
      */
     public function getQuizes()
     {
@@ -108,10 +108,10 @@ class QuizUsuarioDetalle
     /**
      * Set preguntas
      *
-     * @param \Quiz\QuizBundle\Entity\Preguntas $preguntas
+     * @param \AppBundle\Entity\Admin\Quiz\Preguntas $preguntas
      * @return QuizUsuarioDetalle
      */
-    public function setPreguntas(\Quiz\QuizBundle\Entity\Preguntas $preguntas = null)
+    public function setPreguntas(\AppBundle\Entity\Admin\Quiz\Preguntas $preguntas = null)
     {
         $this->preguntas = $preguntas;
 
@@ -121,7 +121,7 @@ class QuizUsuarioDetalle
     /**
      * Get preguntas
      *
-     * @return \Quiz\QuizBundle\Entity\Preguntas 
+     * @return \AppBundle\Entity\Admin\Quiz\Preguntas 
      */
     public function getPreguntas()
     {
@@ -131,10 +131,10 @@ class QuizUsuarioDetalle
     /**
      * Set opciones
      *
-     * @param \Quiz\QuizBundle\Entity\Opciones $opciones
+     * @param \AppBundle\Entity\Admin\Quiz\Opciones $opciones
      * @return QuizUsuarioDetalle
      */
-    public function setOpciones(\Quiz\QuizBundle\Entity\Opciones $opciones = null)
+    public function setOpciones(\AppBundle\Entity\Admin\Quiz\Opciones $opciones = null)
     {
         $this->opciones = $opciones;
 
@@ -144,7 +144,7 @@ class QuizUsuarioDetalle
     /**
      * Get opciones
      *
-     * @return \Quiz\QuizBundle\Entity\Opciones 
+     * @return \AppBundle\Entity\Admin\Quiz\Opciones 
      */
     public function getOpciones()
     {

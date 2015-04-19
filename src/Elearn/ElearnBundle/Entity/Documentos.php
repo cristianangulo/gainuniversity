@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Entity
  */
-class Documentose
+class Documentos
 {
     /**
      * @ORM\Id

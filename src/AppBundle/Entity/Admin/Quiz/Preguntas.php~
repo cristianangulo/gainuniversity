@@ -43,7 +43,7 @@ class Preguntas
      protected $quiz;
 
      /**
-      * @ORM\OneToMany(targetEntity="Opciones", mappedBy="preguntas")
+      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Quiz\Opciones", mappedBy="preguntas")
       * @ORM\OrderBy({"posicion" = "ASC"})
       */
 
@@ -57,7 +57,7 @@ class Preguntas
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class Preguntas
     /**
      * Get pregunta
      *
-     * @return string 
+     * @return string
      */
     public function getPregunta()
     {
@@ -103,7 +103,7 @@ class Preguntas
     /**
      * Get posicion
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosicion()
     {
@@ -126,7 +126,7 @@ class Preguntas
     /**
      * Get quiz
      *
-     * @return \AppBundle\Entity\Admin\Quiz\Quiz 
+     * @return \AppBundle\Entity\Admin\Quiz\Quiz
      */
     public function getQuiz()
     {
@@ -159,7 +159,7 @@ class Preguntas
     /**
      * Get opciones
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpciones()
     {

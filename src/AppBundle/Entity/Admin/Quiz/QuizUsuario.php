@@ -1,6 +1,6 @@
 <?php
 
-namespace Quiz\QuizBundle\Entity;
+namespace AppBundle\Entity\Admin\Quiz;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * QuizUsuario
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Quiz\QuizBundle\Entity\QuizUsuarioRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Admin\Quiz\QuizUsuarioRepository")
  */
 class QuizUsuario
 {
@@ -22,33 +22,33 @@ class QuizUsuario
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Cursos", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Cursos\Cursos", inversedBy="calificacion")
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      */
 
     private $cursos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Modulos", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="calificacion")
      * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
      */
 
     private $modulos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Elearn\ElearnBundle\Entity\Secciones", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Items\Items", inversedBy="calificacion")
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     private $items;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Quiz", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Quiz\Quiz", inversedBy="calificacion")
      * @ORM\JoinColumn(name="quiz_id", referencedColumnName="id")
      */
     private $quizes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ACL\ACLBundle\Entity\Usuarios", inversedBy="calificacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Usuarios", inversedBy="calificacion")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
     private $usuarios;
@@ -64,7 +64,7 @@ class QuizUsuario
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -87,7 +87,7 @@ class QuizUsuario
     /**
      * Get calificacion
      *
-     * @return string
+     * @return string 
      */
     public function getCalificacion()
     {
@@ -97,10 +97,10 @@ class QuizUsuario
     /**
      * Set cursos
      *
-     * @param \Elearn\ElearnBundle\Entity\Cursos $cursos
+     * @param \AppBundle\Entity\Admin\Cursos\Cursos $cursos
      * @return QuizUsuario
      */
-    public function setCursos(\Elearn\ElearnBundle\Entity\Cursos $cursos = null)
+    public function setCursos(\AppBundle\Entity\Admin\Cursos\Cursos $cursos = null)
     {
         $this->cursos = $cursos;
 
@@ -110,7 +110,7 @@ class QuizUsuario
     /**
      * Get cursos
      *
-     * @return \Elearn\ElearnBundle\Entity\Cursos
+     * @return \AppBundle\Entity\Admin\Cursos\Cursos 
      */
     public function getCursos()
     {
@@ -120,10 +120,10 @@ class QuizUsuario
     /**
      * Set modulos
      *
-     * @param \Elearn\ElearnBundle\Entity\Modulos $modulos
+     * @param \AppBundle\Entity\Admin\Modulos\Modulos $modulos
      * @return QuizUsuario
      */
-    public function setModulos(\Elearn\ElearnBundle\Entity\Modulos $modulos = null)
+    public function setModulos(\AppBundle\Entity\Admin\Modulos\Modulos $modulos = null)
     {
         $this->modulos = $modulos;
 
@@ -133,7 +133,7 @@ class QuizUsuario
     /**
      * Get modulos
      *
-     * @return \Elearn\ElearnBundle\Entity\Modulos
+     * @return \AppBundle\Entity\Admin\Modulos\Modulos 
      */
     public function getModulos()
     {
@@ -143,10 +143,10 @@ class QuizUsuario
     /**
      * Set items
      *
-     * @param \Elearn\ElearnBundle\Entity\Secciones $items
+     * @param \AppBundle\Entity\Admin\Items\Items $items
      * @return QuizUsuario
      */
-    public function setItems(\Elearn\ElearnBundle\Entity\Secciones $items = null)
+    public function setItems(\AppBundle\Entity\Admin\Items\Items $items = null)
     {
         $this->items = $items;
 
@@ -156,7 +156,7 @@ class QuizUsuario
     /**
      * Get items
      *
-     * @return \Elearn\ElearnBundle\Entity\Secciones
+     * @return \AppBundle\Entity\Admin\Items\Items 
      */
     public function getItems()
     {
@@ -166,10 +166,10 @@ class QuizUsuario
     /**
      * Set quizes
      *
-     * @param \Quiz\QuizBundle\Entity\Quiz $quizes
+     * @param \AppBundle\Entity\Admin\Quiz\Quiz $quizes
      * @return QuizUsuario
      */
-    public function setQuizes(\Quiz\QuizBundle\Entity\Quiz $quizes = null)
+    public function setQuizes(\AppBundle\Entity\Admin\Quiz\Quiz $quizes = null)
     {
         $this->quizes = $quizes;
 
@@ -179,7 +179,7 @@ class QuizUsuario
     /**
      * Get quizes
      *
-     * @return \Quiz\QuizBundle\Entity\Quiz
+     * @return \AppBundle\Entity\Admin\Quiz\Quiz 
      */
     public function getQuizes()
     {
@@ -189,10 +189,10 @@ class QuizUsuario
     /**
      * Set usuarios
      *
-     * @param \ACL\ACLBundle\Entity\Usuarios $usuarios
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
      * @return QuizUsuario
      */
-    public function setUsuarios(\ACL\ACLBundle\Entity\Usuarios $usuarios = null)
+    public function setUsuarios(\AppBundle\Entity\ACL\Usuarios $usuarios = null)
     {
         $this->usuarios = $usuarios;
 
@@ -202,7 +202,7 @@ class QuizUsuario
     /**
      * Get usuarios
      *
-     * @return \ACL\ACLBundle\Entity\Usuarios 
+     * @return \AppBundle\Entity\ACL\Usuarios 
      */
     public function getUsuarios()
     {

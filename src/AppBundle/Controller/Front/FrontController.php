@@ -1,24 +1,24 @@
 <?php
 
-namespace Elearn\ElearnBundle\Controller;
+namespace AppBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Elearn\ElearnBundle\Entity\ComentariosItems;
 use Elearn\ElearnBundle\Form\ComentariosItemsType;
 use Symfony\Component\HttpFoundation\Request;
 
-use ACL\ACLBundle\Entity\Usuarios;
-use Elearn\ElearnBundle\Form\PerfilUsuarioType;
+use AppBundle\Entity\ACL\Usuarios;
+use AppBundle\Form\ACL\PerfilUsuarioType;
 use Elearn\ElearnBundle\Form\PasswordUsuarioType;
 
 use ACL\ACLBundle\Entity\CursoUsuarios;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Quiz\QuizBundle\Entity\QuizUsuario;
-use Quiz\QuizBundle\Entity\QuizUsuarioDetalle;
+use AppBundle\Entity\Admin\Quiz\QuizUsuario;
+use AppBundle\Entity\Admin\Quiz\QuizUsuarioDetalle;
 
-use Quiz\QuizBundle\Entity\UsuarioQuizPreguntasOpciones;
-use Quiz\QuizBundle\Form\UsuarioQuizPreguntasOpcionesType;
+use AppBundle\Entity\Admin\Quiz\UsuarioQuizPreguntasOpciones;
+use AppBundle\Form\Admin\Quiz\UsuarioQuizPreguntasOpcionesType;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -32,7 +32,7 @@ class FrontController extends Controller
     $em = $this->getDoctrine()->getManager();
 
     $curso = $em
-    ->getRepository("ElearnBundle:Cursos")
+    ->getRepository("AppBundle:Admin\Cursos\Cursos")
     ->findOneById($id);
 
     if (!$curso) {
@@ -57,7 +57,7 @@ class FrontController extends Controller
         $usuario = $this->getUser()->getId();
       }
 
-      $fru = $em->getRepository('ElearnBundle:CursoUsuarios');
+      $fru = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios');
 
       $fru = $fru->createQueryBuilder('cu')
         ->where('cu.curso = :curso')
@@ -127,18 +127,17 @@ class FrontController extends Controller
 
   public function moduloAction($curso, $modulo, $seccion, Request $request, $pregunta)
   {
-
     $em = $this->getDoctrine()->getManager();
 
     $curso = $this->getDoctrine()
-    ->getRepository("ElearnBundle:Cursos")
+    ->getRepository("AppBundle:Admin\Cursos\Cursos")
     ->find($curso);
     $modulo = $this->getDoctrine()
-    ->getRepository("ElearnBundle:Modulos")
+    ->getRepository("AppBundle:Admin\Modulos\Modulos")
     ->find($modulo);
 
     $seccion = $this->getDoctrine()
-    ->getRepository("ElearnBundle:Secciones")
+    ->getRepository("AppBundle:Admin\Items\Items")
     ->find($seccion);
 
     if(!$seccion){
@@ -161,7 +160,7 @@ class FrontController extends Controller
       $quizUsuario = $this->getQuizUsuario($curso, $modulo, $seccion, $this->getUser());
 
       if(null == $quizUsuario ){
-
+      exit();
       $qUsuario = new QuizUsuario();
 
       $quizUsuarioForm = $this->createFormBuilder($qUsuario)
@@ -174,11 +173,11 @@ class FrontController extends Controller
         $qUsuario->setModulos($modulo);
         $qUsuario->setItems($seccion);
 
-        $quiz = $em->getRepository("QuizBundle:Quiz")->find($seccion->getQuiz()->getId());
+        $quiz = $em->getRepository("AppBundle:Admin\Quiz")->find($seccion->getQuiz()->getId());
 
         $qUsuario->setQuizes($quiz);
 
-        $usuario = $em->getRepository("ACLBundle:Usuarios")->find($this->getUser()->getId());
+        $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->find($this->getUser()->getId());
 
         $qUsuario->setUsuarios($usuario);
         $qUsuario->setCalificacion("");
@@ -210,7 +209,7 @@ class FrontController extends Controller
 
       $preguntasResueltas = $this->getPreguntasResultas($quizUsuario["quizUsuario"]);
       $quiz = $quizUsuario["quizItem"];
-
+      
       if(count($preguntas) === count($preguntasResueltas)){
         return $this->render('ElearnBundle:Front:respuestas.html.twig', array(
           "curso" => $curso,
@@ -279,7 +278,7 @@ class FrontController extends Controller
 
       $opcionesForm = $this->createFormBuilder($quizUsuarioDetalle)
         ->add('opciones', 'entity', array(
-          'class' => 'QuizBundle:Opciones',
+          'class' => 'AppBundle:Admin\Quiz\Opciones',
           'query_builder' => function(EntityRepository $er) use($preguntaActual, $quiz){
               return $er->createQueryBuilder('o')
                 ->innerJoin('o.preguntas','p')
@@ -424,7 +423,7 @@ class FrontController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $preguntasResueltas = $em->getRepository("QuizBundle:QuizUsuarioDetalle");
+    $preguntasResueltas = $em->getRepository("AppBundle:Admin\Quiz\QuizUsuarioDetalle");
 
     $preguntasResueltas = $preguntasResueltas->createQueryBuilder('p')
       ->andWhere('p.quizes  = :quiz')
@@ -440,7 +439,7 @@ class FrontController extends Controller
 
     $em = $this->getDoctrine()->getManager();
 
-    $quizUsuario = $em->getRepository("QuizBundle:QuizUsuario");
+    $quizUsuario = $em->getRepository("AppBundle:Admin\Quiz\QuizUsuario");
 
     $quizUsuario = $quizUsuario->createQueryBuilder('p')
       ->where('p.cursos     = :curso')
