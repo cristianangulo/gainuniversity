@@ -86,7 +86,7 @@ class MSNController extends Controller
 
     if($msnForm->isValid()){
 
-      $usuario = $em->getRepository('ACLBundle:Usuarios')->find($this->getUser()->getId());
+      $usuario = $em->getRepository('AppBundle:ACL\Usuarios')->find($this->getUser()->getId());
       $msn->setUsuarios($usuario);
       $msn->setEstado(1);
       $em->persist($msn);

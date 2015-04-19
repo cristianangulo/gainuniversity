@@ -52,7 +52,7 @@ class AddMultimediaFieldSubscriber implements EventSubscriberInterface
 
           if($data->getTipo()->getId()==5){
             $form->add('quiz', 'entity', array(
-              'class' => 'QuizBundle:Quiz',
+              'class' => 'AppBundle:Admin\Quiz\Quiz',
               'property' => 'quiz',
               'empty_value' => 'Seleccione',
               'label' => 'Multimedia'
