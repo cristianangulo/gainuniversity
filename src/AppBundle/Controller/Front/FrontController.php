@@ -358,11 +358,11 @@ class FrontController extends Controller
 
     $usuario = $this->get('security.context')->getToken()->getUser();
 
-    $usuario = $em->getRepository('ACLBundle:Usuarios')->findOneByUsername($usuario->getUsername());
+    $usuario = $em->getRepository('AppBundle:ACL\Usuarios')->findOneByUsername($usuario->getUsername());
 
-    $curso = $em->getRepository('ElearnBundle:Cursos')->findOneById($curso);
-    $modulo = $em->getRepository('ElearnBundle:Modulos')->findOneById($modulo);
-    $items = $em->getRepository('ElearnBundle:Secciones')->findOneById($seccion);
+    $curso = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->findOneById($curso);
+    $modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->findOneById($modulo);
+    $items = $em->getRepository('AppBundle:Admin\Items\Items')->findOneById($seccion);
 
     $comentario->setUsuarios($usuario);
     $comentario->setCursos($curso);
