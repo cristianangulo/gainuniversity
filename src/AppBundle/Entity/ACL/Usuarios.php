@@ -78,7 +78,7 @@ class Usuarios implements UserInterface
   private $codigo;
 
   /**
-   * @ORM\OneToMany(targetEntity="Elearn\ElearnBundle\Entity\CursoUsuarios", mappedBy="usuario")
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="usuario")
    **/
 
   private $curso;
@@ -267,39 +267,6 @@ class Usuarios implements UserInterface
     }
 
     /**
-     * Add curso
-     *
-     * @param \Elearn\ElearnBundle\Entity\CursoUsuarios $curso
-     * @return Usuarios
-     */
-    public function addCurso(\Elearn\ElearnBundle\Entity\CursoUsuarios $curso)
-    {
-        $this->curso[] = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Remove curso
-     *
-     * @param \Elearn\ElearnBundle\Entity\CursoUsuarios $curso
-     */
-    public function removeCurso(\Elearn\ElearnBundle\Entity\CursoUsuarios $curso)
-    {
-        $this->curso->removeElement($curso);
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCurso()
-    {
-        return $this->curso;
-    }
-
-    /**
      * Set codigo
      *
      * @param string $codigo
@@ -362,5 +329,38 @@ class Usuarios implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    /**
+     * Add curso
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso
+     * @return Usuarios
+     */
+    public function addCurso(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso)
+    {
+        $this->curso[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso
+     */
+    public function removeCurso(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso)
+    {
+        $this->curso->removeElement($curso);
+    }
+
+    /**
+     * Get curso
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCurso()
+    {
+        return $this->curso;
     }
 }

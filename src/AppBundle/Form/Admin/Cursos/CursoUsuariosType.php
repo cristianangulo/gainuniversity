@@ -1,6 +1,6 @@
 <?php
 
-namespace Elearn\ElearnBundle\Form;
+namespace AppBundle\Form\Admin\Cursos;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ class CursoUsuariosType extends AbstractType
             ->add('fechaRegistro','date', array(
             ))
             ->add('usuario', 'entity', array(
-              'class' => 'ACLBundle:Usuarios',
+              'class' => 'AppBundle:ACL\Usuarios',
               'property' => 'nombre',
               'empty_value' => 'Seleccione'
             ))
@@ -31,7 +31,7 @@ class CursoUsuariosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elearn\ElearnBundle\Entity\CursoUsuarios'
+            'data_class' => 'AppBundle\Entity\Admin\Cursos\CursoUsuarios'
         ));
     }
 

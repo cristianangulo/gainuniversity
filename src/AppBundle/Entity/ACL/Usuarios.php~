@@ -78,7 +78,7 @@ class Usuarios implements UserInterface
   private $codigo;
 
   /**
-   * @ORM\OneToMany(targetEntity="Elearn\ElearnBundle\Entity\CursoUsuarios", mappedBy="usuario")
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="usuario")
    **/
 
   private $curso;
@@ -264,39 +264,6 @@ class Usuarios implements UserInterface
     public function getNombre()
     {
         return $this->nombre;
-    }
-
-    /**
-     * Add curso
-     *
-     * @param \Elearn\ElearnBundle\Entity\CursoUsuarios $curso
-     * @return Usuarios
-     */
-    public function addCurso(\Elearn\ElearnBundle\Entity\CursoUsuarios $curso)
-    {
-        $this->curso[] = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Remove curso
-     *
-     * @param \Elearn\ElearnBundle\Entity\CursoUsuarios $curso
-     */
-    public function removeCurso(\Elearn\ElearnBundle\Entity\CursoUsuarios $curso)
-    {
-        $this->curso->removeElement($curso);
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCurso()
-    {
-        return $this->curso;
     }
 
     /**

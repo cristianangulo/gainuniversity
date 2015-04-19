@@ -5,8 +5,8 @@ namespace Elearn\ElearnBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Elearn\ElearnBundle\Entity\CursoUsuarios;
-use Elearn\ElearnBundle\Form\CursoUsuariosType;
+use AppBundle\Entity\Admin\Cursos\CursoUsuarios;
+use AppBundle\Form\Admin\Cursos\CursoUsuariosType;
 
 /**
  * CursoUsuarios controller.
@@ -22,7 +22,7 @@ class CursoUsuariosController extends Controller
     public function indexAction($curso, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('ElearnBundle:CursoUsuarios');
+        $entities = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios');
 
         $entities = $entities->createQueryBuilder('cu')
           ->where('cu.curso = :curso')
@@ -37,7 +37,7 @@ class CursoUsuariosController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $curso = $em->getRepository('ElearnBundle:Cursos')->find($curso);
+            $curso = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->find($curso);
             $entity->setCurso($curso);
             $em->persist($entity);
             $em->flush();
@@ -230,7 +230,7 @@ class CursoUsuariosController extends Controller
     public function deleteUsuarioCursoAction($curso, $usuario)
     {
       $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('ElearnBundle:CursoUsuarios')->find($usuario);
+      $entity = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->find($usuario);
 
       if (!$entity) {
           throw $this->createNotFoundException('Unable to find CursoUsuarios entity.');

@@ -10,7 +10,7 @@ use AppBundle\Form\Admin\Cursos\CursosType;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elearn\ElearnBundle\Entity\CursoModulos;
+use AppBundle\Entity\Admin\Cursos\CursoModulos;
 
 
 /**
@@ -156,7 +156,7 @@ class CursosController extends Controller
             //$modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo);
             $cursoModulos->setPosicion(count($originalModulos) + 1);
             $cursoModulos->setCursos($curso);
-            $modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo->getModulos()->getId());
+            $modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($modulo->getModulos()->getId());
             $cursoModulos->setModulos($modulo);
 
             $em->persist($cursoModulos);
@@ -167,6 +167,7 @@ class CursosController extends Controller
 
         return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $id)));
       }
+
 
         return $this->render('ElearnBundle:Cursos:edit.html.twig', array(
             'entity'      => $curso,
