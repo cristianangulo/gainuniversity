@@ -22,7 +22,7 @@ class CursoUsuarios
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cursos")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Cursos\Cursos")
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      **/
     private $curso;
@@ -43,84 +43,5 @@ class CursoUsuarios
     public function __construct()
     {
         $this->fechaRegistro = new \DateTime();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set fechaRegistro
-     *
-     * @param \DateTime $fechaRegistro
-     * @return CursoUsuarios
-     */
-    public function setFechaRegistro($fechaRegistro)
-    {
-        $this->fechaRegistro = $fechaRegistro;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaRegistro
-     *
-     * @return \DateTime 
-     */
-    public function getFechaRegistro()
-    {
-        return $this->fechaRegistro;
-    }
-
-    /**
-     * Set curso
-     *
-     * @param \AppBundle\Entity\Admin\Cursos\Cursos $curso
-     * @return CursoUsuarios
-     */
-    public function setCurso(\AppBundle\Entity\Admin\Cursos\Cursos $curso = null)
-    {
-        $this->curso = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \AppBundle\Entity\Admin\Cursos\Cursos 
-     */
-    public function getCurso()
-    {
-        return $this->curso;
-    }
-
-    /**
-     * Set usuario
-     *
-     * @param \AppBundle\Entity\ACL\Usuarios $usuario
-     * @return CursoUsuarios
-     */
-    public function setUsuario(\AppBundle\Entity\ACL\Usuarios $usuario = null)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return \AppBundle\Entity\ACL\Usuarios 
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
     }
 }

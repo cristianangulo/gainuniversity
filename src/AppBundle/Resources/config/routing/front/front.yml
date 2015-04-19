@@ -9,3 +9,7 @@ front_modulo:
 front_perfil:
     path:     /perfil/
     defaults: { _controller: AppBundle:Front/Perfil:perfil }
+
+perfil_tus_cursos:
+    path:     /perfil/tus-cursos
+    defaults: { _controller: AppBundle:Front/CursosUsuario:cursos }

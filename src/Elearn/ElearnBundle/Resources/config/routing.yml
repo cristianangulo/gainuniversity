@@ -23,7 +23,3 @@ elearn_homepage:
 front_msn:
     path:     /perfil/msn
     defaults: { _controller: ElearnBundle:MSN:msn}
-
-perfil_tus_cursos:
-    path:     /perfil/tus-cursos
-    defaults: { _controller: ElearnBundle:Front:tusCursos }

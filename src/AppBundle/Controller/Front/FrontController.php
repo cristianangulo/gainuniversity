@@ -209,7 +209,7 @@ class FrontController extends Controller
 
       $preguntasResueltas = $this->getPreguntasResultas($quizUsuario["quizUsuario"]);
       $quiz = $quizUsuario["quizItem"];
-      
+
       if(count($preguntas) === count($preguntasResueltas)){
         return $this->render('ElearnBundle:Front:respuestas.html.twig', array(
           "curso" => $curso,
@@ -461,15 +461,15 @@ class FrontController extends Controller
       return $qUsuario;
   }
 
-  public function tusCursosAction()
-  {
-    $em = $this->getDoctrine()->getManager();
-    $usuario = $this->get('security.context')->getToken()->getUser();
-
-    $usuario = $em->getRepository("ACLBundle:Usuarios")->find($usuario->getId());
-
-    return $this->render('ElearnBundle:Front:tus-cursos.html.twig', array(
-      'usuario' => $usuario
-    ));
-  }
+  // public function tusCursosAction()
+  // {
+  //   $em = $this->getDoctrine()->getManager();
+  //   $usuario = $this->get('security.context')->getToken()->getUser();
+  //
+  //   $usuario = $em->getRepository("ACLBundle:Usuarios")->find($usuario->getId());
+  //
+  //   return $this->render('ElearnBundle:Front:tus-cursos.html.twig', array(
+  //     'usuario' => $usuario
+  //   ));
+  // }
 }

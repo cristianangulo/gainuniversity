@@ -22,7 +22,7 @@ class CursoUsuarios
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cursos")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Cursos\Cursos")
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      **/
     private $curso;
@@ -48,7 +48,7 @@ class CursoUsuarios
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -71,7 +71,7 @@ class CursoUsuarios
     /**
      * Get fechaRegistro
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaRegistro()
     {
@@ -94,7 +94,7 @@ class CursoUsuarios
     /**
      * Get curso
      *
-     * @return \AppBundle\Entity\Admin\Cursos\Cursos 
+     * @return \AppBundle\Entity\Admin\Cursos\Cursos
      */
     public function getCurso()
     {
@@ -117,7 +117,7 @@ class CursoUsuarios
     /**
      * Get usuario
      *
-     * @return \AppBundle\Entity\ACL\Usuarios 
+     * @return \AppBundle\Entity\ACL\Usuarios
      */
     public function getUsuario()
     {

@@ -18,9 +18,9 @@
           {% for cursos in usuario.curso %}
             <tr>
               <th scope="row">1</th>
-              <td>{{ cursos.cursos.curso }}</td>
+              <td>{{ cursos.curso.curso }}</td>
               <td class="text-center">
-                <a href="{{ path('front_curso', {'id' : cursos.cursos.id }) }}" class="btn btn-default">Ver curso</a>
+                <a href="{{ path('front_curso', {'id' : cursos.curso.id }) }}" class="btn btn-default">Ver curso</a>
               </td>
             </tr>
 
