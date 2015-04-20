@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Front\ComentariosItems;
 use AppBundle\Form\Front\ComentariosItemsType;
@@ -26,7 +27,10 @@ use Doctrine\ORM\EntityRepository;
 
 class FrontController extends Controller
 {
-
+  public function homeAction()
+  {
+    return $this->redirect($this->generateUrl('login'));
+  }
   public function indexAction($id)
   {
     $em = $this->getDoctrine()->getManager();

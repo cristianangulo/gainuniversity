@@ -19,6 +19,7 @@ security:
 
         secured_area:
             pattern:    ^/
+            anonymous: ~
             form_login:
               login_path:  login
               csrf_provider: form.csrf_provider
