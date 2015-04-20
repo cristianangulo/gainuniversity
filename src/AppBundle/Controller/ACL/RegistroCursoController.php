@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Elearn\ElearnBundle\Entity\CursoUsuarios;
+use AppBundle\Entity\Admin\Cursos\CursoUsuarios;
 
 class RegistroCursoController extends Controller
 {
@@ -17,7 +17,7 @@ class RegistroCursoController extends Controller
     $em = $this->getDoctrine()->getManager();
 
     //Averiguamos el curso con el Salt enviado desde el correo del cliente
-    $curso = $em->getRepository('ElearnBundle:Cursos')->findOneBySku($sku);
+    $curso = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->findOneBySku($sku);
 
     if (!$curso) {
         throw $this->createNotFoundException('Este curso no existe.');
@@ -42,7 +42,7 @@ class RegistroCursoController extends Controller
       $user = $this->getUser();
 
       // Se genera una consulta preguntando si la relación que se pretente hacer ya existe
-      $cursoUsuario = $em->getRepository('ElearnBundle:CursoUsuarios');
+      $cursoUsuario = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios');
 
       $consulta = $cursoUsuario->createQueryBuilder('c')
         ->where('c.curso = :curso')
@@ -58,7 +58,7 @@ class RegistroCursoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         //$curso = $em->getRepository('ElearnBundle:Cursos')->find(2);
-        $usuario = $em->getRepository('ACLBundle:Usuarios')->find($user->getId());
+        $usuario = $em->getRepository('AppBundle:ACL\Usuarios')->find($user->getId());
 
         $cursoUsuario->setCurso($curso);
         $cursoUsuario->setUsuario($usuario);

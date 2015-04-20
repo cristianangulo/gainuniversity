@@ -31,5 +31,5 @@ admin_cursos_usuarios_delete:
 
 admin_curso_usuario_delete:
     path:     /{curso}/{usuario}/delete
-    defaults: { _controller: "ElearnBundle:CursoUsuarios:deleteUsuarioCurso" }
+    defaults: { _controller: "AppBundle:Admin\CursoUsuarios:deleteUsuarioCurso" }
     methods:  [GET]
