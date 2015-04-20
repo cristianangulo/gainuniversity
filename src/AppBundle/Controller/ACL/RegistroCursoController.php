@@ -41,19 +41,15 @@ class RegistroCursoController extends Controller
     if($conexion["status"] == 0){
       $user = $this->getUser();
 
-      // Se genera una consulta preguntando si la relación que se pretente hacer ya existe
-      $cursoUsuario = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios');
+      /**
+       * Se consulta si el usuario tiene relación con el curso
+       */
 
-      $consulta = $cursoUsuario->createQueryBuilder('c')
-        ->where('c.curso = :curso')
-        ->andWhere('c.usuario = :usuario')
-        ->setParameter('curso', $curso->getId())
-        ->setParameter('usuario', $user->getId())
-        ->getQuery()
-        ->getResult();
+      $cursosUsuarios = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->findCursosUsuarios($curso->getId(), $user->getId());
 
       // Si la consulta no existe se genera el registro
-      if(!$consulta){
+      if(!$cursosUsuarios){
+        exit();
         $cursoUsuario = new CursoUsuarios();
 
         $em = $this->getDoctrine()->getManager();
@@ -66,14 +62,14 @@ class RegistroCursoController extends Controller
         $em->persist($cursoUsuario);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('front_perfil'));
+        return $this->redirect($this->generateUrl('perfil_tus_cursos'));
       }
 
-      return $this->redirect($this->generateUrl('front_perfil'));
+      return $this->redirect($this->generateUrl('perfil_tus_cursos'));
 
     }
 
-    return $this->redirect($this->generateUrl('front_perfil'));
+    return $this->redirect($this->generateUrl('perfil_tus_cursos'));
 
   }
 }
