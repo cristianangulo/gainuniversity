@@ -27,10 +27,10 @@ use Doctrine\ORM\EntityRepository;
 
 class FrontController extends Controller
 {
-  // public function homeAction()
-  // {
-  //   return $this->redirect($this->generateUrl('login'));
-  // }
+  public function homeAction()
+  {
+    return $this->redirect($this->generateUrl('login'));
+  }
 
   // public function indexAction($id)
   // {

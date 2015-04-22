@@ -76,6 +76,10 @@ body{
 				border-radius: 40%;
 			}
 
+.column-unlock{
+	background: #eee;
+	color: #aaa;
+}
 
 .titulo-seccion{
 	width: 400px;
