@@ -3,51 +3,106 @@
 {% block body %}
 
 <ul class="timeline-scrubber inner-element">
-  {% for modulos in curso.modulos|slice(0,modulosPublicar) %}
+  {% for modulos in curso.modulos %}
   <li class="selected">
     <a href="#m{{ modulos.modulos.id }}" data-separator="#m{{ modulos.modulos.id }}">
-      {{ modulos.modulos.modulo }}</a>
+      {% if modulos.modulos.id in modulos_con_acceso|keys %}
+        <i class="fa fa-unlock-alt"></i> M - {{ loop.index}}  {# modulos.modulos.modulo #}
+      {% else %}
+        <i class="fa fa-lock"></i> M - {{ loop.index}}  {# modulos.modulos.modulo #}
+      {% endif %}
+
+    </a>
   </li>
   {% endfor %}
 </ul>
 <div id="timeline" class="demo1">
   <div class="timeline">
     <div class="spine"></div>
-    {% for modulos in curso.modulos|slice(0,modulosPublicar) %}
-    <div class="date_separator" id="m{{ modulos.modulos.id }}" data-appear-top-offset="-400">
-      <span>{{ modulos.modulos.modulo }}</span>
-    </div>
-    <ul class="columns">
-      {% for items in modulos.modulos.secciones %}
-      <li>
-        <div class="timeline_element partition-white">
-          <div class="timeline_date">
-            <div>
-              <!--<div class="inline-block">
-                <span class="day text-bold">02</span>
-              </div>-->
-              <div class="inline-block">
+    {% for modulos in curso.modulos %}
 
-                <!--<span class="block month text-large text-light">november 2014</span>-->
+    {% if modulos.modulos.id in modulos_con_acceso|keys %}
+      <div class="date_separator" id="m{{ modulos.modulos.id }}" data-appear-top-offset="-400">
+        <span>
+          {% if modulos.modulos.id in modulos_con_acceso|keys %}
+            <i class="fa fa-unlock-alt"></i>
+          {% endif %}
+          {{ modulos.modulos.modulo }}
+      </span>
+      </div>
+      <ul class="columns">
+
+
+        {% for items in modulos.modulos.secciones %}
+
+        <li>
+        <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulos.modulos.id, 'seccion': items.secciones.id}) }}" >
+          <div class="timeline_element partition-white">
+            <div class="timeline_date">
+              <div>
+                <!--<div class="inline-block">
+                  <span class="day text-bold">02</span>
+                </div>-->
+                <div class="inline-block">
+
+                  <!--<span class="block month text-large text-light">november 2014</span>-->
+                </div>
               </div>
             </div>
+            <div class="timeline_title">
+              <i class="fa fa-{{ items.secciones.tipo.svgSeccion }} fa-2x pull-left fa-border"></i>
+              <h4 class="light-text no-margin padding-5">{{ items.secciones.seccion }}</h4>
+            </div>
+            <div class="timeline_content">
+              {{ items.secciones.descripcion }}
+            </div>
           </div>
-          <div class="timeline_title">
-            <i class="fa fa-{{ items.secciones.tipo.svgSeccion }} fa-2x pull-left fa-border"></i>
-            <h4 class="light-text no-margin padding-5">{{ items.secciones.seccion }}</h4>
+          </a>
+        </li>
+
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="date_separator" id="m{{ modulos.modulos.id }}" data-appear-top-offset="-400">
+        <span>
+          {% if modulos.modulos.id in modulos_con_acceso|keys %}
+
+          {% else %}
+            <i class="fa fa-lock"></i>
+          {% endif %}
+
+          {{ modulos.modulos.modulo }}
+        </span>
+      </div>
+      <ul class="columns">
+        {% for items in modulos.modulos.secciones %}
+        <li>
+          <div class="timeline_element partition-white">
+            <div class="timeline_date">
+              <div>
+                <!--<div class="inline-block">
+                  <span class="day text-bold">02</span>
+                </div>-->
+                <div class="inline-block">
+
+                  <!--<span class="block month text-large text-light">november 2014</span>-->
+                </div>
+              </div>
+            </div>
+            <div class="timeline_title">
+              <i class="fa fa-{{ items.secciones.tipo.svgSeccion }} fa-2x pull-left fa-border"></i>
+              <h4 class="light-text no-margin padding-5">{{ items.secciones.seccion }}</h4>
+            </div>
+            <div class="timeline_content">
+              {{ items.secciones.descripcion }}
+            </div>
           </div>
-          <div class="timeline_content">
-            {{ items.secciones.descripcion }}
-          </div>
-          <div class="readmore">
-            <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulos.modulos.id, 'seccion': items.secciones.id}) }}" class="btn btn-default" class="btn btn-green">
-              Ver más <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    {% endif%}
+
+
   {% endfor %}
     <!--
     <div class="date_separator" id="october" data-appear-top-offset="-400">

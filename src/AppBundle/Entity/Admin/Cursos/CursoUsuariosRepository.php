@@ -22,4 +22,15 @@ class CursoUsuariosRepository extends EntityRepository
       ->setParameter('usuario', $usuario)
       ->getResult();
   }
+
+  public function registroCursoUsuario($curso, $usuario)
+  {
+    return $this->getEntityManager()
+      ->createQuery(
+        'SELECT c FROM AppBundle:Admin\Cursos\CursoUsuarios c where c.curso = :curso AND c.usuario = :usuario'
+      )
+      ->setParameter('curso', $curso)
+      ->setParameter('usuario', $usuario)
+      ->getSingleResult();
+  }
 }

@@ -3,3 +3,7 @@ services:
         class: AppBundle\Utils\UserProvider
         calls:
             - [setContainer, ["@service_container"]]
+
+    temporalidad:
+      class:      AppBundle\Utils\Temporalidad
+      arguments:  ["@security.context", @doctrine.orm.entity_manager]

@@ -27,107 +27,106 @@ use Doctrine\ORM\EntityRepository;
 
 class FrontController extends Controller
 {
-  public function homeAction()
-  {
-    return $this->redirect($this->generateUrl('login'));
-  }
-  public function indexAction($id)
-  {
-    $em = $this->getDoctrine()->getManager();
+  // public function homeAction()
+  // {
+  //   return $this->redirect($this->generateUrl('login'));
+  // }
 
-    $curso = $em
-    ->getRepository("AppBundle:Admin\Cursos\Cursos")
-    ->findOneById($id);
-
-    if (!$curso) {
-        throw $this->createNotFoundException(
-        'Este curso no existe '.$id
-      );
-    }
-
-
-
-
-    if ($this->get('security.context')->isGranted('ROLE_USER')) {
-      // @fecha publicación curso
-      $fpc = $curso->getFechaPublicacion();
-
-      // @Usuario
-
-
-      if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')){
-        $usuario = 2;
-      }else{
-        $usuario = $this->getUser()->getId();
-      }
-
-      $fru = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios');
-
-      $fru = $fru->createQueryBuilder('cu')
-        ->where('cu.curso = :curso')
-        ->andWhere('cu.usuario = :usuario')
-        ->setParameter('curso', $id)
-        ->setParameter('usuario', $this->getUser()->getId())
-        ->getQuery()
-      ;
-
-      $fru = $fru->getSingleResult();
-
-      /*
-       * Se la fecha mayor se usa para iniciar la publicación de los módulos
-       */
-
-      $dePublicacion = ($fpc < $fru->getFechaRegistro()) ? $fru->getFechaRegistro() : $fpc;
-
-      /*
-       * Se averigua por la fecha actual
-       */
-      //$hoy = date_format(new \DateTime('now'), 'Y-m-d');
-
-      $hoy = new \DateTime('now');
-      $intervalo = $dePublicacion->diff($hoy)->format('%a');
-
-      $temporalidadCurso = $curso->getTemporalidad();
-
-      $formaPublicacion = 0;
-
-      switch($temporalidadCurso){
-        case 1:
-          $formaPublicacion = 1;
-          break;
-        case 2:
-          $formaPublicacion = 7;
-          break;
-        case 3:
-          $formaPublicacion = 14;
-      };
-
-      // echo "Días de intérvalo: ".$intervalo."<br />";
-      // echo "Forma de publicacion: ".$formaPublicacion."<br />";
-      // echo "Módulos a publicar: ".($intervalo / $formaPublicacion + 1) ."<br />";
-      // exit();
-
-      $modulosCurso = count($curso->getModulos());
-
-      $modulosPublicar = ($intervalo / $formaPublicacion + 1);
-      $modulosPublicar = ($modulosPublicar < $modulosCurso) ? $modulosPublicar: $modulosCurso;
-
-
-      return $this->render('elearn/curso.html.twig', array(
-        "curso" => $curso,
-        "modulosPublicar" => $modulosPublicar
-      ));
-
-    }else{
-
-      return $this->render('elearn/curso.html.twig', array(
-        "curso" => $curso,
-        "modulosPublicar" => null
-      ));
-    }
-
-
-  }
+  // public function indexAction($id)
+  // {
+  //   $em = $this->getDoctrine()->getManager();
+  //
+  //   $curso = $em
+  //   ->getRepository("AppBundle:Admin\Cursos\Cursos")
+  //   ->findOneById($id);
+  //
+  //   if (!$curso) {
+  //       throw $this->createNotFoundException(
+  //       'Este curso no existe '.$id
+  //     );
+  //   }
+  //
+  //
+  //   if ($this->get('security.context')->isGranted('ROLE_USER')) {
+  //     // @fecha publicación curso
+  //     $fpc = $curso->getFechaPublicacion();
+  //
+  //     // @Usuario
+  //
+  //
+  //     if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')){
+  //       $usuario = 2;
+  //     }else{
+  //       $usuario = $this->getUser()->getId();
+  //     }
+  //
+  //     $fru = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios');
+  //
+  //     $fru = $fru->createQueryBuilder('cu')
+  //       ->where('cu.curso = :curso')
+  //       ->andWhere('cu.usuario = :usuario')
+  //       ->setParameter('curso', $id)
+  //       ->setParameter('usuario', $this->getUser()->getId())
+  //       ->getQuery()
+  //     ;
+  //
+  //     $fru = $fru->getSingleResult();
+  //
+  //     /*
+  //      * Se la fecha mayor se usa para iniciar la publicación de los módulos
+  //      */
+  //
+  //     $dePublicacion = ($fpc < $fru->getFechaRegistro()) ? $fru->getFechaRegistro() : $fpc;
+  //
+  //     /*
+  //      * Se averigua por la fecha actual
+  //      */
+  //     //$hoy = date_format(new \DateTime('now'), 'Y-m-d');
+  //
+  //     $hoy = new \DateTime('now');
+  //     $intervalo = $dePublicacion->diff($hoy)->format('%a');
+  //
+  //     $temporalidadCurso = $curso->getTemporalidad();
+  //
+  //     $formaPublicacion = 0;
+  //
+  //     switch($temporalidadCurso){
+  //       case 1:
+  //         $formaPublicacion = 1;
+  //         break;
+  //       case 2:
+  //         $formaPublicacion = 7;
+  //         break;
+  //       case 3:
+  //         $formaPublicacion = 14;
+  //     };
+  //
+  //     // echo "Días de intérvalo: ".$intervalo."<br />";
+  //     // echo "Forma de publicacion: ".$formaPublicacion."<br />";
+  //     // echo "Módulos a publicar: ".($intervalo / $formaPublicacion + 1) ."<br />";
+  //     // exit();
+  //
+  //     $modulosCurso = count($curso->getModulos());
+  //
+  //     $modulosPublicar = ($intervalo / $formaPublicacion + 1);
+  //     $modulosPublicar = ($modulosPublicar < $modulosCurso) ? $modulosPublicar: $modulosCurso;
+  //
+  //
+  //     return $this->render('elearn/curso.html.twig', array(
+  //       "curso" => $curso,
+  //       "modulosPublicar" => $modulosPublicar
+  //     ));
+  //
+  //   }else{
+  //
+  //     return $this->render('elearn/curso.html.twig', array(
+  //       "curso" => $curso,
+  //       "modulosPublicar" => null
+  //     ));
+  //   }
+  //
+  //
+  // }
 
   public function moduloAction($curso, $modulo, $seccion, Request $request, $pregunta)
   {

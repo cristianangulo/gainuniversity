@@ -1,10 +1,10 @@
-front_curso:
+front_home:
     path:     /
     defaults: { _controller: AppBundle:Front/Front:home }
 
 front_curso:
     path:     /curso/{id}
-    defaults: { _controller: AppBundle:Front/Front:index }
+    defaults: { _controller: AppBundle:Front/Curso:curso }
 
 front_modulo:
     path:     /curso/{curso}/{modulo}/{seccion}/{pregunta}
