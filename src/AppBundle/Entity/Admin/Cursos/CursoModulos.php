@@ -34,16 +34,16 @@ class CursoModulos
     private $modulos;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="posicion", type="string", length=255)
+     * @ORM\Column(name="posicion", type="integer")
      */
     private $posicion;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -53,7 +53,7 @@ class CursoModulos
     /**
      * Set posicion
      *
-     * @param string $posicion
+     * @param integer $posicion
      * @return CursoModulos
      */
     public function setPosicion($posicion)
@@ -66,7 +66,7 @@ class CursoModulos
     /**
      * Get posicion
      *
-     * @return string 
+     * @return integer
      */
     public function getPosicion()
     {
@@ -89,7 +89,7 @@ class CursoModulos
     /**
      * Get cursos
      *
-     * @return \AppBundle\Entity\Admin\Cursos\Cursos 
+     * @return \AppBundle\Entity\Admin\Cursos\Cursos
      */
     public function getCursos()
     {
@@ -112,7 +112,7 @@ class CursoModulos
     /**
      * Get modulos
      *
-     * @return \AppBundle\Entity\Admin\Modulos\Modulos 
+     * @return \AppBundle\Entity\Admin\Modulos\Modulos
      */
     public function getModulos()
     {

@@ -89,6 +89,23 @@ body{
 	margin-top: -30px;
 }
 
+.timeline_element:after{
+	padding: 7px;
+}
+.date_separator{
+	width: 100%;
+	float: left;
+	position: relative;
+	padding: 100px;
+}
+
+.modulo-descripcion{
+	width: 100%;
+	float: left;
+	position: relative;
+	margin-top: 30px;
+	text-align: left;
+}
 
 @media only screen and (max-width: 1100px) {
 	#main-panel{

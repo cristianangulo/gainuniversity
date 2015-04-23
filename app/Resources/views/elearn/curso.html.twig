@@ -28,7 +28,11 @@
             <i class="fa fa-unlock-alt"></i>
           {% endif %}
           {{ modulos.modulos.modulo }}
+
       </span>
+      <ul class="list-group modulo-descripcion">
+        <li class="list-group-item">{{ modulos.modulos.descripcion }}</li>
+      </ul>
       </div>
       <ul class="columns">
 
@@ -36,6 +40,7 @@
         {% for items in modulos.modulos.secciones %}
 
         <li>
+
         <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulos.modulos.id, 'seccion': items.secciones.id}) }}" >
           <div class="timeline_element partition-white">
             <div class="timeline_date">
@@ -73,6 +78,9 @@
 
           {{ modulos.modulos.modulo }}
         </span>
+        <ul class="list-group modulo-descripcion">
+          <li class="list-group-item">{{ modulos.modulos.descripcion }}</li>
+        </ul>
       </div>
       <ul class="columns">
         {% for items in modulos.modulos.secciones %}
