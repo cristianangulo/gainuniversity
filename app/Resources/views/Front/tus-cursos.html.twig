@@ -2,6 +2,12 @@
 
 
 {% block contenido %}
+
+{% if mensaje is defined %}
+<div class="alert alert-block alert-warning">
+  {{ mensaje }}
+</div>
+{% endif %}
 <div class="col-md-12">
   <div class="panel panel-default">
     <div class="panel-heading"><h1>Tus cursos</h1></div>

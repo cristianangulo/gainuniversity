@@ -16,7 +16,7 @@
       {% if modulo %}
       <ul class="list-group nav-modulo">
         {% for item in modulo.secciones %}
-          <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulo.id, 'seccion': item.secciones.id}) }}" class="list-group-item {% if item.secciones.id == seccion_id %}active{% endif %}">{{ item.secciones.seccion }}</a>
+          <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulo.id, 'seccion': item.secciones.id}) }}" class="list-group-item {% if item.secciones.id == seccion_id %}active{% endif %}"><i class="fa fa-{{ item.secciones.tipo.svgSeccion }}"></i>   {{ item.secciones.seccion }}</a>
         {% endfor %}
       </ul>
       {% endif %}

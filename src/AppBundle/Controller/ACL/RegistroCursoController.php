@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use AppBundle\Entity\Admin\Cursos\CursoUsuarios;
 
@@ -20,7 +21,8 @@ class RegistroCursoController extends Controller
     $curso = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->findOneBySku($sku);
 
     if (!$curso) {
-        throw $this->createNotFoundException('Este curso no existe.');
+        //throw $this->createNotFoundException('Este curso no existe.');
+        throw new NotFoundHttpException('Este curso no existe');
     }
 
     // Conexión con el Servicio
@@ -38,6 +40,11 @@ class RegistroCursoController extends Controller
 
     //$conexion["status"] = 0;
 
+    if ($conexion["status"] == 1) {
+        //throw $this->createNotFoundException('Este curso no existe.');
+        throw new NotFoundHttpException('El registro ya fue hecho');
+    }
+
     if($conexion["status"] == 0){
       $user = $this->getUser();
 
@@ -49,11 +56,11 @@ class RegistroCursoController extends Controller
 
       // Si la consulta no existe se genera el registro
       if(!$cursosUsuarios){
-        exit();
+
         $cursoUsuario = new CursoUsuarios();
 
         $em = $this->getDoctrine()->getManager();
-        //$curso = $em->getRepository('ElearnBundle:Cursos')->find(2);
+
         $usuario = $em->getRepository('AppBundle:ACL\Usuarios')->find($user->getId());
 
         $cursoUsuario->setCurso($curso);
@@ -62,7 +69,12 @@ class RegistroCursoController extends Controller
         $em->persist($cursoUsuario);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('perfil_tus_cursos'));
+        $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->find($this->getUser()->getId());
+
+        return $this->render('Front/tus-cursos.html.twig', array(
+          'usuario' => $usuario,
+          'mensaje' => 'El registro al curso se ha hecho.'
+        ));
       }
 
       return $this->redirect($this->generateUrl('perfil_tus_cursos'));
