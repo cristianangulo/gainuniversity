@@ -26,7 +26,7 @@ class RecuperarCuentaController extends Controller
 
       $email = $recuperarForm->get('email')->getData();
 
-      $usuario = $em->getRepository("ACLBundle:Usuarios")->findOneByEmail($email);
+      $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->findOneByEmail($email);
 
       if(!$usuario){
         return new Response("Este email no existe");
@@ -40,7 +40,7 @@ class RecuperarCuentaController extends Controller
         ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))     // we configure the sender
         ->setTo($usuario->getEmail())     // we configure the recipient
         ->setBody($this->renderView(
-          "ACLBundle:ACL:mail.html.twig",
+          "ACL/mail.html.twig",
             array(
               'nombre' => $usuario->getNombre(),
               'codigo' => $random

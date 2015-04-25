@@ -27,7 +27,7 @@ class RegistroCuentaController extends Controller
 
       $em = $this->getDoctrine()->getManager();
 
-      $role = $em->getRepository("ACLBundle:Roles")->find(2);
+      $role = $em->getRepository("AppBundle:ACL\Roles")->find(2);
 
       $factory = $this->get('security.encoder_factory');
       $encoder = $factory->getEncoder($entity);
@@ -47,17 +47,17 @@ class RegistroCuentaController extends Controller
         ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
         ->setTo($entity->getEmail())
         ->setBody($this->renderView(
-          "ACLBundle:ACL:mail-registro.html.twig", array(
+          "ACL/mail-registro.html.twig", array(
             'entity' => $entity
           ))
         );
 
       $this->get('mailer')->send($message);
 
-      return $this->render('ACLBundle:ACL:mensaje-registro.html.twig');
+      return $this->render('ACL/mensaje-registro.html.twig');
     }
 
-    return $this->render('ACLBundle:ACL:registro.html.twig', array(
+    return $this->render('ACL/registro.html.twig', array(
       'registro_form' => $registroForm->createView()
     ));
   }
@@ -66,7 +66,7 @@ class RegistroCuentaController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('ACLBundle:Usuarios')->findOneBySalt($salt);
+    $entity = $em->getRepository('AppBundle:ACL\Usuarios')->findOneBySalt($salt);
 
     if (!$entity) {
         throw $this->createNotFoundException('Unable to find Usuarios entity.');
