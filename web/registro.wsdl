@@ -17,7 +17,7 @@
     </types>
 
     <message name="registroSoapRequest">
-        <part name="name" type="xsd:string" />
+        <part name="datos" type="xsd:string" />
     </message>
 
     <message name="registroSoapResponse">

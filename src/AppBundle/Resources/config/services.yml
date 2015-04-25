@@ -8,5 +8,13 @@ services:
       class:      AppBundle\Utils\Temporalidad
       arguments:  ["@security.context", @doctrine.orm.entity_manager]
 
+    encoder:
+      class: AppBundle\Utils\Encoder
+      arguments: ['@security.encoder_factory']
+
     registro_soap:
         class: AppBundle\Utils\RegistroSoap
+        arguments:  [@doctrine.orm.entity_manager, @encoder, "@mailer", @twig]
+
+    hello:
+        class: AppBundle\Utils\Hello
