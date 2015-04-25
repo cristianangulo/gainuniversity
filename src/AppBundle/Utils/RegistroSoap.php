@@ -73,12 +73,13 @@ class RegistroSoap
 
         $message = \Swift_Message::newInstance()
           ->setContentType("text/html")
-          ->setSubject('Activar su cuenta')
+          ->setSubject('Registro plataforma')
           ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
           ->setTo('cristianangulonova@hotmail.com')
           ->setBody($this->twig->render(
             "ACL/registroPlataformaSoap.html.twig", array(
-              'usuario' => $usuario
+              'usuario' => $usuario,
+              'password'=> $rand,
             )));
 
         //echo $message;
@@ -102,15 +103,14 @@ class RegistroSoap
 
           $message = \Swift_Message::newInstance()
             ->setContentType("text/html")
-            ->setSubject('Activar su cuenta')
+            ->setSubject('Registro curso: '.$curso->getCurso())
             ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
             ->setTo('cristianangulonova@hotmail.com')
             ->setBody($this->twig->render(
               "ACL/registroCursoSoap.html.twig", array(
-                'usuario' => $usuario
+                'usuario' => $usuario,
+                'curso' => $curso->getCurso()
               )));
-
-          //echo $message;
 
           $this->mailer->send($message);
         }
