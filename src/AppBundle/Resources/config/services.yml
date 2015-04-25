@@ -14,7 +14,7 @@ services:
 
     registro_soap:
         class: AppBundle\Utils\RegistroSoap
-        arguments:  [@doctrine.orm.entity_manager, @encoder, "@mailer", @twig]
+        arguments:  [@doctrine.orm.entity_manager, @encoder, @mailer, @twig]
 
     hello:
         class: AppBundle\Utils\Hello

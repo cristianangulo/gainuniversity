@@ -3,6 +3,7 @@
 namespace AppBundle\Utils;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\ACL\Usuarios;
+use AppBundle\Entity\Admin\Cursos\CursoUsuarios;
 use AppBundle\Utils\Encoder;
 
 class RegistroSoap
@@ -37,7 +38,11 @@ class RegistroSoap
       $passWS    = $datos[1];
       $nombre    = $datos[2];
       $mail      = $datos[3];
-      $sku       = $datos[4];
+      $sku       = null;
+
+      if(isset($datos[4])){
+        $sku = $datos[4];
+      }
 
       if($this->userWS != $userWS || $this->passWS != $passWS){
         return null;
@@ -65,28 +70,56 @@ class RegistroSoap
         $usuario->setPassword($password);
 
         $this->em->flush();
+
+        $message = \Swift_Message::newInstance()
+          ->setContentType("text/html")
+          ->setSubject('Activar su cuenta')
+          ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
+          ->setTo('cristianangulonova@hotmail.com')
+          ->setBody($this->twig->render(
+            "ACL/registroPlataformaSoap.html.twig", array(
+              'usuario' => $usuario
+            )));
+
+        //echo $message;
+
+        $this->mailer->send($message);
       }
 
-      // $message = \Swift_Message::newInstance()
-      //   ->setContentType("text/html")
-      //   ->setSubject('Registro a curso')
-      //   ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
-      //   //->setTo($entity->getEmail())
-      //   ->setTo('cristianangulonova@hotmail.com')
-      //   ->setBody($this->twig->render(
-      //     "Front/soapRegistro.html.twig", array(
-      //       'usuario' => $usuario
-      //     ))
-      //   );
+      if($sku){
 
-      $message = \Swift_Message::newInstance()
-                                ->setTo('cristianangulonova@hotmail.com')
-                                ->setSubject('Hello Service')
-                                ->setBody($usuario->getNombre() . ' says hi!');
+        $curso = $this->em->getRepository("AppBundle:Admin\Cursos\Cursos")->findOneBySku($sku);
 
-      $this->mailer->send($message);
+        $usuarioCurso = $this->em->getRepository("AppBundle:Admin\Cursos\CursoUsuarios")->findOneByUsuario($usuario->getId());
 
-      return $usuario->getId();
+        if(!$usuarioCurso){
+          $registro = new CursoUsuarios();
+          $registro->setCurso($curso);
+          $registro->setUsuario($usuario);
+
+          $this->em->persist($registro);
+          $this->em->flush();
+
+          $message = \Swift_Message::newInstance()
+            ->setContentType("text/html")
+            ->setSubject('Activar su cuenta')
+            ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
+            ->setTo('cristianangulonova@hotmail.com')
+            ->setBody($this->twig->render(
+              "ACL/registroCursoSoap.html.twig", array(
+                'usuario' => $usuario
+              )));
+
+          //echo $message;
+
+          $this->mailer->send($message);
+        }
+
+      }
+
+
+
+      return true;
 
     }
 }
