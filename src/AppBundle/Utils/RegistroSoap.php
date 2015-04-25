@@ -2,14 +2,14 @@
 
 namespace AppBundle\Utils;
 
-class Hello
+class RegistroSoap
 {
 
     public function __construct()
     {
     }
 
-    public function hello($name)
+    public function registroSoap($name)
     {
         return 'Hello, '.$name;
     }

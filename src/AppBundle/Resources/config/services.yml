@@ -8,5 +8,5 @@ services:
       class:      AppBundle\Utils\Temporalidad
       arguments:  ["@security.context", @doctrine.orm.entity_manager]
 
-    hello:
-        class: AppBundle\Utils\Hello
+    registro_soap:
+        class: AppBundle\Utils\RegistroSoap

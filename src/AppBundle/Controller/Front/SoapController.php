@@ -13,8 +13,8 @@ class SoapController extends Controller
 {
   public function soapAction()
   {
-        $server = new \SoapServer('http://elearn.loc/registroSoap.wsdl');
-        $server->setObject($this->get('hello'));
+        $server = new \SoapServer('http://elearn.loc/registro.wsdl');
+        $server->setObject($this->get('registro_soap'));
 
         $response = new Response();
         $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
@@ -78,7 +78,7 @@ class SoapController extends Controller
     //   'vatNumber' => '47458714'
     // ));
 
-    $result = $cliente->hello('Cristian');
+    $result = $cliente->registroSoap('Cristian');
 
     echo "<pre>";print_r($result);
     exit();
