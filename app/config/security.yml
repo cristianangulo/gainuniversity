@@ -32,6 +32,8 @@ security:
         - { path: ^/curso, roles: ROLE_USER}
         - { path: ^/perfil, roles: ROLE_USER}
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/soap, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/soap/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 
         # Descomenta la siguiente línea para proteger también

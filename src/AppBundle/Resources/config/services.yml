@@ -7,3 +7,6 @@ services:
     temporalidad:
       class:      AppBundle\Utils\Temporalidad
       arguments:  ["@security.context", @doctrine.orm.entity_manager]
+
+    hello:
+        class: AppBundle\Utils\Hello

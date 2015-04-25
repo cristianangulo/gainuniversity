@@ -21,3 +21,12 @@ perfil_tus_cursos:
 front_msn:
     path:     /perfil/msn
     defaults: { _controller: AppBundle:Admin/MSN:msn}
+
+front_soap:
+    path:     /soap
+    defaults: { _controller: AppBundle:Front/Soap:soap }
+
+front_registro:
+    path:     /soap/registro
+    defaults: { _controller: AppBundle:Front/Soap:soapRegistro }
+    requirements: { _method: post|get }
