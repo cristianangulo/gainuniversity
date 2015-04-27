@@ -25,45 +25,64 @@ class Temporalidad
 
         if(!$this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_SUPER_ADMIN')){
 
-          $registroUsuario = $this->em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->registroCursoUsuario($curso->getId(), $user->getId());
+          $intervalo = $this->intervalo($curso, $user);
 
-          $fechaDePublicacion = ($curso->getFechaPublicacion() < $registroUsuario->getFechaRegistro()) ? $registroUsuario->getFechaRegistro() : $curso->getFechaPublicacion();
+          $cantidadModulos = $this->cantidadModulos($intervalo, $curso);
 
-          $intervalo = $fechaDePublicacion->diff(new \DateTime('now'))->format('%a');
-
-          $temporalidadCurso = $curso->getTemporalidad();
-
-          $formaPublicacion = 0;
-
-          switch($temporalidadCurso){
-            case 1:
-              $formaPublicacion = 1;
-              break;
-            case 2:
-              $formaPublicacion = 7;
-              break;
-            case 3:
-              $formaPublicacion = 14;
-          };
-
-          $cantidadModulos = ($intervalo / $formaPublicacion + 1);
-
-          $cantidadModulos = ($cantidadModulos > count($curso->getModulos() )) ? count($curso->getModulos()) : $cantidadModulos;
-
-          $modulos = [];
-          foreach($curso->getModulos() as $modulo => $key){
-            $modulos[$modulo] = $key->getModulos()->getId();
-          }
-
-          $modulosConAcceso = [];
-
-          for($i = 0; $i < $cantidadModulos; $i++){
-            $modulosConAcceso[$modulos[$i]] = $modulos[$i];
-          }
-
-          return $modulosConAcceso;
+          return $this->modulosConAcceso($curso, $cantidadModulos);
         }
 
-        return count($curso->getModulos());
+        return $this->modulosConAcceso($curso, count($curso->getModulos()));
+    }
+
+    public function intervalo($curso, $user)
+    {
+      $registroUsuario = $this->em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->registroCursoUsuario($curso->getId(), $user->getId());
+
+      $fechaDePublicacion = ($curso->getFechaPublicacion() < $registroUsuario->getFechaRegistro()) ? $registroUsuario->getFechaRegistro() : $curso->getFechaPublicacion();
+
+      $intervalo = $fechaDePublicacion->diff(new \DateTime('now'))->format('%a');
+
+      return $intervalo;
+    }
+
+    public function cantidadModulos($intervalo, $curso)
+    {
+      $temporalidadCurso = $curso->getTemporalidad();
+
+      $formaPublicacion = 0;
+
+      switch($temporalidadCurso){
+        case 1:
+          $formaPublicacion = 1;
+          break;
+        case 2:
+          $formaPublicacion = 7;
+          break;
+        case 3:
+          $formaPublicacion = 14;
+      };
+
+      $cantidadModulos = ($intervalo / $formaPublicacion + 1);
+
+      $cantidadModulos = ($cantidadModulos > count($curso->getModulos() )) ? count($curso->getModulos()) : floor($cantidadModulos);
+
+      return $cantidadModulos;
+    }
+
+    public function modulosConAcceso($curso, $cantidadModulos)
+    {
+      $modulos = [];
+      foreach($curso->getModulos() as $modulo => $key){
+        $modulos[$modulo] = $key->getModulos()->getId();
+      }
+
+      $modulosConAcceso = [];
+
+      for($i = 0; $i < $cantidadModulos; $i++){
+        $modulosConAcceso[$modulos[$i]] = $modulos[$i];
+      }
+
+      return $modulosConAcceso;
     }
 }

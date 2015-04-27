@@ -46,8 +46,8 @@ class SoapController extends Controller
     $string = "gain,".$pass.",SoyDonCristian,cristianangulonova@hotmail.com,EABR-K14";
     $result = $cliente->registroSoap($string);
     var_dump($result);
-    // $crearUsuario = $this->get('registro_soap');
-    // echo $crearUsuario->registroSoap($string);
+    $crearUsuario = $this->get('registro_soap');
+    echo $crearUsuario->registroSoap($string);
 
     exit();
   }
