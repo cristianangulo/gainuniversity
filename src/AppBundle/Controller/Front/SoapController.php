@@ -37,10 +37,10 @@ class SoapController extends Controller
 
     $context = stream_context_create($opts);
     $cliente = new \SoapClient('http://elearn.loc/soap?wsdl',
-                             array('stream_context' => $context,
-                                   'cache_wsdl' => WSDL_CACHE_NONE,
-                                   "trace" => 1, "exception" => 0
-                                   ));
+      array('stream_context' => $context,
+         'cache_wsdl' => WSDL_CACHE_NONE,
+         "trace" => 1, "exception" => 0
+      ));
 
     $pass = "5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg==";
     $string = "gain,".$pass.",SoyDonCristian,cristianangulonova@hotmail.com,EABR-K14";
