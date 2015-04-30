@@ -20,7 +20,7 @@ acl_recuperar_cuenta:
 
 ### Registro cuenta
 
-acl_registro:
+acl_registro_cuenta:
     path:     /registro
     defaults: { _controller: AppBundle:ACL/RegistroCuenta:registro }
 

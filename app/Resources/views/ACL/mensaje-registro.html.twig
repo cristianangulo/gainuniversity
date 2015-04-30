@@ -2,7 +2,8 @@
 
 {% block body %}
   <p class="lead">
-    Hemos enviado un correo para activar su cuenta.
+    {{ usuario }}, hemos enviado un correo electrónico a: <br>
+    <span class="badge">{{ email }}</span> con la información necesaria para activar su cuenta.
   </p>
   <p>
     <a type="button" class="btn btn-link">Registro</a> |
