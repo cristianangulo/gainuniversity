@@ -24,9 +24,9 @@ front_msn:
 
 front_soap:
     path:     /soap
-    defaults: { _controller: AppBundle:Front/Soap:soap }
+    defaults: { _controller: AppBundle:Front/SoapServer:soapServer }
 
 front_registro:
     path:     /soap/registro
-    defaults: { _controller: AppBundle:Front/Soap:soapRegistro }
+    defaults: { _controller: AppBundle:Front/SoapCliente:soapCliente }
     requirements: { _method: post|get }

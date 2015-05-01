@@ -6,7 +6,7 @@ use AppBundle\Entity\ACL\Usuarios;
 use AppBundle\Entity\Admin\Cursos\CursoUsuarios;
 use AppBundle\Utils\Encoder;
 
-class RegistroSoap
+class APIElearnSoap
 {
     private $passWS;
     private $userWS;
@@ -23,6 +23,16 @@ class RegistroSoap
         $this->mailer = $mailer;
         $this->twig = $twig;
 
+    }
+
+    public function registroUsuario($userWS, $passWS, $nombre, $email)
+    {
+      return $userWS." - ".$passWS." - ".$nombre." - ".$email;
+    }
+
+    public function registroUsuarioCurso($usuario, $sku)
+    {
+      return "Registro".$usuario." - ".$sku;
     }
 
     public function registroSoap($name)
