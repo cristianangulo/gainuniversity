@@ -64,29 +64,38 @@ class RegistroSoap
         $usuario->setActivado(1);
         $usuario->setRoles($role);
 
-        $this->em->persist($usuario);
+        //$this->em->persist($usuario);
 
         $password = $this->encoder->setUserPassword($usuario, $rand);
         $usuario->setPassword($password);
 
-        $this->em->flush();
+        //$this->em->flush();
+
+        // $message = \Swift_Message::newInstance()
+        //   ->setContentType("text/html")
+        //   ->setSubject('Registro plataforma')
+        //   ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
+        //   ->setTo($usuario->getEmail())
+        //   ->setBody($this->twig->render(
+        //     "ACL/registroPlataformaSoap.html.twig", array(
+        //       'usuario' => $usuario,
+        //       'password'=> $rand,
+        //     )));
+        //
+        // //echo $message;
+        //
+        // $this->mailer->send($message);
 
         $message = \Swift_Message::newInstance()
-          ->setContentType("text/html")
-          ->setSubject('Registro plataforma')
-          ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
-          ->setTo('cristianangulonova@hotmail.com')
-          ->setBody($this->twig->render(
-            "ACL/registroPlataformaSoap.html.twig", array(
-              'usuario' => $usuario,
-              'password'=> $rand,
-            )));
-
-        //echo $message;
+                                ->setTo('cristianangulonova@gmail.com')
+                                ->setSubject('Hello Service')
+                                ->setBody(' says hi!');
 
         $this->mailer->send($message);
-      }
 
+        return "Mandar mensaje";
+      }
+      return "Sí";
       if($sku){
 
         $curso = $this->em->getRepository("AppBundle:Admin\Cursos\Cursos")->findOneBySku($sku);
