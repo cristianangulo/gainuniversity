@@ -78,7 +78,7 @@ class RecuperarCuentaController extends Controller
     $recuperarForm->handleRequest($request);
 
     $em = $this->getDoctrine()->getManager();
-    $usuario = $em->getRepository("ACLBundle:Usuarios")->findOneByCodigo($codigo);
+    $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->findOneByCodigo($codigo);
 
     if(!$usuario){
       return $this->redirect($this->generateUrl('login'));

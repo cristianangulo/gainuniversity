@@ -13,7 +13,7 @@ class SoapController extends Controller
 {
   public function soapAction()
   {
-        $server = new \SoapServer('http://elearn.loc/registro.wsdl');
+        $server = new \SoapServer('http://elearn.loc/APIregistro.wsdl');
         $server->setObject($this->get('registro_soap'));
 
         $response = new Response();
