@@ -1,0 +1,10 @@
+{% extends '::accesos.html.twig'%}
+
+{% block body %}
+
+<div class="alert alert-success" role="alert">
+  <strong>Muy bien!</strong> Su cuenta ya está activada.
+</div>
+<a href="{{ path('login')}}" type="button" class="btn btn-primary btn-lg btn-block">Login</a>
+
+{% endblock %}

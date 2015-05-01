@@ -79,6 +79,7 @@ class RegistroCuentaController extends Controller
       $entity->setIsActive(1);
       $entity->setActivado(1);
       $em->flush();
+      return $this->render('ACL/cuenta-activada.html.twig');
     }
 
     return $this->redirect($this->generateUrl('login'));

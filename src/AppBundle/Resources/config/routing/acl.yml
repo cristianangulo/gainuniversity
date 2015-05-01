@@ -38,3 +38,8 @@ acl_no_activo:
 acl_registro_curso:
     path:     /perfil/registro-curso/{id}/{sku}
     defaults: { _controller: AppBundle:ACL/RegistroCurso:registroCurso }
+
+
+acl_cuenta_activada:
+    path:     /registro/cuenta-activada
+    defaults: { _controller: AppBundle:ACL/RegistroCuenta:cuentaActivada }
