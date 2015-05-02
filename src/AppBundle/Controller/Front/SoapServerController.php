@@ -11,19 +11,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SoapServerController extends Controller
 {
-  public function soapServerAction()
+  public function soapServerAction(Request $request)
   {
-        $server = new \SoapServer('http://elearn.loc/APISoapElearn.wsdl');
-        $server->setObject($this->get('api.elearn.soap'));
+    $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
 
-        $response = new Response();
-        $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
+    $server = new \SoapServer($baseurl.'/API.wsdl');
+    $server->setObject($this->get('api.elearn.soap'));
 
-        ob_start();
-        $server->handle();
-        $response->setContent(ob_get_clean());
+    $response = new Response();
+    $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
 
-        return $response;
+    ob_start();
+    $server->handle();
+    $response->setContent(ob_get_clean());
 
+    return $response;
   }
 }

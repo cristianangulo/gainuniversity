@@ -13,7 +13,7 @@ services:
       arguments: ['@security.encoder_factory']
 
     api.elearn.soap:
-        class: AppBundle\Utils\APIElearnSoap
+        class: AppBundle\Utils\APISoap
         arguments:  [@doctrine.orm.entity_manager, @encoder, @mailer, @twig]
 
     hello:

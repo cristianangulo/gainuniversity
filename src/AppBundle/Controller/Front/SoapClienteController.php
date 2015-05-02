@@ -11,44 +11,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SoapClienteController extends Controller
 {
-  public function soapClienteAction()
+  public function soapClienteAction(Request $request)
   {
-    $opts = array(
-        'http'=>array(
-            'user_agent' => 'PHPSoapClient'
-            )
-        );
+    $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
 
-    $context = stream_context_create($opts);
-    $cliente = new \SoapClient('http://elearn.loc/soap?wsdl',
-      array('stream_context' => $context,
-         'cache_wsdl' => WSDL_CACHE_NONE,
-         "trace" => 1, "exception" => 0
-      ));
+    $cliente = new \SoapClient($baseurl.'/soap?wsdl');
 
-
-    // $string = "gain,".$pass.",SoyDonCristian,cristianangulonova@hotmail.com,EABR-K14";
-    // $result = $cliente->registroSoap($string);
     $userWS = "gain";
     $passWS = "5FZ2Z8QIkA7UTZ4BYkoC==";
-    $nombre = "Cristian Angulo";
-    $email = "cristian@gmail.com";
-    $sku  = "SKU";
+    $nombre = "@SoyDonCristian";
+    $email = "cristianangulonova@hotmail.com";
+    $sku  = "EABR-K14";
 
-    $usuario = $cliente->registroUsuario($userWS, $passWS, $nombre, $email);
+    //$usuario = $cliente->registroUsuario($userWS, $passWS, $nombre, $email);
 
-    $registroCurso = $cliente->registroUsuarioCurso($usuario,$sku);
+    $api = $this->get('api.elearn.soap');
 
-    echo "<pre>";print_r($usuario);
-    echo "<pre>";print_r($registroCurso);
-    exit();
-    var_dump($registro);
+    $usuario = $api->registroUsuario($userWS, $passWS, $nombre, $email);
 
-    var_dump($registroCurso);
-    exit();
-    $crearUsuario = $this->get('registro_soap');
-    echo $crearUsuario->registroSoap($string);
-
-    exit();
+    $registro = $api->registroUsuarioCurso($usuario, $sku);
+    echo $registro;
+    return new Response("Listo");
   }
 }

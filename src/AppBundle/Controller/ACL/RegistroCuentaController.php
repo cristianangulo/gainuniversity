@@ -53,7 +53,7 @@ class RegistroCuentaController extends Controller
         );
 
       $this->get('mailer')->send($message);
-
+      
       return $this->render('ACL/mensaje-registro.html.twig', array(
          'usuario' => $formData->getNombre(),
          'email'   => $formData->getEmail()
