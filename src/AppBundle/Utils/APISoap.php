@@ -68,8 +68,6 @@ class APISoap
 
         $this->mailer->send($message);
 
-        $this->mailer->send($message);
-
         return $usuario->getId();
       }
 
@@ -109,9 +107,9 @@ class APISoap
               'curso' => $curso->getCurso()
             )));
 
-        $this->mailer->send($message);
-
-        return true;
+        if($this->mailer->send($message)){
+          return true;
+        }
       }
 
       return true;

@@ -30,7 +30,6 @@ class SoapClienteController extends Controller
     $usuario = $api->registroUsuario($userWS, $passWS, $nombre, $email);
 
     $registro = $api->registroUsuarioCurso($usuario, $sku);
-    echo $registro;
     return new Response("Listo");
   }
 }
