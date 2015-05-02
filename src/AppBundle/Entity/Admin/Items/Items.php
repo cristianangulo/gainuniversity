@@ -112,7 +112,7 @@ class Items
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return $_SERVER["DOCUMENT_ROOT"].'/'.$this->getUploadDir();
     }
     protected function getUploadDir()
     {
@@ -163,7 +163,7 @@ class Items
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -186,7 +186,7 @@ class Items
     /**
      * Get seccion
      *
-     * @return string 
+     * @return string
      */
     public function getSeccion()
     {
@@ -209,7 +209,7 @@ class Items
     /**
      * Get multimedia
      *
-     * @return string 
+     * @return string
      */
     public function getMultimedia()
     {
@@ -232,7 +232,7 @@ class Items
     /**
      * Get descripcion
      *
-     * @return string 
+     * @return string
      */
     public function getDescripcion()
     {
@@ -265,7 +265,7 @@ class Items
     /**
      * Get modulos
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getModulos()
     {
@@ -288,7 +288,7 @@ class Items
     /**
      * Get tipo
      *
-     * @return \AppBundle\Entity\Admin\Items\TipoItem 
+     * @return \AppBundle\Entity\Admin\Items\TipoItem
      */
     public function getTipo()
     {
@@ -311,7 +311,7 @@ class Items
     /**
      * Get quiz
      *
-     * @return \AppBundle\Entity\Admin\Quiz\Quiz 
+     * @return \AppBundle\Entity\Admin\Quiz\Quiz
      */
     public function getQuiz()
     {

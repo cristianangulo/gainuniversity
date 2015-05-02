@@ -1,5 +1,6 @@
 /web/app_dev.php
 /web/bundles/
+/web/uploads/*
 /app/cache/*
 /app/config/parameters.yml
 /app/logs/*
