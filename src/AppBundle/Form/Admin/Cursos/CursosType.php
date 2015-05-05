@@ -16,6 +16,12 @@ class CursosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('publicado', null, array(
+              'required' => false
+            ))
+            ->add('urlTienda', null, array(
+              'required' => false
+            ))
             ->add('temporalidad', 'choice', array(
               'choices' => array(1 => "Diario", 2 => '7 días', 3 => '14 días'),
               'label' => 'Forma de publicación',

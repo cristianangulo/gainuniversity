@@ -18,8 +18,11 @@ class CursosUsuarioController extends Controller
 
     $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->find($this->getUser()->getId());
 
+    $cursos = $em->getRepository("AppBundle:Admin\Cursos\Cursos")->findCursosPublicados();
+
     return $this->render('Front/tus-cursos.html.twig', array(
-      'usuario' => $usuario
+      'usuario' => $usuario,
+      'cursos'  => $cursos
     ));
   }
 }

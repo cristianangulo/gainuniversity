@@ -23,6 +23,21 @@ class Cursos
     private $id;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="publicado", type="boolean")
+     */
+
+    private $publicado;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="urlTienda", type="text")
+     */
+    private $urlTienda;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="curso", type="string", length=50)
@@ -73,7 +88,7 @@ class Cursos
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -96,7 +111,7 @@ class Cursos
     /**
      * Get curso
      *
-     * @return string 
+     * @return string
      */
     public function getCurso()
     {
@@ -119,7 +134,7 @@ class Cursos
     /**
      * Get descripcion
      *
-     * @return string 
+     * @return string
      */
     public function getDescripcion()
     {
@@ -142,7 +157,7 @@ class Cursos
     /**
      * Get fechaPublicacion
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaPublicacion()
     {
@@ -165,7 +180,7 @@ class Cursos
     /**
      * Get temporalidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getTemporalidad()
     {
@@ -188,7 +203,7 @@ class Cursos
     /**
      * Get sku
      *
-     * @return string 
+     * @return string
      */
     public function getSku()
     {
@@ -221,10 +236,58 @@ class Cursos
     /**
      * Get modulos
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getModulos()
     {
         return $this->modulos;
+    }
+
+    /**
+     * Set publicado
+     *
+     * @param string $publicado
+     *
+     * @return Cursos
+     */
+    public function setPublicado($publicado)
+    {
+        $this->publicado = $publicado;
+
+        return $this;
+    }
+
+    /**
+     * Get publicado
+     *
+     * @return string
+     */
+    public function getPublicado()
+    {
+        return $this->publicado;
+    }
+
+    /**
+     * Set urlTienda
+     *
+     * @param string $urlTienda
+     *
+     * @return Cursos
+     */
+    public function setUrlTienda($urlTienda)
+    {
+        $this->urlTienda = $urlTienda;
+
+        return $this;
+    }
+
+    /**
+     * Get urlTienda
+     *
+     * @return string
+     */
+    public function getUrlTienda()
+    {
+        return $this->urlTienda;
     }
 }

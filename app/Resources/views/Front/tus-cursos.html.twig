@@ -10,29 +10,46 @@
 {% endif %}
 <div class="col-md-12">
   <div class="panel panel-default">
-    <div class="panel-heading"><h1>Tus cursos</h1></div>
-    <div class="panel-body">
-      <table class="table">
-        <caption>Tus cursos</caption>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for cursos in usuario.curso %}
-            <tr>
-              <th scope="row">1</th>
-              <td>{{ cursos.curso.curso }}</td>
-              <td class="text-center">
-                <a href="{{ path('front_curso', {'id' : cursos.curso.id }) }}" class="btn btn-default">Ver curso</a>
-              </td>
-            </tr>
 
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="panel-body">
+
+      <ul class="list-group">
+        <li class="list-group-item"><h1><i class="fa fa-book"></i> Tus cursos</h1></li>
+        {% for cursos in usuario.curso %}
+        <a href="{{ path('front_curso', {'id' : cursos.curso.id }) }}" class="list-group-item">
+          <i class="fa fa-hand-o-up"></i> {{ cursos.curso.curso }}
+          <br />
+          <small>{{ cursos.fechaRegistro|date('d/m/Y') }}</small>
+
+        </a>
+        {% endfor %}
+      </ul>
+
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h1>
+            Te pueden interesar
+          </h1>
+        </li>
+        {% for curso in cursos %}
+
+        <a href="{{ curso.urlTienda }}" target="_blank" class="list-group-item">
+          <span class="label label-primary"><i class="fa fa-gift"></i> Comprar</span>
+          <hr />
+          {{ curso.fechaPublicacion|date('d/m/Y') }} | <strong>{{ curso.curso }}</strong>
+          <p class="lead">
+            {{ curso.descripcion }}
+          </p>
+          <p>
+            <ul>
+            {% for modulo in curso.modulos %}
+              <li>{{ modulo.modulos.modulo }}</li>
+            {% endfor %}
+            </ul>
+          </p>
+        </a>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </div>
