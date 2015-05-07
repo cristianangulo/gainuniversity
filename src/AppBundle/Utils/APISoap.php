@@ -64,8 +64,6 @@ class APISoap
               'password'=> $rand,
             )));
 
-        //echo $message;
-
         $this->mailer->send($message);
 
         return $usuario->getId();

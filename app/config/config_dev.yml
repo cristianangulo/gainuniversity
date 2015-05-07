@@ -31,9 +31,10 @@ monolog:
 
 assetic:
     use_controller: "%use_assetic_controller%"
-
-swiftmailer:
-    #delivery_address: cristianangulonova@gmail.com
-    transport: gmail
-    username:  cristianangulonova@gmail.com
-    password:  3MientrasCorroVuelo
+# 
+# swiftmailer:
+#     #delivery_address: cristianangulonova@gmail.com
+#     transport: gmail
+#     host: smtp.gmail.com
+#     username:  cristianangulonova@gmail.com
+#     password:  3MientrasCorroVuelo
