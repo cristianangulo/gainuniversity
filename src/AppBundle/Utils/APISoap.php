@@ -98,7 +98,7 @@ class APISoap
           ->setContentType("text/html")
           ->setSubject('Registro curso: '.$curso->getCurso())
           ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
-          ->setTo('cristianangulonova@hotmail.com')
+          ->setTo($usuario->getEmail())
           ->setBody($this->twig->render(
             "ACL/registroCursoSoap.html.twig", array(
               'usuario' => $usuario,
