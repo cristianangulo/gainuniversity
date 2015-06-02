@@ -21,4 +21,7 @@ services:
 
     app.valor_random:
       class:  AppBundle\Utils\ValorRandom
-    
+
+    app.mensajero:
+      class:  AppBundle\Utils\Mensajero
+      arguments:  [@mailer]

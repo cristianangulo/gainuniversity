@@ -33,38 +33,35 @@ class RecuperarCuentaController extends Controller
 
       $mensaje = 'Se ha enviado un e-mail a '. $email->getEmail() .' con la información necesaria para que puedas activar la cuenta';
 
+      /**
+       * Capa de seguridad para evitar envíos de mails
+       * de usuarios que no están registrados en la aplicación
+       */
+
       if(!$usuario){
 
         $this->get('session')->getFlashBag()->add('mensaje', $mensaje);
 
         return $this->redirect($this->generateUrl('acl_recuperar'));
-
-        //return new Response("Este email no existe");
       }
 
       $random = $this->get('app.valor_random')->getValor();
 
-      echo "<pre>";print_r($random);exit();
+      $mail = 'cristianangulonova@hotmail.com';
 
-      $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-        ->setContentType("text/html")
-        ->setSubject('Recuperar cuenta')     // we configure the title
-        ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))     // we configure the sender
-        ->setTo($usuario->getEmail())     // we configure the recipient
-        ->setBody($this->renderView(
-          "ACL/mail.html.twig",
-            array(
-              'nombre' => $usuario->getNombre(),
-              'codigo' => $random
-          ))
-        );
+      $body = $this->renderView("ACL/mail.html.twig",array(
+                  'nombre' => $usuario->getNombre(),
+                  'codigo' => $random
+              ));
 
-      $this->get('mailer')->send($message);
+      $this->get('app.mensajero')->mensajero($mail, $body, 'Recuperar cuenta');
 
       $usuario->setCodigo($random);
       $em->flush();
 
-      return $this->render('ACL/mensaje-recuperar.html.twig');
+      $this->get('session')->getFlashBag()->add('mensaje', $mensaje);
+
+      return $this->redirect($this->generateUrl('acl_recuperar'));
     }
 
     return $this->render('ACL/recuperar.html.twig', array(
