@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use AppBundle\Entity\ACL\Usuarios;
 use AppBundle\Form\ACL\RecuperarCuentaEmailType;
+use AppBundle\Form\ACL\RecuperarCuentaPasswordType;
 
 class RecuperarCuentaController extends Controller
 {
@@ -42,7 +43,7 @@ class RecuperarCuentaController extends Controller
 
         $this->get('session')->getFlashBag()->add('mensaje', $mensaje);
 
-        return $this->redirect($this->generateUrl('acl_recuperar'));
+        return $this->redirect($this->generateUrl('login'));
       }
 
       $random = $this->get('app.valor_random')->getValor();
@@ -61,7 +62,7 @@ class RecuperarCuentaController extends Controller
 
       $this->get('session')->getFlashBag()->add('mensaje', $mensaje);
 
-      return $this->redirect($this->generateUrl('acl_recuperar'));
+      return $this->redirect($this->generateUrl('login'));
     }
 
     return $this->render('ACL/recuperar.html.twig', array(
@@ -82,46 +83,33 @@ class RecuperarCuentaController extends Controller
 
   public function recuperarCuentaAction($codigo, Request $request)
   {
-    $recuperarForm = $this->recuperarPassForm();
-    $recuperarForm->handleRequest($request);
 
     $em = $this->getDoctrine()->getManager();
     $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->findOneByCodigo($codigo);
+
+    $recuperarForm = $this->createForm(new RecuperarCuentaPasswordType(), $usuario);
 
     if(!$usuario){
       return $this->redirect($this->generateUrl('login'));
     }
 
-    if($recuperarForm->isValid()){
-      $password = $recuperarForm->get("password")->getData();
+    $recuperarForm->handleRequest($request);
 
-      $factory = $this->get('security.encoder_factory');
-      $encoder = $factory->getEncoder($usuario);
-      $usuario->setPassword($encoder->encodePassword($password, $usuario->getSalt()));
+    if($recuperarForm->isValid()){
+
+      $password = $recuperarForm->getData()->getPassword();
+      $encoder = $this->get('encoder')->setUserPassword($usuario, $password);
+      $usuario->setPassword($encoder);
       $usuario->setCodigo("");
       $em->flush();
+
+      $this->get('session')->getFlashBag()->add('mensaje', 'Se ha cambiado la contraseña. Ingrese a su cuenta');
+
       return $this->redirect($this->generateUrl('login'));
     }
 
     return $this->render('ACL/recuperar-pass.html.twig', array(
       'form' => $recuperarForm->createView()
     ));
-  }
-
-  public function recuperarPassForm()
-  {
-    $form = $this->createFormBuilder()
-    ->add('password','repeated', array(
-      'type' => 'password',
-      'invalid_message' => 'Los password no coinciden',
-      'options' => array('attr' => array('class' => 'password-field')),
-      'required' => true,
-      'first_options'  => array('label' => 'Password'),
-      'second_options' => array('label' => 'Repita Password'),
-    ))
-        ->add('submit', 'submit', array('label' => 'recuperar', 'attr' => array('class' => 'btn btn-default')))
-        ->getForm();
-
-    return $form;
   }
 }

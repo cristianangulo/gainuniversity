@@ -42,7 +42,7 @@ class Usuarios implements UserInterface
 
   /**
   * @ORM\Column(type="string", length=128)
-  * @Assert\NotBlank(message="El password no puede quedar vacío")
+  * @Assert\NotBlank(groups={"recuperar_password"}, message="El password no puede quedar vacío")
   */
   private $password;
 
