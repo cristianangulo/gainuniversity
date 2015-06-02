@@ -1,7 +1,7 @@
 {% extends '::accesos.html.twig'%}
 
 {% block body %}
-  
+
   <div class="alert alert-success" role="alert">
     <strong>
       Ingresa tu dirección de correo para restablecer tu contraseña. <br />
@@ -12,8 +12,14 @@
     <form class="form" action="" method="post" novalidate="novalidate">
         {{ form_widget(form) }}
         <div class="btn-group">
-          <button type="submit" class="btn btn-default">Enviar</button>
-          <a type="button" class="btn btn-warning" href="{{ path('login') }}">Login</a>
+          <button type="submit" class="btn btn-default">
+            Enviar
+            <span class="glyphicon glyphicon-send"></span>
+            </button>
+          <a type="button" class="btn btn-warning" href="{{ path('login') }}">
+            Login
+            <span class="glyphicon glyphicon-log-in"></span>
+          </a>
         </div>
     </form>
 {% endblock %}
