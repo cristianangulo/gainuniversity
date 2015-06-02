@@ -42,7 +42,9 @@ class RecuperarCuentaController extends Controller
         //return new Response("Este email no existe");
       }
 
-      $random = sha1(md5(rand(10,99999999)));
+      $random = $this->get('app.valor_random')->getValor();
+
+      echo "<pre>";print_r($random);exit();
 
       $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setContentType("text/html")

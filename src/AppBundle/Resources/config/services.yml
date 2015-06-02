@@ -18,3 +18,7 @@ services:
 
     hello:
         class: AppBundle\Utils\Hello
+
+    app.valor_random:
+      class:  AppBundle\Utils\ValorRandom
+    
