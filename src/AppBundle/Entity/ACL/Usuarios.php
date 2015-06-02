@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * AppBundle\Entity\ACL\Usuarios
@@ -26,6 +26,7 @@ class Usuarios implements UserInterface
 
   /**
   * @ORM\Column(type="string", length=100)
+  * @Assert\NotBlank(message="El nombre no debe quedar vacío")
   */
   private $nombre;
 
@@ -41,11 +42,14 @@ class Usuarios implements UserInterface
 
   /**
   * @ORM\Column(type="string", length=128)
+  * @Assert\NotBlank(message="El password no puede quedar vacío")
   */
   private $password;
 
   /**
   * @ORM\Column(type="string", length=255, unique=true)
+  * @Assert\NotBlank(groups={"recuperar_email"}, message="No puede quedar vacío")
+  * @Assert\Email(groups={"recuperar_email"}, message="Escriba un e-mail correcto")
   */
   private $email;
 
@@ -357,7 +361,7 @@ class Usuarios implements UserInterface
     /**
      * Get curso
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCurso()
     {

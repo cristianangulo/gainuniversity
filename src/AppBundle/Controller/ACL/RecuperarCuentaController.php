@@ -8,15 +8,18 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use ACL\ACLBundle\Entity\Usuarios;
-use ACL\ACLBundle\Form\RegistroUsuariosType;
+use AppBundle\Entity\ACL\Usuarios;
+use AppBundle\Form\ACL\RecuperarCuentaEmailType;
 
 class RecuperarCuentaController extends Controller
 {
 
   public function recuperarAction(Request $request)
   {
-    $recuperarForm = $this->recuperarForm();
+
+    $usuario = new Usuarios();
+
+    $recuperarForm = $this->createForm(new RecuperarCuentaEmailType(), $usuario);
 
     $recuperarForm->handleRequest($request);
 
@@ -24,12 +27,19 @@ class RecuperarCuentaController extends Controller
 
       $em = $this->getDoctrine()->getManager();
 
-      $email = $recuperarForm->get('email')->getData();
+      $email = $recuperarForm->getData();
 
-      $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->findOneByEmail($email);
+      $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->findOneByEmail($email->getEmail());
+
+      $mensaje = 'Se ha enviado un e-mail a '. $email->getEmail() .' con la información necesaria para que puedas activar la cuenta';
 
       if(!$usuario){
-        return new Response("Este email no existe");
+
+        $this->get('session')->getFlashBag()->add('mensaje', $mensaje);
+
+        return $this->redirect($this->generateUrl('acl_recuperar'));
+
+        //return new Response("Este email no existe");
       }
 
       $random = sha1(md5(rand(10,99999999)));
@@ -66,7 +76,6 @@ class RecuperarCuentaController extends Controller
         ->add('email', 'email', array(
           'label' => '@e-mail'
         ))
-        ->add('submit', 'submit', array('label' => 'recuperar', 'attr' => array('class' => 'btn btn-default')))
         ->getForm();
 
     return $form;
