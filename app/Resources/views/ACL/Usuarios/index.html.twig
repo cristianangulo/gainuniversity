@@ -27,7 +27,10 @@
                 <td class="col-md-2">{{ entity.username }}</td>
                 <td class="col-md-5">{{ entity.email }}</td>
                 <td class="col-md-4 text-center">
-                  <a class="btn btn-default" href="{{ path('usuarios_edit', { 'id': entity.id }) }}">{{ btn_editar }}</a>
+                  <a class="btn btn-default" href="{{ path('usuarios_edit', { 'id': entity.id }) }}">
+                  {{ btn_editar }}
+                  <span class="glyphicon glyphicon-edit"></span>
+                </a>
                 </td>
             </tr>
         {% endfor %}
