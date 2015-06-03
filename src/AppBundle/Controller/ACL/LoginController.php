@@ -8,6 +8,9 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use AppBundle\Entity\ACL\Usuarios;
+use AppBundle\Form\ACL\UsuariosLoginType;
+
 class LoginController extends Controller
 {
 
@@ -25,9 +28,14 @@ class LoginController extends Controller
       $session->remove(SecurityContext::AUTHENTICATION_ERROR);
     }
 
+    $usuario = new Usuarios();
+
+    $usuarioForm = $this->createForm(new UsuariosLoginType(), $usuario);
+
     return $this->render('ACL/login.html.twig', array(
       'last_username' => $session->get(SecurityContext::LAST_USERNAME),
       'error'         => $error,
+      'usuario_form'   => $usuarioForm->createView()
       )
 
     );

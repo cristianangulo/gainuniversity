@@ -2,35 +2,28 @@
 
 {% block body %}
 
+  <form class="" action="{{ path('login_check') }}" method="post" novalidate="novalidate">
+      {% if error %}
+        <div class="alert alert-warning">{{ error.message }}</div>
+      {% endif %}
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+      <input type="hidden" name="_target_path" value="/curso/1" />
+      {{ form_widget(usuario_form) }}
 
-<form action="{{ path('login_check') }}" method="post" novalidate="novalidate">
+      <div class="btn-group">
+        <button type="submit" class="btn btn-warning">
+          Entrar
+          <span class="glyphicon glyphicon-log-in"></span>
+        </button>
 
-  {% if error %}
-    <div class="alert alert-warning">{{ error.message }}</div>
-  {% endif %}
+      </div>
+      <a href="{{ path('acl_recuperar') }}" type="button" class="btn btn-default pull-right">
+        Recuperar cuenta
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </a>
 
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    <div class="form-group" id="usuarioEmail">
-      <h4><strong>Usuario</strong></h4>
-      <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="ejemplo@mail.com"/>
-    </div>
+  </form>
 
-    <div class="form-group">
-      <h4><strong>Contraseña / Password</strong></h4>
-      <input type="password" class="form-control" type="password" id="password" name="_password" placeholder="Contraseña"/>
-    </div>
-    <input type="hidden" name="_target_path" value="/curso/1" />
-    <div class="btn-group">
-      <button type="submit" class="btn btn-warning">
-        Entrar
-        <span class="glyphicon glyphicon-log-in"></span>
-      </button>
 
-    </div>
-    <a href="{{ path('acl_recuperar') }}" type="button" class="btn btn-default pull-right">
-      Recuperar cuenta
-      <span class="glyphicon glyphicon-info-sign"></span>
-    </a>
 
-</form>
 {% endblock %}
