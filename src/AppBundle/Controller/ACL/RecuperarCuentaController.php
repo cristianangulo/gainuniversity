@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use AppBundle\Entity\ACL\Usuarios;
 use AppBundle\Form\ACL\RecuperarCuentaType;
-use AppBundle\Form\ACL\CambiarPasswordType;
+use AppBundle\Form\ACL\UsuariosPasswordType;
 
 class RecuperarCuentaController extends Controller
 {
@@ -87,7 +87,7 @@ class RecuperarCuentaController extends Controller
     $em = $this->getDoctrine()->getManager();
     $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->findOneByCodigo($codigo);
 
-    $recuperarForm = $this->createForm(new CambiarPasswordType(), $usuario);
+    $recuperarForm = $this->createForm(new UsuariosPasswordType(), $usuario);
 
     if(!$usuario){
       return $this->redirect($this->generateUrl('login'));

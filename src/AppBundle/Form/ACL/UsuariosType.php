@@ -5,6 +5,7 @@ namespace AppBundle\Form\ACL;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use AppBundle\Form\ACL\EventListener\UsuariosSubscriber;
 
 class UsuariosType extends AbstractType
 {
@@ -15,26 +16,10 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sendMail', 'checkbox', array(
-              'label' => 'Notificar al usuario registrado',
-              'mapped' => false
-            ))
             ->add('nombre')
             ->add('username')
             ->add('salt','hidden')
             ->add('email')
-            ->add('password','repeated', array(
-              'type' => 'password',
-              'invalid_message' => 'The password fields must match.',
-              'options' => array('attr' => array('class' => 'password-field')),
-              'required' => true,
-              'first_options'  => array('label' => 'Password'),
-              'second_options' => array('label' => 'Repeat Password'),
-            ))
-            // ->add('isActive', 'checkbox', array(
-            //   'required' => false,
-            //   'label' => 'Usuario activo'
-            // ))
             ->add('roles', 'entity', array(
               'class' => 'AppBundle:ACL\Roles',
               'property' => 'role',
@@ -42,6 +27,8 @@ class UsuariosType extends AbstractType
             ))
 
         ;
+
+        $builder->addEventSubscriber(new UsuariosSubscriber());
     }
 
     /**

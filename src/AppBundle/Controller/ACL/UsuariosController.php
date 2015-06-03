@@ -6,11 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\ACL\Usuarios;
-use AppBundle\Form\ACL\UsuariosType;
-use AppBundle\Form\ACL\UsuariosPerfilType;
 
-use AppBundle\Form\Front\PerfilUsuarioType;
-use AppBundle\Form\Front\PasswordUsuarioType;
+use AppBundle\Form\ACL\UsuariosType;
+use AppBundle\Form\ACL\UsuariosPasswordType;
 
 /**
  * Usuarios controller.
@@ -49,7 +47,7 @@ class UsuariosController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $password = $usuarioForm->getData()->getPassword();
+            $password = $usuarioForm->getData()->getPassword()->getPassword();
 
             if(false == $password){
 
@@ -103,7 +101,7 @@ class UsuariosController extends Controller
             throw $this->createNotFoundException('Unable to find Usuarios entity.');
         }
 
-        $usuarioForm = $this->createForm(new UsuariosPerfilType(), $usuario);
+        $usuarioForm = $this->createForm(new UsuariosType(), $usuario);
 
         $usuarioForm->handleRequest($request);
 
@@ -116,7 +114,7 @@ class UsuariosController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        $usuarioFormPassword = $this->createForm(new PasswordUsuarioType(), $usuario);
+        $usuarioFormPassword = $this->createForm(new UsuariosPasswordType(), $usuario);
 
         $usuarioFormPassword->handleRequest($request);
 
@@ -129,6 +127,8 @@ class UsuariosController extends Controller
           $usuario->setPassword($encoder);
           $em->persist($usuario);
           $em->flush();
+
+          
 
           return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $usuario->getId())));
         }
@@ -152,7 +152,7 @@ class UsuariosController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ACLBundle:Usuarios')->find($id);
+            $entity = $em->getRepository('AppBundle:ACL\Usuarios')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Usuarios entity.');
