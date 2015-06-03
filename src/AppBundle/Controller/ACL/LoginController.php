@@ -31,9 +31,13 @@ class LoginController extends Controller
     $usuario = new Usuarios();
 
     $usuarioForm = $this->createForm(new UsuariosLoginType(), $usuario);
+    $usuarioForm->handleRequest($request);
+
+    if($usuarioForm->isValid()){
+
+    }
 
     return $this->render('ACL/login.html.twig', array(
-      'last_username' => $session->get(SecurityContext::LAST_USERNAME),
       'error'         => $error,
       'usuario_form'   => $usuarioForm->createView()
       )

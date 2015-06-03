@@ -6,7 +6,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RecuperarCuentaEmailType extends AbstractType
+/**
+ * Form para recuperar la cuenta del usuario
+ * Sólo posee el campo @email y desde el controlador envía información a este correo
+ * para poder recuperar la cuenta
+ */
+
+class RecuperarCuentaType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -26,7 +32,7 @@ class RecuperarCuentaEmailType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\ACL\Usuarios',
-            'validation_groups' => array('recuperar_email'),
+            'validation_groups' => array('recuperar_cuenta'),
         ));
     }
 
@@ -35,6 +41,6 @@ class RecuperarCuentaEmailType extends AbstractType
      */
     public function getName()
     {
-        return 'acl_recuperar_cuenta_email';
+        return 'recuperar_cuenta';
     }
 }

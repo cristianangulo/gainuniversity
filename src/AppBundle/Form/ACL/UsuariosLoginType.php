@@ -34,8 +34,6 @@ class UsuariosLoginType extends AbstractType
               )
             ))
         ;
-
-        $builder->addEventSubscriber(new OnLoginSubscriber());
     }
 
     /**

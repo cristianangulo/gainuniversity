@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RecuperarCuentaPasswordType extends AbstractType
+class CambiarPasswordType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -33,7 +33,7 @@ class RecuperarCuentaPasswordType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\ACL\Usuarios',
-            'validation_groups' => array('recuperar_password'),
+            'validation_groups' => array('cambiar_password'),
         ));
     }
 
@@ -42,6 +42,6 @@ class RecuperarCuentaPasswordType extends AbstractType
      */
     public function getName()
     {
-        return 'acl_recuperar_cuenta_password';
+        return 'cambiar_password';
     }
 }

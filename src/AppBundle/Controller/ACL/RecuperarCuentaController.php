@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use AppBundle\Entity\ACL\Usuarios;
-use AppBundle\Form\ACL\RecuperarCuentaEmailType;
-use AppBundle\Form\ACL\RecuperarCuentaPasswordType;
+use AppBundle\Form\ACL\RecuperarCuentaType;
+use AppBundle\Form\ACL\CambiarPasswordType;
 
 class RecuperarCuentaController extends Controller
 {
@@ -20,7 +20,7 @@ class RecuperarCuentaController extends Controller
 
     $usuario = new Usuarios();
 
-    $recuperarForm = $this->createForm(new RecuperarCuentaEmailType(), $usuario);
+    $recuperarForm = $this->createForm(new RecuperarCuentaType(), $usuario);
 
     $recuperarForm->handleRequest($request);
 
@@ -81,13 +81,13 @@ class RecuperarCuentaController extends Controller
     return $form;
   }
 
-  public function recuperarCuentaAction($codigo, Request $request)
+  public function cambiarPasswordAction($codigo, Request $request)
   {
 
     $em = $this->getDoctrine()->getManager();
     $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->findOneByCodigo($codigo);
 
-    $recuperarForm = $this->createForm(new RecuperarCuentaPasswordType(), $usuario);
+    $recuperarForm = $this->createForm(new CambiarPasswordType(), $usuario);
 
     if(!$usuario){
       return $this->redirect($this->generateUrl('login'));
@@ -108,7 +108,7 @@ class RecuperarCuentaController extends Controller
       return $this->redirect($this->generateUrl('login'));
     }
 
-    return $this->render('ACL/recuperar-pass.html.twig', array(
+    return $this->render('ACL/cambiar-password.html.twig', array(
       'form' => $recuperarForm->createView()
     ));
   }

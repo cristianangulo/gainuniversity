@@ -47,14 +47,14 @@ class Usuarios implements UserInterface
 
   /**
   * @ORM\Column(type="string", length=128)
-  * @Assert\NotBlank(groups={"recuperar_password"}, message="El password no puede quedar vacío")
+  * @Assert\NotBlank(groups={"cambiar_password"}, message="El password no puede quedar vacío")
   */
   private $password;
 
   /**
   * @ORM\Column(type="string", length=255, unique=true)
-  * @Assert\NotBlank(groups={"recuperar_email","registro_usuario"}, message="No puede quedar vacío")
-  * @Assert\Email(groups={"recuperar_email","registro_usuario", "perfil_usuario"}, message="Escriba un e-mail correcto")
+  * @Assert\NotBlank(groups={"recuperar_cuenta","registro_usuario"}, message="No puede quedar vacío")
+  * @Assert\Email(groups={"recuperar_cuenta","registro_usuario", "perfil_usuario"}, message="Escriba un e-mail correcto")
   */
   private $email;
 

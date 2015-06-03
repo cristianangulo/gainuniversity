@@ -16,7 +16,7 @@ acl_recuperar:
 
 acl_recuperar_cuenta:
     path:     /cambiar-password/{codigo}
-    defaults: { _controller: AppBundle:ACL/RecuperarCuenta:recuperarCuenta }
+    defaults: { _controller: AppBundle:ACL/RecuperarCuenta:cambiarPassword }
 
 ### Registro cuenta
 
