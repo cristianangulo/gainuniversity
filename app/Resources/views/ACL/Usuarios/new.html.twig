@@ -12,7 +12,18 @@
         </a>
       </li>
     </ul>
-    {{ form(form) }}
+    <div class="alert alert-success">
+      <strong>Si el campo Password está vacío se generará una contraseña aleatoria</strong>
+    </div>
+    <form class="form" action="" method="post" novalidate="novalidate">
+        {{ form_widget(usuario_form) }}
+        <button type="submit" class="btn btn-success">
+            Guardar
+            <span class="glyphicon glyphicon-floppy-save"></span>
+        </button>
+    </form>
+
+
     <ul class="record_actions">
       <li>
         <a href="{{ path('usuarios') }}">

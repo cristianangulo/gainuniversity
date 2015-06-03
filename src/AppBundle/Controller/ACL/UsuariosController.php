@@ -33,90 +33,61 @@ class UsuariosController extends Controller
             'entities' => $entities,
         ));
     }
-    /**
-     * Creates a new Usuarios entity.
-     *
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Usuarios();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($entity);
-            $formData = $form->getData();
-            $entity->setPassword($encoder->encodePassword($formData->getPassword(), $entity->getSalt()));
-            $entity->setActivado(1);
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $entity->getId())));
-        }
-
-        return $this->render('ACL/Usuarios/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to create a Usuarios entity.
-     *
-     * @param Usuarios $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Usuarios $entity)
-    {
-        $form = $this->createForm(new UsuariosType(), $entity, array(
-            'action' => $this->generateUrl('usuarios_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Guardar', 'attr' => array('class' => 'btn btn-success')));
-
-        return $form;
-    }
 
     /**
      * Displays a form to create a new Usuarios entity.
      *
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
-        $entity = new Usuarios();
-        $form   = $this->createCreateForm($entity);
+        $usuario = new Usuarios();
+        $usuarioForm = $this->createForm(new UsuariosType(), $usuario);
 
-        return $this->render('ACL/Usuarios/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
+        $usuarioForm->handleRequest($request);
 
-    /**
-     * Finds and displays a Usuarios entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+        if($usuarioForm->isValid()){
 
-        $entity = $em->getRepository('ACLBundle:Usuarios')->find($id);
+            $em = $this->getDoctrine()->getManager();
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Usuarios entity.');
+            $password = $usuarioForm->getData()->getPassword();
+
+            if(false == $password){
+
+              $password = $this->get('app.valor_random')->getValor();
+              $encoder = $this->get('encoder')->setUserPassword($usuario, $password);
+              $usuario->setPassword($encoder);
+            }
+
+            $encoder = $this->get('encoder')->setUserPassword($usuario, $password);
+            $usuario->setPassword($encoder);
+
+            $em->persist($usuario);
+            $em->flush();
+
+            $sendEmail = $usuarioForm->get('sendMail')->getData();
+
+            if(true === $sendEmail){
+
+              $body = $this->renderView('ACL/registro-usuario.html.twig', array(
+                'usuario' => $usuario,
+                'password'=> $password,
+              ));
+
+              $this->get('app.mensajero')->mensajero($usuario->getEmail(), $body, 'Cuenta creada');
+            }
+
+            $this->get('session')->getFlashBag()->add('mensaje', 'El usuario ha sido creado');
+
+            return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $usuario->getId())));
+
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('ACL/Usuarios/show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+        return $this->render('ACL/Usuarios/new.html.twig', array(
+            'entity' => $usuario,
+            'usuario_form'   => $usuarioForm->createView(),
         ));
     }
+
 
     /**
      * Displays a form to edit an existing Usuarios entity.
@@ -126,88 +97,50 @@ class UsuariosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:ACL\Usuarios')->find($id);
+        $usuario = $em->getRepository('AppBundle:ACL\Usuarios')->find($id);
 
-        if (!$entity) {
+        if (!$usuario) {
             throw $this->createNotFoundException('Unable to find Usuarios entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $usuarioForm = $this->createForm(new UsuariosPerfilType(), $usuario);
+
+        $usuarioForm->handleRequest($request);
+
+        if($usuarioForm->isValid()){
+
+            $em->flush();
+            return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $usuario->getId())));
+
+        }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        $formPassword = $this->createForm(new PasswordUsuarioType(), $entity);
+        $usuarioFormPassword = $this->createForm(new PasswordUsuarioType(), $usuario);
 
-        $formPassword->handleRequest($request);
+        $usuarioFormPassword->handleRequest($request);
 
-        if($formPassword->isValid()){
+        if($usuarioFormPassword->isValid()){
 
-          $factory = $this->get('security.encoder_factory');
-          $encoder = $factory->getEncoder($entity);
-          $formData = $formPassword->getData();
-          $entity->setPassword($encoder->encodePassword($formData->getPassword(), $entity->getSalt()));
-          $em->persist($entity);
+          $password = $usuarioFormPassword->getData()->getPassword();
+
+          $encoder = $this->get('encoder')->setUserPassword($usuario, $password);
+
+          $usuario->setPassword($encoder);
+          $em->persist($usuario);
           $em->flush();
 
-          return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $entity->getId())));
+          return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $usuario->getId())));
         }
 
         return $this->render('ACL/Usuarios/edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'usuario'      => $usuario,
+            'usuario_form'   => $usuarioForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'usuario_password_form' => $formPassword->createView()
+            'usuario_password_form' => $usuarioFormPassword->createView()
         ));
     }
 
-    /**
-    * Creates a form to edit a Usuarios entity.
-    *
-    * @param Usuarios $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Usuarios $entity)
-    {
-        $form = $this->createForm(new UsuariosPerfilType(), $entity, array(
-            'action' => $this->generateUrl('usuarios_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Guardar', 'attr' => array('class' => 'btn btn-success')));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Usuarios entity.
-     *
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:ACL\Usuarios')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Usuarios entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $id)));
-        }
-
-        return $this->render('ACL/Usuarios/edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
     /**
      * Deletes a Usuarios entity.
      *

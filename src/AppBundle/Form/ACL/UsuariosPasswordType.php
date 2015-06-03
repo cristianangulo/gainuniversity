@@ -32,7 +32,8 @@ class UsuariosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\ACL\Usuarios'
+            'data_class' => 'AppBundle\Entity\ACL\Usuarios',
+            'validation_groups' => array('recuperar_password'),
         ));
     }
 

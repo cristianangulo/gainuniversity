@@ -8,12 +8,15 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
 * AppBundle\Entity\ACL\Usuarios
 *
 * @ORM\Table(name="Usuarios")
 * @ORM\Entity(repositoryClass="AppBundle\Entity\ACL\UsuariosRepository")
+* @UniqueEntity(groups={"registro_usuario", "perfil_usuario"}, fields={"username"}, message="Este Username ya está en uso")
+* @UniqueEntity(groups={"registro_usuario", "perfil_usuario"}, fields={"email"}, message="Este Email ya está registrado")
 */
 class Usuarios implements UserInterface
 {
@@ -26,12 +29,14 @@ class Usuarios implements UserInterface
 
   /**
   * @ORM\Column(type="string", length=100)
-  * @Assert\NotBlank(message="El nombre no debe quedar vacío")
+  *
+  * @Assert\NotBlank(groups={"registro_usuario", "perfil_usuario"}, message="El Nombre no debe quedar vacío")
   */
   private $nombre;
 
   /**
   * @ORM\Column(type="string", length=255, unique=true)
+  * @Assert\NotBlank(groups={"registro_usuario", "perfil_usuario"}, message="El Username es obligatorio y no debe quedar vacío")
   */
   private $username;
 
@@ -48,8 +53,8 @@ class Usuarios implements UserInterface
 
   /**
   * @ORM\Column(type="string", length=255, unique=true)
-  * @Assert\NotBlank(groups={"recuperar_email"}, message="No puede quedar vacío")
-  * @Assert\Email(groups={"recuperar_email"}, message="Escriba un e-mail correcto")
+  * @Assert\NotBlank(groups={"recuperar_email","registro_usuario"}, message="No puede quedar vacío")
+  * @Assert\Email(groups={"recuperar_email","registro_usuario", "perfil_usuario"}, message="Escriba un e-mail correcto")
   */
   private $email;
 
@@ -61,7 +66,7 @@ class Usuarios implements UserInterface
   /**
   * @ORM\Column(name="activado", type="boolean")
   */
-  private $activado;
+  private $activado = 1;
 
   // /**
   // * @ORM\ManyToMany(targetEntity="Roles", inversedBy="usuarios")
@@ -72,6 +77,7 @@ class Usuarios implements UserInterface
   /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Roles", inversedBy="usuarios")
    * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+   * @Assert\NotBlank(groups={"registro_usuario", "perfil_usuario"}, message="Seleccione una de las opciones")
    */
 
   protected $roles;

@@ -18,14 +18,24 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          {{ form(edit_form) }}
+          <form class="form" action="" method="post" novalidate>
+            {{ form_widget(usuario_form) }}
+            <button type="submit" name="submit" class="btn btn-success">Guardar</button>
+          </form>
+
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          {{ form(usuario_password_form) }}
+          <form class="form" action="" method="post" novalidate>
+            {{ form_widget(usuario_password_form) }}
+            <button type="submit" class="btn btn-warning">
+              Guardar
+            </button>
+          </form>
+
         </div>
       </div>
     </div>

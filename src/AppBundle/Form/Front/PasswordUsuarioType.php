@@ -23,12 +23,6 @@ class PasswordUsuarioType extends AbstractType
               'first_options'  => array('label' => 'Password'),
               'second_options' => array('label' => 'Repita el Password'),
             ))
-            ->add('submit', 'submit', array(
-              'label' => 'Guardar',
-              'attr' => array(
-                'class' => 'btn btn-warning'
-              )
-            ))
         ;
     }
 

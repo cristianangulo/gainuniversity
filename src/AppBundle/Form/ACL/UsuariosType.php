@@ -15,6 +15,10 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('sendMail', 'checkbox', array(
+              'label' => 'Notificar al usuario registrado',
+              'mapped' => false
+            ))
             ->add('nombre')
             ->add('username')
             ->add('salt','hidden')
@@ -27,15 +31,16 @@ class UsuariosType extends AbstractType
               'first_options'  => array('label' => 'Password'),
               'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('isActive', 'checkbox', array(
-              'required' => false,
-              'label' => 'Usuario activo'
-            ))
+            // ->add('isActive', 'checkbox', array(
+            //   'required' => false,
+            //   'label' => 'Usuario activo'
+            // ))
             ->add('roles', 'entity', array(
               'class' => 'AppBundle:ACL\Roles',
               'property' => 'role',
               'expanded' => true,
             ))
+
         ;
     }
 
@@ -45,7 +50,8 @@ class UsuariosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\ACL\Usuarios'
+            'data_class' => 'AppBundle\Entity\ACL\Usuarios',
+            'validation_groups' => array('registro_usuario'),
         ));
     }
 

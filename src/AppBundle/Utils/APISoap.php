@@ -59,7 +59,7 @@ class APISoap
           ->setFrom(array("no-reply@gainuniversity.com" => "gainuniversity.com"))
           ->setTo($usuario->getEmail())
           ->setBody($this->twig->render(
-            "ACL/registroPlataformaSoap.html.twig", array(
+            "ACL/registro-usuario.html.twig", array(
               'usuario' => $usuario,
               'password'=> $rand,
             )));
