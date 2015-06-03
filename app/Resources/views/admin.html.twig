@@ -46,8 +46,20 @@
 				<div class="col-md-9">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							{% block body %}
+							<div class="page-header"><h1>{% block title_contenido %}{% endblock %}</h1></div>
 
+							<div class="btn-group">
+								{% block navbar_contenido %}{% endblock %}
+							</div>
+
+
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-body">
+
+							{% block body_contenido %}
 
 
 							{% endblock %}

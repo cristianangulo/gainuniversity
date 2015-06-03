@@ -1,18 +1,19 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Usuarios</h1>
-    </div>
+{% block title_contenido %}
+  Usuarios
+{% endblock %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('usuarios_new') }}">
-          Crear usuario
-        </a>
-      </li>
-    </ul>
+{% block navbar_contenido %}
 
+    <a href="{{ path('usuarios_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear usuario
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
     <table class="table table-striped records_list">
         <thead>
             <tr>

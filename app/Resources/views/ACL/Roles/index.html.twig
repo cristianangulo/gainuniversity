@@ -1,17 +1,23 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Roles</h1>
-    </div>
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('roles_new') }}">
-          Crear role
-        </a>
-      </li>
-    </ul>
+{% block title_contenido %}
+
+Roles
+
+{% endblock %}
+
+{% block navbar_contenido %}
+
+    <a href="{{ path('roles_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Role
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
+
 
     <table class="table table-striped records_list">
         <thead>

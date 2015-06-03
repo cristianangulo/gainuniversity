@@ -88,7 +88,7 @@ class Usuarios implements UserInterface
   private $codigo;
 
   /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="usuario")
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="usuario", cascade={"remove"})
    **/
 
   private $curso;

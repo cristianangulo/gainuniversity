@@ -1,18 +1,26 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Crear role <small></small></h1>
-    </div>
+{% block title_contenido %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('roles') }}">
-          Regresar
-        </a>
-      </li>
-    </ul>
-    {% form_theme form 'ElearnBundle:Form:admin-form.html.twig' %}
+Crear Role
+
+{% endblock %}
+
+{% block navbar_contenido %}
+    <a href="{{ path('roles') }}" class="btn btn-default">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Regresar
+
+    </a>
+    <a href="{{ path('roles_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Role
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
+  
 
     {{ form(form) }}
 

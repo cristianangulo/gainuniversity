@@ -1,20 +1,24 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Perfil del usuario</h1>
-    </div>
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('usuarios') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('usuarios_new') }}">
-          Crear usuario
-        </a>
-      </li>
-    </ul>
+
+{% block title_contenido %}
+  <h1>Crear usuario</h1>
+{% endblock %}
+
+{% block navbar_contenido %}
+
+    <a href="{{ path('usuarios') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Regresar
+    </a>
+    <a href="{{ path('usuarios_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear usuario
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">
@@ -39,6 +43,7 @@
         </div>
       </div>
     </div>
+
 
     <div class="col-md-12">
       <div class="panel panel-default">
