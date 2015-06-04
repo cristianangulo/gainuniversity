@@ -35,7 +35,7 @@ twig:
       app_name: 'Gabriel Guerrero'
     form:
         resources: ['bootstrap_3_layout.html.twig']
-
+        #resources: ['bootstrap_3_horizontal_layout.html.twig']
 parameters:
   btn_ver: Ver
   btn_editar: Editar

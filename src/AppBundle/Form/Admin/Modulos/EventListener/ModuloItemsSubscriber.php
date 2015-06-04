@@ -22,17 +22,11 @@ class ModuloItemsSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        // Durante la creación del formulario setData() es llamado con null como
-        // argumento por el constructor FormBuilder. Solo te interesa cuando
-        // setData es llamado con un objeto Entity real (ya sea nuevo,
-        // o recuperado con Doctrine). Esta declaración 'if' permite evadir
-        // la condición null.
         if (null === $data) {
             return;
         }
-
-        // comprueba si el objeto producto es "nuevo"
         if ($data->getId()) {
+
             $form->add('secciones', 'collection', array(
               'type' => new ModuloItemsType(),
               'by_reference' => false,

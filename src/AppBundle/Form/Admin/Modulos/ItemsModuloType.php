@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use AppBundle\Form\Admin\Modulos\EventListener\ModuloItemsSubscriber;
 
-class ModulosType extends AbstractType
+class ItemsModuloType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,10 +15,6 @@ class ModulosType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('modulo')
-            ->add('descripcion')
-        ;
 
         $builder->addEventSubscriber(new ModuloItemsSubscriber());
     }
@@ -38,6 +34,6 @@ class ModulosType extends AbstractType
      */
     public function getName()
     {
-        return 'modulo_items';
+        return 'items_modulo';
     }
 }

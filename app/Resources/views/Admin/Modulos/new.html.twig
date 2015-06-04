@@ -1,26 +1,25 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
+{% block title_contenido %} Crear Módulo {% endblock %}
 
-    <div class="page-header">
-      <h1>Crear módulo</h1>
-    </div>
+{% block navbar_contenido %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_modulos') }}">
-          Regresar
-        </a>
-      </li>
-    </ul>
+    <a href="{{ path('admin_modulos') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Regresar
+    </a>
 
-    {{ form(form, {'attr':{'novalidate':'novalidate'}}) }}
+{% endblock %}
 
-    <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_modulos') }}">
-            Regresar
-        </a>
-    </li>
-</ul>
+{% block body_contenido %}
+
+    <form class="form" action="" method="post" novalidate>
+        {{ form_widget(modulo_form) }}
+        <button type="submit" class="btn btn-success">
+            Guardar
+            <span class="glyphicon glyphicon-floppy-save"></span>
+        </button>
+    </form>
+
+
 {% endblock %}

@@ -1,24 +1,23 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Módulos <small></small></h1>
-    </div>
+{% block title_contenido %} Módulos {% endblock %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_modulos_new') }}">
-          Crear módulo
-        </a>
-      </li>
-    </ul>
+{% block navbar_contenido %}
 
+    <a href="{{ path('admin_modulos_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Módulo
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
     <table class="table table-striped records_list">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Modulo</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th></th>
             </tr>
         </thead>

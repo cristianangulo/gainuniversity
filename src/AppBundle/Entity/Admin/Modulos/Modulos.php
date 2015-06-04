@@ -4,6 +4,7 @@ namespace AppBundle\Entity\Admin\Modulos;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Modulos
@@ -26,6 +27,7 @@ class Modulos
      * @var string
      *
      * @ORM\Column(name="modulo", type="string", length=50)
+     * @Assert\NotBlank(message="El nombre del módulo es obligatorio")
      */
     private $modulo;
 
@@ -33,6 +35,7 @@ class Modulos
      * @var string
      *
      * @ORM\Column(name="descripcion", type="text")
+     * @Assert\NotBlank(message="Es obligatorio")
      */
     private $descripcion;
 

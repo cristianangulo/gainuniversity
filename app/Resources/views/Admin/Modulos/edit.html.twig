@@ -1,21 +1,22 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Perfil del módulo</h1>
-    </div>
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_modulos') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('admin_modulos_new') }}">
-          Crear módulo
-        </a>
-      </li>
-    </ul>
+{% block title_contenido %} Módulo {% endblock %}
 
+{% block navbar_contenido %}
+
+    <a href="{{ path('admin_modulos') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Regresar
+    </a>
+    <a href="{{ path('admin_modulos_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Módulo
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
+    
     {{ form_start(form) }}
 
       {% macro prototype(item) %}

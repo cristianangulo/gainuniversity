@@ -32,83 +32,31 @@ class ModulosController extends Controller
             'entities' => $entities,
         ));
     }
-    /**
-     * Creates a new Modulos entity.
-     *
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Modulos();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $entity->getId())));
-        }
-
-        return $this->render('ElearnBundle:Modulos:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to create a Modulos entity.
-     *
-     * @param Modulos $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Modulos $entity)
-    {
-        $form = $this->createForm(new ModulosType(), $entity, array(
-            'action' => $this->generateUrl('admin_modulos_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => array('class' => 'btn btn-success')));
-
-        return $form;
-    }
 
     /**
      * Displays a form to create a new Modulos entity.
      *
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
-        $entity = new Modulos();
-        $form   = $this->createCreateForm($entity);
+        $modulo = new Modulos();
+        $moduloForm = $this->createForm(new ModulosType(), $modulo);
+        $moduloForm->handleRequest($request);
 
-        return $this->render('Admin/Modulos/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
+        if ($moduloForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($modulo);
+            $em->flush();
 
-    /**
-     * Finds and displays a Modulos entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ElearnBundle:Modulos')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Modulos entity.');
+            $this->get('app.mensajero')->add('mensaje','El Módulo ha sido creado');
+            return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
         }
 
-        $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ElearnBundle:Modulos:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+
+        return $this->render('Admin/Modulos/new.html.twig', array(
+            'modulo' => $modulo,
+            'modulo_form'   => $moduloForm->createView(),
         ));
     }
 
@@ -164,6 +112,8 @@ class ModulosController extends Controller
 
 
           $em->flush();
+
+          $this->get('app.mensajero')->add('mensaje','El Módulo se ha actualizado');
 
           return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $id)));
         }
