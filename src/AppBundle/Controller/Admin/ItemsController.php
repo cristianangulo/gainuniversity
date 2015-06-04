@@ -40,14 +40,7 @@ class ItemsController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_secciones_edit', array('id' => $entity->getId())));
-        }
 
         return $this->render('ElearnBundle:Secciones:new.html.twig', array(
             'entity' => $entity,
@@ -78,14 +71,25 @@ class ItemsController extends Controller
      * Displays a form to create a new Secciones entity.
      *
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
-        $entity = new Items();
-        $form   = $this->createCreateForm($entity);
+        $item = new Items();
+        $itemForm   = $this->createForm(new ItemsType(), $item);
+
+        $itemForm->handleRequest($request);
+
+        if ($itemForm->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($item);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('admin_secciones_edit', array('id' => $item->getId())));
+        }
 
         return $this->render('Admin/Items/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'item' => $item,
+            'item_form'   => $itemForm->createView(),
         ));
     }
 
@@ -115,23 +119,30 @@ class ItemsController extends Controller
      * Displays a form to edit an existing Secciones entity.
      *
      */
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Admin\Items\Items')->find($id);
+        $item = $em->getRepository('AppBundle:Admin\Items\Items')->find($id);
 
-        if (!$entity) {
+        if (!$item) {
             throw $this->createNotFoundException('Unable to find Secciones entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-
         $deleteForm = $this->createDeleteForm($id);
+        $itemForm = $this->createForm(new ItemsType(), $item);
+        $itemForm->handleRequest($request);
+
+        if ($itemForm->isValid()) {
+
+            $item->upload();
+            $em->flush();
+            return $this->redirect($this->generateUrl('admin_secciones_edit', array('id' => $item->getId())));
+        }
 
         return $this->render('Admin/Items/edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'item'        => $item,
+            'item_form'   => $itemForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

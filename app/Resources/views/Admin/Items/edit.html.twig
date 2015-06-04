@@ -1,32 +1,43 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Perfil del ítem</h1>
-    </div>
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_secciones') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('admin_secciones_new') }}">
-          Crear ítem
-        </a>
-      </li>
-    </ul>
+{% block title_contenido %} Crear Ítem {% endblock %}
+
+{% block navbar_contenido %}
+
+    <a href="{{ path('admin_secciones') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Regresar
+    </a>
+
+    <a href="{{ path('admin_secciones_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Ítem
+    </a>
+
+{% endblock %}
 
 
-    {% if entity.tipo.id ==3 %}
-      {% if (entity.path !="") or (entity.path!=NULL) %}
+{% block body_contenido %}
+
+    {% if item.tipo.id ==3 %}
+      {% if (item.path !="") or (item.path!=NULL) %}
       <div class="alert alert-success" role="alert">
-        <strong>Archivo: </strong>{{ entity.path }} <a class="btn btn-danger" href="{{ path('secciones_delete_archivo', {id :entity.id})}}" class="alert-link">
+        <strong>Archivo: </strong>{{ item.path }} <a class="btn btn-danger" href="{{ path('secciones_delete_archivo', {id :item.id})}}" class="alert-link">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
       </div>
       {% endif %}
     {% endif %}
-    {{ form(edit_form, {'attr':{'novalidate':'novalidate'}}) }}
+
+    <form class="" action="" method="post" novalidate>
+      {{ form_widget(item_form) }}
+      <button type="submit" class="btn btn-success">
+        Guardar
+        <span class="glyphicon glyphicon-floppy-save"></span>
+      </button>
+    </form>
+
+
     <ul class="record_actions">
       <li>
         <a href="{{ path('admin_secciones') }}">

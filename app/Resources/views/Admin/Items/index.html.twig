@@ -1,17 +1,17 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Ítems <small></small></h1>
-    </div>
+{% block title_contenido %} Ítems {% endblock %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_secciones_new') }}">
-          Crear ítem
-        </a>
-      </li>
-    </ul>
+{% block navbar_contenido %}
+
+    <a href="{{ path('admin_secciones_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Ítem
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
 
     <table class="table table-striped records_list">
         <thead>

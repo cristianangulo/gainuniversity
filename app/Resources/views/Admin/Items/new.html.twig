@@ -1,24 +1,28 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Crear ítem <small></small></h1>
-    </div>
+{% block title_contenido %} Crear Ítem {% endblock %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_secciones') }}">
-          Regresar
-        </a>
-      </li>
-    </ul>
+{% block navbar_contenido %}
 
-    {{ form(form, {'attr': {'novalidate':'novalidate'}}) }}
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_cursos') }}">
-          Regresar
-        </a>
-      </li>
-    </ul>
+    <a href="{{ path('admin_secciones') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Regresar
+    </a>
+
+    <a href="{{ path('admin_secciones_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Ítem
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
+
+    <form class="" action="" method="post" novalidate>
+      {{ form_widget(item_form) }}
+      <button type="submit" class="btn btn-success">
+          Guardar
+          <span class="glyphicon glyphicon-floppy-save"></span>
+      </button>
+    </form>
 {% endblock %}

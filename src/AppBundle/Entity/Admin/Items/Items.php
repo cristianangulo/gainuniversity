@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Secciones
  *
@@ -27,6 +28,7 @@ class Items
      * @var string
      *
      * @ORM\Column(name="seccion", type="string", length=50)
+     * @Assert\NotBlank(message="El Item es obligatorio y no debe quedar vacío")
      */
     private $seccion;
 
@@ -46,6 +48,7 @@ class Items
      * @var string
      *
      * @ORM\Column(name="descripcion", type="text")
+     * @Assert\NotBlank(message="No debe quedar vacío")
      */
     private $descripcion;
 
@@ -58,6 +61,7 @@ class Items
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Items\TipoItem", inversedBy="items")
      * @ORM\JoinColumn(name="tipo_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="Escoja una de las opciones")
      */
     protected $tipo;
 

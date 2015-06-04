@@ -19,6 +19,7 @@ class ItemsType extends AbstractType
             ->add('tipo', 'entity', array(
               'class' => 'AppBundle:Admin\Items\TipoItem',
               'property' => 'tipoSeccion',
+              'empty_value' => 'Seleccione'
             ))
             ->add('seccion','text',array(
               'label' => 'Ítem'

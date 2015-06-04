@@ -20,11 +20,6 @@ class AddMultimediaFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        // Durante la creación del formulario setData() es llamado con null como
-        // argumento por el constructor FormBuilder. Solo te interesa cuando
-        // setData es llamado con un objeto Entity real (ya sea nuevo,
-        // o recuperado con Doctrine). Esta declaración 'if' permite evadir
-        // la condición null.
         if (null === $data) {
             return;
         }
@@ -38,7 +33,7 @@ class AddMultimediaFieldSubscriber implements EventSubscriberInterface
           ));
 
           if($data->getTipo()->getId()==1 || $data->getTipo()->getId()==4 || $data->getTipo()->getId()==6){
-            $form->add('multimedia', 'text', array('label' => 'Multimedia'));
+            $form->add('multimedia', 'text', array('label' => 'Multimedia (URL del video / audio)'));
           }
 
           if($data->getTipo()->getId()==3){
