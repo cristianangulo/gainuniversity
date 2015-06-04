@@ -5,7 +5,7 @@ namespace AppBundle\Form\Admin\Modulos;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use AppBundle\Form\Admin\Modulos\EventListener\ModuloItemsSubscriber;
+use AppBundle\Form\Admin\Modulos\EventListener\ItemsModuloSubscriber;
 
 class ItemsModuloType extends AbstractType
 {
@@ -16,7 +16,7 @@ class ItemsModuloType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->addEventSubscriber(new ModuloItemsSubscriber());
+        $builder->addEventSubscriber(new ItemsModuloSubscriber());
     }
 
     /**

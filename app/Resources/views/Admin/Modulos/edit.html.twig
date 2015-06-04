@@ -16,64 +16,87 @@
 {% endblock %}
 
 {% block body_contenido %}
-    
-    {{ form_start(form) }}
+    <div class="col-md-5">
+        <form class="" action="" method="post" novalidate>
+            {{ form_widget(modulo_form) }}
+            <button type="submit" class="btn btn-success">
+              Guardar
+              <span class="glyphicon glyphicon-floppy-save"></span>
+            </button>
+        </form>
+    </div>
 
-      {% macro prototype(item) %}
-             <tr>
-               <td>{{ form_widget(item.secciones) }}</td>
-               <td>{{ form_widget(item.posicion) }}</td>
-               <td>
-                <button class="btn btn-danger delete">
-                  <span class="glyphicon glyphicon-remove"></span>
-                </button>
-               </td>
-             </tr>
-         {% endmacro %}
-          {{ form_row(form.modulo) }}
-          {{ form_row(form.descripcion) }}
-         <table class="table table-condensed">
-             <caption></caption>
-             <thead>
-              <tr>
-                <th>
-                  Ítem
-                </th>
-                <th>
-                  Posición
-                </th>
-                <th>
-                </th>
-              </tr>
-             </thead>
-             <tbody class="collections" data-prototype="{{ _self.prototype(form.secciones.vars.prototype)|e }}">
-                 {% for item in form.secciones %}
-                    {{_self.prototype(item)}}
-                 {% endfor %}
-             </tbody>
-         </table>
-         <div class="btn-group">
-         <button type="submit" class="btn btn-success">Guardar</button>
-          <button type="button" class="btn btn-default add">
-            <span class="glyphicon glyphicon-plus"></span> Add
+    <div class="col-md-7">
+      <div class="alert alert-success">
+        <strong>Agregue Ítems al Módulo</strong>
+      </div>
+      <form class="" action="" method="post" novalidate>
+          {{ form_widget(add_items_form) }}
+          <button type="submit" class="btn btn-success">
+            Agregar
+            <span class="glyphicon glyphicon-floppy-save"></span>
           </button>
-         </div>
+      </form>
+      <hr>
+      {% if modulo.secciones|length == 0 %}
+          <div class="alert alert-danger">
+            <strong>Este Módulo no tiene Ítems agregados</strong>
+          </div>
+      {% else %}
+      <div class="alert alert-warning">
+        <strong>
+          Listado de Ítes del Módulo
+        </strong>
+      </div>
+      <form class="" action="" method="post">
+        {{ form_start(items_modulo_form) }}
+
+        {% macro prototype(item) %}
+               <tr>
+                 <td>{{ form_widget(item.secciones) }}</td>
+                 <td>{{ form_widget(item.posicion) }}</td>
+                 <td>
+                  <button class="btn btn-danger delete">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                 </td>
+               </tr>
+           {% endmacro %}
+           <table class="table table-condensed">
+               <caption></caption>
+               <thead>
+                <tr>
+                  <th>
+                    Ítem
+                  </th>
+                  <th>
+                    Posición
+                  </th>
+                  <th>
+                  </th>
+                </tr>
+               </thead>
+               <tbody class="collections" data-prototype="{{ _self.prototype(items_modulo_form.secciones.vars.prototype)|e }}">
+                   {% for item in items_modulo_form.secciones %}
+                      {{_self.prototype(item)}}
+                   {% endfor %}
+               </tbody>
+           </table>
+           <div class="btn-group">
+             <button type="submit" class="btn btn-success">
+               Guardar
+               <span class="glyphicon glyphicon-floppy-save"></span>
+             </button>
+           </div>
 
 
-    {{ form_end(form) }}
+        {{ form_end(items_modulo_form) }}
+      </form>
+      {% endif %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_modulos') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('admin_modulos_new') }}">
-          Crear módulo
-        </a>
-      </li>
-      <li>{{ form(delete_form) }}</li>
-    </ul>
+    </div>
+
+
 
 </ul>
 {% endblock %}

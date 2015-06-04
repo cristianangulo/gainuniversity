@@ -5,7 +5,7 @@ namespace AppBundle\Form\Admin\Modulos;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use AppBundle\Form\Admin\Modulos\EventListener\ModuloSeccionesPosicionSubscriber;
+use AppBundle\Form\Admin\Modulos\EventListener\ModuloItemsSubscriber;
 
 class ModuloItemsType extends AbstractType
 {
@@ -24,7 +24,7 @@ class ModuloItemsType extends AbstractType
             ->add('posicion');
         ;
 
-        $builder->addEventSubscriber(new ModuloSeccionesPosicionSubscriber());
+        $builder->addEventSubscriber(new ModuloItemsSubscriber());
     }
 
     /**

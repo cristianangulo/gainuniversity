@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Admin\Modulos\Modulos;
 use AppBundle\Form\Admin\Modulos\ModulosType;
+use AppBundle\Form\Admin\Modulos\ItemsModuloType;
+use AppBundle\Form\Admin\Modulos\AddItemsType;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -74,42 +76,12 @@ class ModulosController extends Controller
             throw $this->createNotFoundException('Unable to find Modulos entity.');
         }
 
-        $originalItems = new ArrayCollection();
+        $moduloForm = $this->createForm(new ModulosType(), $modulo);
 
-        foreach($modulo->getSecciones() as $item){
-          $originalItems->add($item);
-        }
-
-        $form = $this->createEditForm($modulo);
-
-        $form->handleRequest($request);
+        $moduloForm->handleRequest($request);
         $deleteForm = $this->createDeleteForm($id);
 
-        if ($form->isValid()) {
-          foreach($originalItems as $o){
-          if(false === $modulo->getSecciones()->contains($o)){
-            //$o->getOrden()->removeElement($ordenCompra);
-            //$o->setOrden(null);
-            $em->remove($o);
-            //$em->persist($o);
-          }
-        }
-
-        foreach($form->getData()->getSecciones() as $item){
-          if(!$item->getId()){
-            $moduloSecciones = new ModuloItems();
-
-            $modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($modulo);
-            $secciones = count($originalItems) + 1;
-            $moduloSecciones->setPosicion($secciones);
-            $moduloSecciones->setModulos($modulo);
-            $seccion = $em->getRepository('AppBundle:Admin\Items\Items')->find($item->getSecciones()->getId());
-            $moduloSecciones->setSecciones($seccion);
-
-            $em->persist($moduloSecciones);
-          }
-        }
-
+        if ($moduloForm->isValid()) {
 
           $em->flush();
 
@@ -118,10 +90,55 @@ class ModulosController extends Controller
           return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $id)));
         }
 
+        $originalItems = new ArrayCollection();
+
+        foreach($modulo->getSecciones() as $item){
+          $originalItems->add($item);
+        }
+
+        /**
+         * Form para agregar Ítems al módulo
+         */
+
+        $moduloSecciones = new ModuloItems();
+        $AddItemsForm = $this->createForm(new AddItemsType(), $moduloSecciones);
+
+        $AddItemsForm->handleRequest($request);
+
+        if($AddItemsForm->isValid()){
+
+          $secciones = count($originalItems) + 1;
+          $moduloSecciones->setPosicion($secciones);
+          $moduloSecciones->setModulos($modulo);
+          $em->persist($moduloSecciones);
+          $em->flush();
+          $this->get('app.mensajero')->add('mensaje','Se ha agregado un Ítem al Módulo');
+          return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
+        }
+
+        $itemsModuloForm = $this->createForm(new ItemsModuloType(), $modulo);
+
+        $itemsModuloForm->handleRequest($request);
+
+        if($itemsModuloForm->isValid()){
+
+          foreach($originalItems as $o){
+          if(false === $modulo->getSecciones()->contains($o)){
+              $em->remove($o);
+            }
+          }
+
+          $em->flush();
+          $this->get('app.mensajero')->add('mensaje','Se han actualizado los Ítems del Módulo');
+          return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
+        }
+
         return $this->render('Admin/Modulos/edit.html.twig', array(
-            'entity'      => $modulo,
-            'form'   => $form->createView(),
+            'modulo'      => $modulo,
+            'modulo_form'   => $moduloForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'items_modulo_form' => $itemsModuloForm->createView(),
+            'add_items_form' => $AddItemsForm->createView()
         ));
     }
 

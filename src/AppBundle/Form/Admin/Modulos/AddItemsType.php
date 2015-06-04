@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ModulosType extends AbstractType
+class AddItemsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,9 +15,11 @@ class ModulosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('modulo')
-            ->add('descripcion','textarea', array(
-              'attr' => array('rows' => '10'),
+            ->add('secciones', 'entity', array(
+              'class' => 'AppBundle:Admin\Items\Items',
+              'property' => 'seccion',
+              'empty_value' => 'Seleccione',
+              'label' => 'Ítems'
             ))
         ;
     }
@@ -28,7 +30,7 @@ class ModulosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Admin\Modulos\Modulos'
+            'data_class' => 'AppBundle\Entity\Admin\Modulos\ModuloItems'
         ));
     }
 
@@ -37,6 +39,6 @@ class ModulosType extends AbstractType
      */
     public function getName()
     {
-        return 'modulo_items';
+        return 'add_items_modulo';
     }
 }
