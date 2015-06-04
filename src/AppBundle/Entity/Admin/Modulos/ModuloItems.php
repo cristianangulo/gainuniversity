@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Admin\Modulos;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ModuloSecciones
@@ -38,6 +39,7 @@ class ModuloItems
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Items\Items", inversedBy="seccionesmodulo")
      * @ORM\JoinColumn(name="seccion_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="Seleccione un Ítem")
      **/
 
     private $secciones;

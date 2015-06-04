@@ -42,6 +42,7 @@ class Modulos
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="modulos", cascade={"persist"})
      * @ORM\OrderBy({"posicion" = "ASC"})
+     * @Assert\NotBlank(message="Es obligatorio")
      **/
 
     private $secciones;

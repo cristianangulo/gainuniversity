@@ -19,7 +19,7 @@ class ModuloItemsType extends AbstractType
             ->add('secciones', 'entity', array(
               'class' => 'AppBundle:Admin\Items\Items',
               'property' => 'seccion',
-              'empty_value' => 'Seleccione'
+              //'empty_value' => 'Seleccione'
             ))
             ->add('posicion');
         ;
