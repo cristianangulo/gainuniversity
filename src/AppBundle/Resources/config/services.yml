@@ -25,3 +25,7 @@ services:
     app.cartero:
       class:  AppBundle\Utils\Cartero
       arguments:  [@mailer]
+
+    app.mensajero:
+      class:  AppBundle\Utils\Mensajero
+      arguments:  [@session]

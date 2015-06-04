@@ -41,7 +41,7 @@ class RecuperarCuentaController extends Controller
 
       if(!$usuario){
 
-        $this->get('session')->getFlashBag()->add('mensaje', $mensaje);
+        $this->get('app.mensajero')->add('mensaje', $mensaje);
 
         return $this->redirect($this->generateUrl('login'));
       }
@@ -60,8 +60,7 @@ class RecuperarCuentaController extends Controller
       $usuario->setCodigo($random);
       $em->flush();
 
-      $this->get('session')->getFlashBag()->add('mensaje', $mensaje);
-
+      $this->get('app.mensajero')->add('mensaje', $mensaje);
       return $this->redirect($this->generateUrl('login'));
     }
 
