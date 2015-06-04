@@ -30,42 +30,6 @@ class ItemsController extends Controller
             'entities' => $entities,
         ));
     }
-    /**
-     * Creates a new Secciones entity.
-     *
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Items();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-
-
-        return $this->render('ElearnBundle:Secciones:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to create a Secciones entity.
-     *
-     * @param Secciones $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Items $entity)
-    {
-        $form = $this->createForm(new ItemsType(), $entity, array(
-            'action' => $this->generateUrl('admin_secciones_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Guardar', 'attr' => array('class' => 'btn btn-success')));
-
-        return $form;
-    }
 
     /**
      * Displays a form to create a new Secciones entity.
@@ -84,34 +48,14 @@ class ItemsController extends Controller
             $em->persist($item);
             $em->flush();
 
+            $this->get('app.mensajero')->add('mensaje', 'El Ítem se ha creado');
+
             return $this->redirect($this->generateUrl('admin_secciones_edit', array('id' => $item->getId())));
         }
 
         return $this->render('Admin/Items/new.html.twig', array(
             'item' => $item,
             'item_form'   => $itemForm->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a Secciones entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ElearnBundle:Secciones')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Secciones entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('ElearnBundle:Secciones:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -137,6 +81,9 @@ class ItemsController extends Controller
 
             $item->upload();
             $em->flush();
+
+            $this->get('app.mensajero')->add('mensaje', 'El Ítem se ha actualizado');
+
             return $this->redirect($this->generateUrl('admin_secciones_edit', array('id' => $item->getId())));
         }
 
@@ -206,7 +153,7 @@ class ItemsController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ElearnBundle:Secciones')->find($id);
+            $entity = $em->getRepository('AppBundle:Admin\Items\Items')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Secciones entity.');
@@ -216,6 +163,7 @@ class ItemsController extends Controller
             $em->flush();
         }
 
+        $this->get('app.mensajero')->add('error', 'El Ítem ha sido borrado');
         return $this->redirect($this->generateUrl('admin_secciones'));
     }
 

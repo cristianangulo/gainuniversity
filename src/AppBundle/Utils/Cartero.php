@@ -23,7 +23,7 @@ class Cartero
       $this->from = array("no-reply@gainuniversity.com" => "gainuniversity.com");
     }
 
-    public function cartero($mail, $body, $subject = false)
+    public function msn($mail, $body, $subject = false)
     {
       $message = \Swift_Message::newInstance()
         ->setContentType($this->contentType)

@@ -71,10 +71,10 @@ class UsuariosController extends Controller
                 'password'=> $password,
               ));
 
-              $this->get('app.mensajero')->mensajero($usuario->getEmail(), $body, 'Cuenta creada');
+              $this->get('app.cartero')->msn($usuario->getEmail(), $body, 'Cuenta creada');
             }
 
-            $this->get('session')->getFlashBag()->add('mensaje', 'El usuario ha sido creado');
+            $this->get('app.mensajero')->add('mensaje', 'El usuario ha sido creado');
 
             return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $usuario->getId())));
 
@@ -108,6 +108,7 @@ class UsuariosController extends Controller
         if($usuarioForm->isValid()){
 
             $em->flush();
+            $this->get('app.mensajero')->add('mensaje', 'Los datos del usuario han sido actualizados');
             return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $usuario->getId())));
 
         }
@@ -128,7 +129,7 @@ class UsuariosController extends Controller
           $em->persist($usuario);
           $em->flush();
 
-          
+          $this->get('app.mensajero')->add('mensaje', 'La contraseña ha sido actualizada');
 
           return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $usuario->getId())));
         }
@@ -161,7 +162,7 @@ class UsuariosController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
+        $this->get('app.mensajero')->add('error', 'El usuario ha sido eliminado');
         return $this->redirect($this->generateUrl('usuarios'));
     }
 
