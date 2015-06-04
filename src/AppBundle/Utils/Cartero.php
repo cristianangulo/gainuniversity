@@ -5,7 +5,7 @@ namespace AppBundle\Utils;
 /**
  * Clase (capa) encargada de abstraer el envío de datos vía email en la aplicación
  */
-class Mensajero
+class Cartero
 {
 
     private $contentType;
@@ -23,7 +23,7 @@ class Mensajero
       $this->from = array("no-reply@gainuniversity.com" => "gainuniversity.com");
     }
 
-    public function mensajero($mail, $body, $subject = false)
+    public function cartero($mail, $body, $subject = false)
     {
       $message = \Swift_Message::newInstance()
         ->setContentType($this->contentType)

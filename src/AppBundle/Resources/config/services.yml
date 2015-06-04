@@ -22,6 +22,6 @@ services:
     app.valor_random:
       class:  AppBundle\Utils\ValorRandom
 
-    app.mensajero:
-      class:  AppBundle\Utils\Mensajero
+    app.cartero:
+      class:  AppBundle\Utils\Cartero
       arguments:  [@mailer]
