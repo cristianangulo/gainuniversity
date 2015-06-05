@@ -304,26 +304,12 @@ class Cursos
     }
 
     /**
-     * Add usuario
+     * Get usuarios
      *
-     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario
-     *
-     * @return Cursos
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function addUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
+    public function getUsuarios()
     {
-        $this->usuarios[] = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Remove usuario
-     *
-     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario
-     */
-    public function removeUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
-    {
-        $this->usuarios->removeElement($usuario);
+        return $this->usuarios;
     }
 }

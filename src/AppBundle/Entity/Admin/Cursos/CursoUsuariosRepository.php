@@ -16,7 +16,7 @@ class CursoUsuariosRepository extends EntityRepository
   {
     return $this->getEntityManager()
       ->createQuery(
-        'SELECT c FROM AppBundle:Admin\Cursos\CursoUsuarios c where c.curso = :curso AND c.usuario = :usuario'
+        'SELECT c FROM AppBundle:Admin\Cursos\CursoUsuarios c where c.cursos = :curso AND c.usuarios = :usuario'
       )
       ->setParameter('curso', $curso)
       ->setParameter('usuario', $usuario)
@@ -27,7 +27,7 @@ class CursoUsuariosRepository extends EntityRepository
   {
     return $this->getEntityManager()
       ->createQuery(
-        'SELECT c FROM AppBundle:Admin\Cursos\CursoUsuarios c where c.curso = :curso AND c.usuario = :usuario'
+        'SELECT c FROM AppBundle:Admin\Cursos\CursoUsuarios c where c.cursos = :curso AND c.usuarios = :usuario'
       )
       ->setParameter('curso', $curso)
       ->setParameter('usuario', $usuario)
@@ -38,7 +38,7 @@ class CursoUsuariosRepository extends EntityRepository
   {
     return $this->getEntityManager()
       ->createQuery(
-        'SELECT c FROM AppBundle:Admin\Cursos\CursoUsuarios c where c.curso = :curso AND c.usuario = :usuario'
+        'SELECT c FROM AppBundle:Admin\Cursos\CursoUsuarios c where c.cursos = :curso AND c.usuarios = :usuario'
       )
       ->setParameter('curso', $curso)
       ->setParameter('usuario', $usuario)

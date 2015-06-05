@@ -279,8 +279,17 @@ class CursosController extends Controller
         ;
     }
 
-    public function usuariosAction($curso)
+    public function eliminarUsuariosCursoAction($curso, $usuario)
     {
-      return new Response($curso);
+      $em = $this->getDoctrine()->getManager();
+      $cursoUsuario = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->findCursoUsuario($curso, $usuario);
+
+      if($cursoUsuario){
+
+        echo $cursoUsuario->getUsuarios();
+
+      }
+
+      return new Response('Hola');
     }
 }

@@ -304,6 +304,16 @@ class Cursos
     }
 
     /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    /**
      * Add usuario
      *
      * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario
@@ -325,15 +335,5 @@ class Cursos
     public function removeUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
     {
         $this->usuarios->removeElement($usuario);
-    }
-
-    /**
-     * Get usuarios
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsuarios()
-    {
-        return $this->usuarios;
     }
 }
