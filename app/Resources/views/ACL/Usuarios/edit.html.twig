@@ -42,6 +42,31 @@
 
         </div>
       </div>
+      <hr>
+      <div class="alert alert-success">
+        <strong>Cursos del usuario</strong>
+      </div>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th>
+                    Curso
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for curso in usuario.cursos %}
+                  <tr>
+                    <td>
+                      {{ curso.cursos.curso }}
+                    </td>
+                  </tr>
+              {% endfor %}
+
+            </tbody>
+        </table>
+
     </div>
 
 

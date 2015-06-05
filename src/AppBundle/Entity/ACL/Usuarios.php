@@ -88,10 +88,10 @@ class Usuarios implements UserInterface
   private $codigo;
 
   /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="usuario", cascade={"remove"})
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="usuarios", cascade={"remove"})
    **/
 
-  private $curso;
+  private $cursos;
 
   public function __construct()
   {
@@ -345,11 +345,12 @@ class Usuarios implements UserInterface
      * Add curso
      *
      * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso
+     *
      * @return Usuarios
      */
     public function addCurso(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso)
     {
-        $this->curso[] = $curso;
+        $this->cursos[] = $curso;
 
         return $this;
     }
@@ -361,16 +362,16 @@ class Usuarios implements UserInterface
      */
     public function removeCurso(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso)
     {
-        $this->curso->removeElement($curso);
+        $this->cursos->removeElement($curso);
     }
 
     /**
-     * Get curso
+     * Get cursos
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCurso()
+    public function getCursos()
     {
-        return $this->curso;
+        return $this->cursos;
     }
 }

@@ -1,17 +1,8 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Quiz's <small></small></h1>
-    </div>
+{% block title_contenido %} Quizes {% endblock %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_quiz_new') }}">
-          Crear quiz
-        </a>
-      </li>
-    </ul>
+{% block body_contenido %}
 
     <table class="table table-striped records_list">
         <thead>
@@ -35,11 +26,4 @@
         {% endfor %}
         </tbody>
     </table>
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_quiz_new') }}">
-          Crear quiz
-        </a>
-      </li>
-    </ul>
     {% endblock %}
