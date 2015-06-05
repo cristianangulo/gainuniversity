@@ -25,14 +25,14 @@ class CursoUsuarios
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Cursos\Cursos")
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      **/
-    private $curso;
+    private $cursos;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Usuarios", inversedBy="cursoUsuarios")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", onDelete="CASCADE")
      **/
-    private $usuario;
+    private $usuarios;
 
     /**
      * @var string
@@ -79,49 +79,52 @@ class CursoUsuarios
         return $this->fechaRegistro;
     }
 
+
     /**
-     * Set curso
+     * Set cursos
      *
-     * @param \AppBundle\Entity\Admin\Cursos\Cursos $curso
+     * @param \AppBundle\Entity\Admin\Cursos\Cursos $cursos
+     *
      * @return CursoUsuarios
      */
-    public function setCurso(\AppBundle\Entity\Admin\Cursos\Cursos $curso = null)
+    public function setCursos(\AppBundle\Entity\Admin\Cursos\Cursos $cursos = null)
     {
-        $this->curso = $curso;
+        $this->cursos = $cursos;
 
         return $this;
     }
 
     /**
-     * Get curso
+     * Get cursos
      *
      * @return \AppBundle\Entity\Admin\Cursos\Cursos
      */
-    public function getCurso()
+    public function getCursos()
     {
-        return $this->curso;
+        return $this->cursos;
     }
 
     /**
-     * Set usuario
+     * Set usuarios
      *
-     * @param \AppBundle\Entity\ACL\Usuarios $usuario
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
+     *
      * @return CursoUsuarios
      */
-    public function setUsuario(\AppBundle\Entity\ACL\Usuarios $usuario = null)
+    public function setUsuarios(\AppBundle\Entity\ACL\Usuarios $usuarios = null)
     {
-        $this->usuario = $usuario;
+        $this->usuarios = $usuarios;
 
         return $this;
     }
 
     /**
-     * Get usuario
+     * Get usuarios
      *
      * @return \AppBundle\Entity\ACL\Usuarios
      */
-    public function getUsuario()
+    public function getUsuarios()
     {
-        return $this->usuario;
+        return $this->usuarios;
     }
 }

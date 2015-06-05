@@ -187,6 +187,7 @@ class CursosController extends Controller
             'modulos_curso_form' => $modulosCursoForm->createView(),
             'add_modulos_form' => $cursoModulosForm->createView(),
             'add_usuarios_form' => $addUsuariosForm->createView(),
+            'usuarios_curso_form' => $usuariosCursoForm->createView()
         ));
     }
 

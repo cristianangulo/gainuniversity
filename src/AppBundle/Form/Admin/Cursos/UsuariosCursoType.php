@@ -14,7 +14,7 @@ class UsuariosCursoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('cursoUsuarios', 'collection', array(
+        $builder->add('usuarios', 'collection', array(
           'type' => new AddUsuariosType(),
           'by_reference' => false,
           'allow_add' => true,
@@ -37,6 +37,6 @@ class UsuariosCursoType extends AbstractType
      */
     public function getName()
     {
-        return 'modulos_curso';
+        return 'usuarios_curso';
     }
 }

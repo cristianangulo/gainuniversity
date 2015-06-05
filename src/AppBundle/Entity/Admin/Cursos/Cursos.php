@@ -86,15 +86,14 @@ class Cursos
 
     /**
     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="cursos", cascade={"persist"})
-    * @ORM\OrderBy({"posicion" = "ASC"})
     */
-    private $cursoUsuarios;
+    private $usuarios;
 
 
     public function __construct()
     {
       $this->modulos = new ArrayCollection();
-      $this->cursoUsuarios = new ArrayCollection();
+      $this->usuarios = new ArrayCollection();
       $this->fechaPublicacion = new \DateTime('now');
     }
 
@@ -305,36 +304,36 @@ class Cursos
     }
 
     /**
-     * Add cursoUsuario
+     * Add usuario
      *
-     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $cursoUsuario
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario
      *
      * @return Cursos
      */
-    public function addCursoUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $cursoUsuario)
+    public function addUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
     {
-        $this->cursoUsuarios[] = $cursoUsuario;
+        $this->usuarios[] = $usuario;
 
         return $this;
     }
 
     /**
-     * Remove cursoUsuario
+     * Remove usuario
      *
-     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $cursoUsuario
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario
      */
-    public function removeCursoUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $cursoUsuario)
+    public function removeUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
     {
-        $this->cursoUsuarios->removeElement($cursoUsuario);
+        $this->usuarios->removeElement($usuario);
     }
 
     /**
-     * Get cursoUsuarios
+     * Get usuarios
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCursoUsuarios()
+    public function getUsuarios()
     {
-        return $this->cursoUsuarios;
+        return $this->usuarios;
     }
 }

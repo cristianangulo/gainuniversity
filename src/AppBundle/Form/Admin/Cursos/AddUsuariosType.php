@@ -15,7 +15,7 @@ class AddUsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('usuario', 'entity', array(
+            ->add('usuarios', 'entity', array(
               'class' => 'AppBundle:ACL\Usuarios',
               'property' => 'nombre',
               'empty_value' => 'Seleccione'

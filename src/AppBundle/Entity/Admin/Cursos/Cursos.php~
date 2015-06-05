@@ -88,13 +88,13 @@ class Cursos
     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoUsuarios", mappedBy="cursos", cascade={"persist"})
     * @ORM\OrderBy({"posicion" = "ASC"})
     */
-    private $cursoUsuarios;
+    private $usuarios;
 
 
     public function __construct()
     {
       $this->modulos = new ArrayCollection();
-      $this->cursoUsuarios = new ArrayCollection();
+      $this->usuarios = new ArrayCollection();
       $this->fechaPublicacion = new \DateTime('now');
     }
 
@@ -302,5 +302,39 @@ class Cursos
     public function getUrlTienda()
     {
         return $this->urlTienda;
+    }
+
+    /**
+     * Add usuario
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario
+     *
+     * @return Cursos
+     */
+    public function addUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
+    {
+        $this->usuarios[] = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Remove usuario
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario
+     */
+    public function removeUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
+    {
+        $this->usuarios->removeElement($usuario);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
     }
 }
