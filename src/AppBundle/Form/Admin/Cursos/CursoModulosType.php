@@ -20,8 +20,6 @@ class CursoModulosType extends AbstractType
             ->add('modulos', 'entity', array(
               'class' => 'AppBundle:Admin\Modulos\Modulos',
               'property' => 'modulo',
-              'empty_value' => "Seleccione",
-              'label' => 'Agregue módulos a este curso'
             ))
             ->add('posicion')
         ;

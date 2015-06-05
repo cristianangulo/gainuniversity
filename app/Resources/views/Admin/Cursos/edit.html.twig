@@ -13,6 +13,11 @@
       Crear Curso
     </a>
 
+    <a href="{{ path('admin_cursos_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Agregue Usuarios
+    </a>
+
 {% endblock %}
 
 {% block body_contenido %}
@@ -41,7 +46,7 @@
       </form>
       <hr>
       <div class="alert alert-success">
-        <strong>Listado de Módulos del Curso | {{ curso.modulos|length|default('No hay Módulos para este Curso') }}</strong>
+        <strong>Listado de Módulos del Curso | {{ curso.modulos|length }}</strong>
       </div>
       {{ form_start(modulos_curso_form) }}
 
@@ -97,8 +102,46 @@
             </button>
         </form>
         <hr>
-        <form class="form" action="" method="post" novalidate>
-            {{ form_widget(usuarios_curso_form) }}
-        </form>
+        <div class="alert alert-success">
+          <strong>Usuarios del Curso | {{ curso.usuarios|length }}</strong>
+        </div>
+          <table class="table table-responsive">
+            <thead>
+              <tr>
+                <th>
+                  Usuario
+                </th>
+                <th>
+
+                </th>
+              </tr>
+            </thead>
+              <tbody>
+                {% for usuario in curso.usuarios %}
+                <tr>
+                  <td>
+                       {{ loop.index }} - {{ usuario.usuarios.nombre|default("Usuario sin nombre") }}<br>
+                       <small>
+                         {{ usuario.usuarios.email }}<br>
+                         {{ usuario.fechaRegistro|date('d/m/Y') }}
+                       </small>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <a href="{{ path('usuarios_edit', {'id': usuario.usuarios.id }) }}" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user"></span>
+                      </a>
+                      <button type="button" class="btn btn-default">
+                          <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+
+
     </div>
 {% endblock %}

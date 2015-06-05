@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Admin\Cursos\Cursos;
@@ -169,7 +170,7 @@ class CursosController extends Controller
 
         if($addUsuariosForm->isValid()){
 
-            $cursoUsuarios->setCurso($curso);
+            $cursoUsuarios->setCursos($curso);
             $em->persist($cursoUsuarios);
             $em->flush();
 
@@ -276,5 +277,10 @@ class CursosController extends Controller
             ->add('submit', 'submit', array('label' => 'Eliminar', 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
+    }
+
+    public function usuariosAction($curso)
+    {
+      return new Response($curso);
     }
 }

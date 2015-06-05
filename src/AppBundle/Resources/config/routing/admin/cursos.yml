@@ -28,3 +28,7 @@ admin_cursos_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Admin/Cursos:delete" }
     requirements: { _method: post|delete }
+
+usuarios_curso:
+    path:     /usuarios/{curso}
+    defaults: { _controller: "AppBundle:Admin/Cursos:usuarios" }

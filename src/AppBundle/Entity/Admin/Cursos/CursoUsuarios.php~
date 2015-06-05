@@ -103,4 +103,28 @@ class CursoUsuarios
     {
         return $this->cursos;
     }
+
+    /**
+     * Set usuarios
+     *
+     * @param \AppBundle\Entity\ACL\Usuarios $usuarios
+     *
+     * @return CursoUsuarios
+     */
+    public function setUsuarios(\AppBundle\Entity\ACL\Usuarios $usuarios = null)
+    {
+        $this->usuarios = $usuarios;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \AppBundle\Entity\ACL\Usuarios
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
 }
