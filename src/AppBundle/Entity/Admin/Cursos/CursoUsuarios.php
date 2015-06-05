@@ -28,7 +28,7 @@ class CursoUsuarios
     private $curso;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Usuarios", inversedBy="usuarioscurso")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ACL\Usuarios", inversedBy="cursoUsuarios")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", onDelete="CASCADE")
      **/

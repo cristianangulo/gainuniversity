@@ -84,4 +84,21 @@
 
       {{ form_end(modulos_curso_form) }}
     </div>
+    <div class="col-md-6">
+      <hr>
+      <div class="alert alert-success">
+        <strong>Agregue Usuarios</strong>
+      </div>
+        <form class="form" action="" method="post" novalidate>
+            {{ form_widget(add_usuarios_form) }}
+            <button type="submit" class="btn btn-success">
+              Agregar
+              <span class="glyphicon glyphicon-save"></span>
+            </button>
+        </form>
+        <hr>
+        <form class="form" action="" method="post" novalidate>
+
+        </form>
+    </div>
 {% endblock %}

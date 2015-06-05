@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CursoUsuariosType extends AbstractType
+class UsuariosCursoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,15 +14,12 @@ class CursoUsuariosType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('fechaRegistro','date', array(
-            ))
-            ->add('usuario', 'entity', array(
-              'class' => 'AppBundle:ACL\Usuarios',
-              'property' => 'nombre',
-              'empty_value' => 'Seleccione'
-            ))
-        ;
+        $builder->add('cursoUsuarios', 'collection', array(
+          'type' => new AddUsuariosType(),
+          'by_reference' => false,
+          'allow_add' => true,
+          'allow_delete' => true
+        ));
     }
 
     /**
@@ -31,7 +28,7 @@ class CursoUsuariosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Admin\Cursos\CursoUsuarios'
+            'data_class' => 'AppBundle\Entity\Admin\Cursos\Cursos'
         ));
     }
 
@@ -40,6 +37,6 @@ class CursoUsuariosType extends AbstractType
      */
     public function getName()
     {
-        return 'elearn_elearnbundle_cursousuarios';
+        return 'modulos_curso';
     }
 }
