@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Admin\Cursos\Cursos;
 use AppBundle\Form\Admin\Cursos\CursosType;
+use AppBundle\Form\Admin\Cursos\ModulosCursoType;
+use AppBundle\Form\Admin\Cursos\CursoModulosType;
+use AppBundle\Form\Admin\Cursos\AddModulosCursoType;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -92,55 +95,97 @@ class CursosController extends Controller
 
         $curso = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->find($id);
 
-        if (!$curso) {
-            throw $this->createNotFoundException('Unable to find Cursos entity.');
-        }
-
         $originalModulos = new ArrayCollection();
 
         foreach($curso->getModulos() as $modulo){
           $originalModulos->add($modulo);
         }
 
-        $form = $this->createEditForm($curso);
+        if (!$curso) {
+            throw $this->createNotFoundException('Unable to find Cursos entity.');
+        }
 
-        $form->handleRequest($request);
+        $cursoForm = $this->createForm(new CursosType(), $curso);
+
+        $cursoForm->handleRequest($request);
         $deleteForm = $this->createDeleteForm($id);
 
-        if ($form->isValid()) {
-          foreach($originalModulos as $o){
-            if(false === $curso->getModulos()->contains($o)){
-              //$o->getOrden()->removeElement($ordenCompra);
-              //$o->setOrden(null);
-              $em->remove($o);
-              //$em->persist($o);
-            }
-          }
-
-        foreach($form->getData()->getModulos() as $modulo){
-          if(!$modulo->getId()){
-            $cursoModulos = new CursoModulos();
-
-            //$modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo);
-            $cursoModulos->setPosicion(count($originalModulos) + 1);
-            $cursoModulos->setCursos($curso);
-            $modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($modulo->getModulos()->getId());
-            $cursoModulos->setModulos($modulo);
-
-            $em->persist($cursoModulos);
-          }
-        }
+        if ($cursoForm->isValid()) {
+        // foreach($form->getData()->getModulos() as $modulo){
+        //   if(!$modulo->getId()){
+        //     $cursoModulos = new CursoModulos();
+        //
+        //     //$modulo = $em->getRepository('ElearnBundle:Modulos')->find($modulo);
+        //
+        //   }
+        // }
 
         $em->flush();
 
-        return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $id)));
+        $this->get('app.mensajero')->add('mensaje','Se han actualizado los datos del Curso');
+
+        return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
       }
 
 
+        $cursoModulos = new CursoModulos();
+
+        $cursoModulosForm = $this->createForm(new AddModulosCursoType(), $cursoModulos);
+
+        $cursoModulosForm->handleRequest($request);
+
+        if($cursoModulosForm->isValid()){
+
+          $cursoModulos->setPosicion(count($originalModulos) + 1);
+          $cursoModulos->setCursos($curso);
+          //$modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($modulo->getModulos()->getId());
+          //$cursoModulos->setModulos($modulo);
+
+          $em->persist($cursoModulos);
+          $em->flush();
+          $this->get('app.mensajero')->add('mensaje','Se ha agregado un Módulo al Curso');
+
+          return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
+
+        }
+
+        // $addModulosForm = $this->createForm(new AddModulosCursoType(), $cursoModulos);
+        //
+        // $addModulosForm->handleRequest($request);
+        //
+        // if($addModulosForm->isValid()){
+        //
+
+        //
+        // }
+
+        $modulosCursoForm = $this->createForm(new ModulosCursoType(), $curso);
+        $modulosCursoForm->handleRequest($request);
+
+
+
+        if($modulosCursoForm->isValid()){
+
+            foreach($originalModulos as $o){
+              if(false === $curso->getModulos()->contains($o)){
+                $em->remove($o);
+              }
+            }
+
+            $em->flush();
+
+            $this->get('app.mensajero')->add('mensaje','Los Módulos se han actualizado');
+
+            return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
+        }
+
+
         return $this->render('Admin/Cursos/edit.html.twig', array(
-            'entity'      => $curso,
-            'form'   => $form->createView(),
+            'curso'      => $curso,
+            'curso_form'   => $cursoForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'modulos_curso_form' => $modulosCursoForm->createView(),
+            'add_modulos_form' => $cursoModulosForm->createView()
         ));
     }
 

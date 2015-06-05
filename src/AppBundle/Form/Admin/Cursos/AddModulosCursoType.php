@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use AppBundle\Form\Admin\Cursos\EventListener\CursoModulosPosicionSubscriber;
 
 
-class CursoModulosType extends AbstractType
+class AddModulosCursoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,12 +21,9 @@ class CursoModulosType extends AbstractType
               'class' => 'AppBundle:Admin\Modulos\Modulos',
               'property' => 'modulo',
               'empty_value' => "Seleccione",
-              'label' => 'Agregue módulos a este curso'
+              'label' => 'Módulos'
             ))
-            ->add('posicion')
         ;
-
-        $builder->addEventSubscriber(new CursoModulosPosicionSubscriber());
 
     }
 
@@ -45,6 +42,6 @@ class CursoModulosType extends AbstractType
      */
     public function getName()
     {
-        return 'elearn_elearnbundle_cursomodulos';
+        return 'add_modulos_curso';
     }
 }

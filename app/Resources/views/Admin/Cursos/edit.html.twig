@@ -16,9 +16,34 @@
 {% endblock %}
 
 {% block body_contenido %}
-    
-    <div class="well">
-      {{ form_start(form) }}
+    <div class="col-md-12">
+      <form class="form" action="" method="post" novalidate>
+          {{ form_widget(curso_form) }}
+          <button type="submit" class="btn btn-success">
+            Guardar
+            <span class="glyphicon glyphicon-floppy-save"></span>
+          </button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <hr>
+
+      <div class="alert alert-success">
+        <strong>Agregue Módulos</strong>
+      </div>
+
+      <form class="form" action="" method="post" novalidate>
+          {{ form_widget(add_modulos_form) }}
+          <button type="submit" class="btn btn-success">
+            Agregar
+            <span class="glyphicon glyphicon-save"></span>
+          </button>
+      </form>
+      <hr>
+      <div class="alert alert-success">
+        <strong>Listado de Módulos del Curso | {{ curso.modulos|length|default('No hay Módulos para este Curso') }}</strong>
+      </div>
+      {{ form_start(modulos_curso_form) }}
 
         {% macro prototype(modulo) %}
                <tr>
@@ -31,20 +56,12 @@
                  </td>
                </tr>
            {% endmacro %}
-            {{ form_row(form.curso) }}
-            {{ form_row(form.temporalidad) }}
-            {{ form_row(form.fechaPublicacion) }}
-            {{ form_row(form.sku) }}
-            {{ form_row(form.descripcion) }}
-            <div class="page-header">
-              <h1>Módulos</h1>
-            </div>
            <table class="table table-condensed">
                <caption></caption>
                <thead>
                 <tr>
                   <th>
-                    Ítem
+                    Módulo
                   </th>
                   <th>
                     Posición
@@ -53,34 +70,18 @@
                   </th>
                 </tr>
                </thead>
-               <tbody class="collections" data-prototype="{{ _self.prototype(form.modulos.vars.prototype)|e }}">
-                   {% for modulo in form.modulos %}
+               <tbody class="collections" data-prototype="{{ _self.prototype(modulos_curso_form.modulos.vars.prototype)|e }}">
+                   {% for modulo in modulos_curso_form.modulos %}
                       {{_self.prototype(modulo)}}
                    {% endfor %}
                </tbody>
            </table>
-           <div class="btn-group">
-           <button type="submit" class="btn btn-success">Guardar</button>
-            <button type="button" class="btn btn-default add">
-              <span class="glyphicon glyphicon-plus"></span> Add
-            </button>
-           </div>
+           <button type="submit" class="btn btn-success">
+             Guardar
+             <span class="glyphicon glyphicon-floppy-save"></span>
+           </button>
 
 
-      {{ form_end(form) }}
+      {{ form_end(modulos_curso_form) }}
     </div>
-
-
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_cursos') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('admin_cursos_new') }}">
-          Crear curso
-        </a>
-      </li>
-      <li>{{ form(delete_form) }}</li>
-    </ul>
 {% endblock %}

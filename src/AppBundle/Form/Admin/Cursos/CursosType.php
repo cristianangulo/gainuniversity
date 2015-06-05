@@ -40,7 +40,7 @@ class CursosType extends AbstractType
             //->add('modulos')
         ;
 
-        $builder->addEventSubscriber(new CursoModulosSubscriber());
+        //$builder->addEventSubscriber(new CursoModulosSubscriber());
     }
 
     /**

@@ -47,25 +47,19 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="page-header"><h1>{% block title_contenido %}{% endblock %}</h1></div>
-
-							<div class="btn-group">
-								{% block navbar_contenido %}{% endblock %}
-							</div>
+							<div class="btn-group">{% block navbar_contenido %}{% endblock %}</div>
 						</div>
 					</div>
 					{% include 'includes/mensajero.html.twig'%}
 					<div class="panel panel-default">
 						<div class="panel-body">
-
-							{% block body_contenido %}
-
-
-							{% endblock %}
+							{% block body_contenido %}{% endblock %}
 						</div>
 					</div>
+					<div class="panel panel-default">
+						<div class="panel-body">{% block foot_contenido %}{% endblock %}</div>
+					</div>
 				</div>
-
-
 			</div>
 		</div>
 		<script type="text/javascript" charset="utf-8" src="{{ asset('js/jQuery.js') }}"></script>

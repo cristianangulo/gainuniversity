@@ -5,10 +5,8 @@ namespace AppBundle\Form\Admin\Cursos;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use AppBundle\Form\Admin\Cursos\EventListener\CursoModulosPosicionSubscriber;
 
-
-class CursoModulosType extends AbstractType
+class ModulosCursoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,18 +14,12 @@ class CursoModulosType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('modulos', 'entity', array(
-              'class' => 'AppBundle:Admin\Modulos\Modulos',
-              'property' => 'modulo',
-              'empty_value' => "Seleccione",
-              'label' => 'Agregue módulos a este curso'
-            ))
-            ->add('posicion')
-        ;
-
-        $builder->addEventSubscriber(new CursoModulosPosicionSubscriber());
-
+        $builder->add('modulos', 'collection', array(
+          'type' => new CursoModulosType(),
+          'by_reference' => false,
+          'allow_add' => true,
+          'allow_delete' => true
+        ));
     }
 
     /**
@@ -36,7 +28,7 @@ class CursoModulosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Admin\Cursos\CursoModulos'
+            'data_class' => 'AppBundle\Entity\Admin\Cursos\Cursos'
         ));
     }
 
@@ -45,6 +37,6 @@ class CursoModulosType extends AbstractType
      */
     public function getName()
     {
-        return 'elearn_elearnbundle_cursomodulos';
+        return 'modulos_curso';
     }
 }

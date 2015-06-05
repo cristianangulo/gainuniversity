@@ -87,7 +87,7 @@ class ModulosController extends Controller
 
           $this->get('app.mensajero')->add('mensaje','El Módulo se ha actualizado');
 
-          return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $id)));
+          return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
         }
 
         $originalItems = new ArrayCollection();
