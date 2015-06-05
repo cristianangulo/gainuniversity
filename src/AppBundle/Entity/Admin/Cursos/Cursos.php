@@ -5,6 +5,8 @@ namespace AppBundle\Entity\Admin\Cursos;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use ACL\ACLBundle\Entity\Usuarios;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Cursos
  *
@@ -41,6 +43,7 @@ class Cursos
      * @var string
      *
      * @ORM\Column(name="curso", type="string", length=50)
+     * @Assert\NotBlank(message="El nombre del Curso es obligatorio")
      */
     private $curso;
 
@@ -62,6 +65,7 @@ class Cursos
      * @var integer
      *
      * @ORM\Column(name="temporalidad", type="integer")
+     * @Assert\NotBlank(message="La Forma de publicación es obligatoria")
      */
 
     private $temporalidad;
@@ -70,6 +74,7 @@ class Cursos
      * @var string
      *
      * @ORM\Column(name="sku", type="string", length=100)
+     * @Assert\NotBlank(message="El SKU no debe quedar vacío")
      */
     private $sku;
 

@@ -19,9 +19,8 @@ class CursosType extends AbstractType
             ->add('publicado', null, array(
               'required' => false
             ))
-            ->add('urlTienda', null, array(
-              'required' => false
-            ))
+            ->add('curso')
+
             ->add('temporalidad', 'choice', array(
               'choices' => array(1 => "Diario", 2 => '7 días', 3 => '14 días'),
               'label' => 'Forma de publicación',
@@ -31,9 +30,11 @@ class CursosType extends AbstractType
               'input'  => 'datetime',
               'widget' => 'choice',
             ))
-            ->add('curso')
             ->add('sku', 'text', array(
               'label' => 'Ponga aquí el SKU del curso de tusaludfisicaymental.com'
+            ))
+            ->add('urlTienda', null, array(
+              'required' => false
             ))
             ->add('descripcion')
             //->add('modulos')

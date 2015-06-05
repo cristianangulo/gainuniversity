@@ -34,62 +34,30 @@ class CursosController extends Controller
             'entities' => $entities,
         ));
     }
-    /**
-     * Creates a new Cursos entity.
-     *
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Cursos();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $entity->getId())));
-        }
-
-        return $this->render('ElearnBundle:Cursos:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to create a Cursos entity.
-     *
-     * @param Cursos $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Cursos $entity)
-    {
-        $form = $this->createForm(new CursosType(), $entity, array(
-            'action' => $this->generateUrl('admin_cursos_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Guardar', 'attr' => array('class' => 'btn btn-success')));
-
-        return $form;
-    }
 
     /**
      * Displays a form to create a new Cursos entity.
      *
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
-        $entity = new Cursos();
-        $form   = $this->createCreateForm($entity);
+      $curso = new Cursos();
+      $cursoForm = $this->createForm(new CursosType(), $curso);
+      $cursoForm->handleRequest($request);
 
-        return $this->render('Admin/Cursos/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+      if ($cursoForm->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($curso);
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
+      }
+
+      return $this->render('Admin/Cursos/new.html.twig', array(
+          'curso' => $curso,
+          'curs_form'   => $cursoForm->createView(),
+      ));
     }
 
     /**

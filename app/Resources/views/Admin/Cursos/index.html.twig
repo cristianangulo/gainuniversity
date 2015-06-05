@@ -1,24 +1,25 @@
 {% extends '::admin.html.twig' %}
 
+{% block title_contenido %} Cursos {% endblock %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Cursos <small></small></h1>
-    </div>
+{% block navbar_contenido %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_cursos_new') }}">
-          Crear curso
-        </a>
-      </li>
-    </ul>
+    <a href="{{ path('admin_cursos_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Curso
+    </a>
+
+{% endblock %}
+
+
+{% block body_contenido %}
+
     <table class="table table-striped records_list">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Curso</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th></th>
             </tr>
         </thead>

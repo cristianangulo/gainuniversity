@@ -1,24 +1,22 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Perfil del curso</h1>
-    </div>
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_cursos') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('admin_cursos_new') }}">
-          Crear curso
-        </a>
-        |
-        <a href="{{ path('admin_cursos_usuarios', {'curso': entity.id}) }}">
-          Agregar usuarios
-        </a>
-      </li>
-    </ul>
+{% block title_contenido %} Curso {% endblock %}
+
+{% block navbar_contenido %}
+
+    <a href="{{ path('admin_cursos') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+        Regresar
+    </a>
+    <a href="{{ path('admin_cursos_new') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign"></span>
+      Crear Curso
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
+    
     <div class="well">
       {{ form_start(form) }}
 
