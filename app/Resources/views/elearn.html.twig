@@ -55,76 +55,9 @@
 	<!-- end: HEAD -->
 	<!-- start: BODY -->
 	<body>
-
+		{% include 'includes/headAdmin.html.twig' %}
 		<div class="main-wrapper">
 			<!-- start: TOPBAR -->
-			<header class="topbar navbar navbar-inverse navbar-fixed-top inner">
-				<!-- start: TOPBAR CONTAINER -->
-				<div class="container">
-					<div class="navbar-header">
-						<a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
-							<i class="fa fa-bars"></i>
-						</a>
-						<!-- start: LOGO -->
-						<!-- <a class="navbar-brand" href="index.html">
-							<img src="assets/images/logo.png" alt="Rapido">
-						</a> -->
-						<!-- end: LOGO -->
-					</div>
-					<div class="navbar-header">
-			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-			        <span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			      </button>
-			      <a class="navbar-brand" href="{{ path('front_perfil') }}"><img src="{{ asset('elearnIcon.png') }}" alt="Rapido">{{ app_name }}</a>
-			    </div>
-					<div class="topbar-tools">
-						<!-- start: TOP NAVIGATION MENU -->
-						<ul class="nav navbar-right">
-							<!-- start: USER DROPDOWN -->
-							<li class="dropdown current-user">
-								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-									<!--<img src="assets/images/avatar-1-small.jpg" class="img-circle" alt="">--> <span class="username hidden-xs">{{ app.user.username }}</span> <i class="fa fa-caret-down "></i>
-								</a>
-								<ul class="dropdown-menu dropdown-dark">
-									<li>
-										<a href="{{ path('front_perfil')}}">
-											Mi Perfil
-										</a>
-									</li>
-									<li>
-										<a href="{{ path('logout') }}">
-											Log Out
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="right-menu-toggle">
-								<a href="{{ path('front_msn') }}">
-									<i class="fa fa-envelope toggle-icon"></i> <span class="notifications-count badge badge-default animated bounceIn"><i class="fa fa-info-circle"></i></span>
-								</a>
-							</li>
-							<!-- end: USER DROPDOWN -->
-							{% if is_granted('ROLE_ADMIN') %}
-							<li class="right-menu-toggle">
-								<a href="{{ path('admin_cursos') }}">
-									<i class="fa fa-globe toggle-icon"></i> <i class="fa fa-caret-right"></i> <span class="notifications-count badge badge-default hide"></span>
-								</a>
-							</li>
-							{% endif %}
-
-						</ul>
-						<!-- end: TOP NAVIGATION MENU -->
-					</div>
-				</div>
-				<!-- end: TOPBAR CONTAINER -->
-			</header>
-			<!-- end: TOPBAR -->
-			<!-- start: PAGESLIDE LEFT -->
-			<!-- end: PAGESLIDE LEFT -->
-			<!-- start: PAGESLIDE RIGHT -->
 			<div id="pageslide-right" class="pageslide slide-fixed inner">
 				<div class="right-wrapper ps-container" style="height: 415px;">
 					<ul class="nav nav-tabs nav-justified" id="sidebar-tab">
