@@ -1,0 +1,6 @@
+services:
+    modulos_curso.request_listener:
+        class: AppBundle\EventListener\ModulosCursoListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 4096 }
+        arguments:  [@logger]
