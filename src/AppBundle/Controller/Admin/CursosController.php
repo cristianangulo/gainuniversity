@@ -279,17 +279,16 @@ class CursosController extends Controller
         ;
     }
 
-    public function eliminarUsuariosCursoAction($curso, $usuario)
+    public function eliminarUsuariosCursoAction($curso, $id)
     {
       $em = $this->getDoctrine()->getManager();
-      $cursoUsuario = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->findCursoUsuario($curso, $usuario);
+      $cursoUsuario = $em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->find($id);
 
-      if($cursoUsuario){
+      $em->remove($cursoUsuario);
+      $em->flush();
 
-        echo $cursoUsuario->getUsuarios();
+      $this->get('app.mensajero')->add('mensaje','Se ha eliminado un Usuario del Curso');
+      return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso)));
 
-      }
-
-      return new Response('Hola');
     }
 }

@@ -131,7 +131,7 @@
                       <a href="{{ path('usuarios_edit', {'id': usuario.usuarios.id }) }}" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-user"></span>
                       </a>
-                      <a href="{{ path('eliminar_usuarios_curso', { 'curso': curso.id, 'usuario': usuario.usuarios.id }) }}" ="button" class="btn btn-default">
+                      <a href="{{ path('eliminar_usuarios_curso', { 'curso': curso.id, 'id': usuario.id }) }}" ="button" class="btn btn-default">
                           <span class="glyphicon glyphicon-trash"></span>
                       </a>
 

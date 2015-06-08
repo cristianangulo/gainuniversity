@@ -1,6 +1,5 @@
 
 #container-main{
-  margin-top: 30px;
   padding: 10px;
 }
 
@@ -15,8 +14,6 @@ body{
 #body{
   width: 1200px;
   margin: auto;
-  padding: 20px;
-
 }
 
 .record_actions{
@@ -97,4 +94,10 @@ body{
 
 .active-admin{
 	background: red;
+}
+
+@media screen and (max-width: 1200px) {
+  #body{
+    width: 100%;
+  }
 }

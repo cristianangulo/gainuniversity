@@ -30,5 +30,5 @@ admin_cursos_delete:
     requirements: { _method: post|delete }
 
 eliminar_usuarios_curso:
-    path:     /eliminar-usuario/{curso}/{usuario}
+    path:     /eliminar-usuario/{curso}/{id}
     defaults: { _controller: "AppBundle:Admin/Cursos:eliminarUsuariosCurso" }
