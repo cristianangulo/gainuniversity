@@ -6,25 +6,47 @@
 
     <div class="col-md-3">
     <div class="text-center">
-      <div class="btn-group text-right" role="group" aria-label="..." ">
+      <div class="btn-group text-right" role="group" aria-label="..." >
         <button type="button" class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
         <a href="{{ path('front_curso', {'id': curso.id })}}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></a>
         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></button>
       </div>
     </div>
 
-      {% if modulo %}
-      <ul class="list-group nav-modulo">
-        {% for item in modulo.secciones %}
-          <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulo.id, 'seccion': item.secciones.id}) }}" class="list-group-item {% if item.secciones.id == seccion_id %}active{% endif %}"><i class="fa fa-{{ item.secciones.tipo.svgSeccion }}"></i>   {{ item.secciones.seccion }}</a>
-        {% endfor %}
-      </ul>
-      {% endif %}
+    {% include 'Front/items/nav-modulo.html.twig' %}
     </div>
 
     <div class="col-md-9">
-      {% block contenido %}
-      {% endblock %}
+
+      <div id="contenido-modulo">
+
+        <ol class="breadcrumb">
+          <li><a href="{{ path('front_curso', {'id': curso.id })}}">{{ curso.curso }}</a></li>
+          <li>{{ modulo.modulo }}</li>
+          <li class="active"><strong>{{ item.seccion }}<strong></li>
+        </ol>
+        <div id="w-contenido-modulo">
+          <div class="w-media-modulo">
+              {% block contenido %}
+
+              {% endblock %}
+          </div>
+
+          <div class="w-datos-media">
+            <div id="w-avatar-modulo">
+              <img src="https://scontent-mia.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10846358_10154996416550085_9136934945260243027_n.jpg?oh=f46c8b109267c9f5c579d62264f77a99&oe=555957CD" />
+            </div>
+            <h3>Expositor <small></small></h3>
+            <p>Gabriel Guerrero</p>
+            <!--<p>Joshua Rosenthal, MScEd, welcomes you to Integrative Nutrition.</p>-->
+            <hr />
+            <p class="lead">
+                {{ item.descripcion }}
+            </p>
+          </div>
+
+        </div>
+      </div>
     </div>
     </div>
   </div>

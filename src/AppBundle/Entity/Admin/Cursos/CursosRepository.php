@@ -21,28 +21,29 @@ class CursosRepository extends EntityRepository
       ->getResult();
   }
 
-  public function findCursoModuloItem($curso, $modulo, $item)
+  public function findCursoModuloItem($cursoId, $moduloId, $itemId)
   {
 
-    $em = $this->getEntityManager();
+      $em = $this->getEntityManager();
 
-    $repositorio = $em->getRepository('AppBundle:Admin\Cursos\Cursos');
+      $cursos = $em->getRepository('AppBundle:Admin\Cursos\Cursos');
 
-    $curso = $repositorio->createQueryBuilder('c')
-      ->select('c','m','i','s')
-      ->leftJoin('c.modulos','m')
-      ->leftJoin('m.modulos', 'i')
-      ->leftJoin('i.secciones','s')
-      ->where('c.id = :curso')
-      ->andWhere('m.modulos = :modulo')
-      ->andWhere('s.secciones = :item')
-      ->setParameter('curso', $curso)
-      ->setParameter('modulo', $modulo)
-      ->setParameter('item', $item)
-      ->getQuery()
-      ->getResult()
-    ;
+      $curso = $cursos->createQueryBuilder('c')
+        ->select('c','cm','m','i')
+        ->leftJoin('c.modulos','cm')
+        ->leftJoin('cm.modulos', 'm')
+        ->leftJoin('m.items','i')
+        ->where('c.id = :curso')
+        ->andWhere('cm.modulos = :modulo')
+        ->andWhere('i.items = :item')
+        ->setParameter('curso', $cursoId)
+        ->setParameter('modulo', $moduloId)
+        ->setParameter('item', $itemId)
+        ->getQuery()
+        ->getArrayResult()
+      ;
 
-    return $curso;
+      return $curso;
+
   }
 }

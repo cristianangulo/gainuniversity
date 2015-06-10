@@ -32,12 +32,13 @@ class FrontModuloController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $repositorio = $em->getRepository('AppBundle:Admin\Cursos\Cursos');
+    //$modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($modulo);
+
+    //echo count($modulo->getItems());
 
     $itemModulo = $this->get('app.model.items');
 
     return new Response($itemModulo->getItemModulo($curso, $modulo, $item, $pregunta));
-    exit();
 
     $curso = $repositorio->createQueryBuilder('c')
       ->select('c','m','i','s')

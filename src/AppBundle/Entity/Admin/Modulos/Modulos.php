@@ -45,7 +45,7 @@ class Modulos
      * @Assert\NotBlank(message="Es obligatorio")
      **/
 
-    private $secciones;
+    private $items;
 
     /**
     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoModulos", mappedBy="modulos")
@@ -71,6 +71,7 @@ class Modulos
      * Set modulo
      *
      * @param string $modulo
+     *
      * @return Modulos
      */
     public function setModulo($modulo)
@@ -94,6 +95,7 @@ class Modulos
      * Set descripcion
      *
      * @param string $descripcion
+     *
      * @return Modulos
      */
     public function setDescripcion($descripcion)
@@ -114,36 +116,37 @@ class Modulos
     }
 
     /**
-     * Add secciones
+     * Add item
      *
-     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $secciones
+     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $item
+     *
      * @return Modulos
      */
-    public function addSeccione(\AppBundle\Entity\Admin\Modulos\ModuloItems $secciones)
+    public function addItem(\AppBundle\Entity\Admin\Modulos\ModuloItems $item)
     {
-        $this->secciones[] = $secciones;
+        $this->items[] = $item;
 
         return $this;
     }
 
     /**
-     * Remove secciones
+     * Remove item
      *
-     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $secciones
+     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $item
      */
-    public function removeSeccione(\AppBundle\Entity\Admin\Modulos\ModuloItems $secciones)
+    public function removeItem(\AppBundle\Entity\Admin\Modulos\ModuloItems $item)
     {
-        $this->secciones->removeElement($secciones);
+        $this->items->removeElement($item);
     }
 
     /**
-     * Get secciones
+     * Get items
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSecciones()
+    public function getItems()
     {
-        return $this->secciones;
+        return $this->items;
     }
 
     /**

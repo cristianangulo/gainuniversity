@@ -30,19 +30,19 @@ class ModuloItems
     private $posicion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="modulosecciones")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="items")
      * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
      **/
 
     private $modulos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Items\Items", inversedBy="seccionesmodulo")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Items\Items", inversedBy="modulos")
      * @ORM\JoinColumn(name="seccion_id", referencedColumnName="id")
      * @Assert\NotBlank(message="Seleccione un Ítem")
      **/
 
-    private $secciones;
+    private $items;
 
     /**
      * Get id
@@ -58,8 +58,9 @@ class ModuloItems
     /**
      * Set posicion
      *
-     * @param string $posicion
-     * @return ModuloSecciones
+     * @param integer $posicion
+     *
+     * @return ModuloItems
      */
     public function setPosicion($posicion)
     {
@@ -71,7 +72,7 @@ class ModuloItems
     /**
      * Get posicion
      *
-     * @return string
+     * @return integer
      */
     public function getPosicion()
     {
@@ -82,7 +83,8 @@ class ModuloItems
      * Set modulos
      *
      * @param \AppBundle\Entity\Admin\Modulos\Modulos $modulos
-     * @return ModuloSecciones
+     *
+     * @return ModuloItems
      */
     public function setModulos(\AppBundle\Entity\Admin\Modulos\Modulos $modulos = null)
     {
@@ -102,25 +104,26 @@ class ModuloItems
     }
 
     /**
-     * Set secciones
+     * Set items
      *
-     * @param \AppBundle\Entity\Admin\Items\Items $secciones
-     * @return ModuloSecciones
+     * @param \AppBundle\Entity\Admin\Items\Items $items
+     *
+     * @return ModuloItems
      */
-    public function setSecciones(\AppBundle\Entity\Admin\Items\Items $secciones = null)
+    public function setItems(\AppBundle\Entity\Admin\Items\Items $items = null)
     {
-        $this->secciones = $secciones;
+        $this->items = $items;
 
         return $this;
     }
 
     /**
-     * Get secciones
+     * Get items
      *
      * @return \AppBundle\Entity\Admin\Items\Items
      */
-    public function getSecciones()
+    public function getItems()
     {
-        return $this->secciones;
+        return $this->items;
     }
 }
