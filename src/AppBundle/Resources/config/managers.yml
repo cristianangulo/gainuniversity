@@ -1,0 +1,4 @@
+services:
+    app.model.items:
+      class:      AppBundle\Model\ItemModel
+      arguments:  [@doctrine.orm.entity_manager, @twig]

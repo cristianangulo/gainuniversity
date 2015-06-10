@@ -34,6 +34,11 @@ class FrontModuloController extends Controller
 
     $repositorio = $em->getRepository('AppBundle:Admin\Cursos\Cursos');
 
+    $itemModulo = $this->get('app.model.items');
+
+    return new Response($itemModulo->getItemModulo($curso, $modulo, $item, $pregunta));
+    exit();
+
     $curso = $repositorio->createQueryBuilder('c')
       ->select('c','m','i','s')
       ->leftJoin('c.modulos','m')
