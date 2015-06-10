@@ -12,4 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class ComentariosItemsRepository extends EntityRepository
 {
+
+  public function findComentariosItems($curso, $modulo, $item)
+  {
+      $em = $this->getEntityManager();
+
+      $comentarios = $em->getRepository('AppBundle:Front\ComentariosItems');
+
+      $comentarios = $comentarios->createQueryBuilder('i')
+        ->where('i.items = :item')
+          ->andWhere('i.modulos = :modulo')
+          ->andWhere('i.cursos = :curso')
+        ->setParameter('item', $item)
+          ->setParameter('modulo', $modulo)
+          ->setParameter('curso', $curso)
+        ->getQuery()
+        ->getResult();
+
+      return $comentarios;
+
+  }
+
 }

@@ -1,7 +1,26 @@
-{% extends '::modulo.html.twig' %}
+{% extends '::modulo-top.html.twig' %}
+
 
 {% block contenido %}
-  <form class="" action="index.html" method="post">
+    <form class="form" action="" method="post" novalidate>
+        {{ form_widget(comentarios_form) }}
+        <button type="submit" class="btn btn-danger">
+            Comente
+        </button>
+    </form>
 
-  </form>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+      {% for comentario in comentarios_item %}
+        <small>{{ comentario.usuarios.nombre }} | {{ comentario.fecha|default('') }}</small>
+        <p class="lead">
+          {{ comentario.comentario }}
+        </p>
+        <hr />
+      {% endfor %}
+
+      </div>
+    </div>
+
 {% endblock %}

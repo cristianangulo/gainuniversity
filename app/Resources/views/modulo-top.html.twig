@@ -26,12 +26,13 @@
           <li class="active"><strong>{{ item.seccion }}<strong></li>
         </ol>
         <div id="w-contenido-modulo">
+          {% include 'includes/datos-autor-item.html.twig' %}
           <div class="w-media-modulo">
               {% block contenido %}
 
               {% endblock %}
           </div>
-          {% include 'includes/datos-autor-item.html.twig' %}
+
         </div>
       </div>
     </div>

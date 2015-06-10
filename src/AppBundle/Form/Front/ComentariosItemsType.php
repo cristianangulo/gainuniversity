@@ -15,8 +15,9 @@ class ComentariosItemsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comentario')
-            ->add('submit', 'submit', array('label' => 'Comente', 'attr' => array('class' => 'btn btn-danger')));
+            ->add('comentario', 'textarea', array(
+              'attr' => array('rows' => '3'),
+            ))
         ;
     }
 

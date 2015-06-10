@@ -7,23 +7,35 @@ use AppBundle\Utils\Mensajero;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Form\Forms;
+
+//use Symfony\Component\Form\FormFactoryInterface;
+
+use AppBundle\Entity\Front\ComentariosItems;
+use AppBundle\Form\Front\ComentariosItemsType;
 
 /**
  *
  */
-class ItemModuloModel
+class ItemModuloModel extends Controller
 {
     private $em;
     private $twig;
     private $msn;
     private $router;
+    protected $requestStack;
 
-    public function __construct(EntityManager $em, \Twig_Environment $twig, Mensajero $msn, Router $router)
+    public function __construct(EntityManager $em, \Twig_Environment $twig, Mensajero $msn, Router $router, RequestStack $requestStack)
     {
         $this->em     = $em;
         $this->twig   = $twig;
         $this->msn    = $msn;
         $this->router = $router;
+        $this->requestStack = $requestStack;
     }
 
     public function getItemModulo($curso, $modulo, $item, $pregunta)
@@ -95,13 +107,34 @@ class ItemModuloModel
       ));
     }
 
-    protected function renderItemForo($curso, $modulo, $item)
+    protected function renderItemForo($curso, $modulo, $item, Request $request = null)
     {
+      $comentarios = new ComentariosItems();
+
+      $cursoId = $curso->getId();
+      $moduloId = $modulo->getId();
+      $itemId = $item->getId();
+
+      $comentariosItem = $this->em->getRepository('AppBundle:Front\ComentariosItems')->findComentariosItems($cursoId, $moduloId, $itemId);
+
+      $formFactory = Forms::createFormFactory();
+
+      $comentariosForm = $formFactory->createBuilder(new ComentariosItemsType(), $comentarios)->getForm();
+
+      $comentariosForm->handleRequest($request);
+
+      if($comentariosForm->isValid()){
+          exit('Entra');
+      }
+
       return $this->twig->render('Front/items/item-foro.html.twig', array(
         'curso'   => $curso,
         'modulo'  => $modulo,
         'item'    => $item,
-        'item_id' => $item->getId()
+        'item_id' => $item->getId(),
+        'comentarios_form' => $comentariosForm->createView(),
+        'comentarios_item' => $comentariosItem
+        //'comentarios_form' => $comentariosForm->createView()
       ));
     }
 
@@ -111,7 +144,8 @@ class ItemModuloModel
         'curso'   => $curso,
         'modulo'  => $modulo,
         'item'    => $item,
-        'item_id' => $item->getId()
+        'item_id' => $item->getId(),
+
       ));
     }
 
