@@ -46,7 +46,12 @@ class Modulos
      **/
 
     private $secciones;
-    // ...
+
+    /**
+    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoModulos", mappedBy="modulos")
+    * @ORM\OrderBy({"posicion" = "ASC"})
+    */
+    private $cursos;
 
     public function __construct() {
         $this->secciones = new ArrayCollection();

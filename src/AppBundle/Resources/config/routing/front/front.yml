@@ -7,8 +7,8 @@ front_curso:
     defaults: { _controller: AppBundle:Front/Curso:curso }
 
 front_modulo:
-    path:     /curso/{curso}/{modulo}/{seccion}/{pregunta}
-    defaults: { _controller: AppBundle:Front/Front:modulo, pregunta:null }
+    path:     /curso/{curso}/{modulo}/{item}/{pregunta}
+    defaults: { _controller: AppBundle:Front/FrontModulo:modulo, pregunta:null }
 
 front_perfil:
     path:     /perfil/

@@ -46,7 +46,12 @@ class Modulos
      **/
 
     private $secciones;
-    // ...
+
+    /**
+    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Cursos\CursoModulos", mappedBy="modulos")
+    * @ORM\OrderBy({"posicion" = "ASC"})
+    */
+    private $cursos;
 
     public function __construct() {
         $this->secciones = new ArrayCollection();
@@ -139,5 +144,39 @@ class Modulos
     public function getSecciones()
     {
         return $this->secciones;
+    }
+
+    /**
+     * Add curso
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoModulos $curso
+     *
+     * @return Modulos
+     */
+    public function addCurso(\AppBundle\Entity\Admin\Cursos\CursoModulos $curso)
+    {
+        $this->cursos[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoModulos $curso
+     */
+    public function removeCurso(\AppBundle\Entity\Admin\Cursos\CursoModulos $curso)
+    {
+        $this->cursos->removeElement($curso);
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
     }
 }

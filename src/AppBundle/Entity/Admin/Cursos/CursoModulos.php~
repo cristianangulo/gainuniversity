@@ -22,13 +22,13 @@ class CursoModulos
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Cursos\Cursos", inversedBy="cursomodulos")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Cursos\Cursos", inversedBy="modulos")
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      **/
     private $cursos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="moduloscurso")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Modulos\Modulos", inversedBy="cursos")
      * @ORM\JoinColumn(name="modulo_id", referencedColumnName="id")
      **/
     private $modulos;

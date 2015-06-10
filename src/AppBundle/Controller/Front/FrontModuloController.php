@@ -25,14 +25,10 @@ use Doctrine\ORM\EntityRepository;
 
 
 
-class FrontController extends Controller
+class FrontModuloController extends Controller
 {
-  public function homeAction()
-  {
-    return $this->redirect($this->generateUrl('login'));
-  }
 
-  public function moduloAction($curso, $modulo, $seccion, Request $request, $pregunta)
+  public function moduloAction(Request $request, $curso, $modulo, $item, $pregunta)
   {
     $em = $this->getDoctrine()->getManager();
 
@@ -48,7 +44,7 @@ class FrontController extends Controller
       ->andWhere('s.secciones = :item')
       ->setParameter('curso', $curso)
       ->setParameter('modulo', $modulo)
-      ->setParameter('item', $seccion)
+      ->setParameter('item', $item)
       ->getQuery()
       ->getSingleResult()
     ;

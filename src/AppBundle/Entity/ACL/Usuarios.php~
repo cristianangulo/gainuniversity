@@ -340,4 +340,38 @@ class Usuarios implements UserInterface
 
         return $this;
     }
+
+    /**
+     * Add curso
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso
+     *
+     * @return Usuarios
+     */
+    public function addCurso(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso)
+    {
+        $this->cursos[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso
+     */
+    public function removeCurso(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $curso)
+    {
+        $this->cursos->removeElement($curso);
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
+    }
 }
