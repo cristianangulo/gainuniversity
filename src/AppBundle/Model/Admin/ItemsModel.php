@@ -18,6 +18,13 @@ class ItemsModel
         $item = $this->em->getRepository('AppBundle:Admin\Items\Items')->find($item);
         return $item;
     }
+
+    public function comentarios($curso, $modulo, $item)
+    {
+        $comentarios = $this->em->getRepository('AppBundle:Front\ComentariosItems')->findComentariosItems($curso, $modulo, $item);
+
+        return $comentarios;
+    }
 }
 
 ?>

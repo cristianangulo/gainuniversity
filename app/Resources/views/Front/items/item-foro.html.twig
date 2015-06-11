@@ -16,7 +16,7 @@
 
       {% if is_granted('ROLE_ADMIN') %}
       <div class="btn-group pull-right">
-        <a href="{{ path('front_eliminar_mensaje', {'curso': curso.id , 'modulo': modulo.id, 'item': item.id, 'id': comentario.id }) }}" type="button" class="btn btn-default">
+        <a href="{{ path('front_eliminar_comentario', {'curso': curso.id , 'modulo': modulo.id, 'item': item.id, 'id': comentario.id }) }}" type="button" class="btn btn-default">
           <span class="glyphicon glyphicon-remove"></span>
         </a>
       </div>

@@ -2,6 +2,10 @@ services:
     # app.model.items:
     #   class:      AppBundle\Model\ItemModuloModel
     #   arguments:  [@doctrine.orm.entity_manager, @twig, @app.mensajero, @router, @security.context]
+    app.model.usuarios:
+      class:  AppBundle\Model\ACL\UsuariosModel
+      arguments:  [@doctrine.orm.entity_manager]
+
     app.model.cursos:
       class:  AppBundle\Model\Admin\CursosModel
       arguments:  [@doctrine.orm.entity_manager]
