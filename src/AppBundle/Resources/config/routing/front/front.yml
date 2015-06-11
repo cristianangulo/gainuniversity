@@ -26,7 +26,7 @@ item_pdf:
 
 item_video:
     path:     /curso/{curso}/{modulo}/{item}/video
-    defaults: { _controller: AppBundle:Front/ItemsFront:itemVideo, tipo:video}
+    defaults: { _controller: AppBundle:Front/ItemVideo:itemVideo, tipo:video}
     requirements:
         tipo: video
 
