@@ -3,6 +3,8 @@
 namespace AppBundle\Entity\Front;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * ComentariosItems
@@ -49,6 +51,7 @@ class ComentariosItems
      * @var string
      *
      * @ORM\Column(name="comentario", type="text")
+     * @Assert\NotBlank(message="El nombre del Curso es obligatorio")
      */
     private $comentario;
 

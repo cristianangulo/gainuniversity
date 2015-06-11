@@ -42,6 +42,13 @@ class TipoItem
      */
     private $color;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=100)
+     */
+    private $slug;
+
 
     /**
      * Get id
@@ -120,5 +127,29 @@ class TipoItem
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return TipoItem
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

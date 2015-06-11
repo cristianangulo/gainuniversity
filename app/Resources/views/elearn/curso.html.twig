@@ -41,7 +41,7 @@
 
         <li>
 
-        <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulos.modulos.id, 'item': items.items.id}) }}" >
+        <a href="{{ path(items.items.tipo.slug , {'curso': curso.id, 'modulo': modulos.modulos.id, 'item': items.items.id}) }}" >
           <div class="timeline_element partition-white">
             <div class="timeline_date">
               <div>

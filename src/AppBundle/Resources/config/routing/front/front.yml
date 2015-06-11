@@ -6,6 +6,42 @@ front_curso:
     path:     /curso/{id}
     defaults: { _controller: AppBundle:Front/Curso:curso }
 
+item_audio:
+    path:     /curso/{curso}/{modulo}/{item}/audio
+    defaults: { _controller: AppBundle:Front/ItemAudio:itemAudio, tipo:audio}
+    requirements:
+        tipo: audio
+
+item_foro:
+    path:     /curso/{curso}/{modulo}/{item}/foro
+    defaults: { _controller: AppBundle:Front/ItemsFront:itemForo, tipo:foro}
+    requirements:
+        tipo: foro
+
+item_pdf:
+    path:     /curso/{curso}/{modulo}/{item}/pdf
+    defaults: { _controller: AppBundle:Front/ItemsFront:itemPDF, tipo:pdf}
+    requirements:
+        tipo: pdf
+
+item_video:
+    path:     /curso/{curso}/{modulo}/{item}/video
+    defaults: { _controller: AppBundle:Front/ItemsFront:itemVideo, tipo:video}
+    requirements:
+        tipo: video
+
+item_quiz:
+    path:     /curso/{curso}/{modulo}/{item}/quiz
+    defaults: { _controller: AppBundle:Front/ItemsFront:itemQuiz, tipo:quiz}
+    requirements:
+        tipo: quiz
+
+item_audio_down:
+    path:     /curso/{curso}/{modulo}/{item}/down
+    defaults: { _controller: AppBundle:Front/ItemsFront:itemAudioDown, tipo:down}
+    requirements:
+        tipo: down
+
 front_modulo:
     path:     /curso/{curso}/{modulo}/{item}/{pregunta}
     defaults: { _controller: AppBundle:Front/FrontModulo:modulo, pregunta:null }

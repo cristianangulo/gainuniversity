@@ -42,6 +42,13 @@ class TipoItem
      */
     private $color;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=100)
+     */
+    private $slug;
+
 
     /**
      * Get id

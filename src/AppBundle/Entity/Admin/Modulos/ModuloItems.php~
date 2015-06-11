@@ -54,4 +54,76 @@ class ModuloItems
         return $this->id;
     }
 
+
+    /**
+     * Set posicion
+     *
+     * @param integer $posicion
+     *
+     * @return ModuloItems
+     */
+    public function setPosicion($posicion)
+    {
+        $this->posicion = $posicion;
+
+        return $this;
+    }
+
+    /**
+     * Get posicion
+     *
+     * @return integer
+     */
+    public function getPosicion()
+    {
+        return $this->posicion;
+    }
+
+    /**
+     * Set modulos
+     *
+     * @param \AppBundle\Entity\Admin\Modulos\Modulos $modulos
+     *
+     * @return ModuloItems
+     */
+    public function setModulos(\AppBundle\Entity\Admin\Modulos\Modulos $modulos = null)
+    {
+        $this->modulos = $modulos;
+
+        return $this;
+    }
+
+    /**
+     * Get modulos
+     *
+     * @return \AppBundle\Entity\Admin\Modulos\Modulos
+     */
+    public function getModulos()
+    {
+        return $this->modulos;
+    }
+
+    /**
+     * Set items
+     *
+     * @param \AppBundle\Entity\Admin\Items\Items $items
+     *
+     * @return ModuloItems
+     */
+    public function setItems(\AppBundle\Entity\Admin\Items\Items $items = null)
+    {
+        $this->items = $items;
+
+        return $this;
+    }
+
+    /**
+     * Get items
+     *
+     * @return \AppBundle\Entity\Admin\Items\Items
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
 }
