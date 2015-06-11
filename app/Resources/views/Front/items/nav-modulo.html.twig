@@ -1,7 +1,7 @@
 {% if modulo %}
 <ul class="list-group nav-modulo">
   {% for item in modulo.items %}
-    <a href="{{ path('front_modulo', {'curso': curso.id, 'modulo': modulo.id, 'item': item.items.id}) }}" class="list-group-item {% if item.items.id == item_id %}active{% endif %}"><i class="fa fa-{{ item.items.tipo.svgSeccion }}"></i>   {{ item.items.seccion }}</a>
+    <a href="{{ path(item.items.tipo.slug, {'curso': curso.id, 'modulo': modulo.id, 'item': item.items.id}) }}" class="list-group-item {% if item.items.id == item_id %}active{% endif %}"><i class="fa fa-{{ item.items.tipo.svgSeccion }}"></i>   {{ item.items.seccion }}</a>
   {% endfor %}
 </ul>
 {% endif %}

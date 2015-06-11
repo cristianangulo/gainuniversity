@@ -1,4 +1,15 @@
 services:
+    # app.model.items:
+    #   class:      AppBundle\Model\ItemModuloModel
+    #   arguments:  [@doctrine.orm.entity_manager, @twig, @app.mensajero, @router, @security.context]
+    app.model.cursos:
+      class:  AppBundle\Model\Admin\CursosModel
+      arguments:  [@doctrine.orm.entity_manager]
+
+    app.model.modulos:
+      class:  AppBundle\Model\Admin\ModulosModel
+      arguments:  [@doctrine.orm.entity_manager]
+
     app.model.items:
-      class:      AppBundle\Model\ItemModuloModel
-      arguments:  [@doctrine.orm.entity_manager, @twig, @app.mensajero, @router, @security.context]
+      class:  AppBundle\Model\Admin\ItemsModel
+      arguments:  [@doctrine.orm.entity_manager]

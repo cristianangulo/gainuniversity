@@ -7,10 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
 
-class ItemAudioController extends Controller
+class ItemForoController extends Controller
 {
 
-    public function itemAudioAction($curso, $modulo, $item)
+    public function itemForoAction($curso, $modulo, $item)
     {
         $em = $this->getDoctrine()->getManager();
 

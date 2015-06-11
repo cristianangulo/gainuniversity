@@ -29,3 +29,7 @@ services:
     app.mensajero:
       class:  AppBundle\Utils\Mensajero
       arguments:  [@session]
+
+    app.usuario_curso:
+        class: AppBundle\Utils\UsuarioCurso
+        arguments:  [@doctrine.orm.entity_manager]

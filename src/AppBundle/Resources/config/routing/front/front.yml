@@ -14,7 +14,7 @@ item_audio:
 
 item_foro:
     path:     /curso/{curso}/{modulo}/{item}/foro
-    defaults: { _controller: AppBundle:Front/ItemsFront:itemForo, tipo:foro}
+    defaults: { _controller: AppBundle:Front/ItemForo:itemForo, tipo:foro}
     requirements:
         tipo: foro
 
