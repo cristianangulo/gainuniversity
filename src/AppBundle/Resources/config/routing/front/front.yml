@@ -36,11 +36,11 @@ item_quiz:
     requirements:
         tipo: quiz
 
-item_audio_down:
-    path:     /curso/{curso}/{modulo}/{item}/down
-    defaults: { _controller: AppBundle:Front/ItemsFront:itemAudioDown, tipo:down}
+item_audio_descarga:
+    path:     /curso/{curso}/{modulo}/{item}/descarga
+    defaults: { _controller: AppBundle:Front/ItemAudioDescarga:itemAudioDescarga, tipo:descarga}
     requirements:
-        tipo: down
+        tipo: descarga
 
 front_modulo:
     path:     /curso/{curso}/{modulo}/{item}/{pregunta}
