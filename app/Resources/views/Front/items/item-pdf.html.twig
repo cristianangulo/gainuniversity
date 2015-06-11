@@ -1,0 +1,9 @@
+{% extends '::modulo.html.twig' %}
+
+
+{% block contenido %}
+<a href="{{ asset('uploads/documents')}}/{{ item.path }}" target="_blank">
+  <img src="{{ asset('pdf-back.jpg')}}" />
+</a>
+
+{% endblock %}

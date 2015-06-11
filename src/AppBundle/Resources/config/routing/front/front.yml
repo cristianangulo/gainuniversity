@@ -20,7 +20,7 @@ item_foro:
 
 item_pdf:
     path:     /curso/{curso}/{modulo}/{item}/pdf
-    defaults: { _controller: AppBundle:Front/ItemsFront:itemPDF, tipo:pdf}
+    defaults: { _controller: AppBundle:Front/ItemPDF:itemPDF, tipo:pdf}
     requirements:
         tipo: pdf
 
