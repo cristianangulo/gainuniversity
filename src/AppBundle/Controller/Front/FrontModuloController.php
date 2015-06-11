@@ -32,6 +32,75 @@ class FrontModuloController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
+    $curso = $em->getRepository('AppBundle:Admin\Cursos\Cursos')->find($curso);
+
+    $publicacionCurso = $curso->getFechaPublicacion();
+
+
+
+    echo $curso->getCurso().'<br />';
+
+    $publicacionCurso = date_format($publicacionCurso, 'd/m/Y');
+
+    echo $publicacionCurso.'<br />';
+    echo 'Cantidad módulos: '.count($curso->getModulos()).'<br />';
+    echo 'Cantidad usuarios: '.count($curso->getUsuarios()).'<br />';
+
+    $temporalidadCurso = $curso->getTemporalidad();
+
+    $formaPublicacion = 0;
+
+    switch($temporalidadCurso){
+      case 1:
+        $formaPublicacion = 1;
+        break;
+      case 2:
+        $formaPublicacion = 7;
+        break;
+      case 3:
+        $formaPublicacion = 14;
+    };
+
+    function dameFecha($fecha,$dia)
+    {   list($day,$mon,$year) = explode('/',$fecha);
+        return date('d/m/Y',mktime(0,0,0,$mon,$day+$dia,$year));
+    }
+    foreach($curso->getUsuarios() as $usuario){
+        echo "<hr />";
+        echo $usuario->getUsuarios()->getNombre()."<br />";
+        $registroUsuarioCurso = date_format($usuario->getFechaRegistro(), 'd/m/Y');
+
+        echo $registroUsuarioCurso."<br />";
+
+        $fechaInicioCurso = 0;
+
+        if($curso->getFechaPublicacion() < $usuario->getFechaRegistro()){
+          $fechaInicioCurso = $usuario->getFechaRegistro();
+        }else{
+          $fechaInicioCurso = $curso->getFechaPublicacion();
+        }
+
+        echo date_format($fechaInicioCurso, 'd/m/Y').'<br />';
+
+        $intervalo = $fechaInicioCurso->diff(new \DateTime('now'))->format('%a');
+
+        echo 'Días desde el registro: '. $intervalo.'<br />';
+
+        $cantidadModulos = ($intervalo / $formaPublicacion + 1);
+
+        $cantidadModulos = ($cantidadModulos > count($curso->getModulos() )) ? count($curso->getModulos()) : floor($cantidadModulos);
+
+        echo $cantidadModulos.'<br />';
+
+        $fecha = date_format($fechaInicioCurso, 'd/m/Y');
+
+        for($i = 0; $i<count($curso->getModulos()); $i++){
+          echo 'Modulo'.($i+1).': '.dameFecha($fecha,($formaPublicacion*$i)).'<br />';
+        }
+    }
+
+    exit();
+
     //$modulo = $em->getRepository('AppBundle:Admin\Modulos\Modulos')->find($modulo);
 
     //echo count($modulo->getItems());
