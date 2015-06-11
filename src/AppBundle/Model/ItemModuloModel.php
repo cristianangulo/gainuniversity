@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContext;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -27,15 +28,15 @@ class ItemModuloModel extends Controller
     private $twig;
     private $msn;
     private $router;
-    protected $requestStack;
+    protected $security;
 
-    public function __construct(EntityManager $em, \Twig_Environment $twig, Mensajero $msn, Router $router, RequestStack $requestStack)
+    public function __construct(EntityManager $em, \Twig_Environment $twig, Mensajero $msn, Router $router, SecurityContext $security)
     {
         $this->em     = $em;
         $this->twig   = $twig;
         $this->msn    = $msn;
         $this->router = $router;
-        $this->requestStack = $requestStack;
+        $this->security = $security;
     }
 
     public function getItemModulo($curso, $modulo, $item, $pregunta)
@@ -53,21 +54,21 @@ class ItemModuloModel extends Controller
 
           switch ($item->getTipo()->getId()) {
             case 1:
-                return $this->renderItemAudio($curso, $modulo, $item);
+                return new Response($this->renderItemAudio($curso, $modulo, $item));
               break;
             case 2:
-                return $this->renderItemForo($curso, $modulo, $item);
+                return new Response($this->renderItemForo($curso, $modulo, $item));
               break;
             case 3:
-                return $this->renderItemPDF($curso, $modulo, $item);
+                return new Response($this->renderItemPDF($curso, $modulo, $item));
               break;
             case 4:
-                return $this->renderItemVideo($curso, $modulo, $item);
+                return new Response($this->renderItemVideo($curso, $modulo, $item));
             case 5:
-                return $this->renderItemQuiz($curso, $modulo, $item);
+                return new Response($this->renderItemQuiz($curso, $modulo, $item));
               break;
             case 6:
-                return $this->renderItemAudioDescarga($curso, $modulo, $item);
+                return new Response($this->renderItemAudioDescarga($curso, $modulo, $item));
               break;
             default:
               break;
@@ -124,7 +125,24 @@ class ItemModuloModel extends Controller
       $comentariosForm->handleRequest($request);
 
       if($comentariosForm->isValid()){
-          exit('Entra');
+
+        //$usuario = $this->get('security.context')->getToken()->getUser();
+
+        $user = $this->security->getToken()->getUser();
+
+        $usuario = $this->em->getRepository('AppBundle:ACL\Usuarios')->find($user->getId());
+
+        $comentarios->setUsuarios($usuario);
+        $comentarios->setCursos($curso);
+        $comentarios->setModulos($modulo);
+        $comentarios->setItems($item);
+
+        $this->em->persist($comentarios);
+        $this->em->flush();
+
+        return new RedirectResponse($this->router->generate('front_modulo', array('curso' => $curso->getId(), 'modulo' => $modulo->getId(), 'item' => $item->getId())));
+        //return $this->redirect($this->generateUrl('front_modulo', array('curso' => $curso->getId(), 'modulo' => $modulo->getId(), 'item' => $item->getId())));
+
       }
 
       return $this->twig->render('Front/items/item-foro.html.twig', array(

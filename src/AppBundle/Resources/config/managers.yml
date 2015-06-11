@@ -1,4 +1,4 @@
 services:
     app.model.items:
       class:      AppBundle\Model\ItemModuloModel
-      arguments:  [@doctrine.orm.entity_manager, @twig, @app.mensajero, @router, @request_stack]
+      arguments:  [@doctrine.orm.entity_manager, @twig, @app.mensajero, @router, @security.context]

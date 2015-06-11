@@ -30,3 +30,7 @@ front_registro:
     path:     /soap/registro
     defaults: { _controller: AppBundle:Front/SoapCliente:soapCliente }
     requirements: { _method: post|get }
+
+front_eliminar_mensaje:
+    path:     /item/eliminar-mensaje/{curso}/{modulo}/{item}/{id}
+    defaults: { _controller: AppBundle:Front/EliminarMensajeItem:eliminar }

@@ -38,7 +38,7 @@ class FrontModuloController extends Controller
 
     $itemModulo = $this->get('app.model.items');
 
-    return new Response($itemModulo->getItemModulo($curso, $modulo, $item, $pregunta));
+    return $itemModulo->getItemModulo($curso, $modulo, $item, $pregunta);
 
     $curso = $repositorio->createQueryBuilder('c')
       ->select('c','m','i','s')

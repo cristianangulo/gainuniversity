@@ -13,11 +13,32 @@
       <div class="panel-body">
 
       {% for comentario in comentarios_item %}
+
+      {% if is_granted('ROLE_ADMIN') %}
+      <div class="btn-group pull-right">
+        <a href="{{ path('front_eliminar_mensaje', {'curso': curso.id , 'modulo': modulo.id, 'item': item.id, 'id': comentario.id }) }}" type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-remove"></span>
+        </a>
+      </div>
+      {% else %}
+        {% if app.user.id == comentario.usuarios.id %}
+        <div class="btn-group pull-right">
+          <a type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove"></span>
+          </a>
+        </div>
+        {% endif %}
+      {% endif %}
+
+
         <small>{{ comentario.usuarios.nombre }} | {{ comentario.fecha|default('') }}</small>
         <p class="lead">
           {{ comentario.comentario }}
         </p>
-        <hr />
+        <hr>
+        <p>
+
+        </p>
       {% endfor %}
 
       </div>
