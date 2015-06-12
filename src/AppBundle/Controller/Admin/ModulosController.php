@@ -50,7 +50,7 @@ class ModulosController extends Controller
             $em->persist($modulo);
             $em->flush();
 
-            $this->get('app.mensajero')->add('mensaje','El Módulo ha sido creado');
+            $this->get('app.mensajero')->add('info','El Módulo ha sido creado');
             return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
         }
 
@@ -85,7 +85,7 @@ class ModulosController extends Controller
 
           $em->flush();
 
-          $this->get('app.mensajero')->add('mensaje','El Módulo se ha actualizado');
+          $this->get('app.mensajero')->add('info','El Módulo se ha actualizado');
 
           return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
         }
@@ -112,7 +112,7 @@ class ModulosController extends Controller
           $moduloSecciones->setModulos($modulo);
           $em->persist($moduloSecciones);
           $em->flush();
-          $this->get('app.mensajero')->add('mensaje','Se ha agregado un Ítem al Módulo');
+          $this->get('app.mensajero')->add('info','Se ha agregado un Ítem al Módulo');
           return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
         }
 
@@ -129,7 +129,7 @@ class ModulosController extends Controller
           }
 
           $em->flush();
-          $this->get('app.mensajero')->add('mensaje','Se han actualizado los Ítems del Módulo');
+          $this->get('app.mensajero')->add('info','Se han actualizado los Ítems del Módulo');
           return $this->redirect($this->generateUrl('admin_modulos_edit', array('id' => $modulo->getId())));
         }
 

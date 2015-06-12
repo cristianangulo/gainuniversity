@@ -120,7 +120,7 @@ class CursosController extends Controller
 
             $em->flush();
 
-            $this->get('app.mensajero')->add('mensaje','Se han actualizado los datos del Curso');
+            $this->get('app.mensajero')->add('info','Se han actualizado los datos del Curso');
 
             return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
         }
@@ -139,7 +139,7 @@ class CursosController extends Controller
 
           $em->persist($cursoModulos);
           $em->flush();
-          $this->get('app.mensajero')->add('mensaje','Se ha agregado un Módulo al Curso');
+          $this->get('app.mensajero')->add('info','Se ha agregado un Módulo al Curso');
 
           return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
 
@@ -158,7 +158,7 @@ class CursosController extends Controller
 
             $em->flush();
 
-            $this->get('app.mensajero')->add('mensaje','Los Módulos se han actualizado');
+            $this->get('app.mensajero')->add('info','Los Módulos se han actualizado');
 
             return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
         }
@@ -174,7 +174,7 @@ class CursosController extends Controller
             $em->persist($cursoUsuarios);
             $em->flush();
 
-            $this->get('app.mensajero')->add('mensaje','Se ha agregado un nuevo Usuario');
+            $this->get('app.mensajero')->add('info','Se ha agregado un nuevo Usuario');
             return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso->getId())));
 
         }
@@ -287,7 +287,7 @@ class CursosController extends Controller
       $em->remove($cursoUsuario);
       $em->flush();
 
-      $this->get('app.mensajero')->add('mensaje','Se ha eliminado un Usuario del Curso');
+      $this->get('app.mensajero')->add('info','Se ha eliminado un Usuario del Curso');
       return $this->redirect($this->generateUrl('admin_cursos_edit', array('id' => $curso)));
 
     }

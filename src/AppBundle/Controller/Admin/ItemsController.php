@@ -48,7 +48,7 @@ class ItemsController extends Controller
             $em->persist($item);
             $em->flush();
 
-            $this->get('app.mensajero')->add('mensaje', 'El Ítem se ha creado');
+            $this->get('app.mensajero')->add('info', 'El Ítem se ha creado');
 
             return $this->redirect($this->generateUrl('admin_secciones_edit', array('id' => $item->getId())));
         }
@@ -82,7 +82,7 @@ class ItemsController extends Controller
             $item->upload();
             $em->flush();
 
-            $this->get('app.mensajero')->add('mensaje', 'El Ítem se ha actualizado');
+            $this->get('app.mensajero')->add('info', 'El Ítem se ha actualizado');
 
             return $this->redirect($this->generateUrl('admin_secciones_edit', array('id' => $item->getId())));
         }
@@ -163,7 +163,7 @@ class ItemsController extends Controller
             $em->flush();
         }
 
-        $this->get('app.mensajero')->add('error', 'El Ítem ha sido borrado');
+        $this->get('app.mensajero')->add('warning', 'El Ítem ha sido borrado');
         return $this->redirect($this->generateUrl('admin_secciones'));
     }
 
