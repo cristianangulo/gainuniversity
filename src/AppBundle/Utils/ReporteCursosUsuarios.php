@@ -15,8 +15,21 @@ class ReporteCursosUsuarios
         $this->cursos = $cursos;
     }
 
-    public function cursoUsuarios($curso)
+    public function cursos()
     {
+        $reporte = array();
+
+        foreach($this->cursos->cursos() as $curso){
+            $reporte[$curso->getId()] = $this->cursoUsuarios($curso->getId());
+
+        }
+
+        return $reporte;
+    }
+
+    public function curso($curso)
+    {
+
         $curso = $this->cursos->curso($curso);
 
         $publicacionCurso = $curso->getFechaPublicacion();
