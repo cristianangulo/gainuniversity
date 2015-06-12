@@ -55,7 +55,7 @@ class RecuperarCuentaController extends Controller
                   'codigo' => $random
               ));
 
-      $this->get('app.cartero')->cartero($mail, $body, 'Recuperar cuenta');
+      $this->get('app.cartero')->msn($mail, $body, 'Recuperar cuenta');
 
       $usuario->setCodigo($random);
       $em->flush();
