@@ -14,8 +14,8 @@ class ItemVideoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        // echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->cursoUsuarios($curso));exit();
-        // exit();
+        echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->cursoUsuarios($curso));exit();
+        exit();
 
         if(!$this->get('app.usuario_curso')->usuarioCursoModuloItem($curso, $modulo, $item)){
             $this->get('app.mensajero')->add('info','Usted no tiene acceso a los recursos que solicita');
