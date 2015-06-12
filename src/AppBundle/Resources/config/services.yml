@@ -33,3 +33,7 @@ services:
     app.usuario_curso:
         class: AppBundle\Utils\UsuarioCurso
         arguments:  [@doctrine.orm.entity_manager]
+
+    app.reporte_cursos_usuarios:
+        class: AppBundle\Utils\ReporteCursosUsuarios
+        arguments:  [@app.model.cursos]

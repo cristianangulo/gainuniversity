@@ -15,9 +15,9 @@
 
       <ul class="list-group">
         <li class="list-group-item"><h1><i class="fa fa-book"></i> Tus cursos</h1></li>
-        {% for cursos in usuario.curso %}
-        <a href="{{ path('front_curso', {'id' : cursos.curso.id }) }}" class="list-group-item">
-          <i class="fa fa-hand-o-up"></i> {{ cursos.curso.curso }}
+        {% for cursos in usuario.cursos %}
+        <a href="{{ path('front_curso', {'id' : cursos.cursos.id }) }}" class="list-group-item">
+          <i class="fa fa-hand-o-up"></i> {{ cursos.cursos.curso }}
           <br />
           <small>{{ cursos.fechaRegistro|date('d/m/Y') }}</small>
 
