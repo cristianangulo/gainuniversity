@@ -36,4 +36,4 @@ services:
 
     app.reporte_cursos_usuarios:
         class: AppBundle\Utils\ReporteCursosUsuarios
-        arguments:  [@app.model.cursos]
+        arguments:  [@app.model.cursos, @app.model.usuarios]

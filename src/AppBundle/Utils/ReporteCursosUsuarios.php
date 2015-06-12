@@ -3,16 +3,66 @@
 namespace AppBundle\Utils;
 
 use AppBundle\Model\Admin\CursosModel;
+use AppBundle\Model\ACL\UsuariosModel;
 /**
  *
  */
 class ReporteCursosUsuarios
 {
     private $cursos;
+    private $usuarios;
 
-    function __construct(CursosModel $cursos)
+    function __construct(CursosModel $cursos, $usuarios)
     {
         $this->cursos = $cursos;
+        $this->usuarios = $usuarios;
+    }
+
+
+    public function usuario($usuario)
+    {
+        $usuario = $this->usuarios->usuario($usuario);
+
+        $registro = array();
+
+        foreach($usuario->getCursos() as $curso){
+
+            $registro[$curso->getCursos()->getId()]['curso'] = $curso->getCursos()->getCurso();
+
+            $registro[$curso->getCursos()->getId()]['registro'] = $this->dateFormat($curso->getFechaRegistro());
+
+            $inicioCurso = $curso->getCursos()->getFechaPublicacion();
+
+            if($curso->getCursos()->getFechaPublicacion() < $curso->getFechaRegistro()){
+                $inicioCurso = $curso->getFechaRegistro();
+            }
+
+
+            $registro[$curso->getCursos()->getId()]['inicio_curso'] = $this->dateFormat($inicioCurso);
+
+            $intervalo = $inicioCurso->diff(new \DateTime('now'))->format('%a');
+
+            $registro[$curso->getCursos()->getId()]['dias_transcurridos'] = $intervalo;
+
+            $temporalidad = $this->temporalidad($curso->getCursos()->getTemporalidad());
+
+            $cantidadModulos = ($intervalo / $temporalidad + 1);
+
+            $cantidadModulos = ($cantidadModulos > count($curso->getCursos()->getModulos() )) ? count($curso->getCursos()->getModulos()) : floor($cantidadModulos);
+
+            $registro[$curso->getCursos()->getId()]['modulos_hoy'] = $cantidadModulos;
+
+            $fecha = $this->dateFormat($inicioCurso);
+
+            $registro[$curso->getCursos()->getId()]['modulos'] = array();
+
+            foreach($curso->getCursos()->getModulos() as $k => $modulo){
+                $registro[$curso->getCursos()->getId()]['modulos'][$modulo->getModulos()->getId()] = $this->darFecha($fecha,($temporalidad*$k));
+            }
+
+        }
+
+        return $registro;
     }
 
     public function cursos()
@@ -20,8 +70,7 @@ class ReporteCursosUsuarios
         $reporte = array();
 
         foreach($this->cursos->cursos() as $curso){
-            $reporte[$curso->getId()] = $this->cursoUsuarios($curso->getId());
-
+            $reporte[$curso->getId()] = $this->curso($curso->getId());
         }
 
         return $reporte;
@@ -68,10 +117,8 @@ class ReporteCursosUsuarios
 
             $registro['usuarios'][$usuario->getId()]['modulos'] = array();
 
-            for($i = 0; $i<count($curso->getModulos()); $i++){
-
-                $registro['usuarios'][$usuario->getId()]['modulos'][$i+1] = $this->darFecha($fecha,($registro['temporalidad']*$i));
-
+            foreach($curso->getModulos() as $k => $modulo){
+                $registro['usuarios'][$usuario->getId()]['modulos'][$modulo->getId()] = $this->darFecha($fecha,($registro['temporalidad']*$k));
             }
 
         }
