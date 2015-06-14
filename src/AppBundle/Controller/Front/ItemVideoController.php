@@ -15,7 +15,7 @@ class ItemVideoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->cursos());exit();
-        echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->usuario(2));exit();
+        echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->usuario(1));exit();
         //echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->curso(1));exit();
         exit();
 

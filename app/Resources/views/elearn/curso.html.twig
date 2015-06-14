@@ -83,7 +83,7 @@
         </ul>
       </div>
       <ul class="columns">
-        {% for items in modulos.modulos.secciones %}
+        {% for items in modulos.modulos.items %}
         <li>
           <div class="timeline_element partition-white column-unlock">
             <div class="timeline_date">
@@ -98,11 +98,11 @@
               </div>
             </div>
             <div class="timeline_title">
-              <i class="fa fa-{{ items.secciones.tipo.svgSeccion }} fa-2x pull-left fa-border"></i>
-              <h4 class="light-text no-margin padding-5">{{ items.secciones.seccion }}</h4>
+              <i class="fa fa-{{ items.items.tipo.svgSeccion }} fa-2x pull-left fa-border"></i>
+              <h4 class="light-text no-margin padding-5">{{ items.items.seccion }}</h4>
             </div>
             <div class="timeline_content">
-              {{ items.secciones.descripcion }}
+              {{ items.items.descripcion }}
             </div>
           </div>
         </li>

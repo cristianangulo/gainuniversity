@@ -19,6 +19,7 @@
 {% endblock %}
 
 {% block body_contenido %}
+<div class="col-md-12">
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">
@@ -42,31 +43,54 @@
 
         </div>
       </div>
-      <hr>
-      <div class="alert alert-success">
-        <strong>Cursos del usuario</strong>
-      </div>
+</div>
 
-        <table class="table">
-            <thead>
-              <tr>
-                <th>
-                    Curso
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for curso in usuario.cursos %}
-                  <tr>
-                    <td>
-                      {{ curso.cursos.curso }}
-                    </td>
-                  </tr>
-              {% endfor %}
+    <div class="col-md-12">
+        <div class="alert alert-warning" role="alert">
+            <strong>Cursos del usuario</strong>
+        </div>
+        {% for reporte in reportes %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{ reporte.curso }}</div>
+                <div class="panel-body">
 
-            </tbody>
-        </table>
+                    <ul class="list-group">
+                        <li class="list-group-item">Registro {{ reporte.registro}}</li>
+                        <li class="list-group-item">Inicio del curso {{ reporte.inicio_curso}}</li>
+                        <li class="list-group-item">Días transcurridos {{ reporte.dias_transcurridos}}</li>
+                        <li class="list-group-item">Módulos liberados {{ reporte.modulos_hoy}}</li>
+                      </ul>
 
+                </div>
+
+                <!-- Table -->
+                <table class="table">
+                  <thead>
+                      <th>
+                          Módulo
+                      </th>
+                      <th>
+                          Fecha
+                      </th>
+                  </thead>
+                  <tbody>
+                      {% for modulo in reporte.modulos %}
+                      <tr>
+                          <td>
+                              {{ loop.index }}
+                          </td>
+                          <td>
+                              {{ modulo }}
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        {% endfor %}
     </div>
 
 

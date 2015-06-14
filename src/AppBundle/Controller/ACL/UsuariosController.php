@@ -96,6 +96,7 @@ class UsuariosController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $usuario = $em->getRepository('AppBundle:ACL\Usuarios')->find($id);
+        $reporte = $this->get('app.reporte_cursos_usuarios')->usuario($usuario->getId());
 
         if (!$usuario) {
             throw $this->createNotFoundException('Unable to find Usuarios entity.');
@@ -138,7 +139,8 @@ class UsuariosController extends Controller
             'usuario'      => $usuario,
             'usuario_form'   => $usuarioForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'usuario_password_form' => $usuarioFormPassword->createView()
+            'usuario_password_form' => $usuarioFormPassword->createView(),
+            'reportes' => $reporte
         ));
     }
 
