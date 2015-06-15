@@ -16,7 +16,7 @@ class ModulosType extends AbstractType
     {
         $builder
             ->add('modulo')
-            ->add('mail','textarea', array(
+            ->add('mensajeMail','textarea', array(
               'attr' => array('rows' => '10'),
             ))
             ->add('descripcion','textarea', array(
