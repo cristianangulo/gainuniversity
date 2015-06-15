@@ -48,7 +48,7 @@ class RecuperarCuentaController extends Controller
 
       $random = $this->get('app.valor_random')->getValor();
 
-      $mail = 'cristianangulonova@hotmail.com';
+      $mail = $usuario->getEmail();
 
       $body = $this->renderView("ACL/mail.html.twig",array(
                   'nombre' => $usuario->getNombre(),
