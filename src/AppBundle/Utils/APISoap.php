@@ -88,8 +88,8 @@ class APISoap
       if(!$cursoUsuario){
 
         $cursoUsuario = new CursoUsuarios();
-        $cursoUsuario->setCurso($curso);
-        $cursoUsuario->setUsuario($usuario);
+        $cursoUsuario->setCursos($curso);
+        $cursoUsuario->setUsuarios($usuario);
 
         $this->em->persist($cursoUsuario);
         $this->em->flush();
