@@ -40,4 +40,4 @@ services:
 
     app.modulos_liberados:
         class: AppBundle\Utils\ModulosLiberados
-        arguments:  [@app.reporte_cursos_usuarios, $app.cartero]
+        arguments:  [@app.reporte_cursos_usuarios, @app.cartero, @app.model.usuarios, @app.model.modulos, @twig]

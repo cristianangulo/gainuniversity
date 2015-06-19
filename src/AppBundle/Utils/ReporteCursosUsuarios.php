@@ -167,7 +167,7 @@ class ReporteCursosUsuarios
         /**
          * Método para extraer el resultado de usuarios con módulos liberados por día.
          */
-        
+
         $hoy = new \DateTime('now');
 
         $liberados = array();
