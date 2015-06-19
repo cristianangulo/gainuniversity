@@ -65,6 +65,17 @@ class ReporteCursosUsuarios
         return $registro;
     }
 
+    public function usuarios()
+    {
+        $reporte = array();
+
+        foreach ($this->usuarios->usuarios() as $usuario) {
+            $reporte[$usuario->getId()] = $this->usuario($usuario->getId());
+        }
+
+        return $reporte;
+    }
+
     public function cursos()
     {
         $reporte = array();
@@ -149,6 +160,32 @@ class ReporteCursosUsuarios
     {
         list($day,$mon,$year) = explode('/',$fecha);
         return date('d/m/Y',mktime(0,0,0,$mon,$day+$dia,$year));
+    }
+
+    public function modulosLiberados()
+    {
+        /**
+         * Método para extraer el resultado de usuarios con módulos liberados por día.
+         */
+        $hoy = new \DateTime('now');
+
+        $liberados = array();
+
+        foreach($this->usuarios() as $i => $u){
+
+
+            foreach($u as $key => $usuario){
+
+                foreach($usuario['modulos'] as $m => $modulo){
+
+                    if($modulo === $this->dateFormat($hoy)){
+                        $liberados[$i] = $m;
+                    }
+                }
+            }
+        }
+
+        return $liberados;
     }
 }
 

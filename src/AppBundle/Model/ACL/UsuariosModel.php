@@ -18,6 +18,12 @@ class UsuariosModel
         $usuario = $this->em->getRepository('AppBundle:ACL\Usuarios')->find($usuario);
         return $usuario;
     }
+
+    public function usuarios()
+    {
+        $usuarios = $this->em->getRepository('AppBundle:ACL\Usuarios')->findAll();
+        return $usuarios;
+    }
 }
 
 ?>
