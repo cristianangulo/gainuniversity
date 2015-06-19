@@ -40,6 +40,14 @@ class Modulos
     private $descripcion;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="text")
+     * @Assert\NotBlank(message="Es obligatorio")
+     */
+    private $mail;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="modulos", cascade={"persist"})
      * @ORM\OrderBy({"posicion" = "ASC"})
      * @Assert\NotBlank(message="Es obligatorio")
@@ -181,5 +189,29 @@ class Modulos
     public function getCursos()
     {
         return $this->cursos;
+    }
+
+    /**
+     * Set mail
+     *
+     * @param string $mail
+     *
+     * @return Modulos
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * Get mail
+     *
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->mail;
     }
 }
