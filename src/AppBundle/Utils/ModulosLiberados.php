@@ -40,16 +40,16 @@ class ModulosLiberados
 
                 $reporte[$u] = array(
                     'usuario' => $usuario->getNombre(),
-                    'modulo' => $modulo->getModulo()
+                    'modulo' => $modulo->getModulo(),
                 );
 
                 $body = $this->twig->render('Admin/Modulos/modulo-liberado.html.twig', array(
                     'nombre' => $usuario->getNombre(),
                     'modulo' => $modulo->getModulo(),
-                    'mensaje' => $modulo->getMail()
+                    'mensaje' => $modulo->getMensajeMail()
                 ));
 
-                $this->cartero->msn('cristianangulonova@hotmail.com',$body, 'Módulo liberado');
+                $this->cartero->msn('cristianangulonova@hotmail.com',$body, 'Módulo liberado | '. $modulo->getModulo() );
             }
 
             $body = $this->twig->render('Admin/Modulos/reporte-modulos-liberados.html.twig', array(

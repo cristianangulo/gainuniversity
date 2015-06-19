@@ -42,10 +42,10 @@ class Modulos
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="text")
+     * @ORM\Column(name="mensaje_mail", type="text")
      * @Assert\NotBlank(message="Es obligatorio")
      */
-    private $mail;
+    private $mensajeMail;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="modulos", cascade={"persist"})
@@ -75,119 +75,4 @@ class Modulos
         return $this->id;
     }
 
-    /**
-     * Set modulo
-     *
-     * @param string $modulo
-     *
-     * @return Modulos
-     */
-    public function setModulo($modulo)
-    {
-        $this->modulo = $modulo;
-
-        return $this;
-    }
-
-    /**
-     * Get modulo
-     *
-     * @return string
-     */
-    public function getModulo()
-    {
-        return $this->modulo;
-    }
-
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     *
-     * @return Modulos
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * Add item
-     *
-     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $item
-     *
-     * @return Modulos
-     */
-    public function addItem(\AppBundle\Entity\Admin\Modulos\ModuloItems $item)
-    {
-        $this->items[] = $item;
-
-        return $this;
-    }
-
-    /**
-     * Remove item
-     *
-     * @param \AppBundle\Entity\Admin\Modulos\ModuloItems $item
-     */
-    public function removeItem(\AppBundle\Entity\Admin\Modulos\ModuloItems $item)
-    {
-        $this->items->removeElement($item);
-    }
-
-    /**
-     * Get items
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    /**
-     * Add curso
-     *
-     * @param \AppBundle\Entity\Admin\Cursos\CursoModulos $curso
-     *
-     * @return Modulos
-     */
-    public function addCurso(\AppBundle\Entity\Admin\Cursos\CursoModulos $curso)
-    {
-        $this->cursos[] = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Remove curso
-     *
-     * @param \AppBundle\Entity\Admin\Cursos\CursoModulos $curso
-     */
-    public function removeCurso(\AppBundle\Entity\Admin\Cursos\CursoModulos $curso)
-    {
-        $this->cursos->removeElement($curso);
-    }
-
-    /**
-     * Get cursos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCursos()
-    {
-        return $this->cursos;
-    }
 }

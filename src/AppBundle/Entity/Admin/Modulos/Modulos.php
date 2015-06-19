@@ -42,10 +42,10 @@ class Modulos
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="text")
+     * @ORM\Column(name="mensaje_mail", type="text")
      * @Assert\NotBlank(message="Es obligatorio")
      */
-    private $mail;
+    private $mensajeMail;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Admin\Modulos\ModuloItems", mappedBy="modulos", cascade={"persist"})
@@ -74,6 +74,7 @@ class Modulos
     {
         return $this->id;
     }
+
 
     /**
      * Set modulo
@@ -121,6 +122,30 @@ class Modulos
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set mensajeMail
+     *
+     * @param string $mensajeMail
+     *
+     * @return Modulos
+     */
+    public function setMensajeMail($mensajeMail)
+    {
+        $this->mensajeMail = $mensajeMail;
+
+        return $this;
+    }
+
+    /**
+     * Get mensajeMail
+     *
+     * @return string
+     */
+    public function getMensajeMail()
+    {
+        return $this->mensajeMail;
     }
 
     /**
@@ -189,29 +214,5 @@ class Modulos
     public function getCursos()
     {
         return $this->cursos;
-    }
-
-    /**
-     * Set mail
-     *
-     * @param string $mail
-     *
-     * @return Modulos
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    /**
-     * Get mail
-     *
-     * @return string
-     */
-    public function getMail()
-    {
-        return $this->mail;
     }
 }
