@@ -1,0 +1,31 @@
+
+<h1>Reporte de módulos liberados | </h1>
+
+<p>
+    Se han enviado notificaciones de módulos liberados a los siguientes usuarios:
+</p>
+
+<table border="1" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Usuario
+            </th>
+            <th>
+                Módulo
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in reporte %}
+        <tr>
+            <td>
+                {{ usuario.usuario }}
+            </td>
+            <td>
+                {{ usuario.modulo }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

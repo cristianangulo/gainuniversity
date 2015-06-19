@@ -186,7 +186,11 @@ class ReporteCursosUsuarios
             }
         }
 
-        return $liberados;
+        if(!empty($liberados)){
+            return $liberados;
+        }
+
+        return null;
     }
 }
 

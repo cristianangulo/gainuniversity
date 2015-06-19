@@ -31,20 +31,34 @@ class ModulosLiberados
 
     public function send()
     {
-        foreach($this->reporte->modulosLiberados() as $u => $m){ // Usuario => Módulo
+        if(!empty($this->reporte->modulosLiberados())){
+            $reporte = array();
+            foreach($this->reporte->modulosLiberados() as $u => $m){ // Usuario => Módulo
 
-            $usuario = $this->usuarios->usuario($u);
-            $modulo = $this->modulos->modulo($m);
+                $usuario = $this->usuarios->usuario($u);
+                $modulo = $this->modulos->modulo($m);
 
-            $body = $this->twig->render('Admin/Modulos/modulo-liberado.html.twig', array(
-                'nombre' => $usuario->getNombre(),
-                'modulo' => $modulo
+                $reporte[$u] = array(
+                    'usuario' => $usuario->getNombre(),
+                    'modulo' => $modulo->getModulo()
+                );
+
+                $body = $this->twig->render('Admin/Modulos/modulo-liberado.html.twig', array(
+                    'nombre' => $usuario->getNombre(),
+                    'modulo' => $modulo->getModulo(),
+                    'mensaje' => $modulo->getMail()
+                ));
+
+                $this->cartero->msn('cristianangulonova@hotmail.com',$body, 'Módulo liberado');
+            }
+
+            $body = $this->twig->render('Admin/Modulos/reporte-modulos-liberados.html.twig', array(
+                'reporte' => $reporte,
+
             ));
 
-            $this->cartero->msn('cristianangulonova@hotmail.com',$body);
+            $this->cartero->msn('cristianangulonova@hotmail.com',$body, 'Informe de módulos liberados');
         }
-
-
     }
 
 
