@@ -92,7 +92,7 @@ class ModulosController extends Controller
 
         $originalItems = new ArrayCollection();
 
-        foreach($modulo->getSecciones() as $item){
+        foreach($modulo->getItems() as $item){
           $originalItems->add($item);
         }
 
@@ -123,7 +123,7 @@ class ModulosController extends Controller
         if($itemsModuloForm->isValid()){
 
           foreach($originalItems as $o){
-          if(false === $modulo->getSecciones()->contains($o)){
+          if(false === $modulo->getItems()->contains($o)){
               $em->remove($o);
             }
           }

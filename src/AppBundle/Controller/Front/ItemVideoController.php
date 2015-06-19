@@ -18,7 +18,7 @@ class ItemVideoController extends Controller
         // //echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->usuario(1));exit();
         // echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->curso(1));exit();
         //echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->usuarios());exit();
-        echo "<pre>";print_r($this->get('app.reporte_cursos_usuarios')->modulosLiberados());exit();
+        echo "<pre>";print_r($this->get('app.modulos_liberados')->send());exit();
 
 
         exit();

@@ -16,7 +16,7 @@ class ItemsModuloType extends AbstractType
     {
 
         $builder
-          ->add('secciones', 'collection', array(
+          ->add('items', 'collection', array(
               'type' => new ModuloItemsType(),
               'by_reference' => false,
               'allow_add' => true,

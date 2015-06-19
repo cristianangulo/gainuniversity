@@ -37,3 +37,7 @@ services:
     app.reporte_cursos_usuarios:
         class: AppBundle\Utils\ReporteCursosUsuarios
         arguments:  [@app.model.cursos, @app.model.usuarios]
+
+    app.modulos_liberados:
+        class: AppBundle\Utils\ModulosLiberados
+        arguments:  [@app.reporte_cursos_usuarios, $app.cartero]

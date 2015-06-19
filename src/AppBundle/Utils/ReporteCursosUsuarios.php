@@ -12,7 +12,7 @@ class ReporteCursosUsuarios
     private $cursos;
     private $usuarios;
 
-    function __construct(CursosModel $cursos, $usuarios)
+    function __construct(CursosModel $cursos, UsuariosModel $usuarios)
     {
         $this->cursos = $cursos;
         $this->usuarios = $usuarios;
@@ -167,6 +167,7 @@ class ReporteCursosUsuarios
         /**
          * Método para extraer el resultado de usuarios con módulos liberados por día.
          */
+        
         $hoy = new \DateTime('now');
 
         $liberados = array();

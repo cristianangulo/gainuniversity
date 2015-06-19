@@ -25,7 +25,7 @@ class ModuloItemsSubscriber implements EventSubscriberInterface
         if ($data->getId()) {
           $choices = array();
 
-          for($i = 0; $i <count($data->getModulos()->getSecciones()); $i++){
+          for($i = 0; $i <count($data->getModulos()->getItems()); $i++){
             $choices[$i + 1] = $i + 1;
           }
 

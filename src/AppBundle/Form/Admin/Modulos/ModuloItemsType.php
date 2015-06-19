@@ -16,7 +16,7 @@ class ModuloItemsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('secciones', 'entity', array(
+            ->add('items', 'entity', array(
               'class' => 'AppBundle:Admin\Items\Items',
               'property' => 'seccion',
               //'empty_value' => 'Seleccione'
