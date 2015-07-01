@@ -54,6 +54,10 @@ perfil_tus_cursos:
     path:     /perfil/tus-cursos
     defaults: { _controller: AppBundle:Front/CursosUsuario:cursos }
 
+perfil_diplomas:
+    path:     /perfil/datos-diploma
+    defaults: { _controller: AppBundle:Front/CursosUsuario:datosDiploma }
+
 front_msn:
     path:     /perfil/msn
     defaults: { _controller: AppBundle:Admin/MSN:msn}

@@ -192,6 +192,28 @@ class ReporteCursosUsuarios
 
         return null;
     }
+
+    public function fechaLiberarDiplomaCurso($usuario)
+    {
+        $reporte = array();
+
+        foreach($this->usuario($usuario) as $key => $curso){
+
+            $reporte[$key]['id'] = $key;
+            $reporte[$key]['curso'] = $curso["curso"];
+
+            //echo date_diff(end($curso["modulos"]), $this->dateFormat(new \DateTime('now')));
+
+            //$fecha = (end($curso["modulos"]) == $this->dateFormat(new \DateTime('now'))) ? 1 : 0;
+
+            //$reporte[$key]['fecha'] = $fecha ;
+        }
+
+        echo "<pre>";print_r($reporte);exit();
+
+        return $reporte;
+
+    }
 }
 
 

@@ -15,13 +15,30 @@
 
       <ul class="list-group">
         <li class="list-group-item"><h1><i class="fa fa-book"></i> Tus cursos</h1></li>
-        {% for cursos in usuario.cursos %}
-        <a href="{{ path('front_curso', {'id' : cursos.cursos.id }) }}" class="list-group-item">
-          <i class="fa fa-hand-o-up"></i> {{ cursos.cursos.curso }}
-          <br />
-          <small>{{ cursos.fechaRegistro|date('d/m/Y') }}</small>
 
-        </a>
+        {% for curso in usuarioCursos %}
+            <li class="list-group-item">
+                <p>
+                    <i class="fa fa-hand-o-up"></i> {{ curso.curso }}
+                </p>
+                <p>
+                    <div class="btn-group btn-group-sm">
+                      <a href="{{ path('front_curso', {'id' : curso.id }) }}"  type="button" class="btn btn-default">
+                          Ir al Curso
+                      </a>
+                      {% if curso.fecha == 1 %}
+                      <a href="{{ path('perfil_diplomas') }}" type="button" class="btn btn-primary ">
+                          Descargar Diploma
+                      </a>
+                      {% else %}
+                      <a type="button" class="btn btn-default disabled">
+                          Descargar Diploma
+                      </a>
+                      {% endif %}
+                    </div>
+                </p>
+
+            </li>
         {% endfor %}
       </ul>
 
