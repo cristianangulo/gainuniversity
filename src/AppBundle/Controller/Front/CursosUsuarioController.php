@@ -30,8 +30,14 @@ class CursosUsuarioController extends Controller
     ));
   }
 
-  public function datosDiplomaAction()
-  {
-      return new Response('Cambiar Diploma');
-  }
+    public function datosDiplomaAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->find($this->getUser()->getId());
+        
+        return $this->render('Front/datos-diploma.html.twig', array(
+
+        ));
+    }
 }

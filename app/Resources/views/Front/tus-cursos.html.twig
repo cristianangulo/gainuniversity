@@ -26,7 +26,7 @@
                       <a href="{{ path('front_curso', {'id' : curso.id }) }}"  type="button" class="btn btn-default">
                           Ir al Curso
                       </a>
-                      {% if curso.fecha == 1 %}
+                      {% if curso.liberado == 1 %}
                       <a href="{{ path('perfil_diplomas') }}" type="button" class="btn btn-primary ">
                           Descargar Diploma
                       </a>

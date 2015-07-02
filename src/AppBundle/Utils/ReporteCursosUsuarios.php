@@ -195,21 +195,26 @@ class ReporteCursosUsuarios
 
     public function fechaLiberarDiplomaCurso($usuario)
     {
-        $reporte = array();
-
         foreach($this->usuario($usuario) as $key => $curso){
 
             $reporte[$key]['id'] = $key;
             $reporte[$key]['curso'] = $curso["curso"];
+            $reporte[$key]['ultimo_modulo'] = end($curso["modulos"]);
 
-            //echo date_diff(end($curso["modulos"]), $this->dateFormat(new \DateTime('now')));
+            $ultimoModulo = str_replace('/', '-', $reporte[$key]['ultimo_modulo']);
 
-            //$fecha = (end($curso["modulos"]) == $this->dateFormat(new \DateTime('now'))) ? 1 : 0;
+            $hoy = \date('d-m-Y');
 
-            //$reporte[$key]['fecha'] = $fecha ;
+            $ultimoModulo = new \DateTime($ultimoModulo);
+            $hoy = new \DateTime($hoy);
+            $interval = $ultimoModulo->diff($hoy);
+
+            if($interval->format('%R%a') > 0){
+                $reporte[$key]['liberado'] = true;
+            }else{
+                $reporte[$key]['liberado'] = false;
+            }
         }
-
-        echo "<pre>";print_r($reporte);exit();
 
         return $reporte;
 
