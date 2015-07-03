@@ -1,0 +1,36 @@
+<style>
+    body{
+
+    }
+
+    #wrap{
+        width: 100%;
+    }
+
+    #wrap{
+        width: 1032px;
+        height: 702px;
+        float: left;
+        position: absolute;
+        background-image: url("{{ app.request.getSchemeAndHttpHost() }}{{ asset('uploads/diplomas/curso3.png') }}");
+    }
+
+    #nombre{
+        width: 100%;
+        float: left;
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        top: 190px;
+        font-family: Helvetica;
+        font-size: 30px;
+    }
+</style>
+
+
+<div id="wrap">
+    <section id="nombre">
+        <h1>{{ nombre }}</h1>
+    </section>
+
+</div>

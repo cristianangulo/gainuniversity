@@ -24,6 +24,23 @@ class UsuariosModel
         $usuarios = $this->em->getRepository('AppBundle:ACL\Usuarios')->findAll();
         return $usuarios;
     }
+
+    public function cursoUsuario($curso, $usuario)
+    {
+        $usuarioCurso = $this->em->getRepository('AppBundle:Admin\Cursos\CursoUsuarios')->registroCursoUsuario($curso, $usuario);
+
+        return $usuarioCurso;
+    }
+
+    public function nombreDiploma($model, $form)
+    {
+        $nombre = $form->get('nombre')->getData();
+
+        $model->setNombre($nombre);
+
+        $this->em->persist($model);
+        $this->em->flush();
+    }
 }
 
 ?>

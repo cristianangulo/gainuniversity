@@ -41,6 +41,13 @@ class CursoUsuarios
      */
     private $fechaRegistro;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="text")
+     */
+    private $nombre;
+
     public function __construct()
     {
         $this->fechaRegistro = new \DateTime();

@@ -20,7 +20,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "andres-montanez/magallanes": "1.0.*",
         "fergusean/nusoap": "dev-master",
-        "friendsofsymfony/jsrouting-bundle": "~1.5"
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
+        "dompdf/dompdf" : "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

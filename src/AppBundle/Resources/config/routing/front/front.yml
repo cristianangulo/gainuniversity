@@ -55,7 +55,7 @@ perfil_tus_cursos:
     defaults: { _controller: AppBundle:Front/CursosUsuario:cursos }
 
 perfil_diplomas:
-    path:     /perfil/datos-diploma
+    path:     /perfil/datos-diploma/{id}
     defaults: { _controller: AppBundle:Front/CursosUsuario:datosDiploma }
 
 front_msn:
@@ -74,3 +74,7 @@ front_registro:
 front_eliminar_comentario:
     path:     /curso/{curso}/{modulo}/item/{item}/eliminar-mensaje/{id}
     defaults: { _controller: AppBundle:Front/ItemForo:eliminarComentario }
+
+perfil_descargar_curso:
+    path:     /perfil/descargar-curso
+    defaults: { _controller: AppBundle:Front/CursosUsuario:descargarDiploma }

@@ -41,6 +41,13 @@ class CursoUsuarios
      */
     private $fechaRegistro;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="text")
+     */
+    private $nombre;
+
     public function __construct()
     {
         $this->fechaRegistro = new \DateTime();
@@ -126,5 +133,29 @@ class CursoUsuarios
     public function getUsuarios()
     {
         return $this->usuarios;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     *
+     * @return CursoUsuarios
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
     }
 }

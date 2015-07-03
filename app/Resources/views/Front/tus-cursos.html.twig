@@ -27,7 +27,7 @@
                           Ir al Curso
                       </a>
                       {% if curso.liberado == 1 %}
-                      <a href="{{ path('perfil_diplomas') }}" type="button" class="btn btn-primary ">
+                      <a href="{{ path('perfil_diplomas', { id:curso.id }) }}" type="button" class="btn btn-primary ">
                           Descargar Diploma
                       </a>
                       {% else %}
