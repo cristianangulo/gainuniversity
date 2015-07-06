@@ -36,7 +36,7 @@ services:
 
     app.reporte_cursos_usuarios:
         class: AppBundle\Utils\ReporteCursosUsuarios
-        arguments:  [@app.model.cursos, @app.model.usuarios]
+        arguments:  [@app.model.cursos, @app.model.usuarios, @temporalidad, @app.model.cursos]
 
     app.modulos_liberados:
         class: AppBundle\Utils\ModulosLiberados
