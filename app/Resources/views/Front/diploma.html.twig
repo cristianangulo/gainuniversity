@@ -25,12 +25,42 @@
         font-family: Helvetica;
         font-size: 30px;
     }
+
+    #curso{
+        width: 100%;
+        float: left;
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        top: 325px;
+        font-family: Helvetica;
+        font-size: 20px;
+    }
+
+    #fecha{
+        width: 100%;
+        float: left;
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        top: 550px;
+        font-family: Helvetica;
+        font-size: 16px;
+    }
 </style>
 
 
 <div id="wrap">
-    <section id="nombre">
+    <div id="nombre">
         <h1>{{ nombre }}</h1>
-    </section>
+    </div>
+
+    <div id="curso">
+        <h3>{{ curso }}</h3>
+    </div>
+
+    <div id="fecha">
+        <h4>{{ fecha }}</h4>
+    </div>
 
 </div>

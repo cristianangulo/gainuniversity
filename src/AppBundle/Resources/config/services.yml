@@ -41,3 +41,6 @@ services:
     app.modulos_liberados:
         class: AppBundle\Utils\ModulosLiberados
         arguments:  [@app.reporte_cursos_usuarios, @app.cartero, @app.model.usuarios, @app.model.modulos, @twig]
+
+    app.fecha_diploma:
+        class: AppBundle\Utils\FechaDiploma

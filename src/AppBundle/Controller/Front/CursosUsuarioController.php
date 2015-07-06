@@ -38,7 +38,10 @@ class CursosUsuarioController extends Controller
         $cursoUsuario = $this->get('app.model.usuarios')->cursoUsuario($id, $this->getUser()->getId());
 
         if($cursoUsuario->getNombre() != ""){
-            return $this->descargarDiploma($cursoUsuario->getNombre());
+
+            $fecha = $this->get('app.fecha_diploma')->fecha($cursoUsuario->getFechaDiploma());
+
+            return $this->descargarDiploma($cursoUsuario->getNombre(), $fecha, $cursoUsuario->getCursos()->getCurso());
         }
 
         $usuariosForm = $this->usuarioForm($cursoUsuario->getUsuarios()->getNombre());
@@ -72,13 +75,17 @@ class CursosUsuarioController extends Controller
         return $form;
     }
 
-    public function descargarDiploma($nombre)
+    public function descargarDiploma($nombre, $fecha, $curso)
     {
         require_once($this->get('kernel')->getRootDir().'/config/dompdf_config.inc.php');
 
         $html = $this->renderView('Front/diploma.html.twig', array(
-            'nombre' => $nombre
+            'nombre' => $nombre,
+            'fecha'  => $fecha,
+            'curso'  => $curso
         ));
+
+        //return $html;
 
         $dompdf = new \DOMPDF();
         $dompdf->set_paper('a4', 'landscape');
