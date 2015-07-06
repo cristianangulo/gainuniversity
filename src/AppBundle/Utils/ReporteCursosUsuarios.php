@@ -4,6 +4,7 @@ namespace AppBundle\Utils;
 
 use AppBundle\Model\Admin\CursosModel;
 use AppBundle\Model\ACL\UsuariosModel;
+use AppBundle\Utils\Temporalidad;
 /**
  *
  */
@@ -11,11 +12,13 @@ class ReporteCursosUsuarios
 {
     private $cursos;
     private $usuarios;
+    private $temporalidad;
 
-    function __construct(CursosModel $cursos, UsuariosModel $usuarios)
+    function __construct(CursosModel $cursos, UsuariosModel $usuarios, Temporalidad $tempo)
     {
         $this->cursos = $cursos;
         $this->usuarios = $usuarios;
+        $this->temporalidad = $tempo;
     }
 
 
@@ -159,7 +162,7 @@ class ReporteCursosUsuarios
     protected function darFecha($fecha, $dia)
     {
         list($day,$mon,$year) = explode('/',$fecha);
-        return date('d/m/Y',mktime(0,0,0,$mon,$day+$dia,$year));
+        return date('d-m-Y',mktime(0,0,0,$mon,$day+$dia,$year));
     }
 
     public function modulosLiberados()
@@ -198,14 +201,22 @@ class ReporteCursosUsuarios
         foreach($this->usuario($usuario) as $key => $curso){
 
             $reporte[$key]['id'] = $key;
-            $reporte[$key]['curso'] = $curso["curso"];
-            $reporte[$key]['ultimo_modulo'] = end($curso["modulos"]);
 
-            $ultimoModulo = str_replace('/', '-', $reporte[$key]['ultimo_modulo']);
+            $cursos = $this->cursos->curso($key);
+
+            $temporalidad = $this->temporalidad->temporalidad($cursos->getTemporalidad());
+
+            $reporte[$key]['curso'] = $curso["curso"];
+
+
+            $ultimoModulo = new \DateTime(end($curso["modulos"]));
+
+            date_add($ultimoModulo, date_interval_create_from_date_string( $temporalidad.' days'));
+
+            $reporte[$key]['ultimo_modulo'] = date_format($ultimoModulo, 'd-m-Y');
 
             $hoy = \date('d-m-Y');
 
-            $ultimoModulo = new \DateTime($ultimoModulo);
             $hoy = new \DateTime($hoy);
             $interval = $ultimoModulo->diff($hoy);
 
