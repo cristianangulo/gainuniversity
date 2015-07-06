@@ -54,7 +54,6 @@ class CursosUsuarioController extends Controller
 
             $this->get('app.mensajero')->add('info','Descargando diploma');
 
-            return $this->redirect($this->generateUrl('perfil_diplomas', array('id' => $cursoUsuario->getCursos()->getId())));
 
         }
 
