@@ -44,12 +44,20 @@ class CursoUsuarios
     /**
      * @var string
      *
+     * @ORM\Column(name="fecha_diploma", type="datetime")
+     */
+    private $fechaDiploma;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="nombre", type="text")
      */
     private $nombre;
 
     public function __construct()
     {
+        $this->fechaRegistro = new \DateTime();
         $this->fechaRegistro = new \DateTime();
     }
 
@@ -157,5 +165,29 @@ class CursoUsuarios
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set fechaDiploma
+     *
+     * @param \DateTime $fechaDiploma
+     *
+     * @return CursoUsuarios
+     */
+    public function setFechaDiploma($fechaDiploma)
+    {
+        $this->fechaDiploma = $fechaDiploma;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaDiploma
+     *
+     * @return \DateTime
+     */
+    public function getFechaDiploma()
+    {
+        return $this->fechaDiploma;
     }
 }

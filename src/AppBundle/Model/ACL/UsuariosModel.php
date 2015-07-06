@@ -37,6 +37,7 @@ class UsuariosModel
         $nombre = $form->get('nombre')->getData();
 
         $model->setNombre($nombre);
+        $model->setFechaDiploma(new \Datetime("now"));
 
         $this->em->persist($model);
         $this->em->flush();
