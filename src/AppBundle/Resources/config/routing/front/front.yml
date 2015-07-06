@@ -1,5 +1,5 @@
 front_home:
-    path:     /
+    path:     /{id}
     defaults: { _controller: AppBundle:Front/Front:home }
 
 front_curso:

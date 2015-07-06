@@ -16,7 +16,7 @@ class CursosRepository extends EntityRepository
   {
     return $this->getEntityManager()
       ->createQuery(
-        'SELECT c FROM AppBundle:Admin\Cursos\Cursos c where c.publicado = 1 ORDER BY c.id DESC '
+        'SELECT c FROM AppBundle:Admin\Cursos\Cursos c where c.publicado = true ORDER BY c.id DESC '
       )
       ->getResult();
   }

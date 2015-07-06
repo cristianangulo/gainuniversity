@@ -19,6 +19,7 @@ class CursosType extends AbstractType
             ->add('publicado', null, array(
               'required' => false
             ))
+            ->add('videoIntro')
             ->add('curso')
 
             ->add('temporalidad', 'choice', array(

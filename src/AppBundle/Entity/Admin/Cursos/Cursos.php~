@@ -40,6 +40,13 @@ class Cursos
     private $urlTienda;
 
     /**
+     * @var text
+     *
+     * @ORM\Column(name="videoIntro", type="integer", nullable=true)
+     */
+    private $videoIntro;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="curso", type="string", length=50)
@@ -335,5 +342,29 @@ class Cursos
     public function removeUsuario(\AppBundle\Entity\Admin\Cursos\CursoUsuarios $usuario)
     {
         $this->usuarios->removeElement($usuario);
+    }
+
+    /**
+     * Set videoIntro
+     *
+     * @param integer $videoIntro
+     *
+     * @return Cursos
+     */
+    public function setVideoIntro($videoIntro)
+    {
+        $this->videoIntro = $videoIntro;
+
+        return $this;
+    }
+
+    /**
+     * Get videoIntro
+     *
+     * @return integer
+     */
+    public function getVideoIntro()
+    {
+        return $this->videoIntro;
     }
 }

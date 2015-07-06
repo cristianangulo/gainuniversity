@@ -166,4 +166,28 @@ class CursoUsuarios
     {
         return $this->nombre;
     }
+
+    /**
+     * Set fechaDiploma
+     *
+     * @param \DateTime $fechaDiploma
+     *
+     * @return CursoUsuarios
+     */
+    public function setFechaDiploma($fechaDiploma)
+    {
+        $this->fechaDiploma = $fechaDiploma;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaDiploma
+     *
+     * @return \DateTime
+     */
+    public function getFechaDiploma()
+    {
+        return $this->fechaDiploma;
+    }
 }

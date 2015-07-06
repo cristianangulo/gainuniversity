@@ -24,6 +24,12 @@ class CursosModel
         $cursos = $this->em->getRepository('AppBundle:Admin\Cursos\Cursos')->findAll();
         return $cursos;
     }
+
+    public function cursosPublicados()
+    {
+        $cursos = $this->em->getRepository('AppBundle:Admin\Cursos\Cursos')->findCursosPublicados();
+        return $cursos;
+    }
 }
 
 ?>

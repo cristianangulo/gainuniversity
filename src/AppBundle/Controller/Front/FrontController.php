@@ -27,11 +27,16 @@ use Doctrine\ORM\EntityRepository;
 
 class FrontController extends Controller
 {
-    public function homeAction()
+    public function homeAction($id)
     {
+        $curso = $this->get('app.model.cursos')->curso($id);
 
+        $cursos = $this->get('app.model.cursos')->cursosPublicados();
 
-        return $this->render('Elearn/home.html.twig');
+        return $this->render('Elearn/home.html.twig', array(
+            'curso'  => $curso,
+            'cursos' => $cursos
+        ));
     }
 
   public function moduloAction($curso, $modulo, $seccion, Request $request, $pregunta)
