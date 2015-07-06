@@ -48,22 +48,9 @@ class Temporalidad
 
     public function cantidadModulos($intervalo, $curso)
     {
-      $temporalidadCurso = $curso->getTemporalidad();
+      $temporalidadCurso = $this->temporalidad($curso->getTemporalidad());
 
-      $formaPublicacion = 0;
-
-      switch($temporalidadCurso){
-        case 1:
-          $formaPublicacion = 1;
-          break;
-        case 2:
-          $formaPublicacion = 7;
-          break;
-        case 3:
-          $formaPublicacion = 14;
-      };
-
-      $cantidadModulos = ($intervalo / $formaPublicacion + 1);
+      $cantidadModulos = ($intervalo / $temporalidadCurso + 1);
 
       $cantidadModulos = ($cantidadModulos > count($curso->getModulos() )) ? count($curso->getModulos()) : floor($cantidadModulos);
 
@@ -84,5 +71,19 @@ class Temporalidad
       }
 
       return $modulosConAcceso;
+    }
+
+    public function temporalidad($data)
+    {
+        switch($data){
+          case 1:
+            return 1;
+            break;
+          case 2:
+            return 7;
+            break;
+          case 3:
+            return 14;
+        };
     }
 }
