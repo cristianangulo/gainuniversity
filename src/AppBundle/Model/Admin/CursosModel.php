@@ -30,6 +30,12 @@ class CursosModel
         $cursos = $this->em->getRepository('AppBundle:Admin\Cursos\Cursos')->findCursosPublicados();
         return $cursos;
     }
+
+    public function ultimoCurso()
+    {
+        $curso = $this->em->getRepository('AppBundle:Admin\Cursos\Cursos')->ultimoCurso();
+        return $curso;
+    }
 }
 
 ?>

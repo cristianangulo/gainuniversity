@@ -8,16 +8,19 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
 class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
     protected $router;
     protected $security;
+    protected $container;
 
-    public function __construct(Router $router, SecurityContext $security)
+    public function __construct(Router $router, SecurityContext $security, Container $container)
     {
         $this->router   = $router;
         $this->security = $security;
+        $this->container = $container;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
@@ -28,7 +31,10 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
             $response = new RedirectResponse($this->router->generate('admin_cursos'));
         }
         elseif ($this->security->isGranted('ROLE_USER')) {
-            $response = new RedirectResponse($this->router->generate('perfil_tus_cursos'));
+
+            $curso = $this->container->get('app.model.cursos')->ultimoCurso();
+
+            $response = new RedirectResponse($this->router->generate('front_home', array('id' => $curso->getId())));
         }elseif($this->security->isGranted('ROLE_SUPER_ADMIN')){
             $response = new RedirectResponse($this->router->generate('admin_cursos'));
         }

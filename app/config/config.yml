@@ -86,7 +86,7 @@ swiftmailer:
 services:
     acl_success_handler:
         class: AppBundle\Utils\LoginSuccessHandler
-        arguments: [@router, @security.context]
+        arguments: [@router, @security.context, @service_container]
 
     twig.extension.debug:
         class:        Twig_Extension_Debug
