@@ -1,6 +1,6 @@
 front_home:
     path:     /{id}
-    defaults: { _controller: AppBundle:Front/Front:home }
+    defaults: { _controller: AppBundle:Front/Front:home, id: 1 }
 
 front_curso:
     path:     /curso/{id}

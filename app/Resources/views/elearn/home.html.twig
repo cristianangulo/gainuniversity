@@ -2,6 +2,8 @@
 
 {% block body %}
 
+
+
 <div class="col-md-12 banner-home" >
     <img src="http://www.gabrielguerrero.com/wp-content/uploads/2015/05/VISION-BANNERfinal.jpg" alt="" />
 </div>
@@ -20,15 +22,35 @@
                 <a href="{{ path('front_home', { id: curso.id }) }}" class="list-group-item">{{ curso.curso }}</a>
             {% endfor %}
         </ul>
+
+        <ul class="list-group">
+            <a href="{{ path('front_perfil') }}" class="list-group-item active">
+                Tu perfil
+            </a>
+        </ul>
     </div>
     <div class="col-md-8">
 
-        <iframe src="//player.vimeo.com/video/{{ curso.videoIntro }}?title=0&amp;byline=0&amp;portrait=0&amp;color=e31b23" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-        </iframe>
-
         <div class="panel panel-default">
+          <div class="panel-heading">
+              <div class="col-md-6">
+                  <strong>{{ curso.curso }}</strong>
+              </div>
+
+          </div>
           <div class="panel-body">
+              <iframe src="//player.vimeo.com/video/{{ curso.videoIntro }}?title=0&amp;byline=0&amp;portrait=0&amp;color=e31b23" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+              </iframe>
+          </div>
+          <div class="panel-footer">
               {{ curso.descripcion }}
+              <hr>
+                 {% if curso.urlTienda != "" %}
+                  <a href="{{ curso.urlTienda}}" target="_blank" type="button" class="btn btn-default btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart"></span>
+                      Adquirir
+                  </a>
+                  {% endif %}
           </div>
         </div>
     </div>
