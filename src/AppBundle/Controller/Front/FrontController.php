@@ -33,7 +33,7 @@ class FrontController extends Controller
 
         $cursos = $this->get('app.model.cursos')->cursosPublicados();
 
-        return $this->render('Elearn/home.html.twig', array(
+        return $this->render('elearn/home.html.twig', array(
             'curso'  => $curso,
             'cursos' => $cursos
         ));
