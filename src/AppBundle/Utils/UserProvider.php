@@ -43,7 +43,9 @@ class UserProvider extends Controller implements UserProviderInterface
       $roles = array("ROLE_NO_ACTIVADO");
     }
 
-    return new UserEntityService($id, $username, $password, $salt, $roles, $isActive);
+    $img = $user->getPath();
+
+    return new UserEntityService($id, $username, $password, $salt, $roles, $isActive, $img);
 }
 
 public function refreshUser(UserInterface $user)

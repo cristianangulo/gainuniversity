@@ -14,8 +14,9 @@ class UserEntityService implements UserInterface, \Serializable
   private $salt;
   private $roles;
   private $isActive;
+  private $img;
 
-  public function __construct($id, $username, $password, $salt, array $roles, $isActive)
+  public function __construct($id, $username, $password, $salt, array $roles, $isActive, $img)
   {
     $this->id = $id;
     $this->username = $username;
@@ -23,6 +24,7 @@ class UserEntityService implements UserInterface, \Serializable
     $this->salt = $salt;
     $this->roles = $roles;
     $this->isActive = $isActive;
+    $this->img = $img;
   }
 
   public function getId()
@@ -53,6 +55,11 @@ class UserEntityService implements UserInterface, \Serializable
   public function getIsActive()
   {
     return $this->isActive;
+  }
+
+  public function getImg()
+  {
+    return $this->img;
   }
 
   /**

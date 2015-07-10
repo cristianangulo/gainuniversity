@@ -130,3 +130,18 @@ body{
 		border: 0;
 	}
 }
+#img-perfil{
+	width: 30px;
+	float: left;
+	padding: 3px;
+	border-radius: 50%;
+}
+
+#img-comment{
+	width: 60px;
+	height: 60px;
+	float: left;
+	padding: 10px;
+	border-radius: 50%;
+	border: 1px solid #dedede;
+}

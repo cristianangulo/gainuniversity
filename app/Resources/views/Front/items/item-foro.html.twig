@@ -30,6 +30,12 @@
         {% endif %}
       {% endif %}
 
+        {% if comentario.usuarios.path !="" %}
+            <img id="img-comment" src="{{ asset('uploads/usuarios')}}/{{ comentario.usuarios.path }}" alt="" />
+        {% else %}
+            <img id="img-comment" src="{{ asset('uploads/usuarios/perfil-user.png')}}" alt="" />
+
+        {% endif %}
 
         <small>{{ comentario.usuarios.nombre }} | {{ comentario.fecha|default('') }}</small>
         <p class="lead">
