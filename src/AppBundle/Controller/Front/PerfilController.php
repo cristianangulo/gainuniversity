@@ -35,8 +35,10 @@ class PerfilController extends Controller
     $formPassword->handleRequest($request);
 
     if($formPerfil->isValid()){
-      $em->flush();
-      return $this->redirect($this->generateUrl('front_perfil'));
+        $usuario->upload();
+        $em->persist($usuario);
+        $em->flush();
+        return $this->redirect($this->generateUrl('front_perfil'));
     }
 
     if($formPassword->isValid()){
@@ -44,6 +46,7 @@ class PerfilController extends Controller
       $encoder = $factory->getEncoder($usuario);
       $formData = $formPassword->getData();
       $usuario->setPassword($encoder->encodePassword($formData->getPassword(), $usuario->getSalt()));
+
       $em->flush();
       return $this->redirect($this->generateUrl('front_perfil'));
     }
