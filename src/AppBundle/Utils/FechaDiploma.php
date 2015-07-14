@@ -18,8 +18,6 @@ class FechaDiploma
 
     public function getMes($mes)
     {
-
-
         switch ($mes[1]) {
             case 1:
                 return 'enero';

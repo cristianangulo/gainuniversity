@@ -13,22 +13,22 @@ use Doctrine\ORM\EntityRepository;
 
 class CursosUsuarioController extends Controller
 {
-  public function cursosAction()
-  {
-    $em = $this->getDoctrine()->getManager();
+    public function cursosAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 
-    $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->find($this->getUser()->getId());
+        $usuario = $em->getRepository("AppBundle:ACL\Usuarios")->find($this->getUser()->getId());
 
-    $usuarioCursos = $this->get('app.reporte_cursos_usuarios')->fechaLiberarDiplomaCurso($usuario);
+        $usuarioCursos = $this->get('app.reporte_cursos_usuarios')->fechaLiberarDiplomaCurso($usuario);
 
-    $cursos = $em->getRepository("AppBundle:Admin\Cursos\Cursos")->findCursosPublicados();
+        $cursos = $em->getRepository("AppBundle:Admin\Cursos\Cursos")->findCursosPublicados();
 
-    return $this->render('Front/tus-cursos.html.twig', array(
-      'usuario' => $usuario,
-      'usuarioCursos' => $usuarioCursos,
-      'cursos'  => $cursos
-    ));
-  }
+        return $this->render('Front/tus-cursos.html.twig', array(
+          'usuario' => $usuario,
+          'usuarioCursos' => $usuarioCursos,
+          'cursos'  => $cursos
+        ));
+    }
 
     public function datosDiplomaAction($id, Request $request)
     {
@@ -52,9 +52,9 @@ class CursosUsuarioController extends Controller
 
             $this->get('app.model.usuarios')->nombreDiploma($cursoUsuario, $usuariosForm);
 
-            $this->get('app.mensajero')->add('info','Descargando diploma');
+            $this->get('app.mensajero')->add('info','Presiona  "Descargar diploma"');
 
-
+            return $this->redirect($this->generateUrl('perfil_tus_cursos'));
         }
 
         return $this->render('Front/datos-diploma.html.twig', array(
