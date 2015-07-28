@@ -44,14 +44,14 @@ class CursoUsuarios
     /**
      * @var string
      *
-     * @ORM\Column(name="fecha_diploma", type="datetime")
+     * @ORM\Column(name="fecha_diploma", type="datetime", nullable=true)
      */
     private $fechaDiploma;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="text")
+     * @ORM\Column(name="nombre", type="text", nullable=true)
      */
     private $nombre;
 

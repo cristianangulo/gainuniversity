@@ -1,1 +1,1 @@
-<img id="img-perfil" src="{{ asset('uploads/usuarios')}}/{{ app.user.img }}" alt="" />
+<img id="img-perfil" src="{{ asset('uploads/usuarios')}}/{{ app.user.img|default('') }}" alt="" />

@@ -16,7 +16,7 @@ class UserEntityService implements UserInterface, \Serializable
   private $isActive;
   private $img;
 
-  public function __construct($id, $username, $password, $salt, array $roles, $isActive, $img)
+  public function __construct($id, $username, $password, $salt, array $roles, $isActive, $img = null)
   {
     $this->id = $id;
     $this->username = $username;
@@ -116,6 +116,10 @@ class UserEntityService implements UserInterface, \Serializable
     }
 
     if ($this->isActive !== $user->getIsActive()) {
+      return false;
+    }
+
+    if ($this->img !== $user->getImg()) {
       return false;
     }
 

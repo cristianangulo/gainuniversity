@@ -1,6 +1,8 @@
 services:
     user_provider:
         class: AppBundle\Utils\UserProvider
+        arguments:
+            - @app.model.usuarios
         calls:
             - [setContainer, ["@service_container"]]
 

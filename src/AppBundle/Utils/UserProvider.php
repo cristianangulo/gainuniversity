@@ -8,45 +8,43 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use AppBundle\Utils\UserEntityService;
+use AppBundle\Model\ACL\UsuariosModel;
+
 
 class UserProvider extends Controller implements UserProviderInterface
 {
-  public function loadUserByUsername($username)
-  {
+    private $usuarios;
 
-    $repositorio = $this->getDoctrine()->getRepository("AppBundle:ACL\Usuarios");
-
-    $query = $repositorio
-    ->createQueryBuilder('u')
-    ->select('u, r')
-    ->leftJoin('u.roles', 'r')
-    ->where('u.username = :username OR u.email = :email')
-    ->setParameter('username', $username)
-    ->setParameter('email', $username)
-    ->getQuery();
-
-    try {
-      // The Query::getSingleResult() method throws an exception
-      // if there is no record matching the criteria.
-      $user = $query->getSingleResult();
-    } catch (NoResultException $e) {
-      throw new UsernameNotFoundException(sprintf('Unable to find an active admin ACLBundle:Usuarios object identified by "%s".', $username), null, 0, $e);
+    public function __construct(UsuariosModel $usuarios)
+    {
+        $this->usuarios = $usuarios;
     }
 
-    $id = $user->getId();
-    $password = $user->getPassword();
-    $salt = $user->getSalt();
-    $roles = array($user->getRoles()->getRole());
-    $isActive = $user->getIsActive();
+    public function loadUserByUsername($username)
+    {
 
-    if($user->getIsActive()==0){
-      $roles = array("ROLE_NO_ACTIVADO");
+        try{
+            $user = $this->usuarios->byUsernameOrEmail($username);
+        }catch (NoResultException $e){
+            throw new UsernameNotFoundException(sprintf('"%s" no existe', $username));
+        }
+
+        $id = $user->getId();
+        $password = $user->getPassword();
+        $salt = $user->getSalt();
+        $roles = array($user->getRoles()->getRole());
+        $isActive = $user->getIsActive();
+
+        if($user->getIsActive()==0){
+            $roles = array("ROLE_NO_ACTIVADO");
+        }
+
+        $img = $user->getPath();
+
+        $userEntityService = new UserEntityService($id, $username, $password, $salt, $roles, $isActive, $img);
+        
+        return $userEntityService;
     }
-
-    $img = $user->getPath();
-
-    return new UserEntityService($id, $username, $password, $salt, $roles, $isActive, $img);
-}
 
 public function refreshUser(UserInterface $user)
 {

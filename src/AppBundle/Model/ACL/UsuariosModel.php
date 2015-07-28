@@ -42,6 +42,12 @@ class UsuariosModel
         $this->em->persist($model);
         $this->em->flush();
     }
+
+    public function byUsernameOrEmail($username)
+    {
+        $usuarios = $this->em->getRepository('AppBundle:ACL\Usuarios')->byUsernameOrEmail($username);
+        return $usuarios;
+    }
 }
 
 ?>

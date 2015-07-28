@@ -32,11 +32,11 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         }
         elseif ($this->security->isGranted('ROLE_USER')) {
 
-            $curso = $this->container->get('app.model.cursos')->ultimoCurso();
+            //$curso = $this->container->get('app.model.cursos')->ultimoCurso();
 
-            $response = new RedirectResponse($this->router->generate('front_home', array('id' => $curso->getId())));
+            //$response = new RedirectResponse($this->router->generate('front_home', array('id' => $curso->getId())));
 
-            //$response = new RedirectResponse($this->router->generate('perfil_tus_cursos'));
+            $response = new RedirectResponse($this->router->generate('perfil_tus_cursos'));
 
         }elseif($this->security->isGranted('ROLE_SUPER_ADMIN')){
             $response = new RedirectResponse($this->router->generate('admin_cursos'));

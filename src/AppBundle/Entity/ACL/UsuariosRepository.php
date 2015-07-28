@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class UsuariosRepository extends EntityRepository
 {
+    public function byUsernameOrEmail($username)
+    {
+        return $this->getEntityManager()
+              ->createQuery(
+                  'SELECT u FROM AppBundle:ACL\Usuarios u
+                   WHERE u.username = :username
+                   OR u.email = :email
+                  '
+              )
+              ->setParameter('username', $username)
+              ->setParameter('email', $username)
+              ->getSingleResult();
+    }
 }
