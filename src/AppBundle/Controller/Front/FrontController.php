@@ -29,6 +29,10 @@ class FrontController extends Controller
 {
     public function homeAction($id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $curso = $this->get('app.model.cursos')->curso($id);
 
         $cursos = $this->get('app.model.cursos')->cursosPublicados();
