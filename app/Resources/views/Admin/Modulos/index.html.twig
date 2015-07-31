@@ -12,12 +12,11 @@
 {% endblock %}
 
 {% block body_contenido %}
-    <table class="table table-striped records_list">
+    <table class="dataTables table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Modulo</th>
-                <th>Descripción</th>
                 <th></th>
             </tr>
         </thead>
@@ -25,8 +24,12 @@
         {% for entity in entities %}
             <tr>
                 <td class="col-md-1"><a href="{{ path('admin_modulos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td class="col-md-2">{{ entity.modulo }}</td>
-                <td class="col-md-5">{{ entity.descripcion }}</td>
+                <td class="col-md-2">
+                    <h1>{{ entity.modulo }}</h1>
+                    <p>
+                        {{ entity.descripcion }}
+                    </p>
+                </td>
                 <td class="col-md-4 text-center">
                   <a class="btn btn-default" href="{{ path('admin_modulos_edit', { 'id': entity.id }) }}">{{ btn_editar }}</a>
                 </td>

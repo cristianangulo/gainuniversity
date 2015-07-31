@@ -15,7 +15,9 @@ class PerfilUsuarioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file')
+            ->add('file', null, array(
+                'label' => 'Seleccione su foto de perfil'
+            ))
             ->add('nombre')
             ->add('username')
             ->add('salt','hidden')

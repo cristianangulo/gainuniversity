@@ -14,20 +14,30 @@
 {% endblock %}
 
 {% block body_contenido %}
-    <table class="table table-striped records_list">
+    <table class="dataTables table table-striped">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Email</th>
+                <th>Usuario</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td class="col-md-2">{{ entity.username }}</td>
-                <td class="col-md-5">{{ entity.email }}</td>
-                <td class="col-md-4 text-center">
+                <td class="col-md-2">
+                        <h1>{{ entity.nombre|default('Sin nombre') }} <br /><small>{{ entity.username }}</small></h1><br />
+                    <p>
+                        <strong>Email: </strong> {{ entity.email }}
+                    </p>
+
+                    <p>
+                        <strong>Role: </strong> {{ entity.roles.role }}
+                    </p>
+                    <p>
+                        <strong>Cursos registrados: </strong> {{ entity.cursos|length() }}
+                    </p>
+                </td>
+                <td class="col-md-4 text-right">
                   <a class="btn btn-default" href="{{ path('usuarios_edit', { 'id': entity.id }) }}">
                   {{ btn_editar }}
                   <span class="glyphicon glyphicon-edit"></span>

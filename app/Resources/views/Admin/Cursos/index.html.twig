@@ -14,7 +14,7 @@
 
 {% block body_contenido %}
 
-    <table class="table table-striped records_list">
+    <table class="dataTables table table-striped">
         <thead>
             <tr>
                 <th>#</th>
@@ -27,9 +27,7 @@
             <tr>
                 <td class="col-md-1"><a href="{{ path('admin_cursos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td class="col-md-4">
-                  <p class="lead">
-                    {{ entity.curso }}
-                  </p>
+                    <h1>{{ entity.curso }}</h1>
                   <p>
                     {{ entity.descripcion }}
                   </p>

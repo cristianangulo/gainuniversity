@@ -1,6 +1,8 @@
 $(document).ready(function(){
   $( ".datepicker" ).datepicker();
 
+  $('.dataTables').dataTable();
+
   $("#sortable").sortable();
   //$("#sortable").disableSelection();
 
@@ -15,7 +17,7 @@ $(document).ready(function(){
   });
 
   var ordenesColeccion;
-  
+
   $('.add').on('click', function(){
 
     ordenesColeccion = $('tbody.collections');

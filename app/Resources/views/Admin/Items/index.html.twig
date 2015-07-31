@@ -13,12 +13,11 @@
 
 {% block body_contenido %}
 
-    <table class="table table-striped records_list">
+    <table class="dataTables table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>item</th>
-                <th>Descripcion</th>
                 <th></th>
             </tr>
         </thead>
@@ -26,9 +25,13 @@
         {% for entity in entities %}
             <tr>
                 <td class="col-md-1"><a href="{{ path('admin_secciones_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td class="col-md-2">{{ entity.seccion }}</td>
-                <td class="col-md-5">{{ entity.descripcion }}</td>
-                <td class="col-md-4 text-center">
+                <td>
+                    <h1>{{ entity.seccion }}</h1>
+                    <p>
+                        {{ entity.descripcion }}
+                    </p>
+                </td>
+                <td class="text-right">
                   <a class="btn btn-default" href="{{ path('admin_secciones_edit', { 'id': entity.id }) }}">{{ btn_editar }}</a>
                 </td>
             </tr>
