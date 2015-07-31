@@ -17,3 +17,9 @@ services:
     app.model.items:
       class:  AppBundle\Model\Admin\ItemsModel
       arguments:  [@doctrine.orm.entity_manager]
+
+    app.quiz_manager:
+        class:  AppBundle\Model\Admin\QuizManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - AppBundle\Entity\Admin\Quiz\Quiz

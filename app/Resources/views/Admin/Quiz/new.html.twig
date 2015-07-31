@@ -1,18 +1,17 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Crear Quiz</h1>
-    </div>
+{% block title_contenido %} Crear Quiz {% endblock %}
 
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_quiz') }}">
-          Regresar
-        </a>
-      </li>
-    </ul>
+{% block navbar_contenido %}
 
+    <a href="{{ path('admin_quiz') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+        Regresar
+    </a>
+
+{% endblock %}
+
+{% block body_contenido %}
 
     {{ form(form, {'attr':{'novalidate':'novalidate'}}) }}
 

@@ -1,21 +1,17 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Perfil del quiz</h1>
-    </div>
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_quiz') }}">
-          Regresar
-        </a>
-        |
-        <a href="{{ path('admin_quiz_new') }}">
-          Crear módulo
-        </a>
-      </li>
-    </ul>
+{% block title_contenido %} Quiz {% endblock %}
 
+{% block navbar_contenido %}
+
+    <a href="{{ path('admin_quiz') }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+        Regresar
+    </a>
+
+{% endblock %}
+
+{% block body_contenido -%}
     <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-body">

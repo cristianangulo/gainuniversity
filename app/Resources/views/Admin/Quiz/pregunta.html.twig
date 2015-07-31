@@ -1,16 +1,17 @@
 {% extends '::admin.html.twig' %}
 
-{% block body -%}
-    <div class="page-header">
-      <h1>Pregunta: {{ entity.pregunta }}</h1>
-    </div>
-    <ul class="record_actions">
-      <li>
-        <a href="{{ path('admin_quiz_edit', { id: entity.quiz.id }) }}">
-          Regresar
-        </a>
-      </li>
-    </ul>
+{% block title_contenido %} Pregunta {% endblock %}
+
+{% block navbar_contenido %}
+
+    <a href="{{ path('admin_quiz_edit', { id: entity.quiz.id }) }}" class="btn btn-default">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+        Regresar
+    </a>
+
+{% endblock %}
+
+{% block body_contenido -%}
 
     <div class="col-md-12">
       <div class="panel panel-default">
