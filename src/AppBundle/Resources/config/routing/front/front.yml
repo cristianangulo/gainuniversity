@@ -1,3 +1,7 @@
+front_soap:
+    path:     /soap
+    defaults: { _controller: AppBundle:Front/SoapServer:soapServer }
+
 front_home:
     path:     /{id}
     defaults: { _controller: AppBundle:Front/Front:home, id: 1 }
@@ -61,10 +65,6 @@ perfil_diplomas:
 front_msn:
     path:     /perfil/msn
     defaults: { _controller: AppBundle:Admin/MSN:msn}
-
-front_soap:
-    path:     /soap
-    defaults: { _controller: AppBundle:Front/SoapServer:soapServer }
 
 front_registro:
     path:     /soap/registro
