@@ -15,7 +15,7 @@ class SoapClienteController extends Controller
   {
     $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
 
-    $cliente = new \SoapClient($baseurl.'/app_dev.php/soap?wsdl');
+    $cliente = new \SoapClient($baseurl.'/soap?wsdl');
 
     $userWS = "gain";
     $passWS = "5FZ2Z8QIkA7UTZ4BYkoC==";
