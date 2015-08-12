@@ -35,8 +35,8 @@ item_video:
         tipo: video
 
 item_quiz:
-    path:     /curso/{curso}/{modulo}/{item}/quiz
-    defaults: { _controller: AppBundle:Front/ItemsFront:itemQuiz, tipo:quiz}
+    path:     /curso/{curso}/{modulo}/{item}/quiz/{pregunta}
+    defaults: { _controller: AppBundle:Front/ItemQuiz:itemQuiz, tipo:quiz, pregunta:null}
     requirements:
         tipo: quiz
 
@@ -46,9 +46,9 @@ item_audio_descarga:
     requirements:
         tipo: descarga
 
-front_modulo:
-    path:     /curso/{curso}/{modulo}/{item}/{pregunta}
-    defaults: { _controller: AppBundle:Front/FrontModulo:modulo, pregunta:null }
+# front_modulo:
+#     path:     /curso/{curso}/{modulo}/{item}/{pregunta}
+#     defaults: { _controller: AppBundle:Front/FrontModulo:modulo, pregunta:null }
 
 front_perfil:
     path:     /perfil/

@@ -8,7 +8,7 @@
   <ol class="breadcrumb">
     <li><a href="{{ path('front_curso', {'id': curso.id })}}">{{ curso.curso }}</a></li>
     <li>{{ modulo.modulo }}</li>
-    <li class="active"><strong>{{ seccion.seccion }}<strong></li>
+    <li class="active"><strong>{{ item.seccion }}<strong></li>
   </ol>
   <div id="w-contenido-modulo">
 
@@ -21,7 +21,7 @@
       <!--<p>Joshua Rosenthal, MScEd, welcomes you to Integrative Nutrition.</p>-->
       <hr />
       <p class="lead">
-          {{ seccion.quiz.descripcion }}
+          {{ item.quiz.descripcion }}
       </p>
     </div>
     <div class="w-media-modulo">
@@ -29,7 +29,7 @@
 
         <div class="panel panel-default">
           <div class="panel-body">
-  
+
           {% for q in quiz %}
 
             <ul class="list-group">
